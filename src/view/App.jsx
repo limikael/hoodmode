@@ -11,6 +11,10 @@ export default class App extends Component {
 		console.log(this.appModel.layers);
 	};
 
+	onAddLayerClick=()=>{
+		console.log("hello, this="+this.appModel.layers.length);
+	}
+
 	render() {
 		return (
 			<div>
@@ -22,11 +26,11 @@ export default class App extends Component {
 					<div class="card border-primary">
 						<div class="card-header">Add Layer</div>
 						<div class="card-body">
-							<h4 class="card-title">Primary card title</h4>
+							<h4 class="card-title">Primary card Title</h4>
 							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
 						</div>
 					</div>
-					<button type="button" class="btn btn-primary mb-4" click>ADD LAYER</button>
+					<button type="button" class="btn btn-primary mb-4" onClick={this.onAddLayerClick}>ADD LAYER</button>
 					<table class="table">
 						<thead>
 							<tr className="table-primary">

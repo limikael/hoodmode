@@ -1,6 +1,7 @@
 {
-  "presets": ["es2015", "env"],
+  "presets": ["@babel/preset-env","preact"],
   "plugins": [
-    ["transform-react-jsx", { "pragma":"h" }]
+	["@babel/plugin-proposal-class-properties"],
+    ["@babel/plugin-transform-react-jsx", { "pragma":"h" }]
   ]
 }
