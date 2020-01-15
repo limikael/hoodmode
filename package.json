@@ -1,27 +1,20 @@
 {
-  "name": "preact-browserify",
+  "name": "HoodMode",
   "version": "1.0.0",
-  "description": "Quick preact + browserify boilerplate.",
+  "description": "Bringing musical modality to ya hood",
   "main": "src/index.jsx",
   "scripts": {
     "bundle": "browserify -t babelify --debug src/index.jsx -o public/js/bundle.js",
     "deploy": "browserify -t babelify -t uglifyify src/index.jsx -o public/js/bundle.js ",
+    "start": "budo src/index.jsx:bundle.js --dir=public --live --watch-glob=style.css -- -t babelify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jcoc611/preact-browserify.git"
+    "url": "git+https://github.com/limikael/hoodmode.git"
   },
-  "keywords": [
-    "preact",
-    "browserify"
-  ],
-  "author": "jcoc611",
+  "author": "limikael",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/jcoc611/preact-browserify/issues"
-  },
-  "homepage": "https://github.com/jcoc611/preact-browserify#readme",
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
@@ -31,7 +24,11 @@
     "babel-preset-react": "^6.24.1",
     "babelify": "^8.0.0",
     "browserify": "^16.1.0",
-    "uglifyify": "^4.0.5"
+    "budo": "^11.6.3",
+    "uglifyify": "^4.0.5",
+    "bootstrap": "^4.4.1",
+    "bootswatch": "^4.4.1",
+    "jquery": "^3.4.1"
   },
   "dependencies": {
     "preact": "^8.2.7",
