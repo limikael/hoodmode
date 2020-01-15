@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 
-export default class LayerItem extends Component {
+export default class LayerListItem extends Component {
 	render() {
 		return (
 			<tr class="table-active">

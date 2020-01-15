@@ -1,18 +1,63 @@
 import { h, Component } from 'preact';
 import AppModel from '../model/AppModel';
-import LayerItem from './LayerItem.jsx';
+import LayerListItem from './LayerListItem.jsx';
+import AddLayer from './AddLayer.jsx';
+import LayerModel from '../model/LayerModel';
 
 export default class App extends Component {
 	constructor() {
 		super();
 
-		this.appModel=new AppModel();
+		this.app=new AppModel();
 
-		console.log(this.appModel.layers);
+		this.state={
+			view: 'layers'
+		}
 	};
 
 	onAddLayerClick=()=>{
-		console.log("hello, this="+this.appModel.layers.length);
+		this.setState({
+			view: 'add-layer'
+		});
+	};
+
+	onAddLayerClose=(instrument)=>{
+		if (instrument) {
+			this.app.addLayer(new LayerModel());
+		}
+
+		this.setState({
+			view: 'layers'
+		});
+	}
+
+	renderStateContent() {
+		switch (this.state.view) {
+			case 'layers':
+				return (
+					<div>
+						<button type="button" class="btn btn-primary mb-4" onClick={this.onAddLayerClick}>ADD LAYER</button>
+						<table class="table">
+							<thead>
+								<tr className="table-primary">
+									<th scope="col">Layer</th>
+									<th scope="col" style="width: 1%"></th>
+								</tr>
+							</thead>
+							<tbody>
+								{this.app.layers.map((layer,index)=>{
+									return (<LayerListItem key={index} layer={layer}/>);
+								})}
+							</tbody>
+						</table>
+					</div>
+				);
+				break;
+
+			case 'add-layer':
+				return (<AddLayer app={this.app} onClose={this.onAddLayerClose}/>);
+				break;
+		}
 	}
 
 	render() {
@@ -23,27 +68,7 @@ export default class App extends Component {
 					<button type="button" class="btn btn-primary">PLAY</button>
 				</nav>
 				<div className="container">
-					<div class="card border-primary">
-						<div class="card-header">Add Layer</div>
-						<div class="card-body">
-							<h4 class="card-title">Primary card Title</h4>
-							<p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-						</div>
-					</div>
-					<button type="button" class="btn btn-primary mb-4" onClick={this.onAddLayerClick}>ADD LAYER</button>
-					<table class="table">
-						<thead>
-							<tr className="table-primary">
-								<th scope="col">Layer</th>
-								<th scope="col" style="width: 1%"></th>
-							</tr>
-						</thead>
-						<tbody>
-							{this.appModel.layers.map((layer,index)=>{
-								return (<LayerItem key={index} layer={layer}/>);
-							})}
-						</tbody>
-					</table>
+					{this.renderStateContent()}
 				</div>
 			</div>
 		)
