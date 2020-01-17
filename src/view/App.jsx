@@ -1,61 +1,71 @@
 import { h, Component } from 'preact';
 import AppModel from '../model/AppModel';
-import LayerListItem from './LayerListItem.jsx';
 import AddLayer from './AddLayer.jsx';
 import LayerModel from '../model/LayerModel';
+import Modal from '../utils/Modal.jsx';
+import LayerList from './LayerList.jsx';
+import LayerEditor from './LayerEditor.jsx';
 
 export default class App extends Component {
 	constructor() {
 		super();
 
 		this.app=new AppModel();
-
-		this.state={
-			view: 'layers'
-		}
 	};
 
 	onAddLayerClick=()=>{
 		this.setState({
-			view: 'add-layer'
+			showAddLayer: true
 		});
 	};
 
 	onAddLayerClose=(instrument)=>{
 		if (instrument) {
-			this.app.addLayer(new LayerModel());
+			this.app.addLayer(new LayerModel(instrument));
 		}
 
 		this.setState({
-			view: 'layers'
+			showAddLayer: false
+		});
+	};
+
+	onLayerClick=(layer)=>{
+		this.setState({
+			currentLayer: layer
+		});
+	};
+
+	onLayerEditorClose=()=>{
+		this.setState({
+			currentLayer: null
 		});
 	}
 
 	renderStateContent() {
+		if (this.state.showAddLayer)
+			return (
+				<AddLayer app={this.app}
+						onClose={this.onAddLayerClose}/>
+			);
+
+		if (this.state.currentLayer)
+			return (
+				<LayerEditor app={this.app}
+						layer={this.state.currentLayer}
+						onClose={this.onLayerEditorClose}/>
+			);
+
+		return (
+			<LayerList app={this.app}
+					onAddLayerClick={this.onAddLayerClick}
+					onLayerClick={this.onLayerClick}/>
+		);
+
 		switch (this.state.view) {
 			case 'layers':
-				return (
-					<div>
-						<button type="button" class="btn btn-primary mb-4" onClick={this.onAddLayerClick}>ADD LAYER</button>
-						<table class="table">
-							<thead>
-								<tr className="table-primary">
-									<th scope="col">Layer</th>
-									<th scope="col" style="width: 1%"></th>
-								</tr>
-							</thead>
-							<tbody>
-								{this.app.layers.map((layer,index)=>{
-									return (<LayerListItem key={index} layer={layer}/>);
-								})}
-							</tbody>
-						</table>
-					</div>
-				);
 				break;
 
 			case 'add-layer':
-				return (<AddLayer app={this.app} onClose={this.onAddLayerClose}/>);
 				break;
 		}
 	}

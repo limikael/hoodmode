@@ -6,12 +6,9 @@ export default class AppModel {
 		this.layers=[];
 		this.instruments=[];
 
-		this.addLayer(new LayerModel());
-		this.addLayer(new LayerModel());
-		this.addLayer(new LayerModel());
-
-		this.addInstrument(new InstrumentModel());
-		this.addInstrument(new InstrumentModel());
+		this.addInstrument(new InstrumentModel("Drums"));
+		this.addInstrument(new InstrumentModel("Bass"));
+		this.addInstrument(new InstrumentModel("Piano chords"));
 	}
 
 	addLayer(layer) {
