@@ -15,4 +15,7 @@ export default class InstrumentModel {
 	getSoundLabels() {
 		throw new Error("override me!");
 	}
+
+	load() {
+	}
 }

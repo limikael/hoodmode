@@ -8,9 +8,22 @@ export default class AppModel {
 		this.layers=[];
 		this.instruments=[];
 
+		this.audioContext=new window.AudioContext();
+		if (!this.audioContext)
+			throw new Error("no web audio!");
+
 		this.addInstrument(new DrumInstrument());
 		this.addInstrument(new BassInstrument());
 		this.addInstrument(new PianoInstrument());
+	}
+
+	init() {
+		let p=[];
+		for (let i of this.instruments)
+			p.push(i.load());
+
+		this.initPromise=Promise.all(p);
+		return this.initPromise;
 	}
 
 	addLayer(layer) {

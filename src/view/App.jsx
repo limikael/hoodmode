@@ -11,6 +11,15 @@ export default class App extends Component {
 		super();
 
 		this.app=new AppModel();
+		this.state={
+			loading: true
+		}
+
+		this.app.init().then(()=>{
+			this.setState({
+				loading: false
+			});
+		});
 	};
 
 	onAddLayerClick=()=>{
@@ -71,6 +80,12 @@ export default class App extends Component {
 	}
 
 	render() {
+		if (this.state.loading) {
+			return (
+				<div class="loading-screen">LOADING...</div>
+			);
+		}
+
 		return (
 			<div>
 				<nav className="navbar navbar-dark bg-dark mb-4">
@@ -81,6 +96,6 @@ export default class App extends Component {
 					{this.renderStateContent()}
 				</div>
 			</div>
-		)
+		);
 	}
 }
