@@ -1,14 +1,16 @@
 import LayerModel from './LayerModel';
-import InstrumentModel from './InstrumentModel';
+import BassInstrument from './instruments/BassInstrument';
+import PianoInstrument from './instruments/PianoInstrument';
+import DrumInstrument from './instruments/DrumInstrument';
 
 export default class AppModel {
 	constructor() {
 		this.layers=[];
 		this.instruments=[];
 
-		this.addInstrument(new InstrumentModel("Drums"));
-		this.addInstrument(new InstrumentModel("Bass"));
-		this.addInstrument(new InstrumentModel("Piano chords"));
+		this.addInstrument(new DrumInstrument());
+		this.addInstrument(new BassInstrument());
+		this.addInstrument(new PianoInstrument());
 	}
 
 	addLayer(layer) {

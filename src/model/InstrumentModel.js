@@ -11,4 +11,8 @@ export default class InstrumentModel {
 	getLabel() {
 		return this.name;
 	}
+
+	getSoundLabels() {
+		throw new Error("override me!");
+	}
 }

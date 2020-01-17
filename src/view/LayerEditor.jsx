@@ -2,14 +2,14 @@ import { h, Component } from 'preact';
 
 export default class LayerEditor {
 	render() {
-		let buttons=[];
-		for (let i=0; i<10; i++)
-			buttons.push(
+		let buttons=this.props.layer.instrument.getSoundLabels().map((label,index)=>{
+			return (
 				<button type="button" class="btn btn-primary btn-lg mb-3 mr-3"
 						style={{width: '6em', height: '6em'}}>
-					SOUND
+					{label}
 				</button>
 			);
+		});
 
 		return (
 			<div className="card border-primary">

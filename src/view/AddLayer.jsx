@@ -7,7 +7,6 @@ export default class AddLayer extends Component {
 	}
 
 	onInstrumentClick=(instrument)=>{
-		console.log("inst click:"+instrument.getLabel());
 		this.props.onClose(instrument);
 	}
 
