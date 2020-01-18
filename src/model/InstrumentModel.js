@@ -16,6 +16,10 @@ export default class InstrumentModel {
 		throw new Error("override me!");
 	}
 
+	getNumSounds() {
+		return this.getSoundLabels().length;
+	}
+
 	load() {
 	}
 }

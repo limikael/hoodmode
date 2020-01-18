@@ -50,6 +50,14 @@ export default class App extends Component {
 		});
 	}
 
+	onPlayClick=()=>{
+		if (this.app.isPlaying())
+			this.app.stop();
+
+		else
+			this.app.play();
+	}
+
 	renderStateContent() {
 		if (this.state.showAddLayer)
 			return (
@@ -90,7 +98,9 @@ export default class App extends Component {
 			<div>
 				<nav className="navbar navbar-dark bg-dark mb-4">
 					<a className="navbar-brand" href="#">Hoodmode</a>
-					<button type="button" class="btn btn-primary">PLAY</button>
+					<button type="button" class="btn btn-primary" onClick={this.onPlayClick}>
+						PLAY
+					</button>
 				</nav>
 				<div className="container">
 					{this.renderStateContent()}

@@ -7,6 +7,7 @@ export default class AppModel {
 	constructor() {
 		this.layers=[];
 		this.instruments=[];
+		this.bpm=100;
 
 		this.audioContext=new window.AudioContext();
 		if (!this.audioContext)
@@ -34,5 +35,23 @@ export default class AppModel {
 	addInstrument(instrument) {
 		instrument.app=this;
 		this.instruments.push(instrument);
+	}
+
+	isPlaying() {
+		return !!this.playTimer;
+	}
+
+	stop() {
+		clearTimeout(this.playTimer);
+		this.playTimer=null;
+	}
+
+	play=()=>{
+		this.playStartTime=this.audioContext.currentTime;
+
+		for (let layer of this.layers)
+			layer.play(this.playStartTime);
+
+		this.playTimer=setTimeout(this.play,4*1000*60/this.bpm);
 	}
 }

@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 
-export default class LayerEditor {
+export default class LayerEditor extends Component {
 	onInstrumentButtonPress=(index)=>{
 		this.props.layer.instrument.play(index);
 	};
@@ -19,26 +19,40 @@ export default class LayerEditor {
 		document.removeEventListener("keydown",this.onKeyDown);
 	}
 
-	renderRow(label, index) {
+	onSeqClick=(sound, pos)=>{
+		if (this.props.layer.seq[sound][pos]) {
+			this.props.layer.seq[sound][pos]=0;
+		}
+
+		else {
+			this.props.layer.seq[sound][pos]=1;
+			this.props.layer.instrument.play(sound);
+		}
+
+		this.forceUpdate();
+	}
+
+	renderRow=(label, soundIndex)=>{
+		let a=[];
+		for (let i=0; i<16; i++) {
+			let cls='';
+
+			if (this.props.layer.seq[soundIndex][i])
+				cls='bg-primary';
+
+			else if (!(i%4))
+				cls='seq-beat'
+
+			a.push(
+				<td onClick={this.onSeqClick.bind(this,soundIndex,i)}
+						class={cls}/>
+			);
+		}
+
 		return (
 			<tr>
 				<th>{label}</th>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
-				<td></td>
+				{a}
 			</tr>
 		);
 	}
@@ -81,7 +95,7 @@ export default class LayerEditor {
 						</div>
 						<div class="tab-pane fade" id="sequence">
 							<table class="sequence-table">
-								{this.props.layer.instrument.getSoundLabels().map(this.renderRow)}
+								{this.props.layer.instrument.getSoundLabels().map(this.renderRow).reverse()}
 							</table>
 						</div>
 						<div class="tab-pane fade" id="layer">
