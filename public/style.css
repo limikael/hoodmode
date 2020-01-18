@@ -1,6 +1,24 @@
-body {
-	margin: 0;
-	padding: 0;
-	background: #ffffff;
-	font-size: 20px;
+.nav-tabs a.nav-link {
+	border-color: transparent !important;
+}
+
+.nav-tabs a.active {
+	border: 1px solid #888 !important;
+}
+
+.nav-tabs {
+   border-bottom: 1px solid #888;
+}
+
+.sequence-table {
+	table-layout: fixed;
+	width: 100%;
+}
+
+.sequence-table th {
+	width: 4em;
+}
+
+.sequence-table td {
+	border: 1px solid #888;
 }

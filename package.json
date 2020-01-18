@@ -6,7 +6,7 @@
   "scripts": {
     "bundle": "browserify -t babelify --debug src/index.jsx -o public/js/bundle.js",
     "deploy": "browserify -t babelify -t uglifyify src/index.jsx -o public/js/bundle.js ",
-    "start": "budo src/index.jsx:bundle.js --dir=public --live --watch-glob=style.css -- -t babelify",
+    "start": "budo src/index.jsx:bundle.js --dir=public --live --watch-glob=public/*.css -- -t babelify",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
