@@ -64,6 +64,8 @@ export default class App extends Component {
 
 		else
 			this.app.play();
+
+		this.forceUpdate();
 	}
 
 	renderStateContent() {
@@ -107,11 +109,15 @@ export default class App extends Component {
 			);
 		}
 
+		let playCls="btn btn-primary ";
+		if (this.app.isPlaying())
+			playCls+="active";
+
 		return (
 			<div>
 				<nav className="navbar navbar-dark bg-dark mb-4">
 					<a className="navbar-brand" href="#">Hoodmode</a>
-					<button type="button" class="btn btn-primary" onClick={this.onPlayClick}>
+					<button type="button" class={playCls} onClick={this.onPlayClick}>
 						PLAY
 					</button>
 				</nav>
