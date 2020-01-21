@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 
 export default class Chord extends Component {
 	onChordButtonClick(index) {
-		this.props.app.currentChordIndex=index;
+		this.props.app.setCurrentChordIndex(index);
 		this.forceUpdate();
 	}
 

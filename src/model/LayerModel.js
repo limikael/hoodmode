@@ -28,16 +28,20 @@ export default class LayerModel {
 	play(when) {
 		let secPerBeat=60/this.app.bpm;
 		let secPerGrid=secPerBeat/4;
+		let chordCents=this.app.getCurrentChordCents();
 
 		for (let soundIndex=0; soundIndex<this.instrument.getNumSounds(); soundIndex++) {
 			for (let gridIndex=0; gridIndex<16; gridIndex++) {
 				if (this.seq[soundIndex][gridIndex]) {
-					this.instrument.play(
-						soundIndex,
+					let note=this.instrument.createNote(soundIndex);
+					note.setChordCents(chordCents);
+					note.setVelocity(this.vel[gridIndex]);
+					note.playSheduled(
 						when+gridIndex*secPerGrid,
-						secPerGrid*this.getNoteLen(gridIndex),
-						this.vel[gridIndex]
+						secPerGrid*this.getNoteLen(gridIndex)
 					);
+
+					this.app.addInstrumentNote(note);
 				}
 			}
 		}
@@ -46,8 +50,11 @@ export default class LayerModel {
 	toggle(sound, pos) {
 		this.seq[sound][pos]=!this.seq[sound][pos];
 
-		if (this.seq[sound][pos])
-			this.instrument.play(sound);
+		if (this.seq[sound][pos]) {
+			let note=this.instrument.createNote(sound);
+			note.setChordCents(this.app.getCurrentChordCents());
+			note.playNow();
+		}
 	}
 
 	toggleVel(pos) {

@@ -65,6 +65,8 @@ export default class AppModel {
 			"name": "Piano",
 			"sample": "samples/piano/piano-c.wav"
 		}));
+
+		this.currentNotes=[];
 	}
 
 	init() {
@@ -100,6 +102,11 @@ export default class AppModel {
 	stop() {
 		clearTimeout(this.playTimer);
 		this.playTimer=null;
+
+		for (let note of this.currentNotes)
+			note.setVelocity(0);
+
+		this.currentNotes=[];
 	}
 
 	play=()=>{
@@ -111,6 +118,19 @@ export default class AppModel {
 		this.playTimer=setTimeout(this.play,4*1000*60/this.bpm);
 	}
 
+	onInstrumentNoteEnded(note) {
+		let idx=this.currentNotes.indexOf(note);
+		if (idx<0)
+			return;
+
+		this.currentNotes.splice(idx,1);
+	}
+
+	addInstrumentNote(note) {
+		note.onended=this.onInstrumentNoteEnded.bind(this,note);
+		this.currentNotes.push(note);
+	}
+
 	getChordLabels() {
 		return this.chordLabels;
 	}
@@ -118,5 +138,22 @@ export default class AppModel {
 	getCurrentChordNoteCents(triadNote) {
 		let chordNotes=this.chordNotes[this.currentChordIndex];
 		return AudioUtil.noteToCents(chordNotes[triadNote]);
+	}
+
+	getCurrentChordCents() {
+		let chordNotes=this.chordNotes[this.currentChordIndex];
+		return [
+			AudioUtil.noteToCents(chordNotes[0]),
+			AudioUtil.noteToCents(chordNotes[1]),
+			AudioUtil.noteToCents(chordNotes[2])
+		];
+	}
+
+	setCurrentChordIndex(chordIndex) {
+		this.currentChordIndex=chordIndex;
+		let chordCents=this.getCurrentChordCents();
+
+		for (let note of this.currentNotes)
+			note.setChordCents(chordCents);
 	}
 }

@@ -1,6 +1,7 @@
 import "@babel/polyfill";
 import InstrumentModel from './InstrumentModel';
 import AudioUtil from '../utils/AudioUtil';
+import InstrumentNote from './InstrumentNote';
 
 export default class PercussiveInstrument extends InstrumentModel {
 	constructor(options) {
@@ -13,7 +14,11 @@ export default class PercussiveInstrument extends InstrumentModel {
 		return this.options.labels;
 	}
 
-	play(index, at) {
+	createNote(soundIndex) {
+		return new InstrumentNote(this.app, this.buffers[soundIndex]);
+	}
+
+/*	play(index, at) {
 		if (!at)
 			at=0;
 
@@ -22,7 +27,7 @@ export default class PercussiveInstrument extends InstrumentModel {
 		this.source.connect(this.app.audioContext.destination);
 
 		this.source.start(at);
-	}
+	}*/
 
 	async load() {
 		this.buffers=[];

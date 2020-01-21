@@ -20,6 +20,10 @@ export default class InstrumentModel {
 		return this.getSoundLabels().length;
 	}
 
+	createNote(soundIndex) {
+		throw new Error("override me!");
+	}
+
 	load() {
 	}
 }

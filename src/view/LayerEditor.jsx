@@ -2,12 +2,16 @@ import { h, Component } from 'preact';
 
 export default class LayerEditor extends Component {
 	onInstrumentButtonPress=(index)=>{
-		this.props.layer.instrument.play(index);
+		let note=this.props.layer.instrument.createNote(index);
+		note.setChordCents(this.props.app.getCurrentChordCents());
+		note.playNow();
 	};
 
 	onKeyDown=(e)=>{
 		if (parseInt(e.key)) {
-			this.props.layer.instrument.play(parseInt(e.key)-1);
+			let note=this.props.layer.instrument.createNote(parseInt(e.key)-1);
+			note.setChordCents(this.props.app.getCurrentChordCents());
+			note.playNow();
 		}
 	}
 
