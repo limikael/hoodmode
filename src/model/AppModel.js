@@ -29,7 +29,7 @@ export default class AppModel {
 			throw new Error("no web audio!");
 
 		this.addInstrument(new PercussiveInstrument({
-			"name": "Bad Sampled Jazz Drums"
+			"name": "Bad Sampled Jazz Drums",
 		}));
 
 		this.addInstrument(new HarmonicInstrument({
@@ -56,6 +56,13 @@ export default class AppModel {
 	addLayer(layer) {
 		layer.app=this;
 		this.layers.push(layer);
+	}
+
+	deleteLayer(layer) {
+		let idx=this.layers.indexOf(layer)
+
+		if (idx>=0)
+			this.layers.splice(idx,1);
 	}
 
 	addInstrument(instrument) {

@@ -51,6 +51,13 @@ export default class App extends Component {
 		});
 	}
 
+	onLayerEditorDelete=()=>{
+		this.app.deleteLayer(this.state.currentLayer);
+		this.setState({
+			currentLayer: null
+		});
+	}
+
 	onPlayClick=()=>{
 		if (this.app.isPlaying())
 			this.app.stop();
@@ -70,7 +77,8 @@ export default class App extends Component {
 			return (
 				<LayerEditor app={this.app}
 						layer={this.state.currentLayer}
-						onClose={this.onLayerEditorClose}/>
+						onClose={this.onLayerEditorClose}
+						onDelete={this.onLayerEditorDelete}/>
 			);
 
 		return (

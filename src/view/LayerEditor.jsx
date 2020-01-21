@@ -133,7 +133,10 @@ export default class LayerEditor extends Component {
 							</table>
 						</div>
 						<div class="tab-pane fade" id="layer">
-							<button type="button" class="btn btn-danger">Delete Layer</button>
+							<button type="button" class="btn btn-danger"
+									onClick={this.props.onDelete}>
+								Delete Layer
+							</button>
 						</div>
 					</div>
 				</div>
