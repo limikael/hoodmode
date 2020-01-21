@@ -60,6 +60,11 @@ export default class AppModel {
 			"sampleNote": "F#",
 			"sample": "samples/bass/acoustic_bass_f_sharp.mp3"
 		}));
+
+		this.addInstrument(new HarmonicInstrument({
+			"name": "Piano",
+			"sample": "samples/piano/piano-c.wav"
+		}));
 	}
 
 	init() {
