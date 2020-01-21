@@ -29,18 +29,36 @@ export default class AppModel {
 			throw new Error("no web audio!");
 
 		this.addInstrument(new PercussiveInstrument({
-			"name": "Bad Sampled Jazz Drums",
+			"name": "Bad Jazz Drums",
+			"labels": ["KICK","SNARE","HI-HAT"],
+			"samples": [
+				"samples/drums/bad-kick.wav",
+				"samples/drums/bad-snare.wav",
+				"samples/drums/bad-hihat.wav",
+			]
+		}));
+
+		this.addInstrument(new PercussiveInstrument({
+			"name": "Yes Drums",
+			"labels": ["KICK","SNARE","HI-HAT 1","HI-HAT 2","HI-HAT 3"],
+			"samples": [
+				"samples/drums/yes-kick.mp3",
+				"samples/drums/yes-snare.mp3",
+				"samples/drums/thrl-hat_A_minor.wav",
+				"samples/drums/vinyl-hat_90bpm_C.wav",
+				"samples/drums/rock-hihat-tchik.wav"
+			]
 		}));
 
 		this.addInstrument(new HarmonicInstrument({
 			"name": "Dive Bass",
-			"sample": "samples/upright-bass-bombdive.mp3"
+			"sample": "samples/bass/upright-bass-bombdive.mp3"
 		}));
 
 		this.addInstrument(new HarmonicInstrument({
 			"name": "Acoustic Bass",
 			"sampleNote": "F#",
-			"sample": "samples/acoustic_bass_f_sharp.mp3"
+			"sample": "samples/bass/acoustic_bass_f_sharp.mp3"
 		}));
 	}
 
