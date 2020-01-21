@@ -5,6 +5,7 @@ import LayerModel from '../model/LayerModel';
 import Modal from '../utils/Modal.jsx';
 import LayerList from './LayerList.jsx';
 import LayerEditor from './LayerEditor.jsx';
+import Chord from './Chord.jsx';
 
 export default class App extends Component {
 	constructor() {
@@ -73,9 +74,13 @@ export default class App extends Component {
 			);
 
 		return (
-			<LayerList app={this.app}
-					onAddLayerClick={this.onAddLayerClick}
-					onLayerClick={this.onLayerClick}/>
+			<div>
+				<LayerList app={this.app}
+						onAddLayerClick={this.onAddLayerClick}
+						onLayerClick={this.onLayerClick}/>
+
+				<Chord app={this.app}/>
+			</div>
 		);
 
 		switch (this.state.view) {
@@ -104,6 +109,9 @@ export default class App extends Component {
 				</nav>
 				<div className="container">
 					{this.renderStateContent()}
+				</div>
+
+				<div class="container mt-4">
 				</div>
 			</div>
 		);

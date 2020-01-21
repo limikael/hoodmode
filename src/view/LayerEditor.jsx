@@ -20,14 +20,13 @@ export default class LayerEditor extends Component {
 	}
 
 	onSeqClick=(sound, pos)=>{
-		if (this.props.layer.seq[sound][pos]) {
-			this.props.layer.seq[sound][pos]=0;
-		}
+		this.props.layer.toggle(sound,pos);
+		this.forceUpdate();
+	}
 
-		else {
-			this.props.layer.seq[sound][pos]=1;
-			this.props.layer.instrument.play(sound);
-		}
+	onVelClick(index) {
+		if (this.props.layer.hasSoundAt(index))
+			this.props.layer.toggleVel(index);
 
 		this.forceUpdate();
 	}
@@ -55,6 +54,41 @@ export default class LayerEditor extends Component {
 				{a}
 			</tr>
 		);
+	}
+
+	renderSequenceTable() {
+		let rows=this.props.layer.instrument.getSoundLabels().map(this.renderRow).reverse();
+
+		rows.push(<tr><td class='empty' style={{border: 'none'}}/></tr>);
+
+		let a=[];
+		for (let i=0; i<16; i++) {
+			if (this.props.layer.hasSoundAt(i)) {
+				let ja=[];
+				for (let j=0; j<4; j++) {
+					if (this.props.layer.vel[i]>=(1-j*.25))
+						ja.push(<div class="seq-vel bg-danger"/>);
+
+					else
+						ja.push(<div class="seq-vel"/>);
+				}
+
+				a.push(<td onClick={this.onVelClick.bind(this,i)}>{ja}</td>);
+			}
+
+			else {
+				a.push(<td onClick={this.onVelClick.bind(this,i)}/>);
+			}
+		}
+
+		rows.push(
+			<tr>
+				<th>Vel</th>
+				{a}
+			</tr>
+		);
+
+		return rows;
 	}
 
 	render() {
@@ -95,7 +129,7 @@ export default class LayerEditor extends Component {
 						</div>
 						<div class="tab-pane fade" id="sequence">
 							<table class="sequence-table">
-								{this.props.layer.instrument.getSoundLabels().map(this.renderRow).reverse()}
+								{this.renderSequenceTable()}
 							</table>
 						</div>
 						<div class="tab-pane fade" id="layer">
