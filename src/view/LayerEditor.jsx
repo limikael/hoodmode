@@ -32,6 +32,9 @@ export default class LayerEditor extends Component {
 		if (this.props.layer.hasSoundAt(index))
 			this.props.layer.toggleVel(index);
 
+		else
+			this.props.layer.toggleStacc(index);
+
 		this.forceUpdate();
 	}
 
@@ -78,6 +81,14 @@ export default class LayerEditor extends Component {
 				}
 
 				a.push(<td onClick={this.onVelClick.bind(this,i)}>{ja}</td>);
+			}
+
+			else if (this.props.layer.stacc[i]) {
+				a.push(
+					<td onClick={this.onVelClick.bind(this,i)}>
+						<span class="badge badge-pill badge-danger">.</span>
+					</td>
+				);
 			}
 
 			else {

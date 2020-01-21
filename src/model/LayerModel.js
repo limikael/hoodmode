@@ -15,6 +15,10 @@ export default class LayerModel {
 		this.vel=[];
 		for (let i=0; i<16; i++)
 			this.vel.push(1);
+
+		this.stacc=[];
+		for (let i=0; i<16; i++)
+			this.stacc.push(false);
 	}
 
 	getId() {
@@ -76,9 +80,14 @@ export default class LayerModel {
 		this.vel[pos]=n;
 	}
 
+	toggleStacc(pos) {
+		this.stacc[pos]=!this.stacc[pos];
+	}
+
 	getNoteLen(pos) {
 		for (let i=1; i<16; i++)
-			if (this.hasSoundAt((pos+i)%16))
+			if (this.hasSoundAt((pos+i)%16)
+					|| this.stacc[(pos+i)%16])
 				return i;
 
 		return 16;
