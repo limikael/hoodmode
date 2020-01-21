@@ -1,17 +1,20 @@
 import "@babel/polyfill";
-import InstrumentModel from '../InstrumentModel';
-import AudioUtil from '../../utils/AudioUtil';
+import InstrumentModel from './InstrumentModel';
+import AudioUtil from '../utils/AudioUtil';
 
-export default class BassInstrument extends InstrumentModel {
-	constructor() {
-		super("Bass");
-		this.sampleNote="F#";
-		this.sampleCents=AudioUtil.noteToCents(this.sampleNote);
+export default class HarmonicInstrument extends InstrumentModel {
+	constructor(options) {
+		super(options.name);
+
+		if (!options.sampleNote)
+			options.sampleNote="C";
+
+		this.options=options;
+		this.sampleCents=AudioUtil.noteToCents(this.options.sampleNote);
 	}
 
 	async load() {
-		let url="samples/acoustic_bass_f_sharp.mp3";
-//		let url="samples/upright-bass-bombdive.mp3";
+		let url=this.options.sample;
 		this.buffer=await AudioUtil.loadBuffer(url,this.app.audioContext);
 	}
 

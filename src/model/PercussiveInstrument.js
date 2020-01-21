@@ -1,10 +1,10 @@
 import "@babel/polyfill";
-import InstrumentModel from '../InstrumentModel';
-import AudioUtil from '../../utils/AudioUtil';
+import InstrumentModel from './InstrumentModel';
+import AudioUtil from '../utils/AudioUtil';
 
-export default class DrumInstrument extends InstrumentModel {
-	constructor() {
-		super("Drums");
+export default class PercussiveInstrument extends InstrumentModel {
+	constructor(options) {
+		super(options.name);
 	}
 
 	getSoundLabels() {

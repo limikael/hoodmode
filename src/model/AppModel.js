@@ -1,7 +1,6 @@
 import LayerModel from './LayerModel';
-import BassInstrument from './instruments/BassInstrument';
-import PianoInstrument from './instruments/PianoInstrument';
-import DrumInstrument from './instruments/DrumInstrument';
+import HarmonicInstrument from './HarmonicInstrument';
+import PercussiveInstrument from './PercussiveInstrument';
 import AudioUtil from '../utils/AudioUtil';
 
 export default class AppModel {
@@ -29,9 +28,20 @@ export default class AppModel {
 		if (!this.audioContext)
 			throw new Error("no web audio!");
 
-		this.addInstrument(new DrumInstrument());
-		this.addInstrument(new BassInstrument());
-		this.addInstrument(new PianoInstrument());
+		this.addInstrument(new PercussiveInstrument({
+			"name": "Bad Sampled Jazz Drums"
+		}));
+
+		this.addInstrument(new HarmonicInstrument({
+			"name": "Dive Bass",
+			"sample": "samples/upright-bass-bombdive.mp3"
+		}));
+
+		this.addInstrument(new HarmonicInstrument({
+			"name": "Acoustic Bass",
+			"sampleNote": "F#",
+			"sample": "samples/acoustic_bass_f_sharp.mp3"
+		}));
 	}
 
 	init() {
