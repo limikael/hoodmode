@@ -19,6 +19,38 @@ export default class LayerModel {
 		this.stacc=[];
 		for (let i=0; i<16; i++)
 			this.stacc.push(false);
+
+		this.audible=true;
+		this.volume=1;
+	}
+
+	setAudible(audible) {
+		this.audible=audible;
+		this.updateGain();
+	}
+
+	setVolume(volume) {
+		this.volume=volume;
+		this.updateGain();
+	}
+
+	setApp(app) {
+		this.app=app;
+		this.gain=this.app.audioContext.createGain();
+		this.gain.connect(this.app.audioContext.destination);
+		this.gain.gain.value=0;
+		this.updateGain();
+	}
+
+	updateGain() {
+		if (!this.gain)
+			return;
+
+		if (!this.audible)
+			this.gain.gain.value=0;
+
+		else
+			this.gain.gain.value=this.volume;
 	}
 
 	getId() {
@@ -40,6 +72,7 @@ export default class LayerModel {
 					let note=this.instrument.createNote(soundIndex);
 					note.setChordCents(chordCents);
 					note.setVelocity(this.vel[gridIndex]);
+					note.connect(this.gain);
 					note.playSheduled(
 						when+gridIndex*secPerGrid,
 						secPerGrid*this.getNoteLen(gridIndex)
@@ -57,6 +90,7 @@ export default class LayerModel {
 		if (this.seq[sound][pos]) {
 			let note=this.instrument.createNote(sound);
 			note.setChordCents(this.app.getCurrentChordCents());
+			note.connect(this.app.audioContext.destination);
 			note.playNow();
 		}
 	}

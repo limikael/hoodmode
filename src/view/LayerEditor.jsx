@@ -4,14 +4,13 @@ export default class LayerEditor extends Component {
 	onInstrumentButtonPress=(index)=>{
 		let note=this.props.layer.instrument.createNote(index);
 		note.setChordCents(this.props.app.getCurrentChordCents());
+		note.connect(this.props.app.audioContext.destination);
 		note.playNow();
 	};
 
 	onKeyDown=(e)=>{
 		if (parseInt(e.key)) {
-			let note=this.props.layer.instrument.createNote(parseInt(e.key)-1);
-			note.setChordCents(this.props.app.getCurrentChordCents());
-			note.playNow();
+			this.onInstrumentButtonPress(parseInt(e.key)-1);
 		}
 	}
 
@@ -37,6 +36,10 @@ export default class LayerEditor extends Component {
 
 		this.forceUpdate();
 	}
+
+	onVolumeChange=(e)=>{
+		this.props.layer.setVolume(e.target.value);
+	};
 
 	renderRow=(label, soundIndex)=>{
 		let a=[];
@@ -148,6 +151,11 @@ export default class LayerEditor extends Component {
 							</table>
 						</div>
 						<div class="tab-pane fade" id="layer">
+							<label for="volumeRange">Volume</label>
+							<input type="range" class="custom-range mb-3" id="volumeRange"
+									min="0" max="1" step="0.01"
+									value={this.props.layer.volume}
+									onChange={this.onVolumeChange}/>
 							<button type="button" class="btn btn-danger"
 									onClick={this.props.onDelete}>
 								Delete Layer

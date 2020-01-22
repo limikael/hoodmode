@@ -79,7 +79,7 @@ export default class AppModel {
 	}
 
 	addLayer(layer) {
-		layer.app=this;
+		layer.setApp(this);
 		this.layers.push(layer);
 	}
 
