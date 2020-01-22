@@ -9,6 +9,8 @@ export default class AppModel {
 		this.instruments=[];
 		this.bpm=100;
 		this.currentChordIndex=0;
+		this.chordSequenceIndex=-1;
+		this.chordSequence=[0];
 		this.chordLabels=[
 			"A-", "B (dim)", "C", "D-",
 			"E-", "F", "G",
@@ -69,6 +71,10 @@ export default class AppModel {
 		this.currentNotes=[];
 	}
 
+	addSequenceChord() {
+		this.chordSequence.push(0);
+	}
+
 	init() {
 		let p=[];
 		for (let i of this.instruments)
@@ -107,9 +113,22 @@ export default class AppModel {
 			note.setVelocity(0);
 
 		this.currentNotes=[];
+
+		if (this.chordSequenceIndex>=0)
+			this.chordSequenceIndex=0;
 	}
 
 	play=()=>{
+		if (this.chordSequenceIndex>=0) {
+			if (this.chordSequenceIndex>=this.chordSequence.length)
+				this.chordSequenceIndex=0;
+
+			this.setCurrentChordIndex(this.chordSequence[this.chordSequenceIndex]);
+			this.chordSequenceIndex++;
+
+			if (this.chordSequenceIndex>=this.chordSequence.length)
+				this.chordSequenceIndex=0;
+		}
 		this.playStartTime=this.audioContext.currentTime;
 
 		for (let layer of this.layers)

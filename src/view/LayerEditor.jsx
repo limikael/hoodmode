@@ -16,6 +16,7 @@ export default class LayerEditor extends Component {
 
 	componentDidMount() {
 		document.addEventListener("keydown",this.onKeyDown);
+		$('.nav-tabs a[href="#pad"]').tab('show');
 	}
 
 	componentWillUnmount() {
@@ -128,7 +129,7 @@ export default class LayerEditor extends Component {
 						<span>&times;</span>
 					</button>
         		</div>
-				<div className="card-body">
+				<div class="card-body">
 					<ul class="nav nav-tabs mb-3">
 						<li class="nav-item">
 							<a class="nav-link active" data-toggle="tab" href="#pad">Pad</a>
