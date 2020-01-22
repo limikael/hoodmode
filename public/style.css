@@ -43,3 +43,19 @@
 	width: 1em;
 	height: 1em;
 }
+
+/*.navbar-nav {
+	display: flex;
+}
+
+.navbar-nav .nav-item {
+	flex: 0 0 auto;
+}
+
+.fillit {
+	flex: 1 0 100% !important;
+}*/
+
+.fillit {
+	width: 400px !important;
+}

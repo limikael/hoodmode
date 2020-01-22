@@ -68,6 +68,10 @@ export default class App extends Component {
 		this.forceUpdate();
 	}
 
+	onSettingsClick=()=>{
+		console.log("setti");
+	}
+
 	renderStateContent() {
 		if (this.state.showAddLayer)
 			return (
@@ -115,11 +119,27 @@ export default class App extends Component {
 
 		return (
 			<div>
-				<nav className="navbar navbar-dark bg-dark mb-4">
+				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4 nav-fill">
 					<a className="navbar-brand" href="#">Hoodmode</a>
-					<button type="button" class={playCls} onClick={this.onPlayClick}>
-						PLAY
-					</button>
+					<ul class="navbar-nav">
+						<li class="nav-item mr-3">
+							<button type="button" class={playCls}
+									onClick={this.onPlayClick}>
+								>
+							</button>
+						</li>
+						<li class="nav-item">
+							<select class="custom-select" style={{width: 'calc(100vw - 15em)'}}>
+								<option></option>
+							</select>
+						</li>
+						<li class="nav-item ml-3">
+							<button type="button" class="btn btn-primary"
+									onClick={this.onSettingsClick}>
+								?
+							</button>
+						</li>
+					</ul>
 				</nav>
 				<div className="container">
 					{this.renderStateContent()}
