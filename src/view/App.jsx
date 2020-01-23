@@ -113,33 +113,25 @@ export default class App extends Component {
 			);
 		}
 
-		let playCls="btn btn-primary ";
+		let playCls="btn btn-primary mr-3 icon-button ";
 		if (this.app.isPlaying())
 			playCls+="active";
 
 		return (
 			<div>
-				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4 nav-fill">
+				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
 					<a className="navbar-brand" href="#">Hoodmode</a>
-					<ul class="navbar-nav">
-						<li class="nav-item mr-3">
-							<button type="button" class={playCls}
-									onClick={this.onPlayClick}>
-								>
-							</button>
-						</li>
-						<li class="nav-item">
-							<select class="custom-select" style={{width: 'calc(100vw - 15em)'}}>
-								<option></option>
-							</select>
-						</li>
-						<li class="nav-item ml-3">
-							<button type="button" class="btn btn-primary"
-									onClick={this.onSettingsClick}>
-								?
-							</button>
-						</li>
-					</ul>
+					<button type="button" class={playCls}
+							onClick={this.onPlayClick}>
+						<img src="img/play-fill.svg"/>
+					</button>
+					<select class="custom-select">
+						<option></option>
+					</select>
+					<button type="button" class="btn btn-primary ml-3 icon-button"
+							onClick={this.onSettingsClick}>
+						<img src="img/gear-fill.svg"/>
+					</button>
 				</nav>
 				<div className="container">
 					{this.renderStateContent()}

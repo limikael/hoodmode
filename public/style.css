@@ -44,18 +44,11 @@
 	height: 1em;
 }
 
-/*.navbar-nav {
-	display: flex;
+.icon-button {
+	padding: 0;
 }
 
-.navbar-nav .nav-item {
-	flex: 0 0 auto;
-}
-
-.fillit {
-	flex: 1 0 100% !important;
-}*/
-
-.fillit {
-	width: 400px !important;
+.icon-button img {
+	height: 2.3em;
+	filter: invert(100%);
 }
