@@ -2,8 +2,6 @@ import { h, Component } from 'preact';
 
 export default class Modal extends Component {
 	componentDidMount=()=>{
-//		console.log();
-
 		$(this.base).modal('show');
 		$(this.base).on('hidden.bs.modal', this.props.handleHideModal);
 	}

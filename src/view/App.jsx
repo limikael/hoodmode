@@ -6,6 +6,7 @@ import Modal from '../utils/Modal.jsx';
 import LayerList from './LayerList.jsx';
 import LayerEditor from './LayerEditor.jsx';
 import Chord from './Chord.jsx';
+import Settings from './Settings.jsx';
 
 export default class App extends Component {
 	constructor() {
@@ -69,7 +70,15 @@ export default class App extends Component {
 	}
 
 	onSettingsClick=()=>{
-		console.log("setti");
+		this.setState({
+			showSettings: true
+		});
+	}
+
+	onSettingsClose=()=>{
+		this.setState({
+			showSettings: false
+		});
 	}
 
 	renderStateContent() {
@@ -117,6 +126,10 @@ export default class App extends Component {
 		if (this.app.isPlaying())
 			playCls+="active";
 
+		let settings=null;
+		if (this.state.showSettings)
+			settings=<Settings app={this.app} onClose={this.onSettingsClose}/>
+
 		return (
 			<div>
 				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
@@ -133,11 +146,9 @@ export default class App extends Component {
 						<img src="img/gear-fill.svg"/>
 					</button>
 				</nav>
+				{settings}
 				<div className="container">
 					{this.renderStateContent()}
-				</div>
-
-				<div class="container mt-4">
 				</div>
 			</div>
 		);

@@ -5,7 +5,7 @@ export default class LayerList extends Component {
 	render() {
 		return (
 			<div>
-				<button type="button" class="btn btn-primary mb-4"
+				<button type="button" class="btn btn-primary mb-3"
 						onClick={this.props.onAddLayerClick}>
 					ADD LAYER
 				</button>
