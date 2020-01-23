@@ -125,8 +125,8 @@ export default class App extends Component {
 							onClick={this.onPlayClick}>
 						<img src="img/play-fill.svg"/>
 					</button>
-					<select class="custom-select">
-						<option></option>
+					<select class="custom-select bg-light">
+						<option>hello world</option>
 					</select>
 					<button type="button" class="btn btn-primary ml-3 icon-button"
 							onClick={this.onSettingsClick}>
