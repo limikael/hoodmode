@@ -34,6 +34,7 @@ export default class App extends Component {
 	onAddLayerClose=(instrument)=>{
 		if (instrument) {
 			this.app.getCurrentSong().addLayer(new LayerModel(instrument));
+			this.app.saveToLocalStorage();
 		}
 
 		this.setState({
@@ -51,10 +52,12 @@ export default class App extends Component {
 		this.setState({
 			currentLayer: null
 		});
+		this.app.saveToLocalStorage();
 	}
 
 	onLayerEditorDelete=()=>{
 		this.app.getCurrentSong().deleteLayer(this.state.currentLayer);
+		this.app.saveToLocalStorage();
 		this.setState({
 			currentLayer: null
 		});
@@ -80,6 +83,7 @@ export default class App extends Component {
 		this.setState({
 			showSettings: false
 		});
+		this.app.saveToLocalStorage();
 	}
 
 	onSongChange=(e)=>{
@@ -94,6 +98,7 @@ export default class App extends Component {
 
 		else {
 			this.app.addNewSong();
+			this.app.saveToLocalStorage();
 		}
 
 		this.forceUpdate();
@@ -105,6 +110,7 @@ export default class App extends Component {
 		});
 
 		this.app.deleteCurrentSong();
+		this.app.saveToLocalStorage();
 		this.forceUpdate();
 	}
 
@@ -125,7 +131,8 @@ export default class App extends Component {
 
 		return (
 			<div>
-				<LayerList song={this.app.getCurrentSong()}
+				<LayerList app={this.app}
+						song={this.app.getCurrentSong()}
 						onAddLayerClick={this.onAddLayerClick}
 						onLayerClick={this.onLayerClick}/>
 

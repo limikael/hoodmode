@@ -19,7 +19,8 @@ export default class LayerList extends Component {
 					<tbody>
 						{this.props.song.layers.map((layer,index)=>{
 							return (
-								<LayerListItem key={index} layer={layer}
+								<LayerListItem app={this.props.app}
+										key={index} layer={layer}
 										onClick={this.props.onLayerClick}/>
 							);
 						})}

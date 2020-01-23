@@ -8,6 +8,7 @@ export default class Chord extends Component {
 
 	onAddChordClick=()=>{
 		this.props.app.addSequenceChord();
+		this.props.app.saveToLocalStorage();
 		this.forceUpdate();
 	}
 
@@ -21,6 +22,7 @@ export default class Chord extends Component {
 		else
 			song.chordSequence[index]=v;
 
+		this.props.app.saveToLocalStorage();
 		this.forceUpdate();
 	}
 

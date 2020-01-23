@@ -7,6 +7,7 @@ export default class LayerListItem extends Component {
 
 	onAudibleChange=(e)=>{
 		this.props.layer.setAudible(e.target.checked);
+		this.props.app.saveToLocalStorage();
 	};
 
 	render() {

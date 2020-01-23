@@ -136,4 +136,23 @@ export default class LayerModel {
 
 		return false;
 	}
+
+	getObjectData() {
+		return {
+			audible: this.audible,
+			volume: this.volume,
+			seq: this.seq,
+			vel: this.vel,
+			stacc: this.stacc,
+			instrumentName: this.instrument.name
+		}
+	}
+
+	applyObjectData(data) {
+		this.audible=data.audible;
+		this.volume=data.volume;
+		this.seq=data.seq;
+		this.vel=data.vel;
+		this.stacc=data.stacc;
+	}
 }

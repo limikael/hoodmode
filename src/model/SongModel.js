@@ -1,3 +1,5 @@
+import LayerModel from './LayerModel';
+
 export default class SongModel {
 	constructor(name) {
 		this.name=name;
@@ -30,5 +32,34 @@ export default class SongModel {
 	setKey(key, minor) {
 		this.key=key;
 		this.minor=minor;
+	}
+
+	getObjectData() {
+		let layerData=[];
+		for (let layer of this.layers)
+			layerData.push(layer.getObjectData());
+
+		return {
+			name: this.name,
+			chordSequence: this.chordSequence,
+			key: this.key,
+			minor: this.minor,
+			bpm: this.bpm,
+			layers: layerData
+		}
+	}
+
+	applyObjectData(data) {
+		this.name=data.name;
+		this.chordSequence=data.chordSequence;
+		this.key=data.key;
+		this.minor=data.minor;
+		this.bpm=data.bpm;
+
+		for (let layerData of data.layers) {
+			let layer=new LayerModel(this.app.getInstrumentByName(layerData.instrumentName));
+			this.addLayer(layer);
+			layer.applyObjectData(layerData);
+		}
 	}
 }

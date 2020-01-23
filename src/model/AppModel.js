@@ -1,4 +1,3 @@
-import LayerModel from './LayerModel';
 import HarmonicInstrument from './HarmonicInstrument';
 import PercussiveInstrument from './PercussiveInstrument';
 import AudioUtil from '../utils/AudioUtil';
@@ -14,9 +13,6 @@ export default class AppModel {
 		this.songs=[];
 		this.currentChordIndex=0;
 		this.chordSequenceIndex=-1;
-
-		this.addSong(new SongModel("Hello"));
-		this.addSong(new SongModel("World"));
 
 		this.addInstrument(new PercussiveInstrument({
 			"name": "Bad Jazz Drums",
@@ -57,6 +53,11 @@ export default class AppModel {
 		}));
 
 		this.currentNotes=[];
+		this.loadFromLocalStorage();
+
+		if (!this.songs.length)
+			this.addNewSong();
+
 		this.setCurrentSongIndex(0);
 	}
 
@@ -192,5 +193,33 @@ export default class AppModel {
 
 		if (this.currentSongIndex>=this.songs.length)
 			this.currentSongIndex=this.songs.length-1;
+	}
+
+	loadFromLocalStorage() {
+		let jsonData=window.localStorage.getItem("songs");
+		if (!jsonData || !jsonData.length)
+			return;
+
+		let datas=JSON.parse(jsonData);
+		console.log("Loading songs: "+datas.length);
+
+		for (let data of datas) {
+			this.addNewSong();
+			this.getCurrentSong().applyObjectData(data);
+		}
+	}
+
+	saveToLocalStorage() {
+		let songData=[];
+		for (let song of this.songs)
+			songData.push(song.getObjectData());
+
+		window.localStorage.setItem("songs",JSON.stringify(songData));
+	}
+
+	getInstrumentByName(name) {
+		for (let instrument of this.instruments)
+			if (instrument.name==name)
+				return instrument;
 	}
 }
