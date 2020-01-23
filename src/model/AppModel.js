@@ -14,21 +14,6 @@ export default class AppModel {
 		this.key="A";
 		this.minor=true;
 
-/*		this.chordLabels=[
-			"A-", "B (dim)", "C", "D-",
-			"E-", "F", "G",
-		];
-
-		this.chordNotes=[
-			["A","C","E"],
-			["B","D","F"],
-			["C","E","G"],
-			["D","F","A"],
-			["E","G","B"],
-			["F","A","C"],
-			["G","B","D"],
-		];*/
-
 		this.audioContext=new window.AudioContext();
 		if (!this.audioContext)
 			throw new Error("no web audio!");
