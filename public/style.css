@@ -52,3 +52,10 @@
 	height: 2.3em;
 	filter: invert(100%);
 }
+
+.navbar-brand {
+	font-size: 0.75em;
+	border: 1px solid #fff;
+	border-radius: 5px;
+	padding: 3px;
+}

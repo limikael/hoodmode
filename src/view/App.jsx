@@ -120,7 +120,7 @@ export default class App extends Component {
 		return (
 			<div>
 				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
-					<a className="navbar-brand" href="#">Hoodmode</a>
+					<a className="navbar-brand" href="#">HOOD<br/>MODE</a>
 					<button type="button" class={playCls}
 							onClick={this.onPlayClick}>
 						<img src="img/play-fill.svg"/>
