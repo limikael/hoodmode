@@ -11,7 +11,10 @@ export default class AppModel {
 		this.currentChordIndex=0;
 		this.chordSequenceIndex=-1;
 		this.chordSequence=[0];
-		this.chordLabels=[
+		this.key="A";
+		this.minor=true;
+
+/*		this.chordLabels=[
 			"A-", "B (dim)", "C", "D-",
 			"E-", "F", "G",
 		];
@@ -24,7 +27,7 @@ export default class AppModel {
 			["E","G","B"],
 			["F","A","C"],
 			["G","B","D"],
-		];
+		];*/
 
 		this.audioContext=new window.AudioContext();
 		if (!this.audioContext)
@@ -69,6 +72,11 @@ export default class AppModel {
 		}));
 
 		this.currentNotes=[];
+	}
+
+	setKey(key, minor) {
+		this.key=key;
+		this.minor=minor;
 	}
 
 	addSequenceChord() {
@@ -151,16 +159,18 @@ export default class AppModel {
 	}
 
 	getChordLabels() {
-		return this.chordLabels;
+		return AudioUtil.getChordNamesForScale(this.key,this.minor);
 	}
 
 	getCurrentChordNoteCents(triadNote) {
-		let chordNotes=this.chordNotes[this.currentChordIndex];
+		let scaleChordNotes=AudioUtil.getChordNotesForScale(this.key,this.minor);
+		let chordNotes=scaleChordNotes[this.currentChordIndex];
 		return AudioUtil.noteToCents(chordNotes[triadNote]);
 	}
 
 	getCurrentChordCents() {
-		let chordNotes=this.chordNotes[this.currentChordIndex];
+		let scaleChordNotes=AudioUtil.getChordNotesForScale(this.key,this.minor);
+		let chordNotes=scaleChordNotes[this.currentChordIndex];
 		return [
 			AudioUtil.noteToCents(chordNotes[0]),
 			AudioUtil.noteToCents(chordNotes[1]),

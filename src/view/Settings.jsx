@@ -1,4 +1,6 @@
 import { h, Component } from 'preact';
+import HtmlUtil from '../utils/HtmlUtil.jsx';
+import AudioUtil from '../utils/AudioUtil.js';
 
 export default class Settings extends Component {
 	componentDidMount=()=>{
@@ -9,6 +11,16 @@ export default class Settings extends Component {
 	onTempoChange=(e)=>{
 		this.props.app.bpm=e.target.value;
 		this.forceUpdate();
+	}
+
+	onKeyChange=(e)=>{
+		this.props.app.setKey(e.target.value,this.props.app.minor);
+	}
+
+	onModeChange=(e)=>{
+		let v=((e.target.value=='true')?true:false);
+
+		this.props.app.setKey(this.props.app.key,v);
 	}
 
 	render() {
@@ -33,9 +45,25 @@ export default class Settings extends Component {
 								</div>
 
 								<div class="form-group row">
-									<label for="songName">Key</label>
-									<select class="form-control">
-										<option>A minor</option>
+									<label class="col-12 pl-0" for="songName">Key</label>
+									<select class="form-control col-2"
+											onChange={this.onKeyChange}>
+										{
+											HtmlUtil.selectOptionsNoKey(
+												AudioUtil.NOTE_NAMES,
+												this.props.app.key
+											)
+										}
+									</select>
+									<div class="col-1"/>
+									<select class="form-control col-4"
+											onChange={this.onModeChange}>
+										{
+											HtmlUtil.selectOptions(
+												{false: "major", true: "minor"},
+												this.props.app.minor
+											)
+										}
 									</select>
 								</div>
 
