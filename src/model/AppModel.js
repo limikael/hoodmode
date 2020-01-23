@@ -2,21 +2,21 @@ import LayerModel from './LayerModel';
 import HarmonicInstrument from './HarmonicInstrument';
 import PercussiveInstrument from './PercussiveInstrument';
 import AudioUtil from '../utils/AudioUtil';
+import SongModel from './SongModel';
 
 export default class AppModel {
 	constructor() {
-		this.layers=[];
-		this.instruments=[];
-		this.bpm=100;
-		this.currentChordIndex=0;
-		this.chordSequenceIndex=-1;
-		this.chordSequence=[0];
-		this.key="A";
-		this.minor=true;
-
 		this.audioContext=new window.AudioContext();
 		if (!this.audioContext)
 			throw new Error("no web audio!");
+
+		this.instruments=[];
+		this.songs=[];
+		this.currentChordIndex=0;
+		this.chordSequenceIndex=-1;
+
+		this.addSong(new SongModel("Hello"));
+		this.addSong(new SongModel("World"));
 
 		this.addInstrument(new PercussiveInstrument({
 			"name": "Bad Jazz Drums",
@@ -57,15 +57,30 @@ export default class AppModel {
 		}));
 
 		this.currentNotes=[];
+		this.setCurrentSongIndex(0);
 	}
 
-	setKey(key, minor) {
-		this.key=key;
-		this.minor=minor;
+	addSong(song) {
+		song.setApp(this);
+		this.songs.push(song);
+	}
+
+	setCurrentSongIndex(index) {
+		this.currentSongIndex=index;
+	}
+
+	getCurrentSong() {
+		return this.songs[this.currentSongIndex];
+	}
+
+	getSongNames() {
+		let names=this.songs.map((song)=>{return song.name});
+		return names;
 	}
 
 	addSequenceChord() {
-		this.chordSequence.push(0);
+		let song=this.getCurrentSong();
+		song.chordSequence.push(0);
 	}
 
 	init() {
@@ -75,18 +90,6 @@ export default class AppModel {
 
 		this.initPromise=Promise.all(p);
 		return this.initPromise;
-	}
-
-	addLayer(layer) {
-		layer.setApp(this);
-		this.layers.push(layer);
-	}
-
-	deleteLayer(layer) {
-		let idx=this.layers.indexOf(layer)
-
-		if (idx>=0)
-			this.layers.splice(idx,1);
 	}
 
 	addInstrument(instrument) {
@@ -112,22 +115,24 @@ export default class AppModel {
 	}
 
 	play=()=>{
+		let song=this.getCurrentSong();
+
 		if (this.chordSequenceIndex>=0) {
-			if (this.chordSequenceIndex>=this.chordSequence.length)
+			if (this.chordSequenceIndex>=song.chordSequence.length)
 				this.chordSequenceIndex=0;
 
-			this.setCurrentChordIndex(this.chordSequence[this.chordSequenceIndex]);
+			this.setCurrentChordIndex(song.chordSequence[this.chordSequenceIndex]);
 			this.chordSequenceIndex++;
 
-			if (this.chordSequenceIndex>=this.chordSequence.length)
+			if (this.chordSequenceIndex>=song.chordSequence.length)
 				this.chordSequenceIndex=0;
 		}
 		this.playStartTime=this.audioContext.currentTime;
 
-		for (let layer of this.layers)
+		for (let layer of song.layers)
 			layer.play(this.playStartTime);
 
-		this.playTimer=setTimeout(this.play,4*1000*60/this.bpm);
+		this.playTimer=setTimeout(this.play,4*1000*60/song.bpm);
 	}
 
 	onInstrumentNoteEnded(note) {
@@ -144,17 +149,20 @@ export default class AppModel {
 	}
 
 	getChordLabels() {
-		return AudioUtil.getChordNamesForScale(this.key,this.minor);
+		let song=this.getCurrentSong();
+		return AudioUtil.getChordNamesForScale(song.key,song.minor);
 	}
 
 	getCurrentChordNoteCents(triadNote) {
-		let scaleChordNotes=AudioUtil.getChordNotesForScale(this.key,this.minor);
+		let song=this.getCurrentSong();
+		let scaleChordNotes=AudioUtil.getChordNotesForScale(song.key,song.minor);
 		let chordNotes=scaleChordNotes[this.currentChordIndex];
 		return AudioUtil.noteToCents(chordNotes[triadNote]);
 	}
 
 	getCurrentChordCents() {
-		let scaleChordNotes=AudioUtil.getChordNotesForScale(this.key,this.minor);
+		let song=this.getCurrentSong();
+		let scaleChordNotes=AudioUtil.getChordNotesForScale(song.key,song.minor);
 		let chordNotes=scaleChordNotes[this.currentChordIndex];
 		return [
 			AudioUtil.noteToCents(chordNotes[0]),
@@ -169,5 +177,20 @@ export default class AppModel {
 
 		for (let note of this.currentNotes)
 			note.setChordCents(chordCents);
+	}
+
+	addNewSong() {
+		this.addSong(new SongModel("My New Song"));
+		this.setCurrentSongIndex(this.songs.length-1);
+	}
+
+	deleteCurrentSong() {
+		this.songs.splice(this.currentSongIndex,1);
+
+		if (!this.songs.length)
+			this.addNewSong();
+
+		if (this.currentSongIndex>=this.songs.length)
+			this.currentSongIndex=this.songs.length-1;
 	}
 }

@@ -24,7 +24,7 @@ export default class HtmlUtil {
 		for (let key in options) {
 			let selected=false;
 
-			if (key==current.toString())
+			if (key==String(current))
 				selected=true;
 
 			res.push(

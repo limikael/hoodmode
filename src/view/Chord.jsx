@@ -13,12 +13,13 @@ export default class Chord extends Component {
 
 	onSequenceChordChange=(index,e)=>{
 		let v=parseInt(e.target.value);
+		let song=this.props.app.getCurrentSong();
 
 		if (v<0)
-			this.props.app.chordSequence.splice(index,1);
+			song.chordSequence.splice(index,1);
 
 		else
-			this.props.app.chordSequence[index]=v;
+			song.chordSequence[index]=v;
 
 		this.forceUpdate();
 	}
@@ -75,7 +76,8 @@ export default class Chord extends Component {
 							})}
 						</div>
 						<div class="tab-pane fade" id="sequence">
-							{this.props.app.chordSequence.map((sequenceChord,sequenceIndex)=>{
+							{this.props.app.getCurrentSong().chordSequence.map(
+								(sequenceChord,sequenceIndex)=>{
 								return (
 									<select class="btn btn-success mr-2 mb-2 active"
 											style={{'width': '5em', 'height': '5em'}}

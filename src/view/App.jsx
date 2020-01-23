@@ -7,6 +7,7 @@ import LayerList from './LayerList.jsx';
 import LayerEditor from './LayerEditor.jsx';
 import Chord from './Chord.jsx';
 import Settings from './Settings.jsx';
+import HtmlUtil from '../utils/HtmlUtil.jsx';
 
 export default class App extends Component {
 	constructor() {
@@ -32,7 +33,7 @@ export default class App extends Component {
 
 	onAddLayerClose=(instrument)=>{
 		if (instrument) {
-			this.app.addLayer(new LayerModel(instrument));
+			this.app.getCurrentSong().addLayer(new LayerModel(instrument));
 		}
 
 		this.setState({
@@ -53,7 +54,7 @@ export default class App extends Component {
 	}
 
 	onLayerEditorDelete=()=>{
-		this.app.deleteLayer(this.state.currentLayer);
+		this.app.getCurrentSong().deleteLayer(this.state.currentLayer);
 		this.setState({
 			currentLayer: null
 		});
@@ -81,6 +82,32 @@ export default class App extends Component {
 		});
 	}
 
+	onSongChange=(e)=>{
+		if (this.state.currentLayer) {
+			this.setState({
+				currentLayer: null
+			});
+		}
+
+		if (e.target.value>=0)
+			this.app.setCurrentSongIndex(e.target.value);
+
+		else {
+			this.app.addNewSong();
+		}
+
+		this.forceUpdate();
+	}
+
+	onSettingsDelete=()=>{
+		this.setState({
+			showSettings: false
+		});
+
+		this.app.deleteCurrentSong();
+		this.forceUpdate();
+	}
+
 	renderStateContent() {
 		if (this.state.showAddLayer)
 			return (
@@ -98,7 +125,7 @@ export default class App extends Component {
 
 		return (
 			<div>
-				<LayerList app={this.app}
+				<LayerList song={this.app.getCurrentSong()}
 						onAddLayerClick={this.onAddLayerClick}
 						onLayerClick={this.onLayerClick}/>
 
@@ -128,7 +155,11 @@ export default class App extends Component {
 
 		let settings=null;
 		if (this.state.showSettings)
-			settings=<Settings app={this.app} onClose={this.onSettingsClose}/>
+			settings=
+				<Settings app={this.app} 
+						onClose={this.onSettingsClose}
+						song={this.app.getCurrentSong()}
+						onDelete={this.onSettingsDelete}/>
 
 		return (
 			<div>
@@ -138,8 +169,15 @@ export default class App extends Component {
 							onClick={this.onPlayClick}>
 						<img src="img/play-fill.svg"/>
 					</button>
-					<select class="custom-select bg-light">
-						<option>hello world</option>
+					<select class="custom-select bg-light"
+							onChange={this.onSongChange}>
+						{
+							HtmlUtil.selectOptions(
+								this.app.getSongNames(),
+								this.app.currentSongIndex
+							)
+						}
+						<option value="-1">New Song...</option>
 					</select>
 					<button type="button" class="btn btn-primary ml-3 icon-button"
 							onClick={this.onSettingsClick}>

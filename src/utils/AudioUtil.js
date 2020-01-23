@@ -97,7 +97,7 @@ export default class AudioUtil {
 	}
 
 	static getChordNamesForScale(scale, minor) {
-		let prefixes=["","-","-","","","-"," (dim)"];
+		let prefixes=["","-","-","","","-","o"];
 		if (minor)
 			prefixes=["-","o","","-","-","",""];
 

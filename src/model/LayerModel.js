@@ -34,8 +34,9 @@ export default class LayerModel {
 		this.updateGain();
 	}
 
-	setApp(app) {
-		this.app=app;
+	setSong(song) {
+		this.song=song;
+		this.app=this.song.app;
 		this.gain=this.app.audioContext.createGain();
 		this.gain.connect(this.app.audioContext.destination);
 		this.gain.gain.value=0;
@@ -54,7 +55,7 @@ export default class LayerModel {
 	}
 
 	getId() {
-		return "layer"+this.app.layers.indexOf(this);
+		return "layer"+this.song.layers.indexOf(this);
 	}
 
 	getLabel() {
@@ -62,7 +63,7 @@ export default class LayerModel {
 	}
 
 	play(when) {
-		let secPerBeat=60/this.app.bpm;
+		let secPerBeat=60/this.song.bpm;
 		let secPerGrid=secPerBeat/4;
 		let chordCents=this.app.getCurrentChordCents();
 

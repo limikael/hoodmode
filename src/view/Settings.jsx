@@ -9,18 +9,27 @@ export default class Settings extends Component {
 	}
 
 	onTempoChange=(e)=>{
-		this.props.app.bpm=e.target.value;
+		this.props.song.bpm=e.target.value;
 		this.forceUpdate();
 	}
 
 	onKeyChange=(e)=>{
-		this.props.app.setKey(e.target.value,this.props.app.minor);
+		this.props.song.setKey(e.target.value,this.props.song.minor);
 	}
 
 	onModeChange=(e)=>{
 		let v=((e.target.value=='true')?true:false);
 
-		this.props.app.setKey(this.props.app.key,v);
+		this.props.song.setKey(this.props.song.key,v);
+	}
+
+	onNameChange=(e)=>{
+		this.props.song.name=e.target.value;
+	}
+
+	onDeleteClick=()=>{
+		$(this.base).modal('hide');
+		this.props.onDelete();
 	}
 
 	render() {
@@ -41,7 +50,9 @@ export default class Settings extends Component {
 							<form class="container mb-0"><fieldset>
 								<div class="form-group row">
 									<label>Song Name</label>
-									<input type="text" class="form-control"/>
+									<input type="text" class="form-control"
+										value={this.props.song.name}
+										onChange={this.onNameChange}/>
 								</div>
 
 								<div class="form-group row">
@@ -51,7 +62,7 @@ export default class Settings extends Component {
 										{
 											HtmlUtil.selectOptionsNoKey(
 												AudioUtil.NOTE_NAMES,
-												this.props.app.key
+												this.props.song.key
 											)
 										}
 									</select>
@@ -61,7 +72,7 @@ export default class Settings extends Component {
 										{
 											HtmlUtil.selectOptions(
 												{false: "major", true: "minor"},
-												this.props.app.minor
+												this.props.song.minor
 											)
 										}
 									</select>
@@ -70,11 +81,11 @@ export default class Settings extends Component {
 								<div class="form-group row mb-0">
 									<label class="col-12 pl-0">Tempo</label>
 									<input type="text" class="form-control col-2"
-										value={this.props.app.bpm}
+										value={this.props.song.bpm}
 										onChange={this.onTempoChange}/>
 									<div class="col"/>
 									<input type="range" class="custom-range col-9 mt-2"
-										min="60" max="180" value={this.props.app.bpm}
+										min="60" max="180" value={this.props.song.bpm}
 										onChange={this.onTempoChange}/>
 									{/*
 										<div class="col"/>
@@ -84,6 +95,10 @@ export default class Settings extends Component {
 							</fieldset></form>
 						</div>
 						<div className="modal-footer">
+							<button type="button" className="btn btn-danger"
+									onClick={this.onDeleteClick}>
+								Delete Song
+							</button>
 							<button type="button" className="btn btn-primary"
 									data-dismiss="modal">
 								Close
