@@ -2,6 +2,26 @@ import { h, Component } from 'preact';
 import LayerListItem from './LayerListItem.jsx';
 
 export default class LayerList extends Component {
+	componentDidMount() {
+		document.addEventListener("keydown",this.onKeyDown);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener("keydown",this.onKeyDown);
+	}
+
+	onKeyDown=(e)=>{
+		let num=parseInt(e.key);
+		if (!(num>=1))
+			return;
+
+		let layer=this.props.app.getCurrentSong().layers[num-1];
+		layer.setAudible(!layer.audible);
+
+		this.forceUpdate();
+		this.props.app.saveToLocalStorage();
+	}
+
 	render() {
 		return (
 			<div>

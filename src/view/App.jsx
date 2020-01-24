@@ -25,6 +25,32 @@ export default class App extends Component {
 		});
 	};
 
+	onKeyDown=(e)=>{
+		if (e.target.nodeName=="INPUT")
+			return;
+
+		if (e.key==" ") {
+			e.preventDefault();
+			e.stopPropagation();
+
+			if (this.app.isPlaying())
+				this.app.stop();
+
+			else
+				this.app.play();
+
+			this.forceUpdate();
+		}
+	}
+
+	componentDidMount() {
+		document.addEventListener("keydown",this.onKeyDown);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener("keydown",this.onKeyDown);
+	}
+
 	onAddLayerClick=()=>{
 		this.setState({
 			showAddLayer: true
