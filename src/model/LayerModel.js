@@ -149,8 +149,8 @@ export default class LayerModel {
 	}
 
 	applyObjectData(data) {
-		this.audible=data.audible;
-		this.volume=data.volume;
+		this.setAudible(data.audible);
+		this.setVolume(data.volume);
 		this.seq=data.seq;
 		this.vel=data.vel;
 		this.stacc=data.stacc;
