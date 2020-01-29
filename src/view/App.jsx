@@ -23,6 +23,11 @@ export default class App extends Component {
 				loading: false
 			});
 		});
+
+		this.app.onPlayInterval=()=>{
+			console.log("play interval: "+this.app.getBeatIndex());
+			this.forceUpdate();
+		}
 	};
 
 	onKeyDown=(e)=>{
@@ -152,7 +157,8 @@ export default class App extends Component {
 				<LayerEditor app={this.app}
 						layer={this.state.currentLayer}
 						onClose={this.onLayerEditorClose}
-						onDelete={this.onLayerEditorDelete}/>
+						onDelete={this.onLayerEditorDelete}
+						beatIndex={this.app.getBeatIndex()}/>
 			);
 
 		return (

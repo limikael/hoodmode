@@ -50,6 +50,9 @@ export default class LayerEditor extends Component {
 			if (this.props.layer.seq[soundIndex][i])
 				cls='bg-primary';
 
+			else if (i==this.props.beatIndex)
+				cls='bg-light';
+
 			else if (!(i%4))
 				cls='seq-beat'
 

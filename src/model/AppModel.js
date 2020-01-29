@@ -106,6 +106,9 @@ export default class AppModel {
 		clearTimeout(this.playTimer);
 		this.playTimer=null;
 
+		clearInterval(this.playInterval);
+		this.playInterval=null;
+
 		for (let note of this.currentNotes)
 			note.setVelocity(0);
 
@@ -134,6 +137,21 @@ export default class AppModel {
 			layer.play(this.playStartTime);
 
 		this.playTimer=setTimeout(this.play,4*1000*60/song.bpm);
+
+		if (!this.playInterval)
+			this.playInterval=setInterval(this.onPlayInterval,.25*1000*60/song.bpm);
+	}
+
+	getBeatIndex() {
+		let song=this.getCurrentSong();
+
+		if (!this.isPlaying())
+			return -1;
+
+		let t=this.audioContext.currentTime-this.playStartTime;
+		let l=4*60/song.bpm;
+
+		return Math.floor(16*t/l);
 	}
 
 	onInstrumentNoteEnded(note) {
