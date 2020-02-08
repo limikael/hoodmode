@@ -25,7 +25,6 @@ export default class App extends Component {
 		});
 
 		this.app.onPlayInterval=()=>{
-			console.log("play interval: "+this.app.getBeatIndex());
 			this.forceUpdate();
 		}
 	};

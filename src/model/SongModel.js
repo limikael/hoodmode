@@ -1,4 +1,5 @@
 import LayerModel from './LayerModel';
+import AudioUtil from '../utils/AudioUtil';
 
 export default class SongModel {
 	constructor(name) {
@@ -52,7 +53,13 @@ export default class SongModel {
 	applyObjectData(data) {
 		this.name=data.name;
 		this.chordSequence=data.chordSequence;
-		this.key=data.key;
+
+		if (!isNaN(parseInt(data.key)))
+			this.key=AudioUtil.NOTE_NAMES[parseInt(data.key)];
+
+		else
+			this.key=data.key;
+
 		this.minor=data.minor;
 		this.bpm=data.bpm;
 

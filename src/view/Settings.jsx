@@ -14,7 +14,8 @@ export default class Settings extends Component {
 	}
 
 	onKeyChange=(e)=>{
-		this.props.song.setKey(e.target.value,this.props.song.minor);
+		let key=AudioUtil.NOTE_NAMES[e.target.value];
+		this.props.song.setKey(key,this.props.song.minor);
 	}
 
 	onModeChange=(e)=>{
@@ -60,9 +61,9 @@ export default class Settings extends Component {
 									<select class="form-control col-2"
 											onChange={this.onKeyChange}>
 										{
-											HtmlUtil.selectOptionsNoKey(
+											HtmlUtil.selectOptions(
 												AudioUtil.NOTE_NAMES,
-												this.props.song.key
+												AudioUtil.NOTE_NAMES.indexOf(this.props.song.key)
 											)
 										}
 									</select>

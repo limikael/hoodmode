@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import SequenceChord from './SequenceChord.jsx';
 
 export default class Chord extends Component {
 	onChordButtonClick=(index)=>{
@@ -12,15 +13,17 @@ export default class Chord extends Component {
 		this.forceUpdate();
 	}
 
-	onSequenceChordChange=(index,e)=>{
-		let v=parseInt(e.target.value);
+	onSequenceChordChange=(index,chord)=>{
 		let song=this.props.app.getCurrentSong();
+		song.chordSequence[index]=chord;
 
-		if (v<0)
-			song.chordSequence.splice(index,1);
+		this.props.app.saveToLocalStorage();
+		this.forceUpdate();
+	}
 
-		else
-			song.chordSequence[index]=v;
+	onSequenceChordDelete=(index)=>{
+		let song=this.props.app.getCurrentSong();
+		song.chordSequence.splice(index,1);
 
 		this.props.app.saveToLocalStorage();
 		this.forceUpdate();
@@ -39,6 +42,8 @@ export default class Chord extends Component {
 	}
 
 	render() {
+		let song=this.props.app.getCurrentSong();
+
 		return (
 			<div class="card border-success">
 				<div class="card-header">
@@ -78,25 +83,14 @@ export default class Chord extends Component {
 							})}
 						</div>
 						<div class="tab-pane fade" id="sequence">
-							{this.props.app.getCurrentSong().chordSequence.map(
-								(sequenceChord,sequenceIndex)=>{
+							{song.chordSequence.map((chord,index)=>{
 								return (
-									<select class="btn btn-success mr-2 mb-2 active"
-											style={{'width': '5em', 'height': '5em'}}
-											onChange={this.onSequenceChordChange.bind(this,sequenceIndex)}
-											key={sequenceIndex}>
-										{this.props.app.getChordLabels().map((label,index)=>{
-											let selected=(sequenceChord==index);
-											return (
-												<option value={index}
-														selected={selected}>
-													{label}
-												</option>
-											);
-										})}
-										<option class="bg-danger" value="-1">Delete</option>
-									</select>
-								);
+									<SequenceChord app={this.props.app} current={chord}
+											onChange={this.onSequenceChordChange.bind(this,index)}
+											onDelete={this.onSequenceChordDelete.bind(this,index)}
+											key={Math.random()}
+											keyPrefix={Math.random()}/>
+								)
 							})}
 							<button class="btn btn-light mb-2"
 									style={{'width': '5em', 'height': '5em'}}

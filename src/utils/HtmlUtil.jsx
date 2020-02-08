@@ -1,7 +1,7 @@
 import { h, Component } from 'preact';
 
 export default class HtmlUtil {
-	static selectOptionsNoKey(options, current) {
+	/*static selectOptionsNoKey(options, current) {
 		let res=options.map((option, index)=>{
 			let selected=false;
 
@@ -16,9 +16,9 @@ export default class HtmlUtil {
 		});
 
 		return res;
-	}
+	}*/
 
-	static selectOptions(options, current) {
+	static selectOptions(options, current, keyPrefix) {
 		let res=[];
 
 		for (let key in options) {
@@ -28,7 +28,8 @@ export default class HtmlUtil {
 				selected=true;
 
 			res.push(
-				<option value={key} selected={selected}>
+				<option value={key} selected={selected}
+						key={keyPrefix+"_"+key+"_"+options[key]+"_"+selected}>
 					{options[key]}
 				</option>
 			);
