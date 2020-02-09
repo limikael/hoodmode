@@ -49,7 +49,8 @@ export default class AppModel {
 
 		this.addInstrument(new HarmonicInstrument({
 			"name": "Piano",
-			"sample": "samples/piano/piano-c.wav"
+			"sample": "samples/piano/piano-c.wav",
+			"defaultVolume": 0.25
 		}));
 
 		this.currentNotes=[];

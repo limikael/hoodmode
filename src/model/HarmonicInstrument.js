@@ -12,6 +12,9 @@ export default class HarmonicInstrument extends InstrumentModel {
 
 		this.options=options;
 		this.sampleCents=AudioUtil.noteToCents(this.options.sampleNote);
+
+		if (options.defaultVolume)
+			this.defaultVolume=options.defaultVolume;
 	}
 
 	async load() {

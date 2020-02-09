@@ -21,7 +21,12 @@ export default class LayerModel {
 			this.stacc.push(false);
 
 		this.audible=true;
-		this.volume=1;
+
+		if (this.instrument.defaultVolume)
+			this.volume=this.instrument.defaultVolume;
+
+		else
+			this.volume=1;
 	}
 
 	setAudible(audible) {
