@@ -4,10 +4,8 @@
   "description": "Bringing musical modality to ya hood",
   "main": "src/index.jsx",
   "scripts": {
-    "bundle": "browserify -t babelify --debug src/index.jsx -o public/js/bundle.js",
-    "deploy": "browserify -t babelify -t uglifyify src/index.jsx -o public/js/bundle.js ",
     "start": "node node_modules/.bin/budo src/index.jsx:bundle.js --dir=public --live --watch-glob=public/*.css --port=$PORT -- -t babelify",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "node node_modules/.bin/budo src/index.jsx:bundle.js --dir=public --live --watch-glob=public/*.css -- -t babelify"
   },
   "repository": {
     "type": "git",
