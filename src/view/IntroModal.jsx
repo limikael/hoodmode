@@ -60,6 +60,15 @@ export default class IntroModal extends Component {
 									they can actually be used to create music, but they sound nothing
 									like they eventually will sound. Please have patience!
 								</li>
+								<li>
+									At the moment, the songs created gets stored locally in your browser.
+									This will also change, I'm envisioning a system whereby you can share
+									the songs across several different devices, export them for usage in
+									other programs, etc, etc. But nothing of this is in place yet. Also,
+									the internal format that the app uses to save songs will probably change,
+									which means that things you create now might not work in future versions
+									of the app.
+								</li>
 							</ul>
 							<p>
 								That being said, please go ahead and test it! And again, please don't
