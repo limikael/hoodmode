@@ -45,29 +45,29 @@ export default class IntroModal extends Component {
 							<h3>Things to keep in mind</h3>
 							<ul>
 								<li>
-									<b>There is no documentation.</b> Just click around and explore,
+									<b>There is no documentation.</b><br/> Just click around and explore,
 									don’t be afraid to break it! If something seems broken, tell me about it!
 								</li>
 								<li>
-									<b>Not a mobile app yet.</b> Even though this is going to be a mobile 
+									<b>Not a mobile app yet.</b><br/> Even though this is going to be a mobile 
 									app eventually, at the moment it doesn't really work on mobiles 
 									at all. This is because this is just a very quick technology
 									test at the moment.
 								</li>
 								<li>
-									<b>The built-in instruments sound like shit.</b> Or well, surprisingly 
+									<b>The built-in instruments sound like shit.</b><br/> Or well, surprisingly 
 									they can actually be used to create music, but they sound 
 									nothing like they eventually will sound. 
 								</li>
 								<li>
-									<b>Tracks are not downloadable for now.</b> At the moment, the tracks
+									<b>Tracks are not downloadable for now.</b><br/> At the moment, the tracks
 									created get stored locally in your browser. This will also change,
 									I'm envisioning a system whereby you can share the songs/tracks
 									across several different devices, export them for usage in other
 									programs, etc, etc. But nothing of this is in place yet.
 								</li>
 								<li>
-									<b>Features will change fast.</b> If you potentially start using
+									<b>Features will change fast.</b><br/> If you potentially start using
 									the app, please don't get attached to anything and don't get
 									upset if it changes. Also, promise that you will not lose hope, 
 									and give it another try later if there is something that isn't
