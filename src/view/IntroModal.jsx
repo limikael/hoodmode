@@ -37,7 +37,7 @@ export default class IntroModal extends Component {
 							<ol>
 								<li>Do you get the basic idea?</li>
 								<li>Are you able to get the app to make any sound?</li>
-								<li>How can the app be improved?</li>
+								<li>What features do you want the app to have?</li>
 							</ol>
 							<p>
 								Any feature suggestions and comments are welcome!
