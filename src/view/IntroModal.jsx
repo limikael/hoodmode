@@ -87,7 +87,7 @@ export default class IntroModal extends Component {
 								</a>
 							</p>
 							<p>Or put your comments as a reply to <a 
-									href="https://www.facebook.com/li.mikael/videos/10157084270912339/"
+									href="https://www.facebook.com/photo.php?fbid=10157104268222339"
 									target="_blank" class="text-info">
 								this</a> facebook post.
 							</p>
