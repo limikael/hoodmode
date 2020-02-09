@@ -59,3 +59,11 @@
 	border-radius: 5px;
 	padding: 3px;
 }
+
+.intro-modal .modal-dialog{
+    overflow-y: initial !important
+}
+.intro-modal .modal-body{
+    max-height: calc(100vh - 200px);
+    overflow-y: auto;
+}

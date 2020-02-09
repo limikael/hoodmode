@@ -8,6 +8,7 @@ import LayerEditor from './LayerEditor.jsx';
 import Chord from './Chord.jsx';
 import Settings from './Settings.jsx';
 import HtmlUtil from '../utils/HtmlUtil.jsx';
+import IntroModal from './IntroModal.jsx';
 
 export default class App extends Component {
 	constructor() {
@@ -20,7 +21,8 @@ export default class App extends Component {
 
 		this.app.init().then(()=>{
 			this.setState({
-				loading: false
+				loading: false,
+				showIntroModal: true
 			});
 		});
 
@@ -180,11 +182,22 @@ export default class App extends Component {
 		}
 	}
 
+	onIntroModalClose=()=>{
+		this.setState({
+			showIntroModal: false
+		});
+	}
+
 	render() {
 		if (this.state.loading) {
 			return (
 				<div class="loading-screen">LOADING...</div>
 			);
+		}
+
+		let introModal=null;
+		if (this.state.showIntroModal) {
+			introModal=<IntroModal onClose={this.onIntroModalClose}/>
 		}
 
 		let playCls="btn btn-primary mr-3 icon-button ";
@@ -222,6 +235,7 @@ export default class App extends Component {
 						<img src="img/gear-fill.svg"/>
 					</button>
 				</nav>
+				{introModal}
 				{settings}
 				<div className="container">
 					{this.renderStateContent()}
