@@ -18,18 +18,19 @@
     "@babel/core": "^7.4.3",
     "@babel/plugin-proposal-class-properties": "^7.8.3",
     "@babel/plugin-transform-react-jsx": "^7.8.3",
+    "@babel/polyfill": "^7.8.3",
     "@babel/preset-env": "^7.8.3",
     "babel-preset-preact": "^2.0.0",
     "babelify": "^10.0.0",
     "bootstrap": "^4.4.1",
+    "bootstrap-icons": "^1.0.0-alpha2",
     "bootswatch": "^4.4.1",
     "browserify": "^16.1.0",
     "budo": "^11.6.3",
     "jquery": "^3.4.1",
-    "uglifyify": "^4.0.5",
-    "@babel/polyfill": "^7.8.3",
-    "bootstrap-icons": "^1.0.0-alpha2",
     "preact": "^8.2.7",
-    "preact-compat": "^3.18.0"
+    "preact-compat": "^3.18.0",
+    "shortid": "^2.2.15",
+    "uglifyify": "^4.0.5"
   }
 }

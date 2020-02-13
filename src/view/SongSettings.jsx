@@ -1,19 +1,22 @@
 import { h, Component } from 'preact';
-import HtmlUtil from '../utils/HtmlUtil.jsx';
+import { Select, IF } from '../utils/ReactUtil.jsx';
 import AudioUtil from '../utils/AudioUtil.js';
 
-export default class Settings extends Component {
+export default class SongSettings extends Component {
 	componentDidMount=()=>{
 		$(this.base).modal('show');
-		$(this.base).on('hidden.bs.modal', this.props.onClose);
+		$(this.base).on('hidden.bs.modal', this.context.hideSongSettings);
+	}
+
+	onNameChange=(e)=>{
+		this.context.setCurrentSongName(e.target.value);
 	}
 
 	onTempoChange=(e)=>{
-		this.props.song.bpm=e.target.value;
-		this.forceUpdate();
+		this.context.setCurrentSongBpm(e.target.value);
 	}
 
-	onKeyChange=(e)=>{
+	/*onKeyChange=(e)=>{
 		let key=AudioUtil.NOTE_NAMES[e.target.value];
 		this.props.song.setKey(key,this.props.song.minor);
 	}
@@ -22,15 +25,11 @@ export default class Settings extends Component {
 		let v=((e.target.value=='true')?true:false);
 
 		this.props.song.setKey(this.props.song.key,v);
-	}
-
-	onNameChange=(e)=>{
-		this.props.song.name=e.target.value;
-	}
+	}*/
 
 	onDeleteClick=()=>{
 		$(this.base).modal('hide');
-		this.props.onDelete();
+		this.context.deleteCurrentSong();
 	}
 
 	render() {
@@ -58,25 +57,9 @@ export default class Settings extends Component {
 
 								<div class="form-group row">
 									<label class="col-12 pl-0" for="songName">Key</label>
-									<select class="form-control col-2"
-											onChange={this.onKeyChange}>
-										{
-											HtmlUtil.selectOptions(
-												AudioUtil.NOTE_NAMES,
-												AudioUtil.NOTE_NAMES.indexOf(this.props.song.key)
-											)
-										}
-									</select>
+									<Select class="form-control col-2" />
 									<div class="col-1"/>
-									<select class="form-control col-4"
-											onChange={this.onModeChange}>
-										{
-											HtmlUtil.selectOptions(
-												{false: "major", true: "minor"},
-												this.props.song.minor
-											)
-										}
-									</select>
+									<Select class="form-control col-4" />
 								</div>
 
 								<div class="form-group row mb-0">

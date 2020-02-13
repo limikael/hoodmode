@@ -24,34 +24,33 @@ export default class LayerEditor extends Component {
 	}
 
 	onSeqClick=(sound, pos)=>{
-		this.props.layer.toggle(sound,pos);
-		this.forceUpdate();
+		this.context.toggleCurrentLayerSeq(sound,pos);
 	}
 
 	onVelClick(index) {
-		if (this.props.layer.hasSoundAt(index))
-			this.props.layer.toggleVel(index);
+		if (true) //this.props.layer.hasSoundAt(index))
+			this.context.toggleCurrentLayerVel(index);
 
 		else
-			this.props.layer.toggleStacc(index);
-
-		this.forceUpdate();
+			this.context.toggleCurrentLayerStacc(index);
 	}
 
 	onVolumeChange=(e)=>{
-		this.props.layer.setVolume(e.target.value);
+		this.context.setCurrentLayerVolume(e.target.value);
 	};
 
 	renderRow=(label, soundIndex)=>{
+		let layer=this.context.getCurrentLayer();
+
 		let a=[];
 		for (let i=0; i<16; i++) {
 			let cls='';
 
-			if (this.props.layer.seq[soundIndex][i])
+			if (layer.seq[soundIndex][i])
 				cls='bg-primary';
 
-			else if (i==this.props.beatIndex)
-				cls='bg-light';
+			/*else if (i==this.props.beatIndex)
+				cls='bg-light';*/
 
 			else if (!(i%4))
 				cls='seq-beat'
@@ -71,16 +70,18 @@ export default class LayerEditor extends Component {
 	}
 
 	renderSequenceTable() {
-		let rows=this.props.layer.instrument.getSoundLabels().map(this.renderRow).reverse();
+		let layer=this.context.getCurrentLayer();
+		let instrument=this.context.getCurrentInstrument();
+		let rows=instrument.getSoundLabels().map(this.renderRow).reverse();
 
 		rows.push(<tr><td class='empty' style={{border: 'none'}}/></tr>);
 
 		let a=[];
 		for (let i=0; i<16; i++) {
-			if (this.props.layer.hasSoundAt(i)) {
+			if (true /*this.props.layer.hasSoundAt(i)*/) {
 				let ja=[];
 				for (let j=0; j<4; j++) {
-					if (this.props.layer.vel[i]>=(1-j*.25))
+					if (layer.vel[i]>=(1-j*.25))
 						ja.push(<div class="seq-vel bg-danger"/>);
 
 					else
@@ -90,7 +91,7 @@ export default class LayerEditor extends Component {
 				a.push(<td onClick={this.onVelClick.bind(this,i)}>{ja}</td>);
 			}
 
-			else if (this.props.layer.stacc[i]) {
+			else if (layer.stacc[i]) {
 				a.push(
 					<td onClick={this.onVelClick.bind(this,i)}>
 						<span class="badge badge-pill badge-danger">.</span>
@@ -114,7 +115,10 @@ export default class LayerEditor extends Component {
 	}
 
 	render() {
-		let buttons=this.props.layer.instrument.getSoundLabels().map((label,index)=>{
+		let layer=this.context.getCurrentLayer();
+		let instrument=this.context.getCurrentInstrument();
+
+		let buttons=instrument.getSoundLabels().map((label,index)=>{
 			return (
 				<button type="button" class="btn btn-primary btn-lg mb-2 mr-2"
 						style={{width: '6em', height: '6em'}}
@@ -127,8 +131,9 @@ export default class LayerEditor extends Component {
 		return (
 			<div className="card border-primary">
 				<div className="card-header">
-					{this.props.layer.getLabel()}
-					<button type="button" class="close" onClick={this.props.onClose}>
+					{layer.instrumentName}
+					<button type="button" class="close"
+							onClick={this.context.hideCurrentLayer}>
 						<span>&times;</span>
 					</button>
         		</div>
@@ -158,10 +163,10 @@ export default class LayerEditor extends Component {
 							<label for="volumeRange">Volume</label>
 							<input type="range" class="custom-range mb-3" id="volumeRange"
 									min="0" max="1" step="0.01"
-									value={this.props.layer.volume}
+									value={layer.volume}
 									onChange={this.onVolumeChange}/>
 							<button type="button" class="btn btn-danger"
-									onClick={this.props.onDelete}>
+									onClick={this.context.deleteCurrentLayer}>
 								Delete Layer
 							</button>
 						</div>

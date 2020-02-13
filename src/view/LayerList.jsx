@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import LayerListItem from './LayerListItem.jsx';
 
 export default class LayerList extends Component {
-	componentDidMount() {
+	/*componentDidMount() {
 		document.addEventListener("keydown",this.onKeyDown);
 	}
 
@@ -20,13 +20,13 @@ export default class LayerList extends Component {
 
 		this.forceUpdate();
 		this.props.app.saveToLocalStorage();
-	}
+	}*/
 
 	render() {
 		return (
 			<div>
 				<button type="button" class="btn btn-primary mb-3"
-						onClick={this.props.onAddLayerClick}>
+						onClick={this.context.showAddLayer}>
 					ADD LAYER
 				</button>
 				<table class="table table-hover">
@@ -37,10 +37,10 @@ export default class LayerList extends Component {
 						</tr>
 					</thead>
 					<tbody>
-						{this.props.song.layers.map((layer,index)=>{
+						{this.context.getCurrentSong().layers.map((layer,index)=>{
 							return (
-								<LayerListItem app={this.props.app}
-										key={index} layer={layer}
+								<LayerListItem key={index} layer={layer}
+										index={index}
 										onClick={this.props.onLayerClick}/>
 							);
 						})}

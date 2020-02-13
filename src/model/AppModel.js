@@ -1,7 +1,6 @@
 import HarmonicInstrument from './HarmonicInstrument';
 import PercussiveInstrument from './PercussiveInstrument';
 import AudioUtil from '../utils/AudioUtil';
-import SongModel from './SongModel';
 
 export default class AppModel {
 	constructor() {
@@ -10,9 +9,6 @@ export default class AppModel {
 			throw new Error("no web audio!");
 
 		this.instruments=[];
-		this.songs=[];
-		this.currentChordIndex=0;
-		this.chordSequenceIndex=-1;
 
 		this.addInstrument(new PercussiveInstrument({
 			"name": "Bad Jazz Drums",
@@ -52,37 +48,6 @@ export default class AppModel {
 			"sample": "samples/piano/piano-c.wav",
 			"defaultVolume": 0.25
 		}));
-
-		this.currentNotes=[];
-		this.loadFromLocalStorage();
-
-		if (!this.songs.length)
-			this.addNewSong();
-
-		this.setCurrentSongIndex(0);
-	}
-
-	addSong(song) {
-		song.setApp(this);
-		this.songs.push(song);
-	}
-
-	setCurrentSongIndex(index) {
-		this.currentSongIndex=index;
-	}
-
-	getCurrentSong() {
-		return this.songs[this.currentSongIndex];
-	}
-
-	getSongNames() {
-		let names=this.songs.map((song)=>{return song.name});
-		return names;
-	}
-
-	addSequenceChord() {
-		let song=this.getCurrentSong();
-		song.chordSequence.push(0);
 	}
 
 	init() {
@@ -97,143 +62,6 @@ export default class AppModel {
 	addInstrument(instrument) {
 		instrument.app=this;
 		this.instruments.push(instrument);
-	}
-
-	isPlaying() {
-		return !!this.playTimer;
-	}
-
-	stop() {
-		clearTimeout(this.playTimer);
-		this.playTimer=null;
-
-		clearInterval(this.playInterval);
-		this.playInterval=null;
-
-		for (let note of this.currentNotes)
-			note.setVelocity(0);
-
-		this.currentNotes=[];
-
-		if (this.chordSequenceIndex>=0)
-			this.chordSequenceIndex=0;
-	}
-
-	play=()=>{
-		let song=this.getCurrentSong();
-
-		if (this.chordSequenceIndex>=0) {
-			if (this.chordSequenceIndex>=song.chordSequence.length)
-				this.chordSequenceIndex=0;
-
-			this.setCurrentChordIndex(song.chordSequence[this.chordSequenceIndex]);
-			this.chordSequenceIndex++;
-
-			if (this.chordSequenceIndex>=song.chordSequence.length)
-				this.chordSequenceIndex=0;
-		}
-		this.playStartTime=this.audioContext.currentTime;
-
-		for (let layer of song.layers)
-			layer.play(this.playStartTime);
-
-		this.playTimer=setTimeout(this.play,4*1000*60/song.bpm);
-
-		if (!this.playInterval)
-			this.playInterval=setInterval(this.onPlayInterval,.25*1000*60/song.bpm);
-	}
-
-	getBeatIndex() {
-		let song=this.getCurrentSong();
-
-		if (!this.isPlaying())
-			return -1;
-
-		let t=this.audioContext.currentTime-this.playStartTime;
-		let l=4*60/song.bpm;
-
-		return Math.floor(16*t/l);
-	}
-
-	onInstrumentNoteEnded(note) {
-		let idx=this.currentNotes.indexOf(note);
-		if (idx<0)
-			return;
-
-		this.currentNotes.splice(idx,1);
-	}
-
-	addInstrumentNote(note) {
-		note.onended=this.onInstrumentNoteEnded.bind(this,note);
-		this.currentNotes.push(note);
-	}
-
-	getChordLabels() {
-		let song=this.getCurrentSong();
-		return AudioUtil.getChordNamesForScale(song.key,song.minor);
-	}
-
-	getCurrentChordNoteCents(triadNote) {
-		let song=this.getCurrentSong();
-		let scaleChordNotes=AudioUtil.getChordNotesForScale(song.key,song.minor);
-		let chordNotes=scaleChordNotes[this.currentChordIndex];
-		return AudioUtil.noteToCents(chordNotes[triadNote]);
-	}
-
-	getCurrentChordCents() {
-		let song=this.getCurrentSong();
-		let scaleChordNotes=AudioUtil.getChordNotesForScale(song.key,song.minor);
-		let chordNotes=scaleChordNotes[this.currentChordIndex];
-		return [
-			AudioUtil.noteToCents(chordNotes[0]),
-			AudioUtil.noteToCents(chordNotes[1]),
-			AudioUtil.noteToCents(chordNotes[2])
-		];
-	}
-
-	setCurrentChordIndex(chordIndex) {
-		this.currentChordIndex=chordIndex;
-		let chordCents=this.getCurrentChordCents();
-
-		for (let note of this.currentNotes)
-			note.setChordCents(chordCents);
-	}
-
-	addNewSong() {
-		this.addSong(new SongModel("My New Song"));
-		this.setCurrentSongIndex(this.songs.length-1);
-	}
-
-	deleteCurrentSong() {
-		this.songs.splice(this.currentSongIndex,1);
-
-		if (!this.songs.length)
-			this.addNewSong();
-
-		if (this.currentSongIndex>=this.songs.length)
-			this.currentSongIndex=this.songs.length-1;
-	}
-
-	loadFromLocalStorage() {
-		let jsonData=window.localStorage.getItem("songs");
-		if (!jsonData || !jsonData.length)
-			return;
-
-		let datas=JSON.parse(jsonData);
-		console.log("Loading songs: "+datas.length);
-
-		for (let data of datas) {
-			this.addNewSong();
-			this.getCurrentSong().applyObjectData(data);
-		}
-	}
-
-	saveToLocalStorage() {
-		let songData=[];
-		for (let song of this.songs)
-			songData.push(song.getObjectData());
-
-		window.localStorage.setItem("songs",JSON.stringify(songData));
 	}
 
 	getInstrumentByName(name) {

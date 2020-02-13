@@ -1,7 +1,7 @@
 import "@babel/polyfill";
 import InstrumentModel from './InstrumentModel';
 import AudioUtil from '../utils/AudioUtil';
-import InstrumentNote from './InstrumentNote';
+//import InstrumentNote from './InstrumentNote';
 
 export default class HarmonicInstrument extends InstrumentModel {
 	constructor(options) {
