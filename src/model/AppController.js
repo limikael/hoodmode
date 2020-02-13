@@ -135,6 +135,13 @@ export default class AppController {
 		return state;
 	}
 
+	toggleLayerAudible(state, layerIndex) {
+		let song=this.helper.getCurrentSong(state);
+		song.layers[layerIndex].audible=!song.layers[layerIndex].audible;
+
+		return state;
+	}
+
 	toggleCurrentLayerSeq(state, sound, pos) {
 		let layer=this.helper.getCurrentLayer(state);
 		layer.seq[sound][pos]=!layer.seq[sound][pos];
