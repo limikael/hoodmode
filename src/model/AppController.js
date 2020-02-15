@@ -1,12 +1,13 @@
 import shortid from 'shortid';
+import "regenerator-runtime/runtime";
 
 export default class AppController {
-	constructor(model, helper) {
-		this.model=model;
+	constructor(conductor, helper) {
+		this.conductor=conductor;
 		this.helper=helper;
 	}
 
-	init() {
+	async init() {
 		let state={
 			currentSongIndex: 0,
 			currentLayerIndex: -1,
@@ -16,15 +17,60 @@ export default class AppController {
 			instruments: []
 		}
 
-		for (let instrument of this.model.instruments) {
-			state.instruments.push({
-				id: shortid.generate(),
-				name: instrument.name
-			});
-		}
+		state.instruments.push({
+			"key": "bad-jazz-drums",
+			"type": "percussive",
+			"name": "Bad Jazz Drums",
+			"labels": ["KICK","SNARE","HI-HAT"],
+			"samples": [
+				"samples/drums/bad-kick.wav",
+				"samples/drums/bad-snare.wav",
+				"samples/drums/bad-hihat.wav",
+			]
+		});
+
+		state.instruments.push({
+			"key": "yes-drums",
+			"type": "percussive",
+			"name": "Yes Drums",
+			"labels": ["KICK","SNARE","HI-HAT 1","HI-HAT 2","HI-HAT 3"],
+			"samples": [
+				"samples/drums/yes-kick.mp3",
+				"samples/drums/yes-snare.mp3",
+				"samples/drums/thrl-hat_A_minor.wav",
+				"samples/drums/vinyl-hat_90bpm_C.wav",
+				"samples/drums/rock-hihat-tchik.wav"
+			]
+		});
+
+		state.instruments.push({
+			"key": "dive-bass",
+			"type": "harmonic",
+			"name": "Dive Bass",
+			"sample": "samples/bass/upright-bass-bombdive.mp3"
+		});
+
+		state.instruments.push({
+			"key": "acoustic-bass",
+			"type": "harmonic",
+			"name": "Acoustic Bass",
+			"sampleNote": "F#",
+			"sample": "samples/bass/acoustic_bass_f_sharp.mp3"
+		});
+
+		state.instruments.push({
+			"key": "piano",
+			"type": "harmonic",
+			"name": "Piano",
+			"sample": "samples/piano/piano-c.wav",
+			"defaultVolume": 0.25
+		});
 
 		state=this.addNewSong(state,"Hello");
 		state=this.addNewSong(state,"World");
+
+		this.conductor.setState(state);
+		await this.conductor.loadInstruments();
 
 		return state;
 	};
@@ -38,7 +84,7 @@ export default class AppController {
 		state.songs.push({
 			name: name,
 			bpm: 100,
-			id: shortid.generate(),
+			key: shortid.generate(),
 			layers: []
 		});
 
@@ -104,14 +150,14 @@ export default class AppController {
 
 	addLayer(state, instrumentName) {
 		let song=state.songs[state.currentSongIndex];
-		let instrument=this.model.getInstrumentByName(instrumentName);
 
 		let seq=[];
-		for (let i=0; i<instrument.getNumSounds(); i++)
+		let numSounds=this.helper.getInstrumentNumSoundsByName(state,instrumentName);
+		for (let i=0; i<numSounds; i++)
 			seq.push(Array(16).fill(false));
 
 		let layer={
-			id: shortid.generate(),
+			key: shortid.generate(),
 			instrumentName: instrumentName,
 			audible: true,
 			volume: 1,

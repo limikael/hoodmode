@@ -2,10 +2,11 @@ import { h, Component } from 'preact';
 
 export default class LayerEditor extends Component {
 	onInstrumentButtonPress=(index)=>{
-		let note=this.props.layer.instrument.createNote(index);
+		this.context.playCurrentInstrument(index);
+/*		let note=this.props.layer.instrument.createNote(index);
 		note.setChordCents(this.props.app.getCurrentChordCents());
 		note.connect(this.props.app.audioContext.destination);
-		note.playNow();
+		note.playNow();*/
 	};
 
 	onKeyDown=(e)=>{
@@ -72,7 +73,7 @@ export default class LayerEditor extends Component {
 	renderSequenceTable() {
 		let layer=this.context.getCurrentLayer();
 		let instrument=this.context.getCurrentInstrument();
-		let rows=instrument.getSoundLabels().map(this.renderRow).reverse();
+		let rows=this.context.getCurrentInstrumentSoundLabels().map(this.renderRow).reverse();
 
 		rows.push(<tr><td class='empty' style={{border: 'none'}}/></tr>);
 
@@ -118,7 +119,7 @@ export default class LayerEditor extends Component {
 		let layer=this.context.getCurrentLayer();
 		let instrument=this.context.getCurrentInstrument();
 
-		let buttons=instrument.getSoundLabels().map((label,index)=>{
+		let buttons=this.context.getCurrentInstrumentSoundLabels().map((label,index)=>{
 			return (
 				<button type="button" class="btn btn-primary btn-lg mb-2 mr-2"
 						style={{width: '6em', height: '6em'}}

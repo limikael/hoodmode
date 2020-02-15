@@ -11,21 +11,40 @@ class AppContext extends Component {
 				if (args[0] && args[0].preventDefault)
 					args[0].preventDefault();
 
-				this.setState(props.controller[key](this.state, ...args));
+				let newState=props.controller[key](this.state, ...args);
+				if (newState instanceof Promise) {
+					this.setState({
+						busy: true
+					});
+
+					newState.then((state)=>{
+						state.busy=false;
+						this.setState(state);
+
+						if (this.props.onStateChange)
+							this.props.onStateChange(state);
+					});
+				}
+
+				else {
+					this.setState(newState);
+
+					if (this.props.onStateChange)
+						this.props.onStateChange(newState);
+				}
 			}
 		}
 
 		for (let key of this.getObjectKeys(props.helper)) {
 			this.curried[key]=(...args)=>{
-				return props.helper[key](this.state);
+				return props.helper[key](this.state, ...args);
 			}
 		}
 
-		if (props.initAction)
-			this.state=props.controller[props.initAction]();
+		this.state={};
 
-		else
-			this.state={};
+		if (props.initAction)
+			this.curried[props.initAction]();
 	}
 
 	getObjectKeys(o) {

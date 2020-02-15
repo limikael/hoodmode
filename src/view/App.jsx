@@ -15,6 +15,9 @@ export default class App extends Component {
 	}
 
 	render() {
+		if (this.context.busy)
+			return (<div>LOADING...</div>);
+
 		let newSongOption={
 			name: "New Song...",
 			id: -1
@@ -31,7 +34,8 @@ export default class App extends Component {
 				)}
 				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
 					<a className="navbar-brand" href="#">HOOD<br/>MODE</a>
-					<button type="button" class="btn btn-primary mr-3 icon-button">
+					<button type="button" class="btn btn-primary mr-3 icon-button"
+						onClick={this.context.play}>
 						<img src="img/play-fill.svg"/>
 					</button>
 					<Select class="custom-select bg-light"

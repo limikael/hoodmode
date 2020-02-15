@@ -12,7 +12,7 @@ export class Select {
 	render() {
 		let props=this.props;
 		if (!props.idField)
-			props.idField="id";
+			props.idField="key";
 
 		if (!props.options)
 			props.options=[];

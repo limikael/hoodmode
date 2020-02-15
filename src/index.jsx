@@ -4,16 +4,17 @@ import AppContext from './utils/AppContext.js';
 import shortid from 'shortid';
 import AppController from './model/AppController.js';
 import AppHelper from './model/AppHelper.js';
-import AppModel from './model/AppModel.js';
+import Conductor from './model/Conductor.js';
 
-let appModel=new AppModel();
-let appHelper=new AppHelper(appModel);
-let appController=new AppController(appModel,appHelper);
+let conductor=new Conductor();
+let appHelper=new AppHelper(conductor);
+let appController=new AppController(conductor,appHelper);
 let appContext=(
 	<AppContext
 			controller={appController}
 			helper={appHelper}
-			initAction="init">
+			initAction="init"
+			onStateChange={conductor.setState}>
 		<App/>
 	</AppContext>
 );

@@ -1,6 +1,6 @@
 export default class AppHelper {
-	constructor(model) {
-		this.model=model;
+	constructor(conductor) {
+		this.conductor=conductor;
 	}
 
 	getCurrentSong(state) {
@@ -11,8 +11,47 @@ export default class AppHelper {
 		return state.songs[state.currentSongIndex].layers[state.currentLayerIndex];
 	}
 
+	getInstrumentByName(state, name) {
+		for (let instrument of state.instruments)
+			if (instrument.name==name)
+				return instrument;
+	}
+
+	getInstrumentNumSoundsByName(state, name) {
+		let instrument=this.getInstrumentByName(state,name);
+
+		switch (instrument.type) {
+			case "harmonic":
+				return 6;
+
+			case "percussive":
+				return instrument.labels.length;
+		}
+	}
+
 	getCurrentInstrument(state) {
 		let layer=this.getCurrentLayer(state);
-		return this.model.getInstrumentByName(layer.instrumentName);
+		return this.getInstrumentByName(state,layer.instrumentName);
+	}
+
+	getCurrentInstrumentSoundLabels(state) {
+		let instrument=this.getCurrentInstrument(state);
+
+		switch (instrument.type) {
+			case "harmonic":
+				return ["T1","T2","T3","O-T1","O-T2","O-T3"];
+
+			case "percussive":
+				return instrument.labels;
+		}
+	}
+
+	playCurrentInstrument(state, soundIndex) {
+		let instrument=this.getCurrentInstrument(state);
+		this.conductor.playInstrument(instrument.name,soundIndex);
+	}
+
+	play() {
+		this.conductor.play();
 	}
 }

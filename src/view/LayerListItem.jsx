@@ -23,10 +23,10 @@ export default class LayerListItem extends Component {
 				<td>
 					<div class="custom-control custom-switch">
 						<input type="checkbox" class="custom-control-input"
-								id={this.props.layer.id}
+								id={this.props.layer.key}
 								checked={this.props.layer.audible}
 								onChange={this.onAudibleChange}/>
-						<label class="custom-control-label" for={this.props.layer.id}/>
+						<label class="custom-control-label" for={this.props.layer.key}/>
 					</div>							
 				</td>
 			</tr>
