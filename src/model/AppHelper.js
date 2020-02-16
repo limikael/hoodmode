@@ -59,8 +59,7 @@ export default class AppHelper {
 
 	getChordLabels(state) {
 		let song=this.getCurrentSong(state);
-//		return MusicUtil.getChordNamesForScale(song.key,song.minor);
-		return ["A","B","C"];
+		return MusicUtil.getChordNamesForScale(song.musicKey,song.minor);
 	}
 
 	getNotesSelectOptions(state) {

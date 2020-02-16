@@ -54,7 +54,7 @@ export default class MusicUtil {
 
 		let res=[];
 		for (let index of noteIndeces)
-			res.push(NOTE_NAMES[(startIndex+index)%12]);
+			res.push(MusicUtil.NOTE_NAMES[(startIndex+index)%12]);
 
 		return res;
 	}

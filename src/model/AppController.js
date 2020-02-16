@@ -11,6 +11,7 @@ export default class AppController {
 		let state={
 			currentSongIndex: 0,
 			currentLayerIndex: -1,
+			currentChordIndex: 0,
 			songSettingsVisible: false,
 			addLayerVisible: false,
 			songs: [],
@@ -93,8 +94,18 @@ export default class AppController {
 		return this.setSongIndex(state,index);
 	}
 
+	setCurrentChordIndex(state, index) {
+		state.currentChordIndex=index;
+
+		return state;
+	}
+
 	setSongIndex(state, index) {
+		if (index==state.currentSongIndex)
+			return state;
+
 		state.currentSongIndex=index;
+		state.currentChordIndex=0;
 
 		return state;
 	}

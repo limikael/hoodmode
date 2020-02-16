@@ -3,8 +3,7 @@ import SequenceChord from './SequenceChord.jsx';
 
 export default class Chord extends Component {
 	onChordButtonClick=(index)=>{
-		this.props.app.setCurrentChordIndex(index);
-		this.forceUpdate();
+		this.context.setCurrentChordIndex(index);
 	}
 
 	onAddChordClick=()=>{
