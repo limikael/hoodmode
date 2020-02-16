@@ -4,6 +4,7 @@ import SongSettings from './SongSettings.jsx';
 import LayerList from './LayerList.jsx';
 import AddLayer from './AddLayer.jsx';
 import LayerEditor from './LayerEditor.jsx';
+import Chord from './Chord.jsx';
 
 export default class App extends Component {
 	onSelectIndexChange=(index)=>{
@@ -53,7 +54,10 @@ export default class App extends Component {
 						<LayerEditor />
 					)}
 					{IF(this.context.currentLayerIndex<0,()=>
-						<LayerList />
+						<div>
+							<LayerList />
+							<Chord/>
+						</div>
 					)}
 				</div>
 			</div>

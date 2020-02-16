@@ -85,6 +85,8 @@ export default class AppController {
 			name: name,
 			bpm: 100,
 			key: shortid.generate(),
+			musicKey: "C",
+			minor: true,
 			layers: []
 		});
 
@@ -117,6 +119,20 @@ export default class AppController {
 
 	setCurrentSongBpm(state, bpm) {
 		state.songs[state.currentSongIndex].bpm=bpm;
+
+		return state;
+	}
+
+	setCurrentSongMusicKey(state, musicKey) {
+		state.songs[state.currentSongIndex].musicKey=musicKey;
+
+		return state;
+	}
+
+	setCurrentSongMinor(state, minor) {
+		console.log("setting minor: "+minor);
+
+		state.songs[state.currentSongIndex].minor=minor;
 
 		return state;
 	}

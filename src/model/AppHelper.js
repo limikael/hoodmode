@@ -1,3 +1,5 @@
+import MusicUtil from '../utils/MusicUtil.js';
+
 export default class AppHelper {
 	constructor(conductor) {
 		this.conductor=conductor;
@@ -53,5 +55,29 @@ export default class AppHelper {
 
 	play() {
 		this.conductor.play();
+	}
+
+	getChordLabels(state) {
+		let song=this.getCurrentSong(state);
+//		return MusicUtil.getChordNamesForScale(song.key,song.minor);
+		return ["A","B","C"];
+	}
+
+	getNotesSelectOptions(state) {
+		let a=[];
+
+		for (let noteName of MusicUtil.NOTE_NAMES)
+			a.push({
+				key: noteName, label: noteName
+			});
+
+		return a;
+	}
+
+	getModalSelectOptions(state) {
+		return [
+			{key: false, label: "major"},
+			{key: true, label: "minor"},
+		];
 	}
 }

@@ -42,7 +42,7 @@ export default class Chord extends Component {
 	}
 
 	render() {
-		let song=this.props.app.getCurrentSong();
+		let song=this.context.getCurrentSong();
 
 		return (
 			<div class="card border-success">
@@ -67,10 +67,10 @@ export default class Chord extends Component {
 
 					<div class="tab-content">
 						<div class="tab-pane fade active show" id="perform">
-							{this.props.app.getChordLabels().map((label,index)=>{
+							{this.context.getChordLabels().map((label,index)=>{
 								let cls="btn btn-success mr-2 mb-2";
 
-								if (index==this.props.app.currentChordIndex)
+								if (index==this.context.currentChordIndex)
 									cls+=" active"
 
 								return (
@@ -82,7 +82,7 @@ export default class Chord extends Component {
 								);
 							})}
 						</div>
-						<div class="tab-pane fade" id="sequence">
+						{/*<div class="tab-pane fade" id="sequence">
 							{song.chordSequence.map((chord,index)=>{
 								return (
 									<SequenceChord app={this.props.app} current={chord}
@@ -97,7 +97,7 @@ export default class Chord extends Component {
 									onClick={this.onAddChordClick}>
 								+
 							</button>
-						</div>
+						</div>*/}
 					</div>
 				</div>
 			</div>

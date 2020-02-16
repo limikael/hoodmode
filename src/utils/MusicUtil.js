@@ -44,7 +44,7 @@ export default class MusicUtil {
 	}
 
 	static getNotesForScale(scale, minor) {
-		let startIndex=NOTE_NAMES.indexOf(scale);
+		let startIndex=MusicUtil.NOTE_NAMES.indexOf(scale);
 		if (startIndex<0)
 			throw new Error("no such scale: "+scale);
 
@@ -60,7 +60,7 @@ export default class MusicUtil {
 	}
 
 	static getChordNotesForScale(scale, minor) {
-		let noteNames=AudioUtil.getNotesForScale(scale,minor);
+		let noteNames=MusicUtil.getNotesForScale(scale,minor);
 
 		let res=[];
 		for (let i=0; i<12; i++)
@@ -78,7 +78,7 @@ export default class MusicUtil {
 		if (minor)
 			prefixes=["-","o","","-","-","",""];
 
-		let noteNames=AudioUtil.getNotesForScale(scale,minor);
+		let noteNames=MusicUtil.getNotesForScale(scale,minor);
 		let res=[];
 		for (let index in noteNames)
 			res.push(noteNames[index]+prefixes[index]);

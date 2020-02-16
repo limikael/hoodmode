@@ -1,5 +1,5 @@
 import { h, Component } from 'preact';
-import HtmlUtil from '../utils/HtmlUtil.jsx';
+import ReactUtil from '../utils/ReactUtil.jsx';
 
 export default class SequenceChord extends Component {
 	onChange=(e)=>{

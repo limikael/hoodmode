@@ -16,12 +16,7 @@ export default class SongSettings extends Component {
 		this.context.setCurrentSongBpm(e.target.value);
 	}
 
-	/*onKeyChange=(e)=>{
-		let key=AudioUtil.NOTE_NAMES[e.target.value];
-		this.props.song.setKey(key,this.props.song.minor);
-	}
-
-	onModeChange=(e)=>{
+	/*onModeChange=(e)=>{
 		let v=((e.target.value=='true')?true:false);
 
 		this.props.song.setKey(this.props.song.key,v);
@@ -57,9 +52,15 @@ export default class SongSettings extends Component {
 
 								<div class="form-group row">
 									<label class="col-12 pl-0" for="songName">Key</label>
-									<Select class="form-control col-2" />
+									<Select class="form-control col-2"
+											options={this.context.getNotesSelectOptions()}
+											selected={this.context.getCurrentSong().musicKey}
+											onChange={this.context.setCurrentSongMusicKey}/>
 									<div class="col-1"/>
-									<Select class="form-control col-4" />
+									<Select class="form-control col-4"
+											options={this.context.getModalSelectOptions()}
+											selected={this.context.getCurrentSong().minor}
+											onChange={this.context.setCurrentSongMinor}/>
 								</div>
 
 								<div class="form-group row mb-0">

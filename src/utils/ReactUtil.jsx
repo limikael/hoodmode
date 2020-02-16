@@ -3,7 +3,7 @@ import { h, Component } from 'preact';
 export class Select {
 	onChange=(e)=>{
 		if (this.props.onChange)
-			this.props.onChange(e.target.value);
+			this.props.onChange(JSON.parse(e.target.value));
 
 		if (this.props.onIndexChange)
 			this.props.onIndexChange(e.target.selectedIndex);
@@ -14,6 +14,9 @@ export class Select {
 		if (!props.idField)
 			props.idField="key";
 
+		if (!props.labelField)
+			props.labelField="label";
+
 		if (!props.options)
 			props.options=[];
 
@@ -23,12 +26,17 @@ export class Select {
 				{props.options.map((option, index)=>{
 					let selected=false;
 
-					if (index===props.selectedIndex)
+					if (props.hasOwnProperty('selectedIndex') &&
+							index===props.selectedIndex)
+						selected=true;
+
+					if (props.hasOwnProperty('selected') &&
+							option[props.idField]===props.selected)
 						selected=true;
 
 					return (
 						<option key={option[props.idField]}
-								value={option[props.idField]}
+								value={JSON.stringify(option[props.idField])}
 								selected={selected}>
 							{option[props.labelField]}
 						</option>
