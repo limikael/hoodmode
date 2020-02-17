@@ -15,7 +15,8 @@ export default class AppController {
 			songSettingsVisible: false,
 			addLayerVisible: false,
 			songs: [],
-			instruments: []
+			instruments: [],
+			playing: false
 		}
 
 		state.instruments.push({
@@ -256,6 +257,12 @@ export default class AppController {
 	setCurrentLayerVolume(state, volume) {
 		let layer=this.helper.getCurrentLayer(state);
 		layer.volume=volume;
+
+		return state;
+	}
+
+	togglePlaying(state) {
+		state.playing=!state.playing;
 
 		return state;
 	}

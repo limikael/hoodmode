@@ -5,26 +5,28 @@ export default class ConductorLayer {
 		this.instrument=this.conductor.getConductorInstrumentByName(data.instrumentName);
 		if (!this.instrument)
 			throw new Error("There is no instrument!!!");
+
+		this.gain=this.conductor.audioContext.createGain();
+		this.gain.connect(this.conductor.audioContext.destination);
+		this.updateGain();
+
+		this.destination=this.gain;
 	}
 
 	update(data) {
 		this.data=data;
+		this.updateGain();
 	}
 
 	finalize() {
+		this.gain.disconnect();
 	}
 
-	play(at, gridIndex) {
-		for (let soundIndex=0; soundIndex<this.instrument.getNumSounds(); soundIndex++) {
-			if (this.data.seq[soundIndex][gridIndex]) {
-				let note=this.conductor.createNote(this.instrument,soundIndex);
-				//note.setChordCents(chordCents);
-				note.setVelocity(this.data.vel[gridIndex]);
-				note.connect(this.gain);
-				note.playSheduled(at);
+	updateGain() {
+		if (!this.data.audible)
+			this.gain.gain.value=0;
 
-				this.conductor.addInstrumentNote(note);
-			}
-		}		
+		else
+			this.gain.gain.value=this.data.volume;
 	}
 }

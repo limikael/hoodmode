@@ -24,6 +24,10 @@ export default class App extends Component {
 			id: -1
 		};
 
+		let playButtonClass="btn btn-primary mr-3 icon-button ";
+		if (this.context.playing)
+			playButtonClass+="active";
+
 		return (
 			<div>
 				{IF(this.context.songSettingsVisible,()=>
@@ -35,8 +39,9 @@ export default class App extends Component {
 				)}
 				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
 					<a className="navbar-brand" href="#">HOOD<br/>MODE</a>
-					<button type="button" class="btn btn-primary mr-3 icon-button"
-						onClick={this.context.play}>
+					<button type="button" 
+							class={playButtonClass}
+							onClick={this.context.togglePlaying}>
 						<img src="img/play-fill.svg"/>
 					</button>
 					<Select class="custom-select bg-light"

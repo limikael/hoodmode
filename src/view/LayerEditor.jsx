@@ -3,10 +3,6 @@ import { h, Component } from 'preact';
 export default class LayerEditor extends Component {
 	onInstrumentButtonPress=(index)=>{
 		this.context.playCurrentInstrument(index);
-/*		let note=this.props.layer.instrument.createNote(index);
-		note.setChordCents(this.props.app.getCurrentChordCents());
-		note.connect(this.props.app.audioContext.destination);
-		note.playNow();*/
 	};
 
 	onKeyDown=(e)=>{
@@ -24,8 +20,12 @@ export default class LayerEditor extends Component {
 		document.removeEventListener("keydown",this.onKeyDown);
 	}
 
-	onSeqClick=(sound, pos)=>{
-		this.context.toggleCurrentLayerSeq(sound,pos);
+	onSeqClick=(soundIndex, pos)=>{
+		this.context.toggleCurrentLayerSeq(soundIndex,pos);
+
+		let layer=this.context.getCurrentLayer();
+		if (layer.seq[soundIndex][pos])
+			this.context.playCurrentInstrument(soundIndex);
 	}
 
 	onVelClick(index) {

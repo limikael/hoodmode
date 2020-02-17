@@ -53,10 +53,6 @@ export default class AppHelper {
 		this.conductor.playInstrument(instrument.name,soundIndex);
 	}
 
-	play() {
-		this.conductor.play();
-	}
-
 	getChordLabels(state) {
 		let song=this.getCurrentSong(state);
 		return MusicUtil.getChordNamesForScale(song.musicKey,song.minor);

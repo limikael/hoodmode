@@ -56,12 +56,12 @@ export default class Chord extends Component {
 								Perform
 							</a>
 						</li>
-						<li class="nav-item">
+						{/*<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#sequence"
 									onClick={this.onTabSelect.bind(this,"sequence")}>
 								Sequence
 							</a>
-						</li>
+						</li>*/}
 					</ul>
 
 					<div class="tab-content">
