@@ -1,4 +1,5 @@
 import AudioUtil from '../utils/AudioUtil';
+import MusicUtil from '../utils/MusicUtil';
 import ConductorNote from './ConductorNote';
 
 export default class ConductorInstrument {
@@ -35,10 +36,16 @@ export default class ConductorInstrument {
 	createNote(soundIndex) {
 		switch (this.data.type) {
 			case "harmonic":
-				return new ConductorNote(this.conductor,this.buffer,soundIndex);
+				let note=new ConductorNote(this.conductor,this.buffer,soundIndex);
+				if (this.data.sampleNote)
+					note.setSampleNoteCents(MusicUtil.noteToCents(this.data.sampleNote));
+
+				return note;
+				break;
 
 			case "percussive":
 				return new ConductorNote(this.conductor,this.buffers[soundIndex]);
+				break;
 		}
 	}
 }

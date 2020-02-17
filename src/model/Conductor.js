@@ -13,6 +13,7 @@ export default class Conductor {
 		this.instruments=ReconcileArray.createWithFactory(this.createInstrument);
 		this.layers=ReconcileArray.createWithFactory(this.createLayer);
 		this.currentNotes=[];
+		this.sequenceIndex=-1;
 	}
 
 	loadInstruments() {
@@ -43,9 +44,13 @@ export default class Conductor {
 	}
 
 	getCurrentChordCents() {
+		let chordIndex=this.state.currentChordIndex;
+		if (this.state.playingSequence)
+			chordIndex=this.getCurrentSong().chordSequence[this.sequenceIndex].chordIndex;
+
 		let song=this.getCurrentSong();
 		let scaleChordNotes=MusicUtil.getChordNotesForScale(song.musicKey,song.minor);
-		let chordNotes=scaleChordNotes[this.state.currentChordIndex];
+		let chordNotes=scaleChordNotes[chordIndex];
 		return [
 			MusicUtil.noteToCents(chordNotes[0]),
 			MusicUtil.noteToCents(chordNotes[1]),
@@ -70,12 +75,14 @@ export default class Conductor {
 	}
 
 	playGridSlice(at, gridIndex) {
+		let chordCents=this.getCurrentChordCents();
+
 		for (let layer of this.layers.getItems()) {
 			for (let soundIndex=0; soundIndex<layer.data.seq.length; soundIndex++) {
 				if (layer.data.seq[soundIndex][gridIndex]) {
 					let note=layer.instrument.createNote(soundIndex);
 					note.connect(layer.destination);
-					note.setChordCents(this.getCurrentChordCents());
+					note.setChordCents(chordCents);
 					note.playSheduled(at,layer.getNoteLen(gridIndex)*this.getSecPerGrid());
 					note.setVelocity(layer.data.vel[gridIndex]);
 
@@ -95,6 +102,12 @@ export default class Conductor {
 
 	play=()=>{
 		this.playStartTime=this.audioContext.currentTime;
+
+		if (this.state.playingSequence) {
+			this.sequenceIndex++;
+			if (this.sequenceIndex>=this.getCurrentSong().chordSequence.length)
+				this.sequenceIndex=0;
+		}
 
 		for (let gridIndex=0; gridIndex<16; gridIndex++) {
 			this.playGridSlice(
@@ -132,8 +145,13 @@ export default class Conductor {
 		else if (!state.playing && this.isPlaying())
 			this.stop();
 
-		let currentChordCents=this.getCurrentChordCents();
-		for (let note of this.currentNotes)
-			note.setChordCents(currentChordCents);
+		if (!state.playing || !state.playingSequence)
+			this.sequenceIndex=-1;
+
+		if (!state.playingSequence) {
+			let currentChordCents=this.getCurrentChordCents();
+			for (let note of this.currentNotes)
+				note.setChordCents(currentChordCents);
+		}
 	};
 }

@@ -13,9 +13,13 @@ class AppContext extends Component {
 
 				let newState=props.controller[key](this.state, ...args);
 				if (newState instanceof Promise) {
-					this.setState({
-						busy: true
-					});
+					if (!this.state)
+						this.state={busy: true};
+
+					else
+						this.setState({
+							busy: true
+						});
 
 					newState.then((state)=>{
 						state.busy=false;
@@ -41,8 +45,6 @@ class AppContext extends Component {
 			}
 		}
 
-		this.state={};
-
 		if (props.initAction)
 			this.curried[props.initAction]();
 	}
@@ -64,7 +66,7 @@ class AppContext extends Component {
 	}
 
 	render() {
-		return this.props.children[0];
+		return this.props.children;
 	}
 };
 

@@ -7,37 +7,27 @@ export default class Chord extends Component {
 	}
 
 	onAddChordClick=()=>{
-		this.props.app.addSequenceChord();
-		this.props.app.saveToLocalStorage();
-		this.forceUpdate();
-	}
-
-	onSequenceChordChange=(index,chord)=>{
-		let song=this.props.app.getCurrentSong();
-		song.chordSequence[index]=chord;
-
-		this.props.app.saveToLocalStorage();
-		this.forceUpdate();
-	}
-
-	onSequenceChordDelete=(index)=>{
-		let song=this.props.app.getCurrentSong();
-		song.chordSequence.splice(index,1);
-
-		this.props.app.saveToLocalStorage();
-		this.forceUpdate();
+		this.context.addSequenceChord();
 	}
 
 	onTabSelect=(tab)=>{
 		switch (tab) {
 			case "perform":
-				this.props.app.chordSequenceIndex=-1;
+				this.context.setPlayingSequence(false);
 				break;
 
 			case "sequence":
-				this.props.app.chordSequenceIndex=0;
+				this.context.setPlayingSequence(true);
 				break;
 		}
+	}
+
+	componentDidMount() {
+		if (this.context.playingSequence)
+			$('.nav-tabs a[href="#sequence"]').tab('show');
+
+		else
+			$('.nav-tabs a[href="#perform"]').tab('show');
 	}
 
 	render() {
@@ -51,17 +41,17 @@ export default class Chord extends Component {
 				<div class="card-body">
 					<ul class="nav nav-tabs mb-3">
 						<li class="nav-item">
-							<a class="nav-link active" data-toggle="tab" href="#perform"
+							<a class="nav-link" data-toggle="tab" href="#perform"
 									onClick={this.onTabSelect.bind(this,"perform")}>
 								Perform
 							</a>
 						</li>
-						{/*<li class="nav-item">
+						{<li class="nav-item">
 							<a class="nav-link" data-toggle="tab" href="#sequence"
 									onClick={this.onTabSelect.bind(this,"sequence")}>
 								Sequence
 							</a>
-						</li>*/}
+						</li>}
 					</ul>
 
 					<div class="tab-content">
@@ -81,14 +71,13 @@ export default class Chord extends Component {
 								);
 							})}
 						</div>
-						{/*<div class="tab-pane fade" id="sequence">
+						{<div class="tab-pane fade" id="sequence">
 							{song.chordSequence.map((chord,index)=>{
 								return (
-									<SequenceChord app={this.props.app} current={chord}
-											onChange={this.onSequenceChordChange.bind(this,index)}
-											onDelete={this.onSequenceChordDelete.bind(this,index)}
-											key={Math.random()}
-											keyPrefix={Math.random()}/>
+									<SequenceChord
+											sequenceIndex={index}
+											chord={chord}
+											key={chord.key}/>
 								)
 							})}
 							<button class="btn btn-light mb-2"
@@ -96,7 +85,7 @@ export default class Chord extends Component {
 									onClick={this.onAddChordClick}>
 								+
 							</button>
-						</div>*/}
+						</div>}
 					</div>
 				</div>
 			</div>

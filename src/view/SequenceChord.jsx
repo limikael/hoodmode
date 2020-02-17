@@ -1,29 +1,31 @@
 import { h, Component } from 'preact';
-import ReactUtil from '../utils/ReactUtil.jsx';
+import { Select } from '../utils/ReactUtil.jsx';
 
 export default class SequenceChord extends Component {
-	onChange=(e)=>{
-		let v=e.target.value;
-
-		if (v<0)
-			this.props.onDelete();
+	onIndexChange=(index)=>{
+		if (index==7)
+			this.context.deleteSequenceChord(this.props.sequenceIndex);
 
 		else
-			this.props.onChange(parseInt(e.target.value));
+			this.context.setSequenceChord(this.props.sequenceIndex,index);
 	}
 
 	render() {
+		let options=this.context.getChordOptions();
+		options.push({
+			label: "Delete",
+			key: -1,
+			class: "bg-danger"
+		});
+
 		return (
-			<select class="btn btn-success mr-2 mb-2 active"
+			<Select class="btn btn-success mr-2 mb-2 active"
 					style={{'width': '5em', 'height': '5em'}}
-					onChange={this.onChange}>
-				{HtmlUtil.selectOptions(
-					this.props.app.getChordLabels(),
-					this.props.current,
-					this.props.keyPrefix
-				)}
-				<option class="bg-danger" value="-1">Delete</option>
-			</select>
+					selectedIndex={this.props.chord.chordIndex}
+					key={this.props.chord.key}
+					onIndexChange={this.onIndexChange}
+					options={options}>
+			</Select>
 		);
 	}
 }

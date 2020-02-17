@@ -9,7 +9,7 @@ import Chord from './Chord.jsx';
 export default class App extends Component {
 	onSelectIndexChange=(index)=>{
 		if (index>=this.context.songs.length)
-			this.context.addNewSong();
+			this.context.addSong();
 
 		else
 			this.context.setSongIndex(index);

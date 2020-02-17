@@ -1,3 +1,5 @@
+import "preact/debug";
+
 import { h, render } from 'preact';
 import App from './view/App.jsx';
 import AppContext from './utils/AppContext.js';

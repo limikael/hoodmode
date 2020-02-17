@@ -20,7 +20,9 @@ export class Select {
 
 		return (
 			<select class={props.class}
-					onChange={this.onChange}>
+					style={props.style}
+					onChange={this.onChange}
+					key={props.key}>
 				{props.options.map((option, index)=>{
 					let selected=false;
 
@@ -29,13 +31,18 @@ export class Select {
 						selected=true;
 
 					if (props.hasOwnProperty('selected') &&
-							option[props.idField]===props.selected)
+							option.key===props.selected)
 						selected=true;
 
+					let key=option.key;
+					if (props.hasOwnProperty('optionKeyPrefix'))
+						key=props.keyPrefix+key;
+
 					return (
-						<option key={option.key}
+						<option key={key}
 								value={JSON.stringify(option.key)}
-								selected={selected}>
+								selected={selected}
+								class={option.class}>
 							{option[props.labelField]}
 						</option>
 					);

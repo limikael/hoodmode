@@ -16,7 +16,8 @@ export default class AppController {
 			addLayerVisible: false,
 			songs: [],
 			instruments: [],
-			playing: false
+			playing: false,
+			playingSequence: false
 		}
 
 		state.instruments.push({
@@ -68,8 +69,8 @@ export default class AppController {
 			"defaultVolume": 0.25
 		});
 
-		state=this.addNewSong(state,"Hello");
-		state=this.addNewSong(state,"World");
+		state=this.addSong(state,"Hello");
+		state=this.addSong(state,"World");
 
 		this.conductor.setState(state);
 		await this.conductor.loadInstruments();
@@ -77,7 +78,7 @@ export default class AppController {
 		return state;
 	};
 
-	addNewSong(state, name) {
+	addSong(state, name) {
 		if (!name)
 			name="My New Song";
 
@@ -87,12 +88,16 @@ export default class AppController {
 			name: name,
 			bpm: 100,
 			key: shortid.generate(),
-			musicKey: "C",
+			musicKey: "A",
 			minor: true,
-			layers: []
+			layers: [],
+			chordSequence: []
 		});
 
-		return this.setSongIndex(state,index);
+		state=this.setSongIndex(state,index);
+		state=this.addSequenceChord(state);
+
+		return state;
 	}
 
 	setCurrentChordIndex(state, index) {
@@ -106,7 +111,9 @@ export default class AppController {
 			return state;
 
 		state.currentSongIndex=index;
+		state.currentLayerIndex=-1;
 		state.currentChordIndex=0;
+		state.playing=false;
 
 		return state;
 	}
@@ -153,7 +160,7 @@ export default class AppController {
 		state.songs.splice(state.currentSongIndex,1);
 
 		if (!state.songs.length)
-			state=AppController.addNewSong(state);
+			state=this.addSong(state);
 
 		if (state.currentSongIndex<0)
 			state.currentSongIndex=0;
@@ -172,6 +179,17 @@ export default class AppController {
 
 	hideAddLayer(state) {
 		state.addLayerVisible=false;
+
+		return state;
+	}
+
+	addSequenceChord(state) {
+		let song=this.helper.getCurrentSong(state);
+
+		song.chordSequence.push({
+			chordIndex: 0,
+			key: shortid.generate()
+		});
 
 		return state;
 	}
@@ -270,6 +288,26 @@ export default class AppController {
 
 	togglePlaying(state) {
 		state.playing=!state.playing;
+
+		return state;
+	}
+
+	setPlayingSequence(state, playingSequence) {
+		state.playingSequence=playingSequence;
+
+		return state;
+	}
+
+	deleteSequenceChord(state, index) {
+		let song=this.helper.getCurrentSong(state);
+		song.chordSequence.splice(index,1);
+
+		return state;
+	}
+
+	setSequenceChord(state, sequenceIndex, chordIndex) {
+		let song=this.helper.getCurrentSong(state);
+		song.chordSequence[sequenceIndex].chordIndex=chordIndex;
 
 		return state;
 	}

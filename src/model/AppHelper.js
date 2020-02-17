@@ -69,6 +69,20 @@ export default class AppHelper {
 		return a;
 	}
 
+	getChordOptions(state) {
+		let song=this.getCurrentSong(state);
+		let chordNames=MusicUtil.getChordNamesForScale(song.musicKey,song.minor);
+		let a=[];
+
+		for (let chordName of chordNames)
+			a.push({
+				key: chordName,
+				label: chordName
+			});
+
+		return a;
+	}
+
 	getModalSelectOptions(state) {
 		return [
 			{key: false, label: "major"},
