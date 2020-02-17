@@ -24,17 +24,13 @@ class AppContext extends Component {
 					newState.then((state)=>{
 						state.busy=false;
 						this.setState(state);
-
-						if (this.props.onStateChange)
-							this.props.onStateChange(state);
+						this.notifyStateChange(state);
 					});
 				}
 
 				else {
 					this.setState(newState);
-
-					if (this.props.onStateChange)
-						this.props.onStateChange(newState);
+					this.notifyStateChange(newState);
 				}
 			}
 		}
@@ -47,6 +43,11 @@ class AppContext extends Component {
 
 		if (props.initAction)
 			this.curried[props.initAction]();
+	}
+
+	notifyStateChange(state) {
+		if (typeof this.props.onStateChange=="function")
+			this.props.onStateChange(state);
 	}
 
 	getObjectKeys(o) {

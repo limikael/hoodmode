@@ -69,8 +69,12 @@ export default class AppController {
 			"defaultVolume": 0.25
 		});
 
-		state=this.addSong(state,"Hello");
-		state=this.addSong(state,"World");
+		let songDataJson=window.localStorage.getItem("hoodmode-songs");
+		if (songDataJson)
+			state.songs=JSON.parse(songDataJson);
+
+		else 
+			state=this.addSong(state);
 
 		this.conductor.setState(state);
 		await this.conductor.loadInstruments();
