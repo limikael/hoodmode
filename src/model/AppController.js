@@ -203,6 +203,12 @@ export default class AppController {
 
 		let seq=[];
 		let numSounds=this.helper.getInstrumentNumSoundsByName(state,instrumentName);
+		let instrument=this.helper.getInstrumentByName(state,instrumentName);
+
+		let volume=1;
+		if (instrument.hasOwnProperty("defaultVolume"))
+			volume=instrument.defaultVolume;
+
 		for (let i=0; i<numSounds; i++)
 			seq.push(Array(16).fill(false));
 
@@ -210,7 +216,7 @@ export default class AppController {
 			key: shortid.generate(),
 			instrumentName: instrumentName,
 			audible: true,
-			volume: 1,
+			volume: volume,
 			seq: seq,
 			vel: Array(16).fill(1),
 			stacc: Array(16).fill(false)

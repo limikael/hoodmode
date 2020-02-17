@@ -69,7 +69,7 @@ export default class Conductor {
 	onNoteEnded(note) {
 		let idx=this.currentNotes.indexOf(note);
 		if (idx<0)
-			throw new Error("note not in current notes!");
+			return;
 
 		this.currentNotes.splice(idx,1);
 	}
