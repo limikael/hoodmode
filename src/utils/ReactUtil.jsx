@@ -11,8 +11,6 @@ export class Select {
 
 	render() {
 		let props=this.props;
-		if (!props.idField)
-			props.idField="key";
 
 		if (!props.labelField)
 			props.labelField="label";
@@ -35,8 +33,8 @@ export class Select {
 						selected=true;
 
 					return (
-						<option key={option[props.idField]}
-								value={JSON.stringify(option[props.idField])}
+						<option key={option.key}
+								value={JSON.stringify(option.key)}
 								selected={selected}>
 							{option[props.labelField]}
 						</option>
