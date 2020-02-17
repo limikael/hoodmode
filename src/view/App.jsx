@@ -7,63 +7,63 @@ import LayerEditor from './LayerEditor.jsx';
 import Chord from './Chord.jsx';
 
 export default class App extends Component {
-	onSelectIndexChange=(index)=>{
-		if (index>=this.context.songs.length)
-			this.context.addSong();
+	updateSize=()=>{
+		let w=window.innerWidth;
+		let h=window.innerHeight;
 
-		else
-			this.context.setSongIndex(index);
+		console.log("size: "+w+"x"+h);
+
+		let wPane=12,hPane=10;
+
+		let wChars,hChars;
+		if (h>w) {
+			hChars=2*hPane+3;
+			wChars=wPane;
+		}
+
+		else {
+			hChars=hPane+3;
+			wChars=2*wPane;
+		}
+
+		if (w/wChars<h/hChars) {
+			document.querySelector("body").style.fontSize=(w/wChars)+"px";
+		}
+
+		else {
+			document.querySelector("body").style.fontSize=(h/hChars)+"px";
+		}
+
+		for (let el of document.querySelectorAll("div.pane")) {
+			if (h>w)
+				el.style.display="block";
+
+			else
+				el.style.display="inline-block";
+		}
+	}
+
+	componentDidMount() {
+		window.onresize=this.updateSize;
+		setTimeout(this.updateSize,0);
 	}
 
 	render() {
 		if (this.context.busy)
 			return (<div>LOADING...</div>);
 
-		let newSongOption={
-			name: "New Song...",
-			id: -1
-		};
-
-		let playButtonClass="btn btn-primary mr-3 icon-button ";
-		if (this.context.playing)
-			playButtonClass+="active";
-
 		return (
 			<div>
-				{IF(this.context.songSettingsVisible,()=>
-					<SongSettings
-						song={this.context.getCurrentSong()}/>
-				)}
-				{IF(this.context.addLayerVisible,()=>
-					<AddLayer />
-				)}
-				<nav className="navbar navbar-expand navbar-dark bg-dark mb-4">
-					<a className="navbar-brand" href="#">HOOD<br/>MODE</a>
-					<button type="button" 
-							class={playButtonClass}
-							onClick={this.context.togglePlaying}>
-						<img src="img/play-fill.svg"/>
-					</button>
-					<Select class="custom-select bg-light"
-						options={this.context.songs.concat(newSongOption)}
-						onIndexChange={this.onSelectIndexChange}
-						selectedIndex={this.context.currentSongIndex}
-						labelField="name"/>
-					<button type="button" class="btn btn-primary ml-3 icon-button"
-							onClick={this.context.showSongSettings}>
-						<img src="img/gear-fill.svg"/>
-					</button>
-				</nav>
-				<div class="container">
-					{IF(this.context.currentLayerIndex>=0,()=>
-						<LayerEditor />
-					)}
-					{IF(this.context.currentLayerIndex<0,()=>
-						<div>
-							<LayerList />
-							<Chord/>
-						</div>
-					)}
+				<div class="header">
+					hello..
+				</div>
+				<div class="pane-container">
+					<div class="pane">
+						pane1
+					</div>
+					<div class="pane">
+						pane2
+					</div>
 				</div>
 			</div>
 		);
