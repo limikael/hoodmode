@@ -29,7 +29,7 @@ export default class LayerEditor extends Component {
 	}
 
 	onVelClick(index) {
-		if (true) //this.props.layer.hasSoundAt(index))
+		if (this.context.currentLayerHasSoundAt(index))
 			this.context.toggleCurrentLayerVel(index);
 
 		else
@@ -79,7 +79,7 @@ export default class LayerEditor extends Component {
 
 		let a=[];
 		for (let i=0; i<16; i++) {
-			if (true /*this.props.layer.hasSoundAt(i)*/) {
+			if (this.context.currentLayerHasSoundAt(i)) {
 				let ja=[];
 				for (let j=0; j<4; j++) {
 					if (layer.vel[i]>=(1-j*.25))

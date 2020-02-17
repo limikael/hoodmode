@@ -66,7 +66,6 @@ export default class Conductor {
 		if (idx<0)
 			throw new Error("note not in current notes!");
 
-		console.log("removing note");
 		this.currentNotes.splice(idx,1);
 	}
 
@@ -77,7 +76,8 @@ export default class Conductor {
 					let note=layer.instrument.createNote(soundIndex);
 					note.connect(layer.destination);
 					note.setChordCents(this.getCurrentChordCents());
-					note.playSheduled(at,1000);
+					note.playSheduled(at,layer.getNoteLen(gridIndex)*this.getSecPerGrid());
+					note.setVelocity(layer.data.vel[gridIndex]);
 
 					note.onended=this.onNoteEnded.bind(this,note);
 					this.currentNotes.push(note);
@@ -86,19 +86,23 @@ export default class Conductor {
 		}
 	}
 
-	play=()=>{
-		let secPerBeat=60/100;
+	getSecPerGrid() {
+		let secPerBeat=60/this.getCurrentSong().bpm;
 		let secPerGrid=secPerBeat/4;
 
+		return secPerGrid;
+	}
+
+	play=()=>{
 		this.playStartTime=this.audioContext.currentTime;
 
 		for (let gridIndex=0; gridIndex<16; gridIndex++) {
 			this.playGridSlice(
-				this.playStartTime+gridIndex*secPerGrid,
+				this.playStartTime+gridIndex*this.getSecPerGrid(),
 				gridIndex);
 		}
 
-		this.playTimer=setTimeout(this.play,1000*16*secPerGrid);
+		this.playTimer=setTimeout(this.play,1000*16*this.getSecPerGrid());
 	}
 
 	stop() {

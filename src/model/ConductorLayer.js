@@ -29,4 +29,22 @@ export default class ConductorLayer {
 		else
 			this.gain.gain.value=this.data.volume;
 	}
+
+	hasSoundAt(pos) {
+		for (let i=0; i<this.data.seq.length; i++) {
+			if (this.data.seq[i][pos])
+				return true;
+		}
+
+		return false;
+	}
+
+	getNoteLen(pos) {
+		for (let i=1; i<16; i++)
+			if (this.hasSoundAt((pos+i)%16)
+					|| this.data.stacc[(pos+i)%16])
+				return i;
+
+		return 16;
+	}
 }

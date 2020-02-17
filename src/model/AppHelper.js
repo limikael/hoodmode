@@ -75,4 +75,14 @@ export default class AppHelper {
 			{key: true, label: "minor"},
 		];
 	}
+
+	currentLayerHasSoundAt(state,gridIndex) {
+		let layer=this.getCurrentLayer(state);
+
+		for (let soundIndex=0; soundIndex<layer.seq.length; soundIndex++)
+			if (layer.seq[soundIndex][gridIndex])
+				return true;
+
+		return false;
+	}
 }

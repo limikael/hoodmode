@@ -223,6 +223,13 @@ export default class AppController {
 		return state;
 	}
 
+	toggleCurrentLayerStacc(state, pos) {
+		let layer=this.helper.getCurrentLayer(state);
+		layer.stacc[pos]=!layer.stacc[pos];
+
+		return state;
+	}
+
 	toggleCurrentLayerVel(state, pos) {
 		let layer=this.helper.getCurrentLayer(state);
 		let n;
