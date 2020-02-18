@@ -23,12 +23,12 @@ body {
 
 .pane-container {
 	white-space:nowrap;
+	margin-left: auto;
+	margin-right: auto;
 }
 
 .pane {
 	width: 12em;
 	height: 10em;
 	background: #f00;
-	margin-left: auto;
-	margin-right: auto;
 }
