@@ -8,39 +8,41 @@ import Chord from './Chord.jsx';
 
 export default class App extends Component {
 	updateSize=()=>{
-		let w=window.innerWidth;
-		let h=window.innerHeight;
+		let windowWidth=window.innerWidth;
+		let windowHeight=window.innerHeight;
 
-		console.log("size: "+w+"x"+h);
+		let cs=getComputedStyle(document.documentElement);
+		let paneWidth=parseInt(cs.getPropertyValue('--paneWidth'));
+		let paneHeight=parseInt(cs.getPropertyValue('--paneHeight'));
+		let headerHeight=parseInt(cs.getPropertyValue('--headerHeight'));
 
-		let wPane=12,hPane=10;
-
-		let wChars,hChars;
-		if (h>w) {
-			hChars=2*hPane+3;
-			wChars=wPane;
+		let contentWidth,contentHeight;
+		if (windowHeight>windowWidth) {
+			contentHeight=2*paneHeight+headerHeight;
+			contentWidth=paneWidth;
+			document.querySelector("body").classList.add("portrait");
+			document.querySelector("body").classList.remove("landscape");
 		}
 
 		else {
-			hChars=hPane+3;
-			wChars=2*wPane;
+			contentHeight=paneHeight+headerHeight;
+			contentWidth=2*paneWidth;
+			document.querySelector("body").classList.add("landscape");
+			document.querySelector("body").classList.remove("portrait");
 		}
 
-		if (w/wChars<h/hChars) {
-			document.querySelector("body").style.fontSize=(w/wChars)+"px";
-		}
+		let fontSize;
+		if (windowWidth/contentWidth<windowHeight/contentHeight)
+			fontSize=windowWidth/contentWidth;
 
-		else {
-			document.querySelector("body").style.fontSize=(h/hChars)+"px";
-		}
+		else
+			fontSize=windowHeight/contentHeight;
 
-		for (let el of document.querySelectorAll("div.pane")) {
-			if (h>w)
-				el.style.display="block";
+		document.querySelector("body").style.fontSize=fontSize+"px";
 
-			else
-				el.style.display="inline-block";
-		}
+		let s=document.documentElement.style;
+		s.setProperty("--paneMarginTop",(windowHeight-fontSize*contentHeight)/2);
+		s.setProperty("--paneMarginLeft",(windowWidth-fontSize*contentWidth)/2);
 	}
 
 	componentDidMount() {

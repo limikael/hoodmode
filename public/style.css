@@ -1,3 +1,13 @@
+:root {
+	--paneWidth: 12em;
+	--paneHeight: 10em;
+	--headerHeight: 3em;
+}
+
+* {
+  box-sizing: border-box;
+}
+
 html, body {
 	position: absolute;
 	width: 100%;
@@ -13,22 +23,24 @@ body {
 }
 
 .header {
-	width: 100%;
-	height: 1em;
+	height: var(--headerHeight);
 	background-color: #000;
 	color: #fff;
 	padding-top: 1em;
-	padding-bottom: 1em;
 }
 
 .pane-container {
-	white-space:nowrap;
-	margin-left: auto;
-	margin-right: auto;
+	white-space: nowrap;
+	margin-top: var(--paneMarginTop);
+	margin-left: var(--paneMarginLeft);
 }
 
 .pane {
-	width: 12em;
-	height: 10em;
+	width: var(--paneWidth);
+	height: var(--paneHeight);
 	background: #f00;
+}
+
+body.landscape .pane {
+	display: inline-block;
 }
