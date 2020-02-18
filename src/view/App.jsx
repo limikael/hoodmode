@@ -12,9 +12,9 @@ export default class App extends Component {
 		let windowHeight=window.innerHeight;
 
 		let cs=getComputedStyle(document.documentElement);
-		let paneWidth=parseInt(cs.getPropertyValue('--paneWidth'));
-		let paneHeight=parseInt(cs.getPropertyValue('--paneHeight'));
-		let headerHeight=parseInt(cs.getPropertyValue('--headerHeight'));
+		let paneWidth=parseFloat(cs.getPropertyValue('--paneWidth'));
+		let paneHeight=parseFloat(cs.getPropertyValue('--paneHeight'));
+		let headerHeight=parseFloat(cs.getPropertyValue('--headerHeight'));
 
 		let contentWidth,contentHeight;
 		if (windowHeight>windowWidth) {
@@ -45,6 +45,10 @@ export default class App extends Component {
 		s.setProperty("--paneMarginLeft",(windowWidth-fontSize*contentWidth)/2);
 	}
 
+	onPlayClick=()=>{
+		console.log("play");
+	}
+
 	componentDidMount() {
 		window.onresize=this.updateSize;
 		setTimeout(this.updateSize,0);
@@ -57,14 +61,90 @@ export default class App extends Component {
 		return (
 			<div>
 				<div class="header">
+					<div class="header-left">
+						<div class="header-button transparent">
+							<img src="img/arrow-left.svg"/>
+						</div>
+					</div>
 					hello..
+					<div class="header-right">
+						<a class="header-button"
+								href="#"
+								onClick={this.onPlayClick}>
+							<img src="img/play-fill.svg"/>
+						</a>
+						<div class="header-button">
+							<img src="img/circle-fill.svg"/>
+						</div>
+						<div class="header-button transparent">
+							<img src="img/gear-fill.svg"/>
+						</div>
+					</div>
 				</div>
 				<div class="pane-container">
+					{/*<div class="double-pane">
+						<div class="double-pane-inner">
+							<div class="pane-header">LAYERS</div>
+							hello
+						</div>
+					</div>*/}
 					<div class="pane">
-						pane1
+						<div class="pane-inner">
+							<div class="pane-header">LAYERS</div>
+							<div>
+								<div class="grid-button empty">+</div>
+								<div class="grid-button">Am7</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+							<div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+							<div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+							<div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+						</div>
 					</div>
 					<div class="pane">
-						pane2
+						<div class="pane-inner">
+							<div class="pane-header">SEQUENCE</div>
+							<div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+							<div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+							<div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+							<div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+								<div class="grid-button">A</div>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

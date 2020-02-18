@@ -1,11 +1,12 @@
 :root {
-	--paneWidth: 12em;
-	--paneHeight: 10em;
-	--headerHeight: 3em;
+	--paneWidth: 11em;
+	--paneHeight: 11em;
+	--headerHeight: 2em;
 }
 
 * {
-  box-sizing: border-box;
+	box-sizing: border-box;
+	line-height: 1em;
 }
 
 html, body {
@@ -18,15 +19,17 @@ html, body {
 body {
 	margin: 0;
 	font-size: 1px;
-	line-height: 1em;
 	font-family: sans-serif;
+	background: #002B36;
 }
 
 .header {
 	height: var(--headerHeight);
 	background-color: #000;
 	color: #fff;
-	padding-top: 1em;
+	padding-top: 0.5em;
+	padding-left: 2em;
+	background: #073642;
 }
 
 .pane-container {
@@ -35,12 +38,132 @@ body {
 	margin-left: var(--paneMarginLeft);
 }
 
+.double-pane {
+	position: relative;
+}
+
+body.landscape .double-pane {
+	width: calc(var(--paneWidth)*2);
+	height: var(--paneHeight);
+}
+
+body.portrait .double-pane {
+	width: var(--paneWidth);
+	height: calc(var(--paneHeight)*2);
+}
+
+.double-pane-inner {
+	position: absolute;
+	left: 0.5em;
+	top: 0.5em;
+	padding: 0.5em;
+	border-radius: 0.25em;
+	border: 0.05em solid #073642;
+/*	background-color: #073642;*/
+}
+
+body.landscape .double-pane-inner {
+	width: calc(var(--paneWidth)*2 - 1em);
+	height: calc(var(--paneHeight) - 1em);
+}
+
+body.portrait .double-pane-inner {
+	width: calc(var(--paneWidth) - 1em);
+	height: calc(var(--paneHeight)*2 - 1em);
+}
+
 .pane {
 	width: var(--paneWidth);
 	height: var(--paneHeight);
-	background: #f00;
+	position: relative;
+}
+
+.pane-inner {
+	position: absolute;
+	left: 0.5em;
+	top: 0.5em;
+	padding: 0.5em;
+	border-radius: 0.25em;
+	width: calc(var(--paneWidth) - 1em);
+	height: calc(var(--paneHeight) - 1em);
+	border: 0.05em solid #073642;
+/*	background-color: #073642;*/
+}
+
+.pane-header {
+	position: absolute;
+	background: #073642;
+	top: -0.75em;
+	left: 1em;
+	font-size: 0.5em;
+	height: 1.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	font-weight: bold;
+	color: #fff;
+	border-radius: 0.5em;
+	padding-top: 0.25em;
+	color: #839496;
 }
 
 body.landscape .pane {
 	display: inline-block;
+}
+
+.grid-button {
+	margin: 0.125em;
+	display: inline-block;
+	border-radius: 0.25em;
+	width: 2em;
+	height: 2em;
+	padding-top: 0.5em;
+	text-align: center;
+	background-color: #BF9A24;
+	color: #fff;
+}
+
+.grid-button.empty {
+	background: transparent;
+	border: 0.05em dashed white;
+}
+
+.header-right {
+	position: absolute;
+	display: inline-block;
+	right: 1em;
+}
+
+.header-left {
+	position: absolute;
+	display: inline-block;
+	left: 0;
+}
+
+.header-button {
+	display: inline-block;
+	background: #fff;
+	color: #000;
+	margin-top: -0.25em;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+	border-radius: 0.25em;
+	margin-left: 0.5em;
+	height: 1.5em;
+	padding-top: 0.25em;
+}
+
+.header-button.transparent {
+	background: transparent;
+	padding-left: 0em;
+	padding-right: 0em;
+	color: #fff;
+}
+
+.header-button img {
+	width: 1em;
+	height: 1em;
+}
+
+.header-button.transparent img {
+	filter: invert(100%);
 }
