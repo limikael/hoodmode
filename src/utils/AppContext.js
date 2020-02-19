@@ -8,6 +8,10 @@ class AppContext extends Component {
 
 		for (let key of this.getObjectKeys(props.controller)) {
 			this.curried[key]=(...args)=>{
+
+				if (this.props.logActions)
+					console.log("Action: "+key+" ("+args+")");
+
 				if (args[0] && args[0].preventDefault)
 					args[0].preventDefault();
 
@@ -29,7 +33,12 @@ class AppContext extends Component {
 				}
 
 				else {
-					this.setState(newState);
+					if (!this.state)
+						this.state=newState;
+
+					else
+						this.setState(newState);
+
 					this.notifyStateChange(newState);
 				}
 			}
@@ -51,7 +60,12 @@ class AppContext extends Component {
 	}
 
 	getObjectKeys(o) {
-		let keys=Object.getOwnPropertyNames(Object.getPrototypeOf(o));
+		let keys=[];
+		o=Object.getPrototypeOf(o);
+		while (Object.getOwnPropertyNames(o).indexOf("__proto__")<0) {
+			keys=keys.concat(Object.getOwnPropertyNames(o));
+			o=Object.getPrototypeOf(o);
+		}
 
 		if (keys.includes("constructor"))
 			keys.splice(keys.indexOf("constructor"),1);

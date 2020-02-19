@@ -1,10 +1,7 @@
 import { h, Component } from 'preact';
 import { Select, IF } from '../utils/ReactUtil.jsx';
-import SongSettings from './SongSettings.jsx';
-import LayerList from './LayerList.jsx';
-import AddLayer from './AddLayer.jsx';
-import LayerEditor from './LayerEditor.jsx';
-import Chord from './Chord.jsx';
+import Header from './Header.jsx';
+import Front from './Front.jsx';
 
 export default class App extends Component {
 	updateSize=()=>{
@@ -60,93 +57,10 @@ export default class App extends Component {
 
 		return (
 			<div>
-				<div class="header">
-					<div class="header-left">
-						<div class="header-button transparent">
-							<img src="img/arrow-left.svg"/>
-						</div>
-					</div>
-					hello..
-					<div class="header-right">
-						<a class="header-button"
-								href="#"
-								onClick={this.onPlayClick}>
-							<img src="img/play-fill.svg"/>
-						</a>
-						<div class="header-button">
-							<img src="img/circle-fill.svg"/>
-						</div>
-						<div class="header-button transparent">
-							<img src="img/gear-fill.svg"/>
-						</div>
-					</div>
-				</div>
-				<div class="pane-container">
-					{/*<div class="double-pane">
-						<div class="double-pane-inner">
-							<div class="pane-header">LAYERS</div>
-							hello
-						</div>
-					</div>*/}
-					<div class="pane">
-						<div class="pane-inner">
-							<div class="pane-header">LAYERS</div>
-							<div>
-								<div class="grid-button empty">+</div>
-								<div class="grid-button">Am7</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-							<div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-							<div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-							<div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-						</div>
-					</div>
-					<div class="pane">
-						<div class="pane-inner">
-							<div class="pane-header">SEQUENCE</div>
-							<div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-							<div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-							<div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-							<div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-								<div class="grid-button">A</div>
-							</div>
-						</div>
-					</div>
-				</div>
+				<Header />
+				{IF(this.context.currentSongIndex<0,()=>
+					<Front />
+				)}
 			</div>
 		);
 	}

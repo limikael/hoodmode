@@ -167,3 +167,22 @@ body.landscape .pane {
 .header-button.transparent img {
 	filter: invert(100%);
 }
+
+.ui-test {
+	position: fixed;
+	top: 0;
+	right: 0;
+	background: #fff;
+}
+
+.table-row {
+	color: #fff;
+	padding: 0.5em;
+	display: block;
+	text-decoration: none;
+}
+
+.table-row.success {
+	border-top: 0.01em solid #90CEC9;
+	background: #2AA198;
+}

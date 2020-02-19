@@ -5,7 +5,8 @@
   "main": "src/index.jsx",
   "scripts": {
     "start": "node node_modules/.bin/budo src/index.jsx:bundle.js --dir=public --live --watch-glob=public/*.css --port=$PORT -- -t babelify",
-    "dev": "node node_modules/.bin/budo src/index.jsx:bundle.js --dir=public --live --watch-glob=public/*.css -- -t babelify"
+    "dev": "node node_modules/.bin/budo src/index.jsx:bundle.js --dir=public --live --watch-glob=public/*.css -- -t babelify",
+    "ui-test": "node node_modules/.bin/budo src/index-ui-test.jsx:bundle.js --dir=public --live --watch-glob=public/*.css -- -t babelify"
   },
   "repository": {
     "type": "git",

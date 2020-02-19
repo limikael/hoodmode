@@ -7,7 +7,7 @@ export default class AppController {
 		this.helper=helper;
 	}
 
-	async init() {
+	initState() {
 		let state={
 			currentSongIndex: 0,
 			currentLayerIndex: -1,
@@ -69,6 +69,11 @@ export default class AppController {
 			"defaultVolume": 0.25
 		});
 
+		return state;
+	}
+
+	async init() {
+		let state=this.initState();
 		let songDataJson=window.localStorage.getItem("hoodmode-songs");
 		if (songDataJson)
 			state.songs=JSON.parse(songDataJson);
