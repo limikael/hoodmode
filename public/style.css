@@ -31,6 +31,35 @@ body {
 	display: flex;
 }
 
+.header-button {
+	display: inline-block;
+	background: #fff;
+	color: #000;
+	margin-top: -0.25em;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+	border-radius: 0.25em;
+	margin-left: 0.5em;
+	height: 1.5em;
+	padding-top: 0.25em;
+}
+
+.header-button.transparent {
+	background: transparent;
+	padding-left: 0em;
+	padding-right: 0em;
+	color: #fff;
+}
+
+.header-button img {
+	width: 1em;
+	height: 1em;
+}
+
+.header-button.transparent img {
+	filter: invert(100%);
+}
+
 .pane-container {
 	white-space: nowrap;
 	margin-top: var(--paneMarginTop);
@@ -124,47 +153,6 @@ body.landscape .pane {
 .grid-button.empty {
 	background: transparent;
 	border: 0.05em dashed white;
-}
-
-.header-right {
-	position: absolute;
-	display: inline-block;
-	right: 1em;
-}
-
-.header-left {
-	position: absolute;
-	display: inline-block;
-	left: 0;
-}
-
-.header-button {
-	display: inline-block;
-	background: #fff;
-	color: #000;
-	margin-top: -0.25em;
-	padding-left: 0.25em;
-	padding-right: 0.25em;
-	border-radius: 0.25em;
-	margin-left: 0.5em;
-	height: 1.5em;
-	padding-top: 0.25em;
-}
-
-.header-button.transparent {
-	background: transparent;
-	padding-left: 0em;
-	padding-right: 0em;
-	color: #fff;
-}
-
-.header-button img {
-	width: 1em;
-	height: 1em;
-}
-
-.header-button.transparent img {
-	filter: invert(100%);
 }
 
 .ui-test {
