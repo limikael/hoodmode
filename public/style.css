@@ -29,25 +29,32 @@ body {
 	color: #fff;
 	background: #073642;
 	display: flex;
+	padding-left: 0.25em;
+	padding-right: 0.25em;
+}
+
+.header-text {
+	flex: 1;
+	margin-top: 0.5em;
+	margin-left: 0.25em;
+	margin-right: 0.25em;
 }
 
 .header-button {
-	display: inline-block;
+	flex: 0;
 	background: #fff;
 	color: #000;
-	margin-top: -0.25em;
-	padding-left: 0.25em;
-	padding-right: 0.25em;
 	border-radius: 0.25em;
-	margin-left: 0.5em;
 	height: 1.5em;
-	padding-top: 0.25em;
+	margin-top: 0.25em;
+	padding: 0.25em;
+
+	margin-left: 0.25em;
+	margin-right: 0.25em;
 }
 
 .header-button.transparent {
 	background: transparent;
-	padding-left: 0em;
-	padding-right: 0em;
 	color: #fff;
 }
 
@@ -87,7 +94,10 @@ body.portrait .double-pane {
 	padding: 0.5em;
 	border-radius: 0.25em;
 	border: 0.05em solid #073642;
-/*	background-color: #073642;*/
+}
+
+.double-pane-inner.filled {
+	background-color: #073642;
 }
 
 body.landscape .double-pane-inner {
@@ -139,6 +149,7 @@ body.landscape .pane {
 }
 
 .grid-button {
+	text-decoration: none;
 	margin: 0.125em;
 	display: inline-block;
 	border-radius: 0.25em;
@@ -157,7 +168,7 @@ body.landscape .pane {
 
 .ui-test {
 	position: fixed;
-	top: 0;
+	bottom: 0;
 	right: 0;
 	background: #fff;
 }

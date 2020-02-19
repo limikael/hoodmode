@@ -99,4 +99,8 @@ export default class AppHelper {
 
 		return false;
 	}
+
+	isSongOpen(state) {
+		return (state.currentSongIndex>=0);
+	}
 }

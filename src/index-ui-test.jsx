@@ -21,7 +21,7 @@ class UiTestAppController extends AppController {
 		/*let state=this.initState();
 		return state;*/
 
-		return this.introPage2();
+		return this.songSettings();
 	}
 
 	introPage2() {
@@ -47,6 +47,25 @@ class UiTestAppController extends AppController {
 
 		return state;
 	}
+
+	songSettings() {
+		let state=this.initState();
+
+		state=this.addSong(state,"Song 1");
+		state.currentSongIndex=0;
+		state.songSettingsVisible=true;
+
+		return state;
+	}
+
+	song() {
+		let state=this.initState();
+
+		state=this.addSong(state,"Song 1");
+		state.currentSongIndex=0;
+
+		return state;
+	}
 }
 
 let mockConductor=new MockConductor();
@@ -57,7 +76,7 @@ let appContext=(
 	<AppContext
 			controller={appController}
 			helper={appHelper}
-			initAction="uiTestInit"
+			initAction="song"
 			logActions={true}>
 		<App/>
 		<AppUiTest/>

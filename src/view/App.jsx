@@ -2,6 +2,9 @@ import { h, Component } from 'preact';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import Header from './Header.jsx';
 import Front from './Front.jsx';
+import Song from './Song.jsx';
+import SongSettings from './SongSettings.jsx';
+import AddLayer from './AddLayer.jsx';
 
 export default class App extends Component {
 	updateSize=()=>{
@@ -58,9 +61,19 @@ export default class App extends Component {
 		return (
 			<div>
 				<Header />
-				{IF(this.context.currentSongIndex<0,()=>
+				{IF(!this.context.isSongOpen(),()=>
 					<Front />
 				)}
+				{IF(this.context.isSongOpen(),()=>{
+					if (this.context.songSettingsVisible)
+						return <SongSettings />;
+
+					else if (this.context.addLayerVisible)
+						return <AddLayer />;
+
+					else
+						return <Song />;
+				})}
 			</div>
 		);
 	}

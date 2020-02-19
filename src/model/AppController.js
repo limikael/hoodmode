@@ -115,6 +115,12 @@ export default class AppController {
 		return state;
 	}
 
+	closeSong(state) {
+		state.currentSongIndex=-1;
+
+		return state;
+	}
+
 	setSongIndex(state, index) {
 		if (index==state.currentSongIndex)
 			return state;
@@ -135,6 +141,12 @@ export default class AppController {
 
 	hideSongSettings(state) {
 		state.songSettingsVisible=false;
+
+		return state;
+	}
+
+	toggleSongSettings(state) {
+		state.songSettingsVisible=!state.songSettingsVisible;
 
 		return state;
 	}
@@ -228,6 +240,8 @@ export default class AppController {
 		};
 
 		song.layers.push(layer);
+
+		state.addLayerVisible=false;
 
 		return state;
 	}
@@ -323,6 +337,16 @@ export default class AppController {
 	setSequenceChord(state, sequenceIndex, chordIndex) {
 		let song=this.helper.getCurrentSong(state);
 		song.chordSequence[sequenceIndex].chordIndex=chordIndex;
+
+		return state;
+	}
+
+	goBack(state) {
+		if (state.songSettingsVisible)
+			return this.hideSongSettings(state);
+
+		else if (this.helper.isSongOpen(state))
+			return this.closeSong(state)
 
 		return state;
 	}
