@@ -27,9 +27,8 @@ body {
 	height: var(--headerHeight);
 	background-color: #000;
 	color: #fff;
-	padding-top: 0.5em;
-	padding-left: 2em;
 	background: #073642;
+	display: flex;
 }
 
 .pane-container {
