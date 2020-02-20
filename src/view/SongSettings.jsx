@@ -5,8 +5,8 @@ export default class SongSettings {
 		return (
 			<div class="pane-container">
 				<div class="double-pane">
-					<div class="double-pane-inner filled">
-						<div class="pane-header">SONG SETTINGS</div>
+					<div class="double-pane-inner bg-dark">
+						<div class="pane-header bg-dark text-secondary">SONG SETTINGS</div>
 						Name:
 					</div>
 				</div>

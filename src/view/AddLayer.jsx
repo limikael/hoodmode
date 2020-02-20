@@ -6,9 +6,9 @@ export default class AddLayer {
 			<div class="pane-container">
 				<div class="double-pane">
 					<div class="double-pane-inner filled">
-						<div class="pane-header">ADD LAYER</div>
+						<div class="pane-header bg-dark text-secondary">ADD LAYER</div>
 						{this.context.instruments.map((instrument,index)=>(
-							<a class="table-row success"
+							<a class="table-row table-row-border text-white bg-warning"
 									href="#"
 									onClick={this.context.addLayer.bind(null,instrument.name)}>
 								{instrument.name}

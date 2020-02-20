@@ -7,11 +7,11 @@ export default class Song extends Component {
 		return (
 			<div class="pane-container">
 				<div class="pane">
-					<div class="pane-inner">
-						<div class="pane-header">LAYERS</div>
+					<div class="pane-inner border-dark">
+						<div class="pane-header text-secondary bg-dark">LAYERS</div>
 
 						{song.layers.map((layer,index)=>
-							<a class="grid-button">
+							<a class="grid-button bg-warning">
 								X
 							</a>
 						)}
@@ -24,14 +24,14 @@ export default class Song extends Component {
 					</div>
 				</div>
 				<div class="pane">
-					<div class="pane-inner">
-						<div class="pane-header">CHORDS</div>
+					<div class="pane-inner border-dark">
+						<div class="pane-header text-secondary bg-dark">CHORDS</div>
 						{this.context.getChordLabels().slice(0,4).map((label)=>
-							<a class="grid-button">{label}</a>
+							<a class="grid-button bg-success">{label}</a>
 						)}
 						<br/>
 						{this.context.getChordLabels().slice(4,8).map((label)=>
-							<a class="grid-button">{label}</a>
+							<a class="grid-button bg-success">{label}</a>
 						)}
 					</div>
 				</div>

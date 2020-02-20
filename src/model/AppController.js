@@ -88,7 +88,7 @@ export default class AppController {
 	};
 
 	addSong(state, name) {
-		if (!name)
+		if (!name || name.toString()=="[object MouseEvent]")
 			name="My New Song";
 
 		let index=state.songs.length;

@@ -6,22 +6,24 @@ export default class Header extends Component {
 		return (
 			<div>
 				{IF(this.context.isSongOpen(),()=>
-					<div class="header">
-						<a class="header-button transparent"
+					<div class="header bg-dark">
+						<a class="header-button text-white"
 								href="#"
 								onClick={this.context.goBack}>
 							<img src="img/arrow-left.svg"/>
 						</a>
-						<div class="header-text">Hello</div>
-						<a class="header-button"
+						<div class="header-text">
+							{this.context.getCurrentSong().name}
+						</div>
+						<a class="header-button bg-white"
 								href="#"
 								onClick={this.onPlayClick}>
 							<img src="img/play-fill.svg"/>
 						</a>
-						<div class="header-button">
+						<div class="header-button bg-white">
 							<img src="img/circle-fill.svg"/>
 						</div>
-						<a class="header-button transparent"
+						<a class="header-button text-white"
 								href="#"
 								onClick={this.context.toggleSongSettings}>
 							<img src="img/gear-fill.svg"/>
@@ -29,7 +31,7 @@ export default class Header extends Component {
 					</div>
 				)}
 				{IF(!this.context.isSongOpen(),()=>
-					<div class="header">
+					<div class="header bg-dark">
 						<div class="header-text">Hoodmode</div>
 					</div>
 				)}
