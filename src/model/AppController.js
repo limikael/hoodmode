@@ -342,6 +342,9 @@ export default class AppController {
 	}
 
 	goBack(state) {
+		if (state.addLayerVisible)
+			return this.hideAddLayer(state);
+
 		if (state.songSettingsVisible)
 			return this.hideSongSettings(state);
 
