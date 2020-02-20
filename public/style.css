@@ -4,6 +4,7 @@
 	--headerHeight: 2em;
 
 	--colorWhite: #fff;
+	--colorBlack: #000;
 	--colorDark: #073642;
 	--colorLight: #FDF6E3;
 	--colorPrimary: #9C7600;
@@ -20,6 +21,7 @@
 }
 
 .bg-white { background-color: var(--colorWhite); }
+.bg-black { background-color: var(--colorBlack); }
 .bg-dark { background-color: var(--colorDark); }
 .bg-light { background-color: var(--colorLight); }
 .bg-primary { background-color: var(--colorPrimary); }
@@ -70,7 +72,6 @@ body {
 
 .header {
 	height: var(--headerHeight);
-	color: #fff;
 	display: flex;
 	padding-left: 0.25em;
 	padding-right: 0.25em;
@@ -104,7 +105,8 @@ body {
 }
 
 .text-white img {
-	filter: invert(100%);
+	filter: brightness(0);
+	filter: invert(1);
 }
 
 .pane-container {
@@ -163,12 +165,34 @@ body.portrait .pane.double {
 	height: 2em;
 	padding-top: 0.5em;
 	text-align: center;
-	color: #fff;
+	vertical-align: top;
+	position: relative;
+}
+
+.grid-button.beat-grid {
+	padding-top: 0.1em;
+}
+
+.grid-button .grid-beat {
+	width: 0.4em;
+	height: 0.4em;
+	display: inline-block;
+	margin: 0.1em;
+	border-radius: 0.1em;
+}
+
+.grid-button .grid-beat.active {
+	background: var(--colorPrimary);
 }
 
 .grid-button.empty {
 	background: transparent;
 	border: 0.05em dashed white;
+}
+
+.grid-button img {
+	width: 1em;
+	height: 1em;
 }
 
 .ui-test {
@@ -184,6 +208,10 @@ body.portrait .pane.double {
 	text-decoration: none;
 	display: inline-block;
 	margin: 0.125em;
+
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 
 body.landscape .table-row {
@@ -197,4 +225,10 @@ body.portrait .table-row,
 
 .table-row-border {
 	border-top: 0.01em solid var(--colorLight);
+}
+
+.table-row img {
+	width: 1em;
+	height: 1em;
+	margin-right: 0.5em;
 }

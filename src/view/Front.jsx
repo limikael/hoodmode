@@ -12,7 +12,7 @@ export default class Front {
 						+ New Song
 					</a>
 					{this.context.songs.map((song,index)=>(
-						<a class="table-row table-row-border bg-success text-white"
+						<a class="table-row table-row-border bg-secondary text-white"
 								href="#"
 								onClick={this.context.setSongIndex.bind(null,index)}>
 							{song.name}

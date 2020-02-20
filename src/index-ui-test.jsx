@@ -66,6 +66,28 @@ class UiTestAppController extends AppController {
 
 		return state;
 	}
+
+	layerEditor() {
+		let state=this.initState();
+
+		state=this.addSong(state,"Song 1");
+		state.currentSongIndex=0;
+
+		state=this.addLayer(state,"Yes Drums");
+		state.currentLayerIndex=0;
+
+		state.songs[0].layers[0].seq[0][0]=true;
+		state.songs[0].layers[0].seq[0][4]=true;
+		state.songs[0].layers[0].seq[0][8]=true;
+		state.songs[0].layers[0].seq[0][12]=true;
+
+		state.songs[0].layers[0].seq[1][4]=true;
+		state.songs[0].layers[0].seq[1][12]=true;
+
+		state.currentGridIndex=0;
+
+		return state;
+	}
 }
 
 let mockConductor=new MockConductor();
@@ -76,7 +98,7 @@ let appContext=(
 	<AppContext
 			controller={appController}
 			helper={appHelper}
-			initAction="song"
+			initAction="layerEditor"
 			logActions={true}>
 		<App/>
 		<AppUiTest/>

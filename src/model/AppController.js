@@ -12,6 +12,7 @@ export default class AppController {
 			currentSongIndex: 0,
 			currentLayerIndex: -1,
 			currentChordIndex: 0,
+			currentGridIndex: -1,
 			songSettingsVisible: false,
 			addLayerVisible: false,
 			songs: [],
@@ -25,6 +26,8 @@ export default class AppController {
 			"type": "percussive",
 			"name": "Bad Jazz Drums",
 			"labels": ["KICK","SNARE","HI-HAT"],
+			"icon": "drum.svg",
+			"icons": ["kick-drum.svg","snare-drum.svg","hi-hat.svg"],
 			"samples": [
 				"samples/drums/bad-kick.wav",
 				"samples/drums/bad-snare.wav",
@@ -37,6 +40,8 @@ export default class AppController {
 			"type": "percussive",
 			"name": "Yes Drums",
 			"labels": ["KICK","SNARE","HI-HAT 1","HI-HAT 2","HI-HAT 3"],
+			"icon": "drum.svg",
+			"icons": ["kick-drum.svg","snare-drum.svg","hi-hat.svg","hi-hat.svg","hi-hat.svg"],
 			"samples": [
 				"samples/drums/yes-kick.mp3",
 				"samples/drums/yes-snare.mp3",
@@ -50,7 +55,8 @@ export default class AppController {
 			"key": "dive-bass",
 			"type": "harmonic",
 			"name": "Dive Bass",
-			"sample": "samples/bass/upright-bass-bombdive.mp3"
+			"sample": "samples/bass/upright-bass-bombdive.mp3",
+			"icon": "bass.svg"
 		});
 
 		state.instruments.push({
@@ -58,7 +64,8 @@ export default class AppController {
 			"type": "harmonic",
 			"name": "Acoustic Bass",
 			"sampleNote": "F#",
-			"sample": "samples/bass/acoustic_bass_f_sharp.mp3"
+			"sample": "samples/bass/acoustic_bass_f_sharp.mp3",
+			"icon": "bass.svg"
 		});
 
 		state.instruments.push({
@@ -66,7 +73,8 @@ export default class AppController {
 			"type": "harmonic",
 			"name": "Piano",
 			"sample": "samples/piano/piano-c.wav",
-			"defaultVolume": 0.25
+			"defaultVolume": 0.25,
+			"icon": "piano.svg"
 		});
 
 		return state;
@@ -342,6 +350,11 @@ export default class AppController {
 	}
 
 	goBack(state) {
+		if (state.currentLayerIndex>=0) {
+			state.currentLayerIndex=-1;
+			return state;
+		}
+
 		if (state.addLayerVisible)
 			return this.hideAddLayer(state);
 
@@ -350,6 +363,16 @@ export default class AppController {
 
 		else if (this.helper.isSongOpen(state))
 			return this.closeSong(state)
+
+		return state;
+	}
+
+	toggleGridIndex(state, newGridIndex) {
+		if (state.currentGridIndex==newGridIndex)
+			state.currentGridIndex=-1;
+
+		else
+			state.currentGridIndex=newGridIndex;
 
 		return state;
 	}

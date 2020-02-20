@@ -12,7 +12,12 @@ export default class Header extends Component {
 								onClick={this.context.goBack}>
 							<img src="img/arrow-left.svg"/>
 						</a>
-						<div class="header-text">
+						{IF(this.context.currentLayerIndex>=0,()=>
+							<div class="header-button text-white">
+								<img src={"img/"+this.context.getInstrumentByName(this.context.getCurrentLayer().instrumentName).icon}/>
+							</div>
+						)}
+						<div class="header-text text-white">
 							{this.context.getCurrentSong().name}
 						</div>
 						<a class="header-button bg-white"
@@ -32,7 +37,7 @@ export default class Header extends Component {
 				)}
 				{IF(!this.context.isSongOpen(),()=>
 					<div class="header bg-dark">
-						<div class="header-text">Hoodmode</div>
+						<div class="header-text text-white">Hoodmode</div>
 					</div>
 				)}
 			</div>

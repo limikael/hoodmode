@@ -7,9 +7,10 @@ export default class AddLayer {
 				<div class="pane double bg-dark">
 					<div class="pane-header bg-dark text-secondary">ADD LAYER</div>
 					{this.context.instruments.map((instrument,index)=>(
-						<a class="table-row table-row-border text-white bg-warning"
+						<a class="table-row table-row-border text-white bg-danger"
 								href="#"
 								onClick={this.context.addLayer.bind(null,instrument.name)}>
+							<img src={"img/"+instrument.icon}/>
 							{instrument.name}
 						</a>
 					))}

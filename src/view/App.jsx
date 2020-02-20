@@ -5,6 +5,7 @@ import Front from './Front.jsx';
 import Song from './Song.jsx';
 import SongSettings from './SongSettings.jsx';
 import AddLayer from './AddLayer.jsx';
+import Layer from './Layer.jsx';
 
 export default class App extends Component {
 	updateSize=()=>{
@@ -70,6 +71,9 @@ export default class App extends Component {
 
 					else if (this.context.addLayerVisible)
 						return <AddLayer />;
+
+					else if (this.context.currentLayerIndex>=0)
+						return <Layer />
 
 					else
 						return <Song />;

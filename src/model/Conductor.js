@@ -49,6 +49,9 @@ export default class Conductor {
 			chordIndex=this.getCurrentSong().chordSequence[this.sequenceIndex].chordIndex;
 
 		let song=this.getCurrentSong();
+		if (!song)
+			return [0,0,0];
+
 		let scaleChordNotes=MusicUtil.getChordNotesForScale(song.musicKey,song.minor);
 		let chordNotes=scaleChordNotes[chordIndex];
 		return [
@@ -137,7 +140,12 @@ export default class Conductor {
 	setState=(state)=>{
 		this.state=state;
 		this.instruments.setData(state.instruments);
-		this.layers.setData(this.getCurrentSong().layers);
+
+		if (this.getCurrentSong())
+			this.layers.setData(this.getCurrentSong().layers);
+
+		else
+			this.layers.setData([]);
 
 		if (state.playing && !this.isPlaying())
 			this.play();
