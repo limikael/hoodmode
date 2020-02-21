@@ -48,13 +48,12 @@ export default class LayerEditor extends Component {
 			let cls='';
 
 			if (layer.seq[soundIndex][i])
-				cls='bg-primary';
-
-			/*else if (i==this.props.beatIndex)
-				cls='bg-light';*/
+				cls='bg-primary ';
 
 			else if (!(i%4))
-				cls='seq-beat'
+				cls='seq-beat '
+
+			cls+='beat-'+i;
 
 			a.push(
 				<td onClick={this.onSeqClick.bind(this,soundIndex,i)}

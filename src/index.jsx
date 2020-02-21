@@ -12,6 +12,15 @@ let conductor=new Conductor();
 let appHelper=new AppHelper(conductor);
 let appController=new AppController(conductor,appHelper);
 
+conductor.onPlayGridIndexChange=(gridIndex)=>{
+	for (let el of document.querySelectorAll(".current-beat"))
+		el.classList.remove('current-beat');
+
+	if (gridIndex>=0)
+		for (let el of document.querySelectorAll(".beat-"+gridIndex))
+			el.classList.add('current-beat');
+}
+
 function onStateChange(state) {
 	conductor.setState(state);
 	window.localStorage.setItem("hoodmode-songs",JSON.stringify(state.songs));

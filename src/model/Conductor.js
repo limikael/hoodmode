@@ -14,6 +14,7 @@ export default class Conductor {
 		this.layers=ReconcileArray.createWithFactory(this.createLayer);
 		this.currentNotes=[];
 		this.sequenceIndex=-1;
+		this.playGridIndex=-1;
 	}
 
 	loadInstruments() {
@@ -100,6 +101,15 @@ export default class Conductor {
 		return secPerGrid;
 	}
 
+	onPlayInterval=()=>{
+		let elapsed=this.audioContext.currentTime-this.playStartTime;
+		let gridIndex=elapsed/this.getSecPerGrid();
+
+		this.playGridIndex=Math.round(gridIndex);
+		if (this.onPlayGridIndexChange)
+			this.onPlayGridIndexChange(this.playGridIndex);
+	}
+
 	play=()=>{
 		this.playStartTime=this.audioContext.currentTime;
 
@@ -116,11 +126,21 @@ export default class Conductor {
 		}
 
 		this.playTimer=setTimeout(this.play,1000*16*this.getSecPerGrid());
+
+		clearInterval(this.playInterval);
+		this.playInterval=setInterval(this.onPlayInterval,1000*this.getSecPerGrid());
+		this.onPlayInterval();
 	}
 
 	stop() {
+		this.playGridIndex=-1;
+		if (this.onPlayGridIndexChange)
+			this.onPlayGridIndexChange(this.playGridIndex);
+
 		clearTimeout(this.playTimer);
+		clearInterval(this.playInterval);
 		this.playTimer=null;
+		this.playInterval=null;
 
 		for (let note of this.currentNotes) {
 			note.setVelocity(0);

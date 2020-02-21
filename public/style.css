@@ -67,3 +67,7 @@
     max-height: calc(100vh - 200px);
     overflow-y: auto;
 }
+
+.sequence-table .current-beat {
+	background: #ccc;
+}
