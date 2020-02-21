@@ -51,6 +51,8 @@
 .border-warning { border: var(--borderWidth) solid var(--colorWarning); }
 .border-info { border: var(--borderWidth) solid var(--colorInfo); }
 
+.active { filter: brightness(50%); }
+
 * {
 	box-sizing: border-box;
 	line-height: 1em;
@@ -181,8 +183,12 @@ body.portrait .pane.double {
 	border-radius: 0.1em;
 }
 
-.grid-button .grid-beat.active {
+.grid-button .grid-beat.grid-beat-active {
 	background: var(--colorPrimary);
+}
+
+.grid-button.current-beat {
+	background: var(--colorLight);
 }
 
 .grid-button.empty {

@@ -3,6 +3,10 @@ import { Select, IF } from '../utils/ReactUtil.jsx';
 
 export default class Header extends Component {
 	render() {
+		let playButtonClass="header-button bg-white ";
+		if (this.context.playing)
+			playButtonClass+="active";
+
 		return (
 			<div>
 				{IF(this.context.isSongOpen(),()=>
@@ -20,9 +24,9 @@ export default class Header extends Component {
 						<div class="header-text text-white">
 							{this.context.getCurrentSong().name}
 						</div>
-						<a class="header-button bg-white"
+						<a class={playButtonClass}
 								href="#"
-								onClick={this.onPlayClick}>
+								onClick={this.context.togglePlaying}>
 							<img src="img/play-fill.svg"/>
 						</a>
 						<div class="header-button bg-white">
