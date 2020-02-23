@@ -158,6 +158,21 @@ body.portrait .pane.double {
 	padding-top: 0.25em;
 }
 
+.form-button {
+	text-decoration: none;
+	margin: 0.125em;
+	display: inline-block;
+	border-radius: 0.25em;
+	height: 2em;
+	padding-top: 0.5em;
+	padding-left: 0.5em;
+	padding-right: 0.5em;
+	text-align: center;
+	vertical-align: top;
+	position: relative;
+	color: var(--colorWhite);
+}
+
 .grid-button {
 	text-decoration: none;
 	margin: 0.125em;

@@ -6,7 +6,7 @@ export default class SongSettings {
 			<div class="pane-container">
 				<div class="pane double bg-dark">
 					<div class="pane-header bg-dark text-secondary">SONG SETTINGS</div>
-					Name:
+					<a class="bg-warning form-button">Remove Layer</a>
 				</div>
 			</div>
 		);
