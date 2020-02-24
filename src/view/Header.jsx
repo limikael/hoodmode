@@ -3,14 +3,18 @@ import { Select, IF } from '../utils/ReactUtil.jsx';
 
 export default class Header extends Component {
 	render() {
-		let playButtonClass="header-button bg-white ";
+		let playButtonClass="header-button text-white ";
 		if (this.context.playing)
 			playButtonClass+="active";
+
+		let recordButtonClass="header-button text-white ";
+		if (this.context.recording)
+			recordButtonClass+="active";
 
 		return (
 			<div>
 				{IF(this.context.isSongOpen(),()=>
-					<div class="header bg-dark">
+					<div class="header box bg-dark">
 						<a class="header-button text-white"
 								href="#"
 								onClick={this.context.goBack}>
@@ -26,12 +30,14 @@ export default class Header extends Component {
 						</div>
 						<a class={playButtonClass}
 								href="#"
-								onClick={this.context.togglePlaying}>
+								onClick={this.context.playClick}>
 							<img src="img/play-fill.svg"/>
 						</a>
-						<div class="header-button bg-white">
+						<a class={recordButtonClass}
+								href="#"
+								onClick={this.context.recordClick}>
 							<img src="img/circle-fill.svg"/>
-						</div>
+						</a>
 						<a class="header-button text-white"
 								href="#"
 								onClick={this.context.toggleSettings}>
@@ -40,7 +46,7 @@ export default class Header extends Component {
 					</div>
 				)}
 				{IF(!this.context.isSongOpen(),()=>
-					<div class="header bg-dark">
+					<div class="header box bg-dark">
 						<div class="header-text text-white">Hoodmode</div>
 					</div>
 				)}

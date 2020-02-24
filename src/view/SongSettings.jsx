@@ -4,26 +4,48 @@ export default class SongSettings {
 	render() {
 		return (
 			<div class="pane-container">
-				<div class="pane double bg-dark">
+				<div class="pane box double bg-dark">
 					<div class="pane-header bg-dark text-secondary">SONG SETTINGS</div>
-					Song Name<br/>
-					<input type="text" class="form-input"
-							value={this.context.getCurrentSong().name}/>
-					<br/><br/>
-					Tempo<br/>
-					<input type="text" class="form-input"/><br/><br/>
+					<div class="input-group">
+						Song Name<br/>
+						<div class="box border bg-white border-black text-black w-4">
+							<input type="text" value={this.context.getCurrentSong().name}/>
+						</div>
+					</div>
 
-					<a class="bg-danger form-button"
-							href="#"
-							onClick={this.context.deleteCurrentSong}>
-						Remove
-					</a>
-					<a class="bg-primary form-button"
-							href="#"
-							onClick={this.context.toggleSettings}>
-						Close
-					</a>
-					<br/>
+					<div class="input-group">
+						Tempo<br/>
+						<div class="box border bg-white border-black text-black w-4">
+							<input type="text" />
+						</div>
+					</div>
+
+					<div class="input-group">
+						Key<br/>
+						<div class="box border bg-white border-black text-black w-4">
+							<input type="text" />
+						</div>
+					</div>
+
+					<div class="input-group">
+						Mode<br/>
+						<div class="box border bg-white border-black text-black w-4">
+							<input type="text" />
+						</div>
+					</div>
+
+					<div class="form-buttons">
+						<a class="bg-danger box text-white"
+								href="#"
+								onClick={this.context.deleteCurrentSong}>
+							Remove
+						</a>
+						<a class="bg-primary box text-white"
+								href="#"
+								onClick={this.context.toggleSettings}>
+							Close
+						</a>
+					</div>
 				</div>
 			</div>
 		);

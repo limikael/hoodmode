@@ -4,15 +4,16 @@ export default class Front {
 	render() {
 		return (
 			<div class="pane-container">
-				<div class="pane double border border-dark">
+				<div class="box pane double border border-dark">
 					<div class="pane-header text-secondary bg-dark">SONGS</div>
 
-					<a class="table-row text-light full-width" href="#"
+					<a href="#" class="text-white"
 							onClick={this.context.addSong}>
-						+ New Song
-					</a>
+						<div class="box bg-dark w-1">+</div>
+						<div class="box">New Song</div>
+					</a><br/>
 					{this.context.songs.map((song,index)=>(
-						<a class="table-row table-row-border bg-secondary text-white"
+						<a class="box bg-secondary text-white w-4 border border-light"
 								href="#"
 								onClick={this.context.setSongIndex.bind(null,index)}>
 							{song.name}

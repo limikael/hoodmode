@@ -9,7 +9,7 @@ export default class AppController {
 
 	initState() {
 		let state={
-			currentSongIndex: 0,
+			currentSongIndex: -1,
 			currentLayerIndex: -1,
 			currentChordIndex: 0,
 			currentGridIndex: -1,
@@ -18,6 +18,7 @@ export default class AppController {
 			songs: [],
 			instruments: [],
 			playing: false,
+			recording: false,
 			playingSequence: false
 		}
 
@@ -138,6 +139,7 @@ export default class AppController {
 		state.currentChordIndex=0;
 		state.currentGridIndex=-1;
 		state.playing=false;
+		state.recording=false;
 
 		return state;
 	}
@@ -320,9 +322,25 @@ export default class AppController {
 		return state;
 	}
 
-	togglePlaying(state) {
+	playClick(state) {
 		state.playing=!state.playing;
 		state.currentGridIndex=-1;
+
+		if (!state.playing)
+			state.recording=false;
+
+		return state;
+	}
+
+	recordClick(state) {
+		state.recording=!state.recording;
+		state.currentGridIndex=-1;
+
+		if (state.recording && !state.playing)
+			state.playing=true;
+
+		if (!state.playing)
+			state.currentGridIndex=-1;
 
 		return state;
 	}
@@ -368,6 +386,7 @@ export default class AppController {
 
 	gridIndexClick(state, newGridIndex) {
 		state.playing=false;
+		state.recording=false;
 
 		if (state.currentGridIndex==newGridIndex)
 			state.currentGridIndex=-1;
@@ -380,6 +399,17 @@ export default class AppController {
 
 	soundButtonClick(state, soundIndex) {
 		let instrument=this.helper.getCurrentInstrument(state);
+
+		if (state.recording) {
+			this.conductor.playInstrument(instrument.name,soundIndex);
+
+			let gridIndex=this.conductor.getPlayGridIndex();
+			let layer=this.helper.getCurrentLayer(state);
+
+			layer.seq[soundIndex][gridIndex]=true;
+
+			return state;
+		}
 
 		if (state.currentGridIndex<0) {
 			this.conductor.playInstrument(instrument.name,soundIndex);

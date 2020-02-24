@@ -1,0 +1,95 @@
+:root {
+	--colorWhite: #fff;
+	--colorBlack: #000;
+	--colorDark: #073642;
+	--colorLight: #FDF6E3;
+	--colorPrimary: #9C7600;
+	--colorSecondary: #839496;
+	--colorSuccess: #2AA198;
+	--colorDanger: #D33682;
+	--colorWarning: #CB4B16;
+	--colorInfo: #268BD2;
+
+/*	--backgroundColor: #002B36;*/
+	--backgroundColor: #001020;
+
+	--borderWidth: 0.1em;
+}
+
+.bg-white { background-color: var(--colorWhite); }
+.bg-black { background-color: var(--colorBlack); }
+.bg-dark { background-color: var(--colorDark); }
+.bg-light { background-color: var(--colorLight); }
+.bg-primary { background-color: var(--colorPrimary); }
+.bg-secondary { background-color: var(--colorSecondary); }
+.bg-success { background-color: var(--colorSuccess); }
+.bg-danger { background-color: var(--colorDanger); }
+.bg-warning { background-color: var(--colorWarning); }
+.bg-info { background-color: var(--colorInfo); }
+
+.text-white { color: var(--colorWhite); }
+.text-dark { color: var(--colorDark); }
+.text-light { color: var(--colorLight); }
+.text-primary { color: var(--colorPrimary); }
+.text-secondary { color: var(--colorSecondary); }
+.text-success { color: var(--colorSuccess); }
+.text-danger { color: var(--colorDanger); }
+.text-warning { color: var(--colorWarning); }
+.text-info { color: var(--colorInfo); }
+
+.border-white { border-color: var(--colorWhite); }
+.border-dark { border-color: var(--colorDark); }
+.border-light { border-color: var(--colorLight); }
+.border-primary { border-color: var(--colorPrimary); }
+.border-secondary { border-color: var(--colorSecondary); }
+.border-success { border-color: var(--colorSuccess); }
+.border-danger { border-color: var(--colorDanger); }
+.border-warning { border-color: var(--colorWarning); }
+.border-info { border-color: var(--colorInfo); }
+
+.active { filter: brightness(50%); }
+
+* {
+	box-sizing: content-box;
+}
+
+html {
+	font-size: 1px;
+}
+
+html, body {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+}
+
+body {
+	margin: 0;
+	line-height: 1em;
+	font-family: sans-serif;
+	background-color: var(--backgroundColor);
+	color: var(--colorLight);
+}
+
+.ui-test {
+	position: fixed;
+	bottom: 0;
+	right: 0;
+	background: #fff;
+}
+
+div.box {
+	height: 1em;
+	padding: 0.4em;
+	margin: 0.1em;
+	display: inline-block;
+	border-radius: 0.4em;
+	text-align: center;
+}
+
+div.box.border {
+	padding: 0.3em;
+	border-width: 0.1em;
+	border-style: solid;
+}

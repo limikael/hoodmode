@@ -16,19 +16,18 @@ export default class App extends Component {
 		let cs=getComputedStyle(document.documentElement);
 		let paneWidth=parseFloat(cs.getPropertyValue('--paneWidth'));
 		let paneHeight=parseFloat(cs.getPropertyValue('--paneHeight'));
-		let headerHeight=parseFloat(cs.getPropertyValue('--headerHeight'));
 
 		let contentWidth,contentHeight;
 		if (windowHeight>windowWidth) {
-			contentHeight=2*paneHeight+headerHeight;
-			contentWidth=paneWidth;
+			contentHeight=2*(paneHeight+1)+2;
+			contentWidth=paneWidth+1;
 			document.querySelector("body").classList.add("portrait");
 			document.querySelector("body").classList.remove("landscape");
 		}
 
 		else {
-			contentHeight=paneHeight+headerHeight;
-			contentWidth=2*paneWidth;
+			contentHeight=paneHeight+2+1;
+			contentWidth=2*(paneWidth+1);
 			document.querySelector("body").classList.add("landscape");
 			document.querySelector("body").classList.remove("portrait");
 		}
@@ -40,7 +39,7 @@ export default class App extends Component {
 		else
 			fontSize=windowHeight/contentHeight;
 
-		document.querySelector("body").style.fontSize=fontSize+"px";
+		document.querySelector("html").style.fontSize=fontSize+"px";
 
 		let s=document.documentElement.style;
 		s.setProperty("--paneMarginTop",(windowHeight-fontSize*contentHeight)/2);
@@ -60,8 +59,12 @@ export default class App extends Component {
 		if (this.context.busy)
 			return (<div>LOADING...</div>);
 
+		let cls="";
+		if (this.context.recording)
+			cls="recording";
+
 		return (
-			<div>
+			<div class={cls}>
 				<Header />
 				{IF(!this.context.isSongOpen(),()=>
 					<Front />

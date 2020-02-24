@@ -104,6 +104,19 @@ export default class Conductor {
 		return secPerGrid;
 	}
 
+	getPlayGridIndex() {
+		if (!this.isPlaying())
+			throw new Error("Not playing!!!");
+
+		let elapsed=this.audioContext.currentTime-this.playStartTime;
+		let gridIndex=Math.round(elapsed/this.getSecPerGrid());
+
+		if (gridIndex==16)
+			gridIndex=0;
+
+		return gridIndex;
+	}
+
 	onPlayInterval=()=>{
 		let elapsed=this.audioContext.currentTime-this.playStartTime;
 		let gridIndex=elapsed/this.getSecPerGrid();
