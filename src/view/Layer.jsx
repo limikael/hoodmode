@@ -1,6 +1,23 @@
 import { h, Component } from 'preact';
 
 export default class Layer extends Component {
+	onKeyDown=(e)=>{
+		if (e.target.nodeName=="INPUT")
+			return;
+
+		let k=parseInt(e.key)-1;
+		if (k>=0)
+			this.context.soundButtonClick(k);
+	}
+
+	componentDidMount() {
+		document.addEventListener("keydown",this.onKeyDown);
+	}
+
+	componentWillUnmount() {
+		document.removeEventListener("keydown",this.onKeyDown);
+	}
+
 	renderSoundSymbols() {
 		let instrument=this.context.getCurrentInstrument();
 		let layer=this.context.getCurrentLayer();
