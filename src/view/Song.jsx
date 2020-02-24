@@ -38,10 +38,20 @@ export default class Song extends Component {
 					</a>
 				</div>}
 				<div class="pane box border border-dark">
-					<div class="pane-header text-secondary bg-dark">CHORDS</div>
-					{this.context.getChordLabels().map((label)=>
-						<a class="box bg-success text-light" style={{width: '1em'}}>{label}</a>
-					)}
+					<div class="pane-header text-secondary bg-dark chords">CHORDS</div>
+					{this.context.getChordLabels().map((label, index)=>{
+						let cls="box w-1 bg-success text-light ";
+						if (index==this.context.currentChordIndex)
+							cls+=" active beat-0 beat-4 beat-8 beat-12";
+
+						return (
+							<a class={cls}
+									href="#"
+									onClick={this.context.setCurrentChordIndex.bind(null,index)}>
+								{label}
+							</a>
+						)
+					})}
 				</div>
 			</div>
 		);

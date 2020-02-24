@@ -260,3 +260,7 @@ body.portrait .form-buttons {
 .box.faded {
 	opacity: 0.5
 }
+
+.current-beat {
+	background-color: var(--colorWarning) !important;
+}
