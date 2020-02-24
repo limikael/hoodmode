@@ -261,6 +261,6 @@ body.portrait .form-buttons {
 	opacity: 0.5
 }
 
-.current-beat {
+.chord.current-beat {
 	background-color: var(--colorWarning) !important;
 }
