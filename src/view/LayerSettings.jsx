@@ -1,21 +1,14 @@
 import { h, Component } from 'preact';
 
-export default class SongSettings {
+export default class LayerSettings {
 	render() {
 		return (
 			<div class="pane-container">
 				<div class="pane double bg-dark">
-					<div class="pane-header bg-dark text-secondary">SONG SETTINGS</div>
-					Song Name<br/>
-					<input type="text" class="form-input"
-							value={this.context.getCurrentSong().name}/>
-					<br/><br/>
-					Tempo<br/>
-					<input type="text" class="form-input"/><br/><br/>
-
+					<div class="pane-header bg-dark text-secondary">LAYER SETTINGS</div>
 					<a class="bg-danger form-button"
 							href="#"
-							onClick={this.context.deleteCurrentSong}>
+							onClick={this.context.deleteCurrentLayer}>
 						Remove
 					</a>
 					<a class="bg-primary form-button"

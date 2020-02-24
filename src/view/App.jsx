@@ -4,6 +4,7 @@ import Header from './Header.jsx';
 import Front from './Front.jsx';
 import Song from './Song.jsx';
 import SongSettings from './SongSettings.jsx';
+import LayerSettings from './LayerSettings.jsx';
 import AddLayer from './AddLayer.jsx';
 import Layer from './Layer.jsx';
 
@@ -66,8 +67,13 @@ export default class App extends Component {
 					<Front />
 				)}
 				{IF(this.context.isSongOpen(),()=>{
-					if (this.context.songSettingsVisible)
-						return <SongSettings />;
+					if (this.context.settingsVisible) {
+						if (this.context.currentLayerIndex>=0)
+							return <LayerSettings />;
+
+						else
+							return <SongSettings />;
+					}
 
 					else if (this.context.addLayerVisible)
 						return <AddLayer />;

@@ -53,7 +53,7 @@ class UiTestAppController extends AppController {
 
 		state=this.addSong(state,"Song 1");
 		state.currentSongIndex=0;
-		state.songSettingsVisible=true;
+		state.settingsVisible=true;
 
 		return state;
 	}

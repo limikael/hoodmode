@@ -13,7 +13,7 @@ export default class AppController {
 			currentLayerIndex: -1,
 			currentChordIndex: 0,
 			currentGridIndex: -1,
-			songSettingsVisible: false,
+			settingsVisible: false,
 			addLayerVisible: false,
 			songs: [],
 			instruments: [],
@@ -142,20 +142,20 @@ export default class AppController {
 		return state;
 	}
 
-	showSongSettings(state) {
-		state.songSettingsVisible=true;
+	showSettings(state) {
+		state.settingsVisible=true;
 
 		return state;
 	}
 
-	hideSongSettings(state) {
-		state.songSettingsVisible=false;
+	hideSettings(state) {
+		state.settingsVisible=false;
 
 		return state;
 	}
 
-	toggleSongSettings(state) {
-		state.songSettingsVisible=!state.songSettingsVisible;
+	toggleSettings(state) {
+		state.settingsVisible=!state.settingsVisible;
 
 		return state;
 	}
@@ -188,15 +188,8 @@ export default class AppController {
 
 	deleteCurrentSong(state) {
 		state.songs.splice(state.currentSongIndex,1);
-
-		if (!state.songs.length)
-			state=this.addSong(state);
-
-		if (state.currentSongIndex<0)
-			state.currentSongIndex=0;
-
-		if (state.currentSongIndex>=state.songs.length)
-			state.currentSongIndex=state.songs.length-1;
+		state.currentSongIndex=-1;
+		state.settingsVisible=false;
 
 		return state;
 	}
@@ -315,6 +308,7 @@ export default class AppController {
 		song.layers.splice(state.currentLayerIndex,1);
 		state.currentLayerIndex=-1;
 		state.currentGridIndex=-1;
+		state.settingsVisible=false;
 
 		return state;
 	}
@@ -354,17 +348,17 @@ export default class AppController {
 	}
 
 	goBack(state) {
-		if (state.currentLayerIndex>=0) {
+		if (state.settingsVisible)
+			return this.hideSettings(state);
+
+		else if (state.currentLayerIndex>=0) {
 			state.currentLayerIndex=-1;
 			state.currentGridIndex=-1;
 			return state;
 		}
 
-		if (state.addLayerVisible)
+		else if (state.addLayerVisible)
 			return this.hideAddLayer(state);
-
-		if (state.songSettingsVisible)
-			return this.hideSongSettings(state);
 
 		else if (this.helper.isSongOpen(state))
 			return this.closeSong(state)

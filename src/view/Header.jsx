@@ -34,7 +34,7 @@ export default class Header extends Component {
 						</div>
 						<a class="header-button text-white"
 								href="#"
-								onClick={this.context.toggleSongSettings}>
+								onClick={this.context.toggleSettings}>
 							<img src="img/gear-fill.svg"/>
 						</a>
 					</div>
