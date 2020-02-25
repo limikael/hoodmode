@@ -12,6 +12,7 @@ export default class AppController {
 			currentSongIndex: -1,
 			currentLayerIndex: -1,
 			currentChordIndex: 0,
+			currentSectionIndex: -1,
 			currentGridIndex: -1,
 			settingsVisible: false,
 			addLayerVisible: false,
@@ -19,7 +20,8 @@ export default class AppController {
 			instruments: [],
 			playing: false,
 			recording: false,
-			playingSequence: false
+			playingSequence: false,
+			editSectionChordVisible: -1
 		}
 
 		state.instruments.push({
@@ -106,7 +108,12 @@ export default class AppController {
 			musicKey: "A",
 			minor: true,
 			layers: [],
-			chordSequence: []
+			chordSequence: [],
+			sections: [
+				[0],
+				[0],
+				[0]
+			]
 		});
 
 		state=this.setSongIndex(state,index);
@@ -121,8 +128,15 @@ export default class AppController {
 		return state;
 	}
 
+	setCurrentSectionIndex(state, index) {
+		state.currentSectionIndex=index;
+
+		return state;
+	}
+
 	closeSong(state) {
 		state.currentSongIndex=-1;
+		state.currentSectionIndex=-1;
 
 		return state;
 	}
@@ -189,6 +203,7 @@ export default class AppController {
 		state.songs.splice(state.currentSongIndex,1);
 		state.currentSongIndex=-1;
 		state.settingsVisible=false;
+		state.currentSectionIndex=-1;
 
 		return state;
 	}
@@ -420,6 +435,38 @@ export default class AppController {
 		if (layer.seq[soundIndex][state.currentGridIndex])
 			this.conductor.playInstrument(instrument.name,soundIndex);
 
+		return state;
+	}
+
+	addSectionChord(state) {
+		let song=this.helper.getCurrentSong(state);
+		song.sections[state.currentSectionIndex].push(0);
+
+		return state;
+	}
+
+	showEditSectionChord(state,index) {
+		state.editSectionChordVisible=index;
+		return state;
+	}
+
+	hideEditSectionChord(state,index) {
+		state.editSectionChordVisible=-1;
+		return state;
+	}
+
+	removeSectionChord(state) {
+		let song=this.helper.getCurrentSong(state);
+		song.sections[state.currentSectionIndex].splice(state.editSectionChordVisible,1);
+
+		state.editSectionChordVisible=-1;
+		return state;
+	}
+
+	editSectionChord(state, index) {
+		let song=this.helper.getCurrentSong(state);
+		song.sections[state.currentSectionIndex][state.editSectionChordVisible]=index;
+		state.editSectionChordVisible=-1;
 		return state;
 	}
 }

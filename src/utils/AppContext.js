@@ -12,14 +12,14 @@ class AppContext extends Component {
 				if (this.props.logActions)
 					console.log("Action: "+key+" ("+args+")");
 
-				if (args[0] && args[0].preventDefault)
-					args[0].preventDefault();
+				for (let i in args) {
+					if (args[i] instanceof Event) {
+						args[i].preventDefault();
+						args[i].stopPropagation();
 
-				if (args[0] instanceof Event) {
-					console.log("it is an event!");
-
-					if (args[0].type=="change") {
-						args[0]=args[0].target.value;
+						if (args[i].type=="change") {
+							args[i]=args[i].target.value;
+						}
 					}
 				}
 

@@ -7,6 +7,7 @@ import SongSettings from './SongSettings.jsx';
 import LayerSettings from './LayerSettings.jsx';
 import AddLayer from './AddLayer.jsx';
 import Layer from './Layer.jsx';
+import SelectChord from './SelectChord.jsx';
 
 export default class App extends Component {
 	updateSize=()=>{
