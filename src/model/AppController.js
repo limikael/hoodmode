@@ -87,9 +87,6 @@ export default class AppController {
 		if (songDataJson)
 			state.songs=JSON.parse(songDataJson);
 
-		else 
-			state=this.addSong(state);
-
 		this.conductor.setState(state);
 		await this.conductor.loadInstruments();
 

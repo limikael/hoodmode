@@ -9,7 +9,9 @@ export default class SongSettings {
 					<div class="input-group">
 						Song Name<br/>
 						<div class="box border bg-white border-black text-black w-4">
-							<input type="text" value={this.context.getCurrentSong().name}/>
+							<input type="text"
+								value={this.context.getCurrentSong().name}
+								onChange={this.context.setCurrentSongName}/>
 						</div>
 					</div>
 

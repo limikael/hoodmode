@@ -15,6 +15,14 @@ class AppContext extends Component {
 				if (args[0] && args[0].preventDefault)
 					args[0].preventDefault();
 
+				if (args[0] instanceof Event) {
+					console.log("it is an event!");
+
+					if (args[0].type=="change") {
+						args[0]=args[0].target.value;
+					}
+				}
+
 				let newState=props.controller[key](this.state, ...args);
 				if (newState instanceof Promise) {
 					if (!this.state)
