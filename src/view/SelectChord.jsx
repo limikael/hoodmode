@@ -2,6 +2,10 @@ import { h, Component } from 'preact';
 
 export default class SelectChord {
 	render() {
+		let song=this.context.getCurrentSong();
+		let section=song.sections[this.context.currentSectionIndex];
+		let currentChordIndex=section[this.context.editSectionChordVisible];
+
 		return (
 			<div class="modal-container" onClick={this.context.hideEditSectionChord}>
 				<div class="box border border-dark bg-background select-chord">
@@ -10,6 +14,8 @@ export default class SelectChord {
 					<div>
 						{this.context.getChordLabels().map((label, index)=>{
 							let cls="box w-1 bg-success text-light chord ";
+							if (index==currentChordIndex)
+								cls+="active";
 
 							return (
 								<a class={cls}
