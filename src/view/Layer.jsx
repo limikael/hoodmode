@@ -55,6 +55,19 @@ export default class Layer extends Component {
 
 		}
 
+		let cls="box w-1 bg-warning text-white ";
+		if (this.context.currentGridIndex>=0 &&
+					layer.stacc[this.context.currentGridIndex])
+			cls+="active";
+
+		buttons[12]=(
+			<a class={cls}
+					href="#"
+					onClick={this.context.toggleCurrentLayerStacc}>
+				<img src="img/rest.svg"/>
+			</a>
+		);
+
 		return buttons;
 	}
 
@@ -72,7 +85,10 @@ export default class Layer extends Component {
 				cls+="bg-black text-white";
 
 			let icon=null;
-			if (this.context.currentLayerHasSoundAt(gridIndex))
+			if (layer.stacc[gridIndex])
+				icon=<img src="img/rest.svg"/>;
+
+			else if (this.context.currentLayerHasSoundAt(gridIndex))
 				icon=<img src="img/note.svg"/>;
 
 			res.push(

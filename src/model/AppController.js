@@ -280,19 +280,12 @@ export default class AppController {
 		return state;
 	}
 
-	toggleCurrentLayerSeq(state, sound, pos) {
+	/*toggleCurrentLayerSeq(state, sound, pos) {
 		let layer=this.helper.getCurrentLayer(state);
 		layer.seq[sound][pos]=!layer.seq[sound][pos];
 
 		return state;
-	}
-
-	toggleCurrentLayerStacc(state, pos) {
-		let layer=this.helper.getCurrentLayer(state);
-		layer.stacc[pos]=!layer.stacc[pos];
-
-		return state;
-	}
+	}*/
 
 	toggleCurrentLayerVel(state, pos) {
 		let layer=this.helper.getCurrentLayer(state);
@@ -399,6 +392,18 @@ export default class AppController {
 
 		else
 			state.currentGridIndex=newGridIndex;
+
+		return state;
+	}
+
+	toggleCurrentLayerStacc(state) {
+		let layer=this.helper.getCurrentLayer(state);
+		let gridIndex=state.currentGridIndex;
+
+		if (state.recording)
+			gridIndex=this.conductor.getPlayGridIndex();
+
+		layer.stacc[gridIndex]=!layer.stacc[gridIndex];
 
 		return state;
 	}
