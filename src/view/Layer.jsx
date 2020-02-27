@@ -73,8 +73,6 @@ export default class Layer extends Component {
 				this.context.currentLayerHasSoundAt(this.context.currentGridIndex))
 			currentVel=layer.vel[this.context.currentGridIndex];
 
-		console.log(currentVel);
-
 		let sizeClasses=["tiny","small",""];
 		let vels=[0.25,0.50,1];
 		for (let i=0; i<3; i++) {
