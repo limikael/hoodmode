@@ -50,7 +50,7 @@ export default class Conductor {
 			return [0,0,0];
 
 		let chordIndex=this.state.currentChordIndex;
-		if (this.state.currentSectionIndex>=0)
+		if (this.state.currentSectionIndex>=0 && this.sequenceIndex>=0)
 			chordIndex=song.sections[this.state.currentSectionIndex][this.sequenceIndex];
 
 		let scaleChordNotes=MusicUtil.getChordNotesForScale(song.musicKey,song.minor);

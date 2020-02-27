@@ -15,8 +15,8 @@
 
 	--backgroundColor: #001020;
 
-	--boxPadding: 0.4em;
-	--borderWidth: 0.05em;
+	--boxPadding: 0.4rem;
+	--borderWidth: 0.05rem;
 }
 
 .bg-white { background-color: var(--colorWhite); }
@@ -80,11 +80,11 @@ a {
 
 .box {
 	padding: var(--boxPadding);
-	margin: calc(0.5em - var(--boxPadding));
+	margin: calc(0.5rem - var(--boxPadding));
 	display: inline-block;
-	border-radius: 0.4em;
+	border-radius: 0.4rem;
 	font-size: 1em;
-	height: 1em;
+	height: 1rem;
 	vertical-align: top !important;
 }
 
@@ -101,7 +101,7 @@ a {
 }
 
 .box.w-1 {
-	width: 1em;
+	width: 1rem;
 	text-align: center;
 }
 
@@ -115,6 +115,18 @@ body.landscape .box.w-4 {
 
 .box.w-2 {
 	width: 3em;
+}
+
+.box.tiny {
+	font-size: 0.33rem;
+	padding-top: calc(var(--boxPadding) + 0.33rem);
+	padding-bottom: calc(var(--boxPadding) - 0.33rem);
+}
+
+.box.small {
+	font-size: 0.66rem;
+	padding-top: calc(var(--boxPadding) + 0.165rem);
+	padding-bottom: calc(var(--boxPadding) - 0.165rem);
 }
 
 .header {

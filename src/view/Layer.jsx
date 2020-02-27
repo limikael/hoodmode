@@ -68,28 +68,59 @@ export default class Layer extends Component {
 			</a>
 		);
 
+		let currentVel=null;
+		if (this.context.currentGridIndex>=0 &&
+				this.context.currentLayerHasSoundAt(this.context.currentGridIndex))
+			currentVel=layer.vel[this.context.currentGridIndex];
+
+		console.log(currentVel);
+
+		let sizeClasses=["tiny","small",""];
+		let vels=[0.25,0.50,1];
+		for (let i=0; i<3; i++) {
+			let cls="box w-1 bg-warning text-white "+sizeClasses[i]+" ";
+
+			if (currentVel==vels[i])
+				cls+="active";
+
+			buttons[13+i]=(
+				<a class={cls}
+						href="#"
+						onClick={this.context.setCurrentLayerVel.bind(null,vels[i])}>
+					<img src="img/note.svg"/>
+				</a>
+			);
+		}
+
 		return buttons;
 	}
 
 	renderSequence() {
 		let layer=this.context.getCurrentLayer();
 		let res=[];
+		let velCls={
+			0.25: "tiny",
+			0.5: "small",
+			1: ""
+		};
 
 		for (let gridIndex=0; gridIndex<16; gridIndex++) {
 			let cls="box w-1 beat-grid beat-"+gridIndex+" ";
 
 			if (gridIndex==this.context.currentGridIndex)
-				cls+="bg-light";
+				cls+="bg-light ";
 
 			else
-				cls+="bg-black text-white";
+				cls+="bg-black text-white ";
 
 			let icon=null;
 			if (layer.stacc[gridIndex])
 				icon=<img src="img/rest.svg"/>;
 
-			else if (this.context.currentLayerHasSoundAt(gridIndex))
+			else if (this.context.currentLayerHasSoundAt(gridIndex)) {
 				icon=<img src="img/note.svg"/>;
+				cls+=velCls[layer.vel[gridIndex]];
+			}
 
 			res.push(
 				<a class={cls}
