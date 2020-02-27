@@ -1,7 +1,7 @@
 import MusicUtil from '../utils/MusicUtil';
 
 export default class ConductorNote {
-	constructor(conductor, buffer, chordNote=-1) {
+	constructor(conductor, buffer, chordNote) {
 		this.conductor=conductor;
 		this.buffer=buffer;
 
@@ -52,12 +52,12 @@ export default class ConductorNote {
 	}
 
 	updateDetune() {
-		if (this.chordNote<0)
+		if (this.chordNote==undefined)
 			this.source.detune.value=0;
 
 		else
 			this.source.detune.value=
-				MusicUtil.OCTAVE_CENTS*Math.floor(this.chordNote/3)+
+				MusicUtil.OCTAVE_CENTS*(Math.floor(this.chordNote/3)-1)+
 				this.chordCents[this.chordNote%3]-
 				this.sampleNoteCents;
 	}

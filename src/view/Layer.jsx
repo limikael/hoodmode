@@ -25,7 +25,7 @@ export default class Layer extends Component {
 		let numSounds=this.context.getInstrumentNumSoundsByName(instrument.name);
 
 		for (let i=0; i<9; i++) {
-			let buttonIndex=4*Math.floor(i/3)+i%3;
+			let buttonIndex=8-4*Math.floor(i/3)+i%3;
 			if (layer.seq[i]) {
 				let buttonClass="box w-1 bg-primary text-white ";
 

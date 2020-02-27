@@ -24,7 +24,7 @@ export default class AppHelper {
 
 		switch (instrument.type) {
 			case "harmonic":
-				return 6;
+				return 9;
 
 			case "percussive":
 				return instrument.labels.length;
