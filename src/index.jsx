@@ -12,13 +12,20 @@ let conductor=new Conductor();
 let appHelper=new AppHelper(conductor);
 let appController=new AppController(conductor,appHelper);
 
-conductor.onPlayGridIndexChange=(gridIndex)=>{
+conductor.onPlayGridIndexChange=(gridIndex, sequenceIndex)=>{
 	for (let el of document.querySelectorAll(".current-beat"))
 		el.classList.remove('current-beat');
 
 	if (gridIndex>=0)
 		for (let el of document.querySelectorAll(".beat-"+gridIndex))
 			el.classList.add('current-beat');
+
+	for (let el of document.querySelectorAll(".current-sequence"))
+		el.classList.remove('current-sequence');
+
+	if (gridIndex%4==0 && sequenceIndex>=0)
+		for (let el of document.querySelectorAll(".sequence-"+sequenceIndex))
+			el.classList.add('current-sequence');
 }
 
 function onStateChange(state) {

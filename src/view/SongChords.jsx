@@ -21,7 +21,7 @@ export default class SongChords extends Component {
 
 	renderSectionChords() {
 		let a=this.context.getCurrentSectionChordLabels().map((label, index)=>{
-			let cls="box w-1 bg-success text-light chord ";
+			let cls="box w-1 bg-success text-light section-chord sequence-"+index;
 
 			return (
 				<a class={cls}

@@ -20,7 +20,6 @@ export default class AppController {
 			instruments: [],
 			playing: false,
 			recording: false,
-			playingSequence: false,
 			editSectionChordVisible: -1
 		}
 
@@ -149,6 +148,7 @@ export default class AppController {
 		state.currentLayerIndex=-1;
 		state.currentChordIndex=0;
 		state.currentGridIndex=-1;
+		state.currentSectionIndex=-1;
 		state.playing=false;
 		state.recording=false;
 
@@ -353,12 +353,6 @@ export default class AppController {
 
 		if (!state.playing)
 			state.currentGridIndex=-1;
-
-		return state;
-	}
-
-	setPlayingSequence(state, playingSequence) {
-		state.playingSequence=playingSequence;
 
 		return state;
 	}
