@@ -302,7 +302,7 @@ export default class AppController {
 
 	setCurrentLayerVolume(state, volume) {
 		let layer=this.helper.getCurrentLayer(state);
-		layer.volume=volume;
+		layer.volume=parseFloat(volume);
 
 		return state;
 	}

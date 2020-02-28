@@ -45,7 +45,7 @@ export default class SongSettings {
 						<a class="bg-danger box text-white"
 								href="#"
 								onClick={this.context.deleteCurrentSong}>
-							Remove
+							Remove Song
 						</a>
 						<a class="bg-primary box text-white"
 								href="#"

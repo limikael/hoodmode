@@ -86,6 +86,8 @@ class UiTestAppController extends AppController {
 
 		state.currentGridIndex=0;
 
+		state.settingsVisible=true;
+
 		return state;
 	}
 }

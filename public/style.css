@@ -248,12 +248,15 @@ body.portrait .input-group {
 	background: transparent;
 }
 
-body.portrait .form-buttons {
-	margin-top: 1em;
+.box input[type="range"] {
 }
 
 .form-buttons {
 	text-align: right;
+	width: calc(100% - 1em);
+	position: absolute;
+	bottom: var(--boxPadding);
+	right: var(--boxPadding);
 }
 
 .beat-grid.current-beat {
