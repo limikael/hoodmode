@@ -180,6 +180,16 @@ export default class AppController {
 	}
 
 	setCurrentSongBpm(state, bpm) {
+		bpm=parseInt(bpm);
+		if (isNaN(bpm))
+			bpm=100;
+
+		if (bpm<50)
+			bpm=50;
+
+		if (bpm>100)
+			bpm=100;
+
 		state.songs[state.currentSongIndex].bpm=bpm;
 
 		return state;

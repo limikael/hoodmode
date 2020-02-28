@@ -236,12 +236,16 @@ body.portrait .input-group {
 	vertical-align: top;
 }
 
-.box input {
+.box input,
+.box select {
 	font-size: 1em;
 	border: none;
-	width: 7em;
-	position: absolute;
+	padding: 0;
+	margin: 0;
+	width: 100%;
 	outline: none;
+	margin-top: -.1em;
+	background: transparent;
 }
 
 body.portrait .form-buttons {

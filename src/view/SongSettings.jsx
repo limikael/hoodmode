@@ -18,21 +18,22 @@ export default class SongSettings {
 					<div class="input-group">
 						Tempo<br/>
 						<div class="box border bg-white border-black text-black w-4">
-							<input type="text" />
+							<input type="text"
+								value={this.context.getCurrentSong().bpm}
+								onChange={this.context.setCurrentSongBpm}/>
 						</div>
 					</div>
 
 					<div class="input-group">
 						Key<br/>
-						<div class="box border bg-white border-black text-black w-4">
+						<div class="box border bg-white border-black text-black w-2">
 							<input type="text" />
 						</div>
-					</div>
-
-					<div class="input-group">
-						Mode<br/>
-						<div class="box border bg-white border-black text-black w-4">
-							<input type="text" />
+						<div class="box border bg-white border-black text-black w-2">
+							<select>
+								<option>Major</option>
+								<option>Minor</option>
+							</select>
 						</div>
 					</div>
 
