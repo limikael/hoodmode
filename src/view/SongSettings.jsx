@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import { Select, IF } from '../utils/ReactUtil.jsx';
 
 export default class SongSettings {
 	render() {
@@ -27,13 +28,16 @@ export default class SongSettings {
 					<div class="input-group">
 						Key<br/>
 						<div class="box border bg-white border-black text-black w-2">
-							<input type="text" />
+							<Select class="form-control col-2"
+									options={this.context.getNotesSelectOptions()}
+									selected={this.context.getCurrentSong().musicKey}
+									onChange={this.context.setCurrentSongMusicKey}/>
 						</div>
 						<div class="box border bg-white border-black text-black w-2">
-							<select>
-								<option>Major</option>
-								<option>Minor</option>
-							</select>
+							<Select class="form-control col-4"
+									options={this.context.getModalSelectOptions()}
+									selected={this.context.getCurrentSong().minor}
+									onChange={this.context.setCurrentSongMinor}/>
 						</div>
 					</div>
 
