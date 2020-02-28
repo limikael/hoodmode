@@ -384,7 +384,7 @@ export default class AppController {
 			gridIndex=this.conductor.getPlayGridIndex();
 
 		if (gridIndex<0)
-			return;
+			return state;
 
 		layer.stacc[gridIndex]=!layer.stacc[gridIndex];
 
@@ -399,7 +399,7 @@ export default class AppController {
 			gridIndex=this.conductor.getPlayGridIndex();
 
 		if (gridIndex<0)
-			return;
+			return state;
 
 		layer.vel[gridIndex]=vel;
 
@@ -431,6 +431,49 @@ export default class AppController {
 
 		if (layer.seq[soundIndex][state.currentGridIndex])
 			this.conductor.playInstrument(instrument.name,soundIndex);
+
+		return state;
+	}
+
+	chordButtonClick(state, octave) {
+		let instrument=this.helper.getCurrentInstrument(state);
+
+		if (state.recording) {
+			this.conductor.playInstrument(instrument.name,octave*3);
+			this.conductor.playInstrument(instrument.name,octave*3+1);
+			this.conductor.playInstrument(instrument.name,octave*3+2);
+
+			let gridIndex=this.conductor.getPlayGridIndex();
+			let layer=this.helper.getCurrentLayer(state);
+
+			layer.seq[octave*3][gridIndex]=true;
+			layer.seq[octave*3+1][gridIndex]=true;
+			layer.seq[octave*3+2][gridIndex]=true;
+			return state;
+		}
+
+		if (state.currentGridIndex<0) {
+			this.conductor.playInstrument(instrument.name,octave*3);
+			this.conductor.playInstrument(instrument.name,octave*3+1);
+			this.conductor.playInstrument(instrument.name,octave*3+2);
+			return state;
+		}
+
+		let layer=this.helper.getCurrentLayer(state);
+		if (this.helper.currentLayerHasChordAt(state,state.currentGridIndex,octave)) {
+			layer.seq[octave*3][state.currentGridIndex]=false;
+			layer.seq[octave*3+1][state.currentGridIndex]=false;
+			layer.seq[octave*3+2][state.currentGridIndex]=false;
+		}
+
+		else {
+			layer.seq[octave*3][state.currentGridIndex]=true;
+			layer.seq[octave*3+1][state.currentGridIndex]=true;
+			layer.seq[octave*3+2][state.currentGridIndex]=true;
+			this.conductor.playInstrument(instrument.name,octave*3);
+			this.conductor.playInstrument(instrument.name,octave*3+1);
+			this.conductor.playInstrument(instrument.name,octave*3+2);
+		}
 
 		return state;
 	}

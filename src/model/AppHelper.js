@@ -97,7 +97,7 @@ export default class AppHelper {
 		];
 	}
 
-	currentLayerHasSoundAt(state,gridIndex) {
+	currentLayerHasSoundAt(state, gridIndex) {
 		let layer=this.getCurrentLayer(state);
 
 		for (let soundIndex=0; soundIndex<layer.seq.length; soundIndex++)
@@ -105,6 +105,16 @@ export default class AppHelper {
 				return true;
 
 		return false;
+	}
+
+	currentLayerHasChordAt(state, gridIndex, octave) {
+		let layer=this.getCurrentLayer(state);
+
+		for (let i=0; i<3; i++)
+			if (!layer.seq[octave*3+i][gridIndex])
+				return false;
+
+		return true;
 	}
 
 	isSongOpen(state) {

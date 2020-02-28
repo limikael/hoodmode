@@ -90,6 +90,23 @@ export default class Layer extends Component {
 			);
 		}
 
+		if (instrument.type=="harmonic") {
+			for (let octave of [0,1,2]) {
+				let cls="box w-1 bg-info text-white ";
+				if (this.context.currentGridIndex>=0 &&
+						this.context.currentLayerHasChordAt(this.context.currentGridIndex,octave))
+					cls+="active";
+
+				buttons[11-octave*4]=(
+					<a class={cls}
+							href="#"
+							onClick={this.context.chordButtonClick.bind(null,octave)}>
+						<img src="/img/music-note.svg"/>
+					</a>
+				);
+			}
+		}
+
 		return buttons;
 	}
 
