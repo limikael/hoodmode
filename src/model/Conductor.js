@@ -121,17 +121,34 @@ export default class Conductor {
 		let elapsed=this.audioContext.currentTime-this.playStartTime;
 		let gridIndex=elapsed/this.getSecPerGrid();
 
-		this.playGridIndex=Math.round(gridIndex);
+		this.playGridIndex=Math.round(gridIndex)%16;
+
 		if (this.onPlayGridIndexChange)
 			this.onPlayGridIndexChange(this.playGridIndex, this.sequenceIndex);
 	}
 
 	play=()=>{
-		this.playStartTime=this.audioContext.currentTime;
+		let song=this.getCurrentSong();
+
+		console.log("play");
+
+		if (song.bpm==this.playBpm) {
+			this.playBarCounter++;
+			this.playTimer=setTimeout(this.play,1000*16*this.getSecPerGrid());
+		}
+
+		else {
+			this.playBpm=song.bpm;
+			this.playStartTime=this.audioContext.currentTime;
+			this.playBarCounter=0;
+
+			this.playTimer=setTimeout(this.play,1000*13*this.getSecPerGrid());
+
+			clearInterval(this.playInterval);
+			this.playInterval=null;
+		}
 
 		if (this.state.currentSectionIndex>=0) {
-			let song=this.getCurrentSong();
-
 			this.sequenceIndex++;
 			if (this.sequenceIndex>=song.sections[this.state.currentSectionIndex].length)
 				this.sequenceIndex=0;
@@ -139,20 +156,22 @@ export default class Conductor {
 
 		for (let gridIndex=0; gridIndex<16; gridIndex++) {
 			this.playGridSlice(
-				this.playStartTime+gridIndex*this.getSecPerGrid(),
+				this.playStartTime
+					+this.playBarCounter*16*this.getSecPerGrid()
+					+gridIndex*this.getSecPerGrid(),
 				gridIndex);
 		}
 
-		this.playTimer=setTimeout(this.play,1000*16*this.getSecPerGrid());
-
-		clearInterval(this.playInterval);
-		this.playInterval=setInterval(this.onPlayInterval,1000*this.getSecPerGrid());
-		this.onPlayInterval();
+		if (!this.playInterval) {
+			this.playInterval=setInterval(this.onPlayInterval,1000*this.getSecPerGrid());
+			this.onPlayInterval();
+		}
 	}
 
 	stop() {
 		this.playGridIndex=-1;
 		this.sequenceIndex=-1;
+		this.playBpm=0;
 
 		if (this.onPlayGridIndexChange)
 			this.onPlayGridIndexChange(this.playGridIndex,this.sequenceIndex);

@@ -187,8 +187,8 @@ export default class AppController {
 		if (bpm<50)
 			bpm=50;
 
-		if (bpm>100)
-			bpm=100;
+		if (bpm>200)
+			bpm=200;
 
 		state.songs[state.currentSongIndex].bpm=bpm;
 
