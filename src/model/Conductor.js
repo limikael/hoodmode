@@ -136,6 +136,11 @@ export default class Conductor {
 		if (barIndex==0 && tickIndex==0) {
 			let cents=this.getCurrentChordCents();
 
+			if (this.playingSequenceIndex>=0) {
+				let i=this.playingSequenceChordIndex;
+				cents=this.getChordCents(song.sections[this.playingSequenceIndex][i]);
+			}
+
 			this.playBar(
 				this.audioTimer.startTime,
 				cents
@@ -143,9 +148,17 @@ export default class Conductor {
 		}
 
 		if (gridIndex==15) {
+			let cents=this.getCurrentChordCents();
+
+			if (this.playingSequenceIndex>=0) {
+				let i=this.playingSequenceChordIndex;
+				i=(i+1)%song.sections[this.playingSequenceIndex].length;
+				cents=this.getChordCents(song.sections[this.playingSequenceIndex][i]);
+			}
+
 			this.playBar(
 				this.audioTimer.startTime+(barIndex+1)*this.getSecPerBar(),
-				this.getCurrentChordCents()
+				cents
 			);
 		}
 
