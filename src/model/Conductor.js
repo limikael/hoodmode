@@ -3,6 +3,7 @@ import ReconcileArray from '../utils/ReconcileArray';
 import ConductorLayer from './ConductorLayer';
 import ConductorInstrument from './ConductorInstrument';
 import MusicUtil from '../utils/MusicUtil';
+import AudioTimer from '../utils/AudioTimer';
 
 export default class Conductor {
 	constructor() {
@@ -10,11 +11,14 @@ export default class Conductor {
 		if (!this.audioContext)
 			throw new Error("no web audio!");
 
+		this.audioTimer=new AudioTimer(this.audioContext);
+		this.audioTimer.onTick=this.onPlayTick;
+
 		this.instruments=ReconcileArray.createWithFactory(this.createInstrument);
 		this.layers=ReconcileArray.createWithFactory(this.createLayer);
 		this.currentNotes=[];
-		this.sequenceIndex=-1;
-		this.playGridIndex=-1;
+		this.playingSequenceIndex=-1;
+		this.playingSequenceChordIndex=-1;
 	}
 
 	loadInstruments() {
@@ -44,14 +48,10 @@ export default class Conductor {
 		return this.state.songs[this.state.currentSongIndex];
 	}
 
-	getCurrentChordCents() {
+	getChordCents(chordIndex) {
 		let song=this.getCurrentSong();
-		if (!song)
+		if (!song || chordIndex<0)
 			return [0,0,0];
-
-		let chordIndex=this.state.currentChordIndex;
-		if (this.state.currentSectionIndex>=0 && this.sequenceIndex>=0)
-			chordIndex=song.sections[this.state.currentSectionIndex][this.sequenceIndex];
 
 		let scaleChordNotes=MusicUtil.getChordNotesForScale(song.musicKey,song.minor);
 		let chordNotes=scaleChordNotes[chordIndex];
@@ -60,6 +60,10 @@ export default class Conductor {
 			MusicUtil.noteToCents(chordNotes[1]),
 			MusicUtil.noteToCents(chordNotes[2])
 		];
+	}
+
+	getCurrentChordCents() {
+		return this.getChordCents(this.state.currentChordIndex);
 	}
 
 	playInstrument(name, soundIndex) {
@@ -78,9 +82,18 @@ export default class Conductor {
 		this.currentNotes.splice(idx,1);
 	}
 
-	playGridSlice(at, gridIndex) {
-		let chordCents=this.getCurrentChordCents();
+	getSecPerGrid() {
+		let secPerBeat=60/this.getCurrentSong().bpm;
+		let secPerGrid=secPerBeat/4;
 
+		return secPerGrid;
+	}
+
+	getSecPerBar() {
+		return this.getSecPerGrid()*16;
+	}
+
+	playGridSlice(at, gridIndex, chordCents) {
 		for (let layer of this.layers.getItems()) {
 			for (let soundIndex=0; soundIndex<layer.data.seq.length; soundIndex++) {
 				if (layer.data.seq[soundIndex][gridIndex]) {
@@ -97,89 +110,67 @@ export default class Conductor {
 		}
 	}
 
-	getSecPerGrid() {
-		let secPerBeat=60/this.getCurrentSong().bpm;
-		let secPerGrid=secPerBeat/4;
-
-		return secPerGrid;
+	playBar(at, chordCents) {
+		for (let gridIndex=0; gridIndex<16; gridIndex++) {
+			this.playGridSlice(
+				at+gridIndex*this.getSecPerGrid(),
+				gridIndex,
+				chordCents
+			);
+		}
 	}
 
-	getPlayGridIndex() {
-		if (!this.isPlaying())
-			throw new Error("Not playing!!!");
+	onPlayTick=(tickIndex)=>{
+		let song=this.getCurrentSong();
 
-		let elapsed=this.audioContext.currentTime-this.playStartTime;
-		let gridIndex=Math.floor(elapsed/this.getSecPerGrid());
+		let barIndex=Math.floor(tickIndex/16);
+		let gridIndex=tickIndex%16;
 
-		if (gridIndex==16)
-			gridIndex=0;
+		if (gridIndex==0 && this.playingSequenceIndex>=0) {
+			this.playingSequenceChordIndex++;
 
-		return gridIndex;
-	}
+			if (this.playingSequenceChordIndex>=song.sections[this.playingSequenceIndex].length)
+				this.playingSequenceChordIndex=0;
+		}
 
-	onPlayInterval=()=>{
-		let elapsed=this.audioContext.currentTime-this.playStartTime;
-		let gridIndex=elapsed/this.getSecPerGrid();
+		if (barIndex==0 && tickIndex==0) {
+			let cents=this.getCurrentChordCents();
 
-		this.playGridIndex=Math.round(gridIndex)%16;
+			this.playBar(
+				this.audioTimer.startTime,
+				cents
+			);
+		}
+
+		if (gridIndex==15) {
+			this.playBar(
+				this.audioTimer.startTime+(barIndex+1)*this.getSecPerBar(),
+				this.getCurrentChordCents()
+			);
+		}
 
 		if (this.onPlayGridIndexChange)
-			this.onPlayGridIndexChange(this.playGridIndex, this.sequenceIndex);
+			this.onPlayGridIndexChange(gridIndex,this.playingSequenceChordIndex);
 	}
 
 	play=()=>{
 		let song=this.getCurrentSong();
+		this.playBpm=song.bpm;
 
-		console.log("play");
+		this.playingSequenceIndex=this.state.currentSectionIndex;
+		this.playingSequenceChordIndex=-1;
 
-		if (song.bpm==this.playBpm) {
-			this.playBarCounter++;
-			this.playTimer=setTimeout(this.play,1000*16*this.getSecPerGrid());
-		}
-
-		else {
-			this.playBpm=song.bpm;
-			this.playStartTime=this.audioContext.currentTime;
-			this.playBarCounter=0;
-
-			this.playTimer=setTimeout(this.play,1000*13*this.getSecPerGrid());
-
-			clearInterval(this.playInterval);
-			this.playInterval=null;
-		}
-
-		if (this.state.currentSectionIndex>=0) {
-			this.sequenceIndex++;
-			if (this.sequenceIndex>=song.sections[this.state.currentSectionIndex].length)
-				this.sequenceIndex=0;
-		}
-
-		for (let gridIndex=0; gridIndex<16; gridIndex++) {
-			this.playGridSlice(
-				this.playStartTime
-					+this.playBarCounter*16*this.getSecPerGrid()
-					+gridIndex*this.getSecPerGrid(),
-				gridIndex);
-		}
-
-		if (!this.playInterval) {
-			this.playInterval=setInterval(this.onPlayInterval,1000*this.getSecPerGrid());
-			this.onPlayInterval();
-		}
+		this.audioTimer.setStartTime(this.audioContext.currentTime);
+		this.audioTimer.setTickInterval(this.getSecPerGrid());
+		this.audioTimer.start();
 	}
 
 	stop() {
-		this.playGridIndex=-1;
-		this.sequenceIndex=-1;
-		this.playBpm=0;
-
 		if (this.onPlayGridIndexChange)
-			this.onPlayGridIndexChange(this.playGridIndex,this.sequenceIndex);
+			this.onPlayGridIndexChange(-1,-1);
 
-		clearTimeout(this.playTimer);
-		clearInterval(this.playInterval);
-		this.playTimer=null;
-		this.playInterval=null;
+		this.playBpm=0;
+		this.audioTimer.stop();
 
 		for (let note of this.currentNotes) {
 			note.setVelocity(0);
@@ -190,7 +181,7 @@ export default class Conductor {
 	}
 
 	isPlaying() {
-		return !!this.playTimer;
+		return this.audioTimer.isRunning();
 	}
 
 	setState=(state)=>{
@@ -204,6 +195,11 @@ export default class Conductor {
 
 			else if (!state.playing && this.isPlaying())
 				this.stop();
+
+			if (this.isPlaying() && this.playBpm!=this.getCurrentSong().bpm) {
+				this.stop();
+				this.play();
+			}
 		}
 
 		else {
@@ -212,10 +208,16 @@ export default class Conductor {
 		}
 
 		if (state.currentSectionIndex<0) {
-			this.sequenceIndex=-1;
+			this.playingSequenceIndex=-1;
+			this.playingSequenceChordIndex=-1
 			let currentChordCents=this.getCurrentChordCents();
 			for (let note of this.currentNotes)
 				note.setChordCents(currentChordCents);
+		}
+
+		else if (state.currentSectionIndex!=this.playingSequenceIndex) {
+			this.playingSequenceIndex=state.currentSectionIndex;
+			this.playingSequenceChordIndex=-1;
 		}
 	};
 }
