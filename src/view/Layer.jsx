@@ -38,7 +38,7 @@ export default class Layer extends Component {
 					buttonIcon="img/"+instrument.icons[i];
 
 				else
-					buttonIcon="img/note.svg";
+					buttonIcon="img/hnote-"+(1+2*(i%3))+".svg";
 
 				buttons[buttonIndex]=
 					<a class={buttonClass}
@@ -101,7 +101,7 @@ export default class Layer extends Component {
 					<a class={cls}
 							href="#"
 							onClick={this.context.chordButtonClick.bind(null,octave)}>
-						<img src="img/music-note.svg"/>
+						<img src="img/hnote-chord.svg"/>
 					</a>
 				);
 			}
