@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import A from './A.jsx';
 
 export default class AppUiTest extends Component {
 	render() {

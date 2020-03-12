@@ -8,6 +8,8 @@ import LayerSettings from './LayerSettings.jsx';
 import AddLayer from './AddLayer.jsx';
 import Layer from './Layer.jsx';
 import SelectChord from './SelectChord.jsx';
+import TapHighlight from './TapHighlight.jsx';
+import A from './A.jsx';
 
 export default class App extends Component {
 	updateSize=()=>{
@@ -66,6 +68,7 @@ export default class App extends Component {
 
 		return (
 			<div class={cls}>
+				<TapHighlight />
 				<Header />
 				{IF(!this.context.isSongOpen(),()=>
 					<Front />

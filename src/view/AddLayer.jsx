@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import A from './A.jsx';
 
 export default class AddLayer {
 	render() {
@@ -7,12 +8,11 @@ export default class AddLayer {
 				<div class="box pane double bg-dark">
 					<div class="pane-header bg-dark text-secondary">ADD LAYER</div>
 					{this.context.instruments.map((instrument,index)=>(
-						<a class="box w-4 text-white bg-danger el"
-								href="#"
+						<A class="box w-4 text-white bg-danger el"
 								onClick={this.context.addLayer.bind(null,instrument.name)}>
 							<img src={"img/"+instrument.icon}/>
 							{instrument.name}
-						</a>
+						</A>
 					))}
 				</div>
 			</div>

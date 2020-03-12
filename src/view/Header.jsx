@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Select, IF } from '../utils/ReactUtil.jsx';
+import A from './A.jsx';
 
 export default class Header extends Component {
 	render() {
@@ -14,11 +15,10 @@ export default class Header extends Component {
 		let items=[];
 		if (this.context.isSongOpen()) {
 			items.push(
-				<a class="header-button text-white"
-						href="#"
+				<A class="header-button text-white"
 						onClick={this.context.goBack}>
 					<img src="img/arrow-left.svg"/>
-				</a>
+				</A>
 			);
 
 			if (this.context.currentLayerIndex>=0)
@@ -35,28 +35,25 @@ export default class Header extends Component {
 			);
 
 			items.push(
-				<a class={playButtonClass}
-						href="#"
+				<A class={playButtonClass}
 						onClick={this.context.playClick}>
 					<img src="img/play-fill.svg"/>
-				</a>
+				</A>
 			);
 
 			if (this.context.currentLayerIndex>=0) 
 				items.push(
-					<a class={recordButtonClass}
-							href="#"
+					<A class={recordButtonClass}
 							onClick={this.context.recordClick}>
 						<img src="img/circle-fill.svg"/>
-					</a>
+					</A>
 				);
 
 			items.push(
-				<a class="header-button text-white"
-						href="#"
+				<A class="header-button text-white"
 						onClick={this.context.toggleSettings}>
 					<img src="img/gear-fill.svg"/>
-				</a>
+				</A>
 			);
 		}
 		else {

@@ -1,6 +1,7 @@
 import { h, Component } from 'preact';
 import SelectChord from './SelectChord.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
+import A from './A.jsx';
 
 export default class SongChords extends Component {
 	renderConductorChords() {
@@ -10,11 +11,10 @@ export default class SongChords extends Component {
 				cls+=" active beat-0 beat-4 beat-8 beat-12";
 
 			return (
-				<a class={cls}
-						href="#"
+				<A class={cls}
 						onClick={this.context.setCurrentChordIndex.bind(null,index)}>
 					{label}
-				</a>
+				</A>
 			)
 		});
 	}
@@ -24,20 +24,18 @@ export default class SongChords extends Component {
 			let cls="box w-1 bg-success text-light section-chord sequence-"+index;
 
 			return (
-				<a class={cls}
-						href="#"
+				<A class={cls}
 						onClick={this.context.showEditSectionChord.bind(null,index)}>
 					{label}
-				</a>
+				</A>
 			);
 		});
 
 		a.push(
-			<a class="box border border-white text-white w-1"
-					href="#"
+			<A class="box border border-white text-white w-1"
 					onClick={this.context.addSectionChord}>
 				+
-			</a>
+			</A>
 		);
 
 		return a;
@@ -58,12 +56,11 @@ export default class SongChords extends Component {
 				<hr class="pane-divider"/>
 				<div class="pane-header text-secondary bg-dark ">CHORDS</div>
 				<div style={{height: '6em'}}>{chordLabels}</div>
-				<a class={"box w-1 bg-secondary text-white "+
+				<A class={"box w-1 bg-secondary text-white "+
 							((this.context.currentSectionIndex==-1)?"active":"")}
-						href="#"
 						onClick={this.context.setCurrentSectionIndex.bind(null,-1)}>
 					<img src="img/conductor.svg"/>
-				</a>
+				</A>
 				{["A","B","C"].map((letter, index)=>{
 					let cls="box w-1 bg-primary text-white ";
 					if (index==this.context.currentSectionIndex)

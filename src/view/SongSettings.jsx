@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import { Select, IF } from '../utils/ReactUtil.jsx';
+import A from './A.jsx';
 
 export default class SongSettings {
 	render() {
@@ -42,16 +43,16 @@ export default class SongSettings {
 					</div>
 
 					<div class="form-buttons">
-						<a class="bg-danger box text-white"
+						<A class="bg-danger box text-white"
 								href="#"
 								onClick={this.context.deleteCurrentSong}>
 							Remove Song
-						</a>
-						<a class="bg-primary box text-white"
+						</A>
+						<A class="bg-primary box text-white"
 								href="#"
 								onClick={this.context.toggleSettings}>
 							Close
-						</a>
+						</A>
 					</div>
 				</div>
 			</div>

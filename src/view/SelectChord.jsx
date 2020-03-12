@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import A from './A.jsx';
 
 export default class SelectChord {
 	render() {
@@ -18,19 +19,18 @@ export default class SelectChord {
 								cls+="active";
 
 							return (
-								<a class={cls}
-										href="#"
+								<A class={cls}
 										onClick={this.context.editSectionChord.bind(null,index)}>
 									{label}
-								</a>
+								</A>
 							)
 						})}
 					</div>
-					<a class="box bg-danger w-1 text-white"
+					<A class="box bg-danger w-1 text-white"
 							href="#"
 							onClick={this.context.removeSectionChord}>
 						<img src="img/trash.svg"/>
-					</a>
+					</A>
 				</div>
 			</div>
 		);

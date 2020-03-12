@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import A from './A.jsx';
 
 export default class Layer extends Component {
 	onKeyDown=(e)=>{
@@ -41,11 +42,11 @@ export default class Layer extends Component {
 					buttonIcon="img/hnote-"+(1+2*(i%3))+".svg";
 
 				buttons[buttonIndex]=
-					<a class={buttonClass}
+					<A class={buttonClass}
 							href="#"
 							onClick={this.context.soundButtonClick.bind(null,i)}>
 						<img src={buttonIcon}/>
-					</a>
+					</A>
 			}
 
 			else {
@@ -61,11 +62,11 @@ export default class Layer extends Component {
 			cls+="active";
 
 		buttons[12]=(
-			<a class={cls}
+			<A class={cls}
 					href="#"
 					onClick={this.context.toggleCurrentLayerStacc}>
 				<img src="img/rest.svg"/>
-			</a>
+			</A>
 		);
 
 		let currentVel=null;
@@ -82,11 +83,11 @@ export default class Layer extends Component {
 				cls+="active";
 
 			buttons[13+i]=(
-				<a class={cls}
+				<A class={cls}
 						href="#"
 						onClick={this.context.setCurrentLayerVel.bind(null,vels[i])}>
 					<img src="img/note.svg"/>
-				</a>
+				</A>
 			);
 		}
 
@@ -98,11 +99,11 @@ export default class Layer extends Component {
 					cls+="active";
 
 				buttons[11-octave*4]=(
-					<a class={cls}
+					<A class={cls}
 							href="#"
 							onClick={this.context.chordButtonClick.bind(null,octave)}>
 						<img src="img/hnote-chord.svg"/>
-					</a>
+					</A>
 				);
 			}
 		}
@@ -138,11 +139,10 @@ export default class Layer extends Component {
 			}
 
 			res.push(
-				<a class={cls}
-						href="#"
+				<A class={cls}
 						onMouseDown={this.context.gridIndexClick.bind(null,gridIndex)}>
 					{icon}
-				</a>
+				</A>
 			);
 		}
 

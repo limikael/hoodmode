@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import A from './A.jsx';
 
 export default class SongLayers extends Component {
 	render() {
@@ -18,23 +19,23 @@ export default class SongLayers extends Component {
 
 					return (
 						<div class={cls}>
-							<a href="#" class="layer-icon"
+							<A href="#" class="layer-icon"
 								onClick={this.context.setLayerIndex.bind(null,index)}>
 								<img src={"img/"+this.context.getInstrumentByName(layer.instrumentName).icon}/>
-							</a>
-							<a href="#" class="layer-icon"
+							</A>
+							<A href="#" class="layer-icon"
 								onClick={this.context.toggleLayerAudible.bind(null,index)}>
 								<img src={icon}/>
-							</a>
+							</A>
 						</div>
 					);
 				})}
 
-				<a class="box border border-white text-white w-1"
+				<A class="box border border-white text-white w-1"
 						href="#"
 						onClick={this.context.showAddLayer}>
 					+
-				</a>
+				</A>
 			</div>
 		);
 	}

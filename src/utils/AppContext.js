@@ -14,6 +14,9 @@ class AppContext extends Component {
 
 				for (let i in args) {
 					if (args[i] instanceof Event) {
+						if (args[i].type=="mousedown" && args[i].button==2)
+							return;
+
 						args[i].preventDefault();
 						args[i].stopPropagation();
 

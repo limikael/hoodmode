@@ -1,4 +1,5 @@
 import { h, Component } from 'preact';
+import A from './A.jsx';
 
 export default class LayerSettings {
 	render() {
@@ -27,16 +28,14 @@ export default class LayerSettings {
 					</div>
 
 					<div class="form-buttons">
-						<a class="box bg-danger text-white"
-								href="#"
+						<A class="box bg-danger text-white"
 								onClick={this.context.deleteCurrentLayer}>
 							Remove Layer
-						</a>
-						<a class="box bg-primary form-button text-white"
-								href="#"
+						</A>
+						<A class="box bg-primary form-button text-white"
 								onClick={this.context.toggleSettings}>
 							Close
-						</a>
+						</A>
 					</div>
 				</div>
 			</div>
