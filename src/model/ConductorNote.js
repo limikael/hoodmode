@@ -52,14 +52,22 @@ export default class ConductorNote {
 	}
 
 	updateDetune() {
+		let cents;
+
 		if (this.chordNote==undefined)
-			this.source.detune.value=0;
+			cents=0;
 
 		else
-			this.source.detune.value=
+			cents=
 				MusicUtil.OCTAVE_CENTS*(Math.floor(this.chordNote/3)-1)+
 				this.chordCents[this.chordNote%3]-
 				this.sampleNoteCents;
+
+		if (this.source.detune)
+			this.source.detune.value=cents;
+
+		else
+			this.source.playbackRate.value=MusicUtil.rateFromCents(cents);
 	}
 
 	setVelocity(vel) {

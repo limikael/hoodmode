@@ -2,6 +2,14 @@ export default class MusicUtil {
 	static OCTAVE_CENTS=1200;
 	static NOTE_NAMES=["A","A#","B","C","C#","D","D#","E","F","F#","G","G#"];
 
+	static rateFromCents(cents) {
+		let middleCFreq=261.63;
+		let freq=middleCFreq*Math.pow(2,cents/1200);
+		let rate=freq/middleCFreq;
+
+		return rate;
+	}
+
 	static noteToCents(s) {
 		switch (s.toUpperCase()) {
 			case "C":

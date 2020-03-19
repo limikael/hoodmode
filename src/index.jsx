@@ -8,9 +8,17 @@ import AppController from './model/AppController.js';
 import AppHelper from './model/AppHelper.js';
 import Conductor from './model/Conductor.js';
 
-let conductor=new Conductor();
-let appHelper=new AppHelper(conductor);
-let appController=new AppController(conductor,appHelper);
+let conductor, appHelper, appController;
+
+try {
+	conductor=new Conductor();
+	appHelper=new AppHelper(conductor);
+	appController=new AppController(conductor,appHelper);
+}
+
+catch (e) {
+	alert(e);
+}
 
 conductor.onPlayGridIndexChange=(gridIndex, sequenceIndex)=>{
 	for (let el of document.querySelectorAll(".current-beat"))
