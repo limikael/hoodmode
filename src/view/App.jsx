@@ -47,6 +47,10 @@ export default class App extends Component {
 		let s=document.documentElement.style;
 		s.setProperty("--paneMarginTop",((windowHeight-fontSize*contentHeight)/2)+"px");
 		s.setProperty("--paneMarginLeft",((windowWidth-fontSize*contentWidth)/2)+"px");
+
+		if (window.hasOwnProperty("cordova")) {
+			StatusBar.hide();
+		}
 	}
 
 	onPlayClick=()=>{
