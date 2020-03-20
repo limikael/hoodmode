@@ -26,6 +26,9 @@ export default class App extends Component {
 			contentWidth=paneWidth+1;
 			document.querySelector("body").classList.add("portrait");
 			document.querySelector("body").classList.remove("landscape");
+
+			if (window.hasOwnProperty("cordova"))
+				StatusBar.show();
 		}
 
 		else {
@@ -33,6 +36,9 @@ export default class App extends Component {
 			contentWidth=2*(paneWidth+1);
 			document.querySelector("body").classList.add("landscape");
 			document.querySelector("body").classList.remove("portrait");
+
+			if (window.hasOwnProperty("cordova"))
+				StatusBar.hide();
 		}
 
 		let fontSize;
@@ -47,10 +53,6 @@ export default class App extends Component {
 		let s=document.documentElement.style;
 		s.setProperty("--paneMarginTop",((windowHeight-fontSize*contentHeight)/2)+"px");
 		s.setProperty("--paneMarginLeft",((windowWidth-fontSize*contentWidth)/2)+"px");
-
-		if (window.hasOwnProperty("cordova")) {
-			StatusBar.hide();
-		}
 	}
 
 	onPlayClick=()=>{
