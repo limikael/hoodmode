@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.8.3",
     "cordova-android": "^8.1.0",
+    "cordova-plugin-statusbar": "^2.4.3",
     "preact": "^10.3.1"
   },
   "devDependencies": {
@@ -34,7 +35,8 @@
   },
   "cordova": {
     "plugins": {
-      "cordova-plugin-whitelist": {}
+      "cordova-plugin-whitelist": {},
+      "cordova-plugin-statusbar": {}
     },
     "platforms": [
       "android"
