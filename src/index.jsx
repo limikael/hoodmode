@@ -56,7 +56,10 @@ function start() {
 }
 
 if (window.hasOwnProperty("cordova"))
-	document.addEventListener('deviceready',start);
+	document.addEventListener('deviceready',()=>{
+		StatusBar.hide();
+		start();
+	});
 
 else
 	start();
