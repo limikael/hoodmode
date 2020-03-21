@@ -29,11 +29,11 @@ export default class LayerSettings {
 
 					<div class="form-buttons">
 						<A class="box bg-danger text-white"
-								onClick={this.context.deleteCurrentLayer}>
+								onRelease={this.context.deleteCurrentLayer}>
 							Remove Layer
 						</A>
 						<A class="box bg-primary form-button text-white"
-								onClick={this.context.toggleSettings}>
+								onRelease={this.context.toggleSettings}>
 							Close
 						</A>
 					</div>

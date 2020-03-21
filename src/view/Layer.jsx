@@ -43,8 +43,7 @@ export default class Layer extends Component {
 
 				buttons[buttonIndex]=
 					<A class={buttonClass}
-							href="#"
-							onClick={this.context.soundButtonClick.bind(null,i)}>
+							onPress={this.context.soundButtonClick.bind(null,i)}>
 						<img src={buttonIcon}/>
 					</A>
 			}
@@ -63,8 +62,7 @@ export default class Layer extends Component {
 
 		buttons[12]=(
 			<A class={cls}
-					href="#"
-					onClick={this.context.toggleCurrentLayerStacc}>
+					onPress={this.context.toggleCurrentLayerStacc}>
 				<img src="img/rest.svg"/>
 			</A>
 		);
@@ -85,7 +83,7 @@ export default class Layer extends Component {
 			buttons[13+i]=(
 				<A class={cls}
 						href="#"
-						onClick={this.context.setCurrentLayerVel.bind(null,vels[i])}>
+						onPress={this.context.setCurrentLayerVel.bind(null,vels[i])}>
 					<img src="img/note.svg"/>
 				</A>
 			);
@@ -101,7 +99,7 @@ export default class Layer extends Component {
 				buttons[11-octave*4]=(
 					<A class={cls}
 							href="#"
-							onClick={this.context.chordButtonClick.bind(null,octave)}>
+							onPress={this.context.chordButtonClick.bind(null,octave)}>
 						<img src="img/hnote-chord.svg"/>
 					</A>
 				);
@@ -140,7 +138,7 @@ export default class Layer extends Component {
 
 			res.push(
 				<A class={cls}
-						onMouseDown={this.context.gridIndexClick.bind(null,gridIndex)}>
+						onPress={this.context.gridIndexClick.bind(null,gridIndex)}>
 					{icon}
 				</A>
 			);

@@ -125,11 +125,20 @@ export default class Conductor {
 		}
 	}
 
+	getPlayGridIndex() {
+		if (!this.isPlaying())
+			return -1;
+
+		return this.playGridIndex;
+	}
+
 	onPlayTick=(tickIndex)=>{
 		let song=this.getCurrentSong();
 
 		let barIndex=Math.floor(tickIndex/16);
 		let gridIndex=tickIndex%16;
+
+		this.playGridIndex=gridIndex;
 
 		if (gridIndex==0 && this.playingSequenceIndex>=0) {
 			this.playingSequenceChordIndex++;

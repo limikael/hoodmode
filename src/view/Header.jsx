@@ -16,7 +16,7 @@ export default class Header extends Component {
 		if (this.context.isSongOpen()) {
 			items.push(
 				<A class="header-button text-white"
-						onClick={this.context.goBack}>
+						onRelease={this.context.goBack}>
 					<img src="img/arrow-left.svg"/>
 				</A>
 			);
@@ -36,7 +36,7 @@ export default class Header extends Component {
 
 			items.push(
 				<A class={playButtonClass}
-						onClick={this.context.playClick}>
+						onPress={this.context.playClick}>
 					<img src="img/play-fill.svg"/>
 				</A>
 			);
@@ -44,14 +44,14 @@ export default class Header extends Component {
 			if (this.context.currentLayerIndex>=0) 
 				items.push(
 					<A class={recordButtonClass}
-							onClick={this.context.recordClick}>
+							onPress={this.context.recordClick}>
 						<img src="img/circle-fill.svg"/>
 					</A>
 				);
 
 			items.push(
 				<A class="header-button text-white"
-						onClick={this.context.toggleSettings}>
+						onRelease={this.context.toggleSettings}>
 					<img src="img/gear-fill.svg"/>
 				</A>
 			);

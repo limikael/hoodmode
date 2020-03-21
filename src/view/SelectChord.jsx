@@ -20,7 +20,7 @@ export default class SelectChord {
 
 							return (
 								<A class={cls}
-										onClick={this.context.editSectionChord.bind(null,index)}>
+										onRelease={this.context.editSectionChord.bind(null,index)}>
 									{label}
 								</A>
 							)
@@ -28,7 +28,7 @@ export default class SelectChord {
 					</div>
 					<A class="box bg-danger w-1 text-white"
 							href="#"
-							onClick={this.context.removeSectionChord}>
+							onRelease={this.context.removeSectionChord}>
 						<img src="img/trash.svg"/>
 					</A>
 				</div>

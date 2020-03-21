@@ -45,12 +45,12 @@ export default class SongSettings {
 					<div class="form-buttons">
 						<A class="bg-danger box text-white"
 								href="#"
-								onClick={this.context.deleteCurrentSong}>
+								onRelease={this.context.deleteCurrentSong}>
 							Remove Song
 						</A>
 						<A class="bg-primary box text-white"
 								href="#"
-								onClick={this.context.toggleSettings}>
+								onRelease={this.context.toggleSettings}>
 							Close
 						</A>
 					</div>

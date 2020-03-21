@@ -13,14 +13,21 @@ import A from './A.jsx';
 
 export default class App extends Component {
 	updateSize=()=>{
-		let windowWidth=window.innerWidth;
-		let windowHeight=window.innerHeight;
+		let windowWidth=document.documentElement.clientWidth;
+		let windowHeight=document.documentElement.clientHeight;
 
 		let cs=getComputedStyle(document.documentElement);
 		let paneWidth=parseFloat(cs.getPropertyValue('--paneWidth'));
 		let paneHeight=parseFloat(cs.getPropertyValue('--paneHeight'));
 
 		let contentWidth,contentHeight;
+
+		let el=document.activeElement;
+		let screenKeyboardActive=false;
+		if (el.nodeName=="INPUT" && el.type=="text")
+			screenKeyboardActive=true;
+
+		// Portrait.
 		if (windowHeight>windowWidth) {
 			contentHeight=2*(paneHeight+1)+2;
 			contentWidth=paneWidth+1;
@@ -31,14 +38,20 @@ export default class App extends Component {
 				StatusBar.show();
 		}
 
+		// Landscape.
 		else {
 			contentHeight=paneHeight+2+1;
 			contentWidth=2*(paneWidth+1);
 			document.querySelector("body").classList.add("landscape");
 			document.querySelector("body").classList.remove("portrait");
 
-			if (window.hasOwnProperty("cordova"))
-				StatusBar.hide();
+			if (window.hasOwnProperty("cordova")) {
+				if (screenKeyboardActive)
+					StatusBar.show();
+
+				else
+					StatusBar.hide();
+			}
 		}
 
 		let fontSize;
@@ -72,9 +85,10 @@ export default class App extends Component {
 		if (this.context.recording)
 			cls="recording";
 
+		// <TapHighlight />
+
 		return (
 			<div class={cls}>
-				<TapHighlight />
 				<Header />
 				{IF(!this.context.isSongOpen(),()=>
 					<Front />

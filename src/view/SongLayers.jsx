@@ -20,11 +20,11 @@ export default class SongLayers extends Component {
 					return (
 						<div class={cls}>
 							<A href="#" class="layer-icon"
-								onClick={this.context.setLayerIndex.bind(null,index)}>
+								onRelease={this.context.setLayerIndex.bind(null,index)}>
 								<img src={"img/"+this.context.getInstrumentByName(layer.instrumentName).icon}/>
 							</A>
 							<A href="#" class="layer-icon"
-								onClick={this.context.toggleLayerAudible.bind(null,index)}>
+								onPress={this.context.toggleLayerAudible.bind(null,index)}>
 								<img src={icon}/>
 							</A>
 						</div>
@@ -33,7 +33,7 @@ export default class SongLayers extends Component {
 
 				<A class="box border border-white text-white w-1"
 						href="#"
-						onClick={this.context.showAddLayer}>
+						onRelease={this.context.showAddLayer}>
 					+
 				</A>
 			</div>

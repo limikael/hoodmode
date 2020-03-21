@@ -12,7 +12,7 @@ export default class SongChords extends Component {
 
 			return (
 				<A class={cls}
-						onClick={this.context.setCurrentChordIndex.bind(null,index)}>
+						onPress={this.context.setCurrentChordIndex.bind(null,index)}>
 					{label}
 				</A>
 			)
@@ -25,7 +25,7 @@ export default class SongChords extends Component {
 
 			return (
 				<A class={cls}
-						onClick={this.context.showEditSectionChord.bind(null,index)}>
+						onRelease={this.context.showEditSectionChord.bind(null,index)}>
 					{label}
 				</A>
 			);
@@ -33,7 +33,7 @@ export default class SongChords extends Component {
 
 		a.push(
 			<A class="box border border-white text-white w-1"
-					onClick={this.context.addSectionChord}>
+					onRelease={this.context.addSectionChord}>
 				+
 			</A>
 		);
@@ -58,7 +58,7 @@ export default class SongChords extends Component {
 				<div style={{height: '6em'}}>{chordLabels}</div>
 				<A class={"box w-1 bg-secondary text-white "+
 							((this.context.currentSectionIndex==-1)?"active":"")}
-						onClick={this.context.setCurrentSectionIndex.bind(null,-1)}>
+						onPress={this.context.setCurrentSectionIndex.bind(null,-1)}>
 					<img src="img/conductor.svg"/>
 				</A>
 				{["A","B","C"].map((letter, index)=>{
@@ -67,11 +67,10 @@ export default class SongChords extends Component {
 						cls+="active";
 
 					return (
-						<a class={cls}
-								href="#"
-								onClick={this.context.setCurrentSectionIndex.bind(null,index)}>
+						<A class={cls}
+								onPress={this.context.setCurrentSectionIndex.bind(null,index)}>
 							{letter}
-						</a>
+						</A>
 					);
 				})}
 				{IF(this.context.editSectionChordVisible>=0,()=>
