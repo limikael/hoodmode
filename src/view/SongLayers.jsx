@@ -18,16 +18,16 @@ export default class SongLayers extends Component {
 					}
 
 					return (
-						<div class={cls}>
-							<A href="#" class="layer-icon"
+						<A class={cls}
 								onRelease={this.context.setLayerIndex.bind(null,index)}>
+							<div class="layer-icon">
 								<img src={"img/"+this.context.getInstrumentByName(layer.instrumentName).icon}/>
-							</A>
-							<A href="#" class="layer-icon"
+							</div>
+							<A class="layer-icon"
 								onPress={this.context.toggleLayerAudible.bind(null,index)}>
 								<img src={icon}/>
 							</A>
-						</div>
+						</A>
 					);
 				})}
 
