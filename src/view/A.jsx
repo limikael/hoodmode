@@ -9,7 +9,7 @@ export default class A extends Component {
 			this.props.onPress();
 
 		if (this.props.onRelease) {
-			this.base.className+=" active";
+			this.base.className+=" pressed";
 		}
 	}
 
@@ -18,7 +18,7 @@ export default class A extends Component {
 		e.stopPropagation();
 
 		if (this.props.onRelease) {
-			this.base.className=this.base.className.replace(" active","");
+			this.base.className=this.base.className.replace(" pressed","");
 
 			this.props.onRelease();
 		}

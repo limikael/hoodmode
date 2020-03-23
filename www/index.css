@@ -56,7 +56,10 @@
 .border-warning { border-color: var(--colorWarning); }
 .border-info { border-color: var(--colorInfo); }
 
-.active { filter: brightness(50%); }
+.active,
+.pressed {
+    filter: brightness(50%);
+}
 
 * {
     line-height: 1em;
