@@ -209,7 +209,8 @@ body.landscape .box.w-4 {
 .header-button.pressed img {
     filter:
         invert(1)
-        drop-shadow(0em 0em 0.2em #fff);
+        drop-shadow(0em 0em 0.3em #fff)
+        drop-shadow(0em 0em 0.3em #fff);
 }
 
 .pane-container {
