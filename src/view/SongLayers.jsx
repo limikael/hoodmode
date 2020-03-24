@@ -23,13 +23,11 @@ export default class SongLayers extends Component {
 					}
 
 					return (
-						<A class={cls}>
-							<A class="layer-icon"
-								onPress={this.onLayerIconPress.bind(null,index)}
-								onRelease={this.context.setLayerIndex.bind(null,index)}>
-
+						<A class={cls}
+							onRelease={this.context.setLayerIndex.bind(null,index)}>
+							<div class="layer-icon">
 								<img src={"img/"+this.context.getInstrumentByName(layer.instrumentName).icon}/>
-							</A>
+							</div>
 							<A class="layer-icon"
 								onPress={this.context.toggleLayerAudible.bind(null,index)}>
 								<img src={icon}/>
