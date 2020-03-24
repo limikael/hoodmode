@@ -2,11 +2,6 @@ import { h, Component } from 'preact';
 import A from './A.jsx';
 
 export default class SongLayers extends Component {
-	onLayerIconPress=(index)=>{
-		let el=document.querySelector(".layer-button-"+index);
-		el.className+=" pressed";
-	}
-
 	render() {
 		let song=this.context.getCurrentSong();
 
