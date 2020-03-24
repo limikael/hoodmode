@@ -49,6 +49,21 @@ export default class Conductor {
 		}
 	}
 
+	getCurrentConductorLayer() {
+		let state=this.state;
+		let key=state.songs[state.currentSongIndex].layers[state.currentLayerIndex].key;
+
+		return this.layers.getItemByKey(key);
+	}
+
+	playLayerInstrument(soundIndex) {
+		let layer=this.getCurrentConductorLayer();
+		let note=layer.instrument.createNote(soundIndex);
+		note.setChordCents(this.getCurrentChordCents());
+		note.connect(layer.destination);
+		note.playNow();
+	}
+
 	getCurrentSong() {
 		return this.state.songs[this.state.currentSongIndex];
 	}
@@ -69,14 +84,6 @@ export default class Conductor {
 
 	getCurrentChordCents() {
 		return this.getChordCents(this.state.currentChordIndex);
-	}
-
-	playInstrument(name, soundIndex) {
-		let instrument=this.getConductorInstrumentByName(name);
-		let note=instrument.createNote(soundIndex);
-		note.setChordCents(this.getCurrentChordCents());
-		note.connect(this.audioContext.destination);
-		note.playNow();
 	}
 
 	onNoteEnded(note) {

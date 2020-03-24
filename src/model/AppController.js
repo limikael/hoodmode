@@ -202,8 +202,6 @@ export default class AppController {
 	}
 
 	setCurrentSongMinor(state, minor) {
-		console.log("setting minor: "+minor);
-
 		state.songs[state.currentSongIndex].minor=minor;
 
 		return state;
@@ -407,10 +405,8 @@ export default class AppController {
 	}
 
 	soundButtonClick(state, soundIndex) {
-		let instrument=this.helper.getCurrentInstrument(state);
-
 		if (state.recording) {
-			this.conductor.playInstrument(instrument.name,soundIndex);
+			this.conductor.playLayerInstrument(soundIndex);
 
 			let gridIndex=this.conductor.getPlayGridIndex();
 			let layer=this.helper.getCurrentLayer(state);
@@ -421,7 +417,7 @@ export default class AppController {
 		}
 
 		if (state.currentGridIndex<0) {
-			this.conductor.playInstrument(instrument.name,soundIndex);
+			this.conductor.playLayerInstrument(soundIndex);
 			return state;
 		}
 
@@ -430,7 +426,7 @@ export default class AppController {
 			!layer.seq[soundIndex][state.currentGridIndex];
 
 		if (layer.seq[soundIndex][state.currentGridIndex])
-			this.conductor.playInstrument(instrument.name,soundIndex);
+			this.conductor.playLayerInstrument(soundIndex);
 
 		return state;
 	}
@@ -439,9 +435,9 @@ export default class AppController {
 		let instrument=this.helper.getCurrentInstrument(state);
 
 		if (state.recording) {
-			this.conductor.playInstrument(instrument.name,octave*3);
-			this.conductor.playInstrument(instrument.name,octave*3+1);
-			this.conductor.playInstrument(instrument.name,octave*3+2);
+			this.conductor.playLayerInstrument(octave*3);
+			this.conductor.playLayerInstrument(octave*3+1);
+			this.conductor.playLayerInstrument(octave*3+2);
 
 			let gridIndex=this.conductor.getPlayGridIndex();
 			let layer=this.helper.getCurrentLayer(state);
@@ -453,9 +449,9 @@ export default class AppController {
 		}
 
 		if (state.currentGridIndex<0) {
-			this.conductor.playInstrument(instrument.name,octave*3);
-			this.conductor.playInstrument(instrument.name,octave*3+1);
-			this.conductor.playInstrument(instrument.name,octave*3+2);
+			this.conductor.playLayerInstrument(octave*3);
+			this.conductor.playLayerInstrument(octave*3+1);
+			this.conductor.playLayerInstrument(octave*3+2);
 			return state;
 		}
 
@@ -470,9 +466,9 @@ export default class AppController {
 			layer.seq[octave*3][state.currentGridIndex]=true;
 			layer.seq[octave*3+1][state.currentGridIndex]=true;
 			layer.seq[octave*3+2][state.currentGridIndex]=true;
-			this.conductor.playInstrument(instrument.name,octave*3);
-			this.conductor.playInstrument(instrument.name,octave*3+1);
-			this.conductor.playInstrument(instrument.name,octave*3+2);
+			this.conductor.playLayerInstrument(octave*3);
+			this.conductor.playLayerInstrument(octave*3+1);
+			this.conductor.playLayerInstrument(octave*3+2);
 		}
 
 		return state;

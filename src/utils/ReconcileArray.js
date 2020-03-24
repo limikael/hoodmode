@@ -56,4 +56,8 @@ export default class ReconcileArray {
 	getItems() {
 		return Object.values(this.itemsByKey);
 	}
+
+	getItemByKey(key) {
+		return this.itemsByKey[key];
+	}
 }
