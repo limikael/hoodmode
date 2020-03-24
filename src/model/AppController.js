@@ -152,6 +152,11 @@ export default class AppController {
 		state.playing=false;
 		state.recording=false;
 
+		let song=this.helper.getCurrentSong(state);
+		for (let i=song.sections.length-1; i>=0; i--)
+			if (song.sections[i].length>1)
+				state.currentSectionIndex=i;
+
 		return state;
 	}
 
