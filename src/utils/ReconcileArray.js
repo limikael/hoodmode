@@ -25,7 +25,10 @@ export default class ReconcileArray {
 
 	setData(datas) {
 		let newKeys=[];
-		for (let data of datas) {
+		for (let index in datas) {
+			let data=datas[index];
+			data.index=index;
+
 			if (!data.key)
 				throw new Error("Array item doesn't have a key");
 

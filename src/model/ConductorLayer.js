@@ -23,11 +23,11 @@ export default class ConductorLayer {
 	}
 
 	updateGain() {
-		if (!this.data.audible)
-			this.gain.gain.value=0;
+		if (this.data.audible || this.data.index==this.conductor.state.currentLayerIndex)
+			this.gain.gain.value=this.data.volume;
 
 		else
-			this.gain.gain.value=this.data.volume;
+			this.gain.gain.value=0;
 	}
 
 	hasSoundAt(pos) {
