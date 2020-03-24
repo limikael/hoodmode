@@ -1,5 +1,6 @@
 import { h, Component } from 'preact';
 import A from './A.jsx';
+import { Select, IF } from '../utils/ReactUtil.jsx';
 
 export default class SelectChord {
 	render() {
@@ -26,11 +27,13 @@ export default class SelectChord {
 							)
 						})}
 					</div>
-					<A class="box bg-danger w-1 text-white"
-							href="#"
-							onRelease={this.context.removeSectionChord}>
-						<img src="img/trash.svg"/>
-					</A>
+					{IF(section.length>1,()=>
+						<A class="box bg-danger w-1 text-white"
+								href="#"
+								onRelease={this.context.removeSectionChord}>
+							<img src="img/trash.svg"/>
+						</A>
+					)}
 				</div>
 			</div>
 		);
