@@ -59,8 +59,8 @@ export default class A extends Component {
 					onTouchMove={this.onMove}
 					onTouchStart={this.onDown}
 					onTouchEnd={this.onUp}
-					onMouseDown={this.onDown}
-					onMouseUp={this.onUp}>
+					/*onMouseDown={this.onDown}
+					onMouseUp={this.onUp}*/>
 				{this.props.children}
 			</a>
 		)
