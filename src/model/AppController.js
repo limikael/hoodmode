@@ -255,8 +255,12 @@ export default class AppController {
 		if (instrument.hasOwnProperty("defaultVolume"))
 			volume=instrument.defaultVolume;
 
-		for (let i=0; i<numSounds; i++)
-			seq.push(Array(16).fill(false));
+		for (let i=0; i<16; i++)
+			seq.push({
+				sounds: [],
+				vel: 1,
+				stacc: false
+			});
 
 		let layer={
 			key: shortid.generate(),
@@ -264,8 +268,6 @@ export default class AppController {
 			audible: true,
 			volume: volume,
 			seq: seq,
-			vel: Array(16).fill(1),
-			stacc: Array(16).fill(false)
 		};
 
 		song.layers.push(layer);
@@ -389,7 +391,7 @@ export default class AppController {
 		if (gridIndex<0)
 			return state;
 
-		layer.stacc[gridIndex]=!layer.stacc[gridIndex];
+		layer.seq[gridIndex].stacc=!layer.seq[gridIndex].stacc;
 
 		return state;
 	}
@@ -404,7 +406,27 @@ export default class AppController {
 		if (gridIndex<0)
 			return state;
 
-		layer.vel[gridIndex]=vel;
+		layer.seq[gridIndex].vel=vel;
+
+		return state;
+	}
+
+	setCurrentGridSound(state, soundIndex, enabled) {
+		let layer=this.helper.getCurrentLayer(state);
+		let currentEnabled=
+			layer.seq[state.currentGridIndex].sounds.includes(soundIndex);
+
+		if (enabled==currentEnabled)
+			return state;
+
+		if (enabled)
+			layer.seq[state.currentGridIndex].sounds.push(soundIndex);
+
+		else
+			layer.seq[state.currentGridIndex].sounds.splice(
+				layer.seq[state.currentGridIndex].sounds.indexOf(soundIndex),
+				1
+			);
 
 		return state;
 	}
@@ -416,7 +438,8 @@ export default class AppController {
 			let gridIndex=this.conductor.getPlayGridIndex();
 			let layer=this.helper.getCurrentLayer(state);
 
-			layer.seq[soundIndex][gridIndex]=true;
+			if (!layer.seq[gridIndex].sounds.includes(soundIndex))
+				layer.seq[gridIndex].sounds.push(soundIndex);
 
 			return state;
 		}
@@ -427,10 +450,10 @@ export default class AppController {
 		}
 
 		let layer=this.helper.getCurrentLayer(state);
-		layer.seq[soundIndex][state.currentGridIndex]=
-			!layer.seq[soundIndex][state.currentGridIndex];
+		let enabled=layer.seq[state.currentGridIndex].sounds.includes(soundIndex);
+		state=this.setCurrentGridSound(state,soundIndex,!enabled);
 
-		if (layer.seq[soundIndex][state.currentGridIndex])
+		if (layer.seq[state.currentGridIndex].sounds.includes(soundIndex))
 			this.conductor.playLayerInstrument(soundIndex);
 
 		return state;
@@ -447,9 +470,15 @@ export default class AppController {
 			let gridIndex=this.conductor.getPlayGridIndex();
 			let layer=this.helper.getCurrentLayer(state);
 
-			layer.seq[octave*3][gridIndex]=true;
-			layer.seq[octave*3+1][gridIndex]=true;
-			layer.seq[octave*3+2][gridIndex]=true;
+			if (!layer.seq[gridIndex].sounds.includes(octave*3))
+				layer.seq[gridIndex].sounds.push(octave*3);
+
+			if (!layer.seq[gridIndex].sounds.includes(octave*3+1))
+				layer.seq[gridIndex].sounds.push(octave*3+1);
+
+			if (!layer.seq[gridIndex].sounds.includes(octave*3+2))
+				layer.seq[gridIndex].sounds.push(octave*3+2);
+
 			return state;
 		}
 
@@ -462,15 +491,15 @@ export default class AppController {
 
 		let layer=this.helper.getCurrentLayer(state);
 		if (this.helper.currentLayerHasChordAt(state,state.currentGridIndex,octave)) {
-			layer.seq[octave*3][state.currentGridIndex]=false;
-			layer.seq[octave*3+1][state.currentGridIndex]=false;
-			layer.seq[octave*3+2][state.currentGridIndex]=false;
+			state=this.setCurrentGridSound(state,octave*3,false);
+			state=this.setCurrentGridSound(state,octave*3+1,false);
+			state=this.setCurrentGridSound(state,octave*3+2,false);
 		}
 
 		else {
-			layer.seq[octave*3][state.currentGridIndex]=true;
-			layer.seq[octave*3+1][state.currentGridIndex]=true;
-			layer.seq[octave*3+2][state.currentGridIndex]=true;
+			state=this.setCurrentGridSound(state,octave*3,true);
+			state=this.setCurrentGridSound(state,octave*3+1,true);
+			state=this.setCurrentGridSound(state,octave*3+2,true);
 			this.conductor.playLayerInstrument(octave*3);
 			this.conductor.playLayerInstrument(octave*3+1);
 			this.conductor.playLayerInstrument(octave*3+2);

@@ -100,9 +100,8 @@ export default class AppHelper {
 	currentLayerHasSoundAt(state, gridIndex) {
 		let layer=this.getCurrentLayer(state);
 
-		for (let soundIndex=0; soundIndex<layer.seq.length; soundIndex++)
-			if (layer.seq[soundIndex][gridIndex])
-				return true;
+		if (layer.seq[gridIndex].sounds.length>0)
+			return true;
 
 		return false;
 	}
@@ -111,7 +110,7 @@ export default class AppHelper {
 		let layer=this.getCurrentLayer(state);
 
 		for (let i=0; i<3; i++)
-			if (!layer.seq[octave*3+i][gridIndex])
+			if (!layer.seq[gridIndex].sounds.includes(octave*3+i))
 				return false;
 
 		return true;

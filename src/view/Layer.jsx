@@ -27,11 +27,11 @@ export default class Layer extends Component {
 
 		for (let i=0; i<9; i++) {
 			let buttonIndex=8-4*Math.floor(i/3)+i%3;
-			if (layer.seq[i]) {
+			if (i<numSounds) {
 				let buttonClass="box w-1 bg-primary text-white ";
 
 				if (this.context.currentGridIndex>=0 &&
-						layer.seq[i][this.context.currentGridIndex])
+						layer.seq[this.context.currentGridIndex].sounds.includes(i))
 					buttonClass+="active"
 
 				let buttonIcon;
@@ -57,7 +57,7 @@ export default class Layer extends Component {
 
 		let cls="box w-1 bg-warning text-white ";
 		if (this.context.currentGridIndex>=0 &&
-					layer.stacc[this.context.currentGridIndex])
+					layer.seq[this.context.currentGridIndex].stacc)
 			cls+="active";
 
 		buttons[12]=(
@@ -70,7 +70,7 @@ export default class Layer extends Component {
 		let currentVel=null;
 		if (this.context.currentGridIndex>=0 &&
 				this.context.currentLayerHasSoundAt(this.context.currentGridIndex))
-			currentVel=layer.vel[this.context.currentGridIndex];
+			currentVel=layer.seq[this.context.currentGridIndex].vel;
 
 		let sizeClasses=["tiny","small",""];
 		let vels=[0.25,0.50,1];
@@ -128,12 +128,12 @@ export default class Layer extends Component {
 				cls+="bg-black text-white ";
 
 			let icon=null;
-			if (layer.stacc[gridIndex])
+			if (layer.seq[gridIndex].stacc)
 				icon=<img src="img/rest.svg"/>;
 
 			else if (this.context.currentLayerHasSoundAt(gridIndex)) {
 				icon=<img src="img/note.svg"/>;
-				cls+=velCls[layer.vel[gridIndex]];
+				cls+=velCls[layer.seq[gridIndex].vel];
 			}
 
 			res.push(

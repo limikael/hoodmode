@@ -31,18 +31,16 @@ export default class ConductorLayer {
 	}
 
 	hasSoundAt(pos) {
-		for (let i=0; i<this.data.seq.length; i++) {
-			if (this.data.seq[i][pos])
-				return true;
-		}
+		if (this.data.seq[pos].sounds.length>0)
+			return true;
 
 		return false;
 	}
 
 	getNoteLen(pos) {
-		for (let i=1; i<16; i++)
+		for (let i=1; i<this.data.seq.length; i++)
 			if (this.hasSoundAt((pos+i)%16)
-					|| this.data.stacc[(pos+i)%16])
+					|| this.data.seq[(pos+i)%16].stacc)
 				return i;
 
 		return 16;

@@ -107,17 +107,15 @@ export default class Conductor {
 
 	playGridSlice(at, gridIndex, chordCents) {
 		for (let layer of this.layers.getItems()) {
-			for (let soundIndex=0; soundIndex<layer.data.seq.length; soundIndex++) {
-				if (layer.data.seq[soundIndex][gridIndex]) {
-					let note=layer.instrument.createNote(soundIndex);
-					note.connect(layer.destination);
-					note.setChordCents(chordCents);
-					note.playSheduled(at,layer.getNoteLen(gridIndex)*this.getSecPerGrid());
-					note.setVelocity(layer.data.vel[gridIndex]);
+			for (let soundIndex of layer.data.seq[gridIndex].sounds) {
+				let note=layer.instrument.createNote(soundIndex);
+				note.connect(layer.destination);
+				note.setChordCents(chordCents);
+				note.playSheduled(at,layer.getNoteLen(gridIndex)*this.getSecPerGrid());
+				note.setVelocity(layer.data.seq[gridIndex].vel);
 
-					note.onended=this.onNoteEnded.bind(this,note);
-					this.currentNotes.push(note);
-				}
+				note.onended=this.onNoteEnded.bind(this,note);
+				this.currentNotes.push(note);
 			}
 		}
 	}
