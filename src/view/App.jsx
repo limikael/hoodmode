@@ -9,7 +9,7 @@ import AddLayer from './AddLayer.jsx';
 import Layer from './Layer.jsx';
 import SelectChord from './SelectChord.jsx';
 import TapHighlight from './TapHighlight.jsx';
-import AboutScreen from './AboutScreen.jsx';
+//import AboutScreen from './AboutScreen.jsx';
 import A from './A.jsx';
 
 export default class App extends Component {
@@ -112,9 +112,9 @@ export default class App extends Component {
 					else
 						return <Song />;
 				})}
-				{IF(this.context.aboutScreenVisible,()=>
+				{/*IF(this.context.aboutScreenVisible,()=>
 					<AboutScreen />
-				)}
+				)*/}
 			</div>
 		);
 	}
