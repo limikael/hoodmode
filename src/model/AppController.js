@@ -392,6 +392,8 @@ export default class AppController {
 			return state;
 
 		layer.seq[gridIndex].stacc=!layer.seq[gridIndex].stacc;
+		if (layer.seq[gridIndex].stacc)
+			layer.seq[gridIndex].sounds=[];
 
 		return state;
 	}
@@ -411,24 +413,31 @@ export default class AppController {
 		return state;
 	}
 
-	setCurrentGridSound(state, soundIndex, enabled) {
+	setGridSound(state, gridIndex, soundIndex, enabled) {
 		let layer=this.helper.getCurrentLayer(state);
 		let currentEnabled=
-			layer.seq[state.currentGridIndex].sounds.includes(soundIndex);
+			layer.seq[gridIndex].sounds.includes(soundIndex);
 
 		if (enabled==currentEnabled)
 			return state;
 
-		if (enabled)
-			layer.seq[state.currentGridIndex].sounds.push(soundIndex);
+		if (enabled) {
+			layer.seq[gridIndex].sounds.push(soundIndex);
+			layer.seq[gridIndex].stacc=false;
+		}
 
-		else
-			layer.seq[state.currentGridIndex].sounds.splice(
-				layer.seq[state.currentGridIndex].sounds.indexOf(soundIndex),
+		else {
+			layer.seq[gridIndex].sounds.splice(
+				layer.seq[gridIndex].sounds.indexOf(soundIndex),
 				1
 			);
+		}
 
 		return state;
+	}
+
+	setCurrentGridSound(state, soundIndex, enabled) {
+		return this.setGridSound(state,state.currentGridIndex,soundIndex,enabled);
 	}
 
 	soundButtonClick(state, soundIndex) {
@@ -436,10 +445,7 @@ export default class AppController {
 			this.conductor.playLayerInstrument(soundIndex);
 
 			let gridIndex=this.conductor.getPlayGridIndex();
-			let layer=this.helper.getCurrentLayer(state);
-
-			if (!layer.seq[gridIndex].sounds.includes(soundIndex))
-				layer.seq[gridIndex].sounds.push(soundIndex);
+			state=this.setGridSound(state,gridIndex,soundIndex,true);
 
 			return state;
 		}
@@ -468,16 +474,9 @@ export default class AppController {
 			this.conductor.playLayerInstrument(octave*3+2);
 
 			let gridIndex=this.conductor.getPlayGridIndex();
-			let layer=this.helper.getCurrentLayer(state);
-
-			if (!layer.seq[gridIndex].sounds.includes(octave*3))
-				layer.seq[gridIndex].sounds.push(octave*3);
-
-			if (!layer.seq[gridIndex].sounds.includes(octave*3+1))
-				layer.seq[gridIndex].sounds.push(octave*3+1);
-
-			if (!layer.seq[gridIndex].sounds.includes(octave*3+2))
-				layer.seq[gridIndex].sounds.push(octave*3+2);
+			state=this.setGridSound(state,gridIndex,octave*3,true);
+			state=this.setGridSound(state,gridIndex,octave*3+1,true);
+			state=this.setGridSound(state,gridIndex,octave*3+2,true);
 
 			return state;
 		}
