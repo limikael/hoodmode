@@ -20,8 +20,9 @@ export default class AppController {
 			instruments: [],
 			playing: false,
 			recording: false,
-			editSectionChordVisible: -1
-		}
+			editSectionChordVisible: -1,
+			aboutScreenVisible: false
+		};
 
 		state.instruments.push({
 			"key": "bad-jazz-drums",
@@ -168,6 +169,18 @@ export default class AppController {
 
 	hideSettings(state) {
 		state.settingsVisible=false;
+
+		return state;
+	}
+
+	showAboutScreen(state) {
+		state.aboutScreenVisible=true;
+
+		return state;
+	}
+
+	hideAboutScreen(state) {
+		state.aboutScreenVisible=false;
 
 		return state;
 	}

@@ -382,6 +382,13 @@ hr.pane-divider.four {
     height: 6em;
 }
 
+.about-screen {
+    margin: auto;
+    position: relative;
+    width: 8em;
+    height: 8em;
+}
+
 .tap-highlight {
     pointer-events: none;
     position: fixed;

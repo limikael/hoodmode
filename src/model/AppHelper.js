@@ -1,8 +1,13 @@
 import MusicUtil from '../utils/MusicUtil.js';
+const appPackage=require("../../package.json");
 
 export default class AppHelper {
 	constructor(conductor) {
 		this.conductor=conductor;
+	}
+
+	getAppVersion() {
+		return appPackage.version;
 	}
 
 	getCurrentSong(state) {

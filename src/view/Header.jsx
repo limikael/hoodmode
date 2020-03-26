@@ -60,6 +60,13 @@ export default class Header extends Component {
 			items.push(
 				<div class="header-text text-white">Hoodmode</div>
 			);
+
+			items.push(
+				<A class="header-button text-white"
+					onRelease={this.context.showAboutScreen}>
+					<img src="img/info-icon.svg"/>
+				</A>
+			);
 		}
 
 

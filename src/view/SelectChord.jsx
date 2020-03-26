@@ -2,7 +2,7 @@ import { h, Component } from 'preact';
 import A from './A.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 
-export default class SelectChord {
+export default class SelectChord extends Component {
 	render() {
 		let song=this.context.getCurrentSong();
 		let section=song.sections[this.context.currentSectionIndex];
