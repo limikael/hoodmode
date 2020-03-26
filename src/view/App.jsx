@@ -10,6 +10,7 @@ import Layer from './Layer.jsx';
 import SelectChord from './SelectChord.jsx';
 import TapHighlight from './TapHighlight.jsx';
 import AboutScreen from './AboutScreen.jsx';
+import Dialog from './Dialog.jsx';
 import A from './A.jsx';
 
 export default class App extends Component {
@@ -114,6 +115,9 @@ export default class App extends Component {
 				})}
 				{IF(this.context.aboutScreenVisible,()=>
 					<AboutScreen />
+				)}
+				{IF(this.context.dialogText,()=>
+					<Dialog />
 				)}
 			</div>
 		);

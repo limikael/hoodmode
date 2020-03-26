@@ -30,7 +30,7 @@ export default class LayerSettings {
 					<div class="form-buttons">
 						<A class="box bg-danger text-white"
 								onRelease={this.context.deleteCurrentLayer}>
-							Remove Layer
+							<img src="img/trash.svg"/>
 						</A>
 						<A class="box bg-primary form-button text-white"
 								onRelease={this.context.toggleSettings}>

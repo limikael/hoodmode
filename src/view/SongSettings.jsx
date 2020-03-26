@@ -43,10 +43,10 @@ export default class SongSettings {
 					</div>
 
 					<div class="form-buttons">
-						<A class="bg-danger box text-white"
+						<A class="bg-warning box text-white w-1"
 								href="#"
 								onRelease={this.context.deleteCurrentSong}>
-							Remove Song
+							<img src="img/trash.svg"/>
 						</A>
 						<A class="bg-primary box text-white"
 								href="#"

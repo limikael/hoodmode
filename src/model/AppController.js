@@ -225,11 +225,34 @@ export default class AppController {
 		return state;
 	}
 
-	deleteCurrentSong(state) {
+	confirmDeleteCurrentSong(state) {
 		state.songs.splice(state.currentSongIndex,1);
 		state.currentSongIndex=-1;
 		state.settingsVisible=false;
 		state.currentSectionIndex=-1;
+
+		return state;
+	}
+
+	deleteCurrentSong(state) {
+		state.dialogText="Sure you want to delete the song?";
+		state.dialogAction="confirmDeleteCurrentSong";
+
+		return state;
+	}
+
+	confirmDialog(state) {
+		state=this[state.dialogAction](state);
+
+		state.dialogText=null;
+		state.dialogAction=null;
+
+		return state;
+	}
+
+	cancelDialog(state) {
+		state.dialogText=null;
+		state.dialogAction=null;
 
 		return state;
 	}
