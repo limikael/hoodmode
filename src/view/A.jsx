@@ -5,13 +5,16 @@ export default class A extends Component {
 		//e.preventDefault();
 		e.stopPropagation();
 
-		if (this.props.onPress && !this.base.isPressed)
-			this.props.onPress();
-
-		if (this.props.onRelease && !this.base.isPressed)
-			this.base.className+=" pressed";
+		if (this.base.isPressed)
+			return;
 
 		this.base.isPressed=true;
+
+		if (this.props.onPress)
+			this.props.onPress();
+
+		if (this.props.onRelease)
+			this.base.className+=" pressed";
 	}
 
 	onUp=(e)=>{
@@ -20,33 +23,32 @@ export default class A extends Component {
 
 		e.stopPropagation();
 
-		if (this.props.onRelease && this.base.isPressed) {
+		if (!this.base.isPressed)
+			return;
+
+		this.base.isPressed=false;
+
+		if (this.props.onRelease) {
 			this.base.className=this.base.className.replace(" pressed","");
 			this.props.onRelease();
 		}
-
-		this.base.isPressed=false;
 	}
 
 	onMove=(e)=>{
-		if (this.base.isPressed) {
+		if (this.props.cancelOnMove && this.base.isPressed) {
 			this.base.className=this.base.className.replace(" pressed","");
 			this.base.isPressed=false;
 		}
 	}
 
 	render() {
-/*
-onMouseDown={this.onDown}
-					onMouseUp={this.onUp}
-*/
-
 		return (
 			<a class={"a "+this.props.class}
 					onTouchMove={this.onMove}
 					onTouchStart={this.onDown}
 					onTouchEnd={this.onUp}
-					>
+					onMouseDown={this.onDown}
+					onMouseUp={this.onUp}>
 				{this.props.children}
 			</a>
 		)

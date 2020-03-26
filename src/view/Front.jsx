@@ -16,7 +16,8 @@ export default class Front {
 					<div class="front-container">
 						{this.context.songs.map((song,index)=>(
 							<A class="box bg-secondary text-white w-4 border border-light el"
-									onRelease={this.context.setSongIndex.bind(null,index)}>
+									onRelease={this.context.setSongIndex.bind(null,index)}
+									cancelOnMove={true}>
 								{song.name}
 							</A>
 						))}
