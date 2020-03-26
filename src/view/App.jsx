@@ -112,9 +112,9 @@ export default class App extends Component {
 					else
 						return <Song />;
 				})}
-				{/*IF(this.context.aboutScreenVisible,()=>
+				{IF(this.context.aboutScreenVisible,()=>
 					<AboutScreen />
-				)*/}
+				)}
 			</div>
 		);
 	}
