@@ -1,6 +1,6 @@
 import MusicUtil from '../utils/MusicUtil.js';
-//const appPackage=require("../../package.json");
-const appPackage={version: "abc"};
+const appPackage=require("../../package.json");
+//const appPackage={version: "abc"};
 
 export default class AppHelper {
 	constructor(conductor) {
