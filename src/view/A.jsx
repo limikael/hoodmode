@@ -2,6 +2,12 @@ import { h, Component } from 'preact';
 
 export default class A extends Component {
 	onDown=(e)=>{
+		if (e instanceof TouchEvent)
+			this.base.haveTouchEvent=true;
+
+		if (this.base.haveTouchEvent && !(e instanceof TouchEvent))
+			return;
+
 		//e.preventDefault();
 		e.stopPropagation();
 
@@ -18,6 +24,12 @@ export default class A extends Component {
 	}
 
 	onUp=(e)=>{
+		if (e instanceof TouchEvent)
+			this.base.haveTouchEvent=true;
+
+		if (this.base.haveTouchEvent && !(e instanceof TouchEvent))
+			return;
+
 		if (e.cancelable)
 			e.preventDefault();
 
