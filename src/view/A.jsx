@@ -3,9 +3,9 @@ import { h, Component } from 'preact';
 export default class A extends Component {
 	onDown=(e)=>{
 		if (e instanceof TouchEvent)
-			this.base.haveTouchEvent=true;
+			window.haveTouchEvent=true;
 
-		if (this.base.haveTouchEvent && !(e instanceof TouchEvent))
+		if (window.haveTouchEvent && !(e instanceof TouchEvent))
 			return;
 
 		//e.preventDefault();
@@ -25,9 +25,9 @@ export default class A extends Component {
 
 	onUp=(e)=>{
 		if (e instanceof TouchEvent)
-			this.base.haveTouchEvent=true;
+			window.haveTouchEvent=true;
 
-		if (this.base.haveTouchEvent && !(e instanceof TouchEvent))
+		if (window.haveTouchEvent && !(e instanceof TouchEvent))
 			return;
 
 		if (e.cancelable)
@@ -59,8 +59,8 @@ export default class A extends Component {
 					onTouchMove={this.onMove}
 					onTouchStart={this.onDown}
 					onTouchEnd={this.onUp}
-					/*onMouseDown={this.onDown}
-					onMouseUp={this.onUp}*/>
+					onMouseDown={this.onDown}
+					onMouseUp={this.onUp}>
 				{this.props.children}
 			</a>
 		)
