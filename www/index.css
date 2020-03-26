@@ -119,6 +119,23 @@ a {
     vertical-align: top !important;
 }
 
+.front-container {
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+
+.front-container::-webkit-scrollbar {
+    display: none;
+}
+
+body.portrait .front-container {
+    height: 15.25em;
+}
+
+body.landscape .front-container {
+    height: 6.25em;
+}
+
 .box.border {
     padding: calc(var(--boxPadding) - var(--borderWidth));
     border-width: var(--borderWidth);
