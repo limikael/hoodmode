@@ -36,13 +36,17 @@ export default class A extends Component {
 	}
 
 	render() {
+/*
+onMouseDown={this.onDown}
+					onMouseUp={this.onUp}
+*/
+
 		return (
 			<a class={"a "+this.props.class}
 					onTouchMove={this.onMove}
 					onTouchStart={this.onDown}
 					onTouchEnd={this.onUp}
-					onMouseDown={this.onDown}
-					onMouseUp={this.onUp}>
+					>
 				{this.props.children}
 			</a>
 		)
