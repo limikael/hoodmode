@@ -2,9 +2,10 @@
 <widget id="app.hoodmode.co" version="0.0.3" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Hoodmode</name>
     <description>
-        Bringing musical modality to ya hood.
+        Hyper casual jam composer.
     </description>
-    <author email="li.mikael@gmail.com" href="http://cordova.io">
+    <icon src="www/img/hoodmode-icon.png" />
+    <author email="li.mikael@gmail.com" href="https://github.com/limikael">
         Mikael Lindqvist
     </author>
     <content src="index.html" />
