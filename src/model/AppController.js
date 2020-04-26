@@ -25,16 +25,29 @@ export default class AppController {
 		};
 
 		state.instruments.push({
-			"key": "bad-jazz-drums",
+			"key": "drums",
 			"type": "percussive",
-			"name": "Bad Jazz Drums",
-			"labels": ["KICK","SNARE","HI-HAT"],
+			"name": "Drums",
+			"labels": [
+				"KICK","KICK","SNARE",
+				"SNARE","HI-HAT","HI-HAT",
+				"HI-HAT","SHAKER","CLAP"],
 			"icon": "drum.svg",
-			"icons": ["kick-drum.svg","snare-drum.svg","hi-hat.svg"],
+			"icons": [
+				"kick-drum.svg","kick-drum.svg",
+				"snare-drum.svg","snare-drum.svg",
+				"hi-hat.svg","hi-hat.svg","hi-hat.svg",
+				"maracas.svg","clap.svg"],
 			"samples": [
+				"samples/drums/yes-kick.mp3",
 				"samples/drums/bad-kick.wav",
+				"samples/drums/yes-snare.mp3",
 				"samples/drums/bad-snare.wav",
 				"samples/drums/bad-hihat.wav",
+				"samples/drums/thrl-hat_A_minor.wav",
+				"samples/drums/rock-hihat-tchik.wav",
+				"samples/drums/Yamaha-RX15-Shaker.wav",
+				"samples/drums/Roland-R-8-808-Clap.wav"
 			]
 		});
 
@@ -46,11 +59,6 @@ export default class AppController {
 			"icon": "drum.svg",
 			"icons": ["kick-drum.svg","snare-drum.svg","hi-hat.svg","hi-hat.svg","hi-hat.svg"],
 			"samples": [
-				"samples/drums/yes-kick.mp3",
-				"samples/drums/yes-snare.mp3",
-				"samples/drums/thrl-hat_A_minor.wav",
-				"samples/drums/vinyl-hat_90bpm_C.wav",
-				"samples/drums/rock-hihat-tchik.wav"
 			]
 		});
 
