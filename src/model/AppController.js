@@ -52,30 +52,10 @@ export default class AppController {
 		});
 
 		state.instruments.push({
-			"key": "yes-drums",
-			"type": "percussive",
-			"name": "Yes Drums",
-			"labels": ["KICK","SNARE","HI-HAT 1","HI-HAT 2","HI-HAT 3"],
-			"icon": "drum.svg",
-			"icons": ["kick-drum.svg","snare-drum.svg","hi-hat.svg","hi-hat.svg","hi-hat.svg"],
-			"samples": [
-			]
-		});
-
-		state.instruments.push({
-			"key": "dive-bass",
+			"key": "string-bass",
 			"type": "harmonic",
-			"name": "Dive Bass",
-			"sample": "samples/bass/upright-bass-bombdive.mp3",
-			"icon": "bass.svg"
-		});
-
-		state.instruments.push({
-			"key": "acoustic-bass",
-			"type": "harmonic",
-			"name": "Acoustic Bass",
-			"sampleNote": "F#",
-			"sample": "samples/bass/acoustic_bass_f_sharp.mp3",
+			"name": "String Bass",
+			"sample": "samples/Yamaha-EX5-Old-Strings-C2-edited.wav",
 			"icon": "bass.svg"
 		});
 
@@ -83,10 +63,37 @@ export default class AppController {
 			"key": "piano",
 			"type": "harmonic",
 			"name": "Piano",
-			"sample": "samples/piano/piano-c.wav",
-			"defaultVolume": 0.25,
-			"icon": "piano.svg"
+			"sample": "samples/piano-c.wav",
+			"icon": "piano.svg",
+			"defaultVolume": 0.25
 		});
+
+		state.instruments.push({
+			"key": "korg-organ",
+			"type": "harmonic",
+			"name": "Korg Organ",
+			"sample": "samples/Korg-DW-8000-Organ-C3.wav",
+			"icon": "organ.svg",
+			"defaultVolume": 0.25
+		});
+
+		state.instruments.push({
+			"key": "clav",
+			"type": "harmonic",
+			"name": "Clav",
+			"sample": "samples/Ensoniq-ESQ-1-Clav-Piano-C3.wav",
+			"icon": "clav.svg",
+			"defaultVolume": 0.75
+		});
+
+		state.instruments.push({
+			"key": "strings",
+			"type": "harmonic",
+			"name": "Strings",
+			"sample": "samples/Yamaha-EX5-MellowStrngs-C4.wav",
+			"icon": "violin.svg",
+			"defaultVolume": 0.25
+		})
 
 		return state;
 	}
