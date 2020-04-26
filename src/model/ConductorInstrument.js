@@ -8,8 +8,8 @@ export default class ConductorInstrument {
 		this.data=data;
 	}
 
-	getName() {
-		return this.data.name;
+	getKey() {
+		return this.data.key;
 	}
 
 	async load() {

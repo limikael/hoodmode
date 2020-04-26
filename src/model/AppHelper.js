@@ -19,22 +19,22 @@ export default class AppHelper {
 		return state.songs[state.currentSongIndex].layers[state.currentLayerIndex];
 	}
 
-	instrumentExists(state, name) {
+	instrumentExists(state, key) {
 		for (let instrument of state.instruments)
-			if (instrument.name==name)
+			if (instrument.key==key)
 				return true;
 
 		return false;
 	}
 
-	getInstrumentByName(state, name) {
+	getInstrumentByKey(state, key) {
 		for (let instrument of state.instruments)
-			if (instrument.name==name)
+			if (instrument.key==key)
 				return instrument;
 	}
 
-	getInstrumentIconByName(state, name) {
-		let instrument=this.getInstrumentByName(state,name);
+	getInstrumentIconByKey(state, key) {
+		let instrument=this.getInstrumentByKey(state,key);
 
 		if (!instrument)
 			return "broken.svg";
@@ -42,8 +42,8 @@ export default class AppHelper {
 		return instrument.icon;
 	}
 
-	getInstrumentNumSoundsByName(state, name) {
-		let instrument=this.getInstrumentByName(state,name);
+	getInstrumentNumSoundsByKey(state, key) {
+		let instrument=this.getInstrumentByKey(state,key);
 
 		switch (instrument.type) {
 			case "harmonic":
@@ -56,7 +56,7 @@ export default class AppHelper {
 
 	getCurrentInstrument(state) {
 		let layer=this.getCurrentLayer(state);
-		return this.getInstrumentByName(state,layer.instrumentName);
+		return this.getInstrumentByKey(state,layer.instrumentKey);
 	}
 
 	getCurrentInstrumentSoundLabels(state) {

@@ -6,7 +6,6 @@ export default class AppController {
 	constructor(conductor, helper) {
 		this.conductor=conductor;
 		this.helper=helper;
-		console.log(demosongs);
 	}
 
 	initState() {
@@ -27,7 +26,7 @@ export default class AppController {
 		};
 
 		state.instruments.push({
-			"key": "drums",
+			"key": "basic-drums",
 			"type": "percussive",
 			"name": "Drums",
 			"labels": [
@@ -54,7 +53,7 @@ export default class AppController {
 		});
 
 		state.instruments.push({
-			"key": "string-bass",
+			"key": "basic-bass",
 			"type": "harmonic",
 			"name": "String Bass",
 			"sample": "samples/Yamaha-EX5-Old-Strings-C2-edited.wav",
@@ -62,7 +61,7 @@ export default class AppController {
 		});
 
 		state.instruments.push({
-			"key": "piano",
+			"key": "basic-piano",
 			"type": "harmonic",
 			"name": "Piano",
 			"sample": "samples/piano-c.wav",
@@ -71,7 +70,7 @@ export default class AppController {
 		});
 
 		state.instruments.push({
-			"key": "korg-organ",
+			"key": "basic-organ",
 			"type": "harmonic",
 			"name": "Korg Organ",
 			"sample": "samples/Korg-DW-8000-Organ-C3.wav",
@@ -80,7 +79,7 @@ export default class AppController {
 		});
 
 		state.instruments.push({
-			"key": "clav",
+			"key": "basic-clav",
 			"type": "harmonic",
 			"name": "Clav",
 			"sample": "samples/Ensoniq-ESQ-1-Clav-Piano-C3.wav",
@@ -89,7 +88,7 @@ export default class AppController {
 		});
 
 		state.instruments.push({
-			"key": "strings",
+			"key": "basic-strings",
 			"type": "harmonic",
 			"name": "Strings",
 			"sample": "samples/Yamaha-EX5-MellowStrngs-C4.wav",
@@ -302,12 +301,12 @@ export default class AppController {
 		return state;
 	}
 
-	addLayer(state, instrumentName) {
+	addLayer(state, instrumentKey) {
 		let song=state.songs[state.currentSongIndex];
 
 		let seq=[];
-		let numSounds=this.helper.getInstrumentNumSoundsByName(state,instrumentName);
-		let instrument=this.helper.getInstrumentByName(state,instrumentName);
+		let numSounds=this.helper.getInstrumentNumSoundsByKey(state,instrumentKey);
+		let instrument=this.helper.getInstrumentByKey(state,instrumentKey);
 
 		let volume=1;
 		if (instrument.hasOwnProperty("defaultVolume"))
@@ -322,7 +321,7 @@ export default class AppController {
 
 		let layer={
 			key: shortid.generate(),
-			instrumentName: instrumentName,
+			instrumentKey: instrumentKey,
 			audible: true,
 			volume: volume,
 			seq: seq,
@@ -338,7 +337,7 @@ export default class AppController {
 	setLayerIndex(state, index) {
 		let song=this.helper.getCurrentSong(state);
 
-		if (!this.helper.instrumentExists(state,song.layers[index].instrumentName)) {
+		if (!this.helper.instrumentExists(state,song.layers[index].instrumentKey)) {
 			state.dialogText="Layer is broken, delete?";
 			state.dialogAction="deleteDialogLayer";
 			state.dialogData=index;

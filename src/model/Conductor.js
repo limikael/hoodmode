@@ -42,9 +42,9 @@ export default class Conductor {
 		return new ConductorInstrument(this,data);
 	};
 
-	getConductorInstrumentByName(name) {
+	getConductorInstrumentByKey(key) {
 		for (let instrument of this.instruments.getItems()) {
-			if (instrument.getName()==name)
+			if (instrument.getKey()==key)
 				return instrument;
 		}
 	}

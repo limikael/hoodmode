@@ -9,7 +9,7 @@ module.exports=
       "layers":[
          {
             "key":"dUG8FJ4pN",
-            "instrumentName":"Drum",
+            "instrumentKey":"basic-drums",
             "audible":true,
             "volume":1,
             "seq":[
@@ -98,7 +98,7 @@ module.exports=
          },
          {
             "key":"JPsgSsHBe",
-            "instrumentName":"String Bass",
+            "instrumentKey":"basic-bass",
             "audible":true,
             "volume":1,
             "seq":[
@@ -187,7 +187,7 @@ module.exports=
          },
          {
             "key":"cwYIn2xpD",
-            "instrumentName":"Piano",
+            "instrumentKey":"basic-piano",
             "audible":true,
             "volume":0.15,
             "seq":[
@@ -276,7 +276,7 @@ module.exports=
          },
          {
             "key":"bW6UZfFVS",
-            "instrumentName":"Korg Organ",
+            "instrumentKey":"basic-organ",
             "audible":true,
             "volume":0.44,
             "seq":[
@@ -365,7 +365,7 @@ module.exports=
          },
          {
             "key":"P_3HCSjAg",
-            "instrumentName":"Clav",
+            "instrumentKey":"basic-clav",
             "audible":true,
             "volume":0.69,
             "seq":[
@@ -454,7 +454,7 @@ module.exports=
          },
          {
             "key":"CJAtgzqly",
-            "instrumentName":"Piano",
+            "instrumentKey":"basic-piano",
             "audible":true,
             "volume":0.11,
             "seq":[
@@ -626,7 +626,7 @@ module.exports=
       "layers":[
          {
             "key":"iAfBtVAkb",
-            "instrumentName":"Strings",
+            "instrumentKey":"basic-strings",
             "audible":true,
             "volume":0.13,
             "seq":[
@@ -749,7 +749,7 @@ module.exports=
          },
          {
             "key":"8gIRU6JI9",
-            "instrumentName":"String Bass",
+            "instrumentKey":"basic-bass",
             "audible":true,
             "volume":1,
             "seq":[
@@ -870,7 +870,7 @@ module.exports=
          },
          {
             "key":"JHQZbxqXH",
-            "instrumentName":"Piano",
+            "instrumentKey":"basic-piano",
             "audible":true,
             "volume":0.25,
             "seq":[
@@ -993,7 +993,7 @@ module.exports=
          },
          {
             "key":"uRJpZq3so",
-            "instrumentName":"Drums",
+            "instrumentKey":"basic-drums",
             "audible":true,
             "volume":1,
             "seq":[
@@ -1118,7 +1118,7 @@ module.exports=
          },
          {
             "key":"CjO5tRooZ",
-            "instrumentName":"Piano",
+            "instrumentKey":"basic-piano",
             "audible":true,
             "volume":0.25,
             "seq":[

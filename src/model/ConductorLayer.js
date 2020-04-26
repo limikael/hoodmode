@@ -2,7 +2,7 @@ export default class ConductorLayer {
 	constructor(conductor, data) {
 		this.conductor=conductor;
 		this.data=data;
-		this.instrument=this.conductor.getConductorInstrumentByName(data.instrumentName);
+		this.instrument=this.conductor.getConductorInstrumentByKey(data.instrumentKey);
 		/*if (!this.instrument)
 			throw new Error("There is no instrument!!!");*/
 
