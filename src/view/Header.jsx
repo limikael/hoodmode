@@ -24,7 +24,7 @@ export default class Header extends Component {
 			if (this.context.currentLayerIndex>=0)
 				items.push(
 					<div class="header-button text-white">
-						<img src={"img/"+this.context.getInstrumentByName(this.context.getCurrentLayer().instrumentName).icon}/>
+						<img src={"img/"+this.context.getInstrumentIconByKey(this.context.getCurrentLayer().instrumentKey)}/>
 					</div>
 				);
 

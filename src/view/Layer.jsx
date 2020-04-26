@@ -23,7 +23,7 @@ export default class Layer extends Component {
 		let instrument=this.context.getCurrentInstrument();
 		let layer=this.context.getCurrentLayer();
 		let buttons=new Array(16).fill(<div class="box w-1"/>);
-		let numSounds=this.context.getInstrumentNumSoundsByName(instrument.name);
+		let numSounds=this.context.getInstrumentNumSoundsByKey(instrument.key);
 
 		for (let i=0; i<9; i++) {
 			let buttonIndex=8-4*Math.floor(i/3)+i%3;
