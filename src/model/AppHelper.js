@@ -19,10 +19,27 @@ export default class AppHelper {
 		return state.songs[state.currentSongIndex].layers[state.currentLayerIndex];
 	}
 
+	instrumentExists(state, name) {
+		for (let instrument of state.instruments)
+			if (instrument.name==name)
+				return true;
+
+		return false;
+	}
+
 	getInstrumentByName(state, name) {
 		for (let instrument of state.instruments)
 			if (instrument.name==name)
 				return instrument;
+	}
+
+	getInstrumentIconByName(state, name) {
+		let instrument=this.getInstrumentByName(state,name);
+
+		if (!instrument)
+			return "broken.svg";
+
+		return instrument.icon;
 	}
 
 	getInstrumentNumSoundsByName(state, name) {

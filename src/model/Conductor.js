@@ -58,10 +58,13 @@ export default class Conductor {
 
 	playLayerInstrument(soundIndex) {
 		let layer=this.getCurrentConductorLayer();
-		let note=layer.instrument.createNote(soundIndex);
-		note.setChordCents(this.getCurrentChordCents());
-		note.connect(layer.destination);
-		note.playNow();
+
+		if (layer.instrument) {
+			let note=layer.instrument.createNote(soundIndex);
+			note.setChordCents(this.getCurrentChordCents());
+			note.connect(layer.destination);
+			note.playNow();
+		}
 	}
 
 	getCurrentSong() {
@@ -108,14 +111,16 @@ export default class Conductor {
 	playGridSlice(at, gridIndex, chordCents) {
 		for (let layer of this.layers.getItems()) {
 			for (let soundIndex of layer.data.seq[gridIndex].sounds) {
-				let note=layer.instrument.createNote(soundIndex);
-				note.connect(layer.destination);
-				note.setChordCents(chordCents);
-				note.playSheduled(at,layer.getNoteLen(gridIndex)*this.getSecPerGrid());
-				note.setVelocity(layer.data.seq[gridIndex].vel);
+				if (layer.instrument) {
+					let note=layer.instrument.createNote(soundIndex);
+					note.connect(layer.destination);
+					note.setChordCents(chordCents);
+					note.playSheduled(at,layer.getNoteLen(gridIndex)*this.getSecPerGrid());
+					note.setVelocity(layer.data.seq[gridIndex].vel);
 
-				note.onended=this.onNoteEnded.bind(this,note);
-				this.currentNotes.push(note);
+					note.onended=this.onNoteEnded.bind(this,note);
+					this.currentNotes.push(note);
+				}
 			}
 		}
 	}

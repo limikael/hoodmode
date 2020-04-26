@@ -266,6 +266,7 @@ export default class AppController {
 
 		state.dialogText=null;
 		state.dialogAction=null;
+		state.dialogData=null;
 
 		return state;
 	}
@@ -273,6 +274,7 @@ export default class AppController {
 	cancelDialog(state) {
 		state.dialogText=null;
 		state.dialogAction=null;
+		state.dialogData=null;
 
 		return state;
 	}
@@ -334,6 +336,16 @@ export default class AppController {
 	}
 
 	setLayerIndex(state, index) {
+		let song=this.helper.getCurrentSong(state);
+
+		if (!this.helper.instrumentExists(state,song.layers[index].instrumentName)) {
+			state.dialogText="Layer is broken, delete?";
+			state.dialogAction="deleteDialogLayer";
+			state.dialogData=index;
+
+			return state;
+		}
+
 		state.currentLayerIndex=index;
 		return state;
 	}
@@ -347,6 +359,16 @@ export default class AppController {
 	toggleLayerAudible(state, layerIndex) {
 		let song=this.helper.getCurrentSong(state);
 		song.layers[layerIndex].audible=!song.layers[layerIndex].audible;
+
+		return state;
+	}
+
+	deleteDialogLayer(state) {
+		let song=this.helper.getCurrentSong(state);
+		song.layers.splice(state.dialogData,1);
+		state.currentLayerIndex=-1;
+		state.currentGridIndex=-1;
+		state.settingsVisible=false;
 
 		return state;
 	}

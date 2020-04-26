@@ -3,8 +3,8 @@ export default class ConductorLayer {
 		this.conductor=conductor;
 		this.data=data;
 		this.instrument=this.conductor.getConductorInstrumentByName(data.instrumentName);
-		if (!this.instrument)
-			throw new Error("There is no instrument!!!");
+		/*if (!this.instrument)
+			throw new Error("There is no instrument!!!");*/
 
 		this.gain=this.conductor.audioContext.createGain();
 		this.gain.connect(this.conductor.audioContext.destination);

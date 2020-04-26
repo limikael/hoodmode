@@ -9,7 +9,7 @@ module.exports=
       "layers":[
          {
             "key":"dUG8FJ4pN",
-            "instrumentName":"Drums",
+            "instrumentName":"Drum",
             "audible":true,
             "volume":1,
             "seq":[
