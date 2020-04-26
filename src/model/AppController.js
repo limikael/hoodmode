@@ -1,10 +1,12 @@
 import shortid from 'shortid';
 import "regenerator-runtime/runtime";
+import demosongs from './demosongs';
 
 export default class AppController {
 	constructor(conductor, helper) {
 		this.conductor=conductor;
 		this.helper=helper;
+		console.log(demosongs);
 	}
 
 	initState() {
@@ -103,6 +105,9 @@ export default class AppController {
 		let songDataJson=window.localStorage.getItem("hoodmode-songs");
 		if (songDataJson)
 			state.songs=JSON.parse(songDataJson);
+
+		if (!state.songs || !state.songs.length)
+			state.songs=demosongs;
 
 		this.conductor.setState(state);
 		await this.conductor.loadInstruments();
