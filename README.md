@@ -1,4 +1,6 @@
 # hoodmode
+<img src="res/hoodmode-shot.png" style="width: 100%"/>
+
 <img src="https://build.phonegap.com/apps/3890729/badge/3937019475/version.svg" />
 
 Thanks for testing my app! It is a tool for musicians to play around with rhythm,
