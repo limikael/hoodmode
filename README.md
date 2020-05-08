@@ -23,14 +23,27 @@ Now download the app and have fun with it!
 
 # Download
 
+In order to download the app, make sure you visit this page on the phone where you want to download it.
+
 The current version is:
 
 <img src="https://build.phonegap.com/apps/3890729/badge/3937019475/version.svg" />
 
-The app is currently not on any app stores. Eventually it will be of course. 
-I want to do a round of testing first, and I'm really grateful that you want to test it!
-To download it for Android and iOS, please use the links at the top of the page.
-For Android users, is should be s easy as just downloading it and testing it. For iOS users, some extra steps are required, see below. In the app there is a little info link. You can use this to check the version of the app you currently have installed on your phone.
+In the app there is a little info link in the top right cornder.
+You can use this to check the version of the app you currently have installed on your phone.
+
+Eventually the app will be in the iOS and Android app stores, like any normal app. However, I'm not at the
+stage yet where the app is smooth enough to be placed there. The way to get there is to have a select few
+people test it first, and this is where you come in. This means that the installation is not as smooth as it
+eventually will be. Please be prepared for a few extra steps!
+
+# Notes for Android users
+
+For Android users, you need to first enable installation of apps from unknown sources. Please see 
+[this link](https://www.applivery.com/docs/troubleshooting/android-unknown-sources/) for information on how
+to do this. The app then comes as an .apk file, and upon downloading it you should be prompted to install it.
+For more information on .apk files in general, please see
+[this link](https://www.androidpit.com/android-for-beginners-what-is-an-apk-file).
 
 # Notes for iOS users
 
@@ -51,3 +64,8 @@ Specifically, I would like to know:
 2. Was there something that was dificult to understand, so it needs to be explained better before I go live?
 
 Very excited to have you as a part of the testing team!
+
+Ways to find me:
+
+* Facebook: <https://www.facebook.com/li.mikael>
+* Email: <mailto:li.mikael@gmail.com>
