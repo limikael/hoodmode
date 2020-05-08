@@ -24,13 +24,13 @@ Now download the app and have fun with it!
 # Download
 
 In order to download the app, make sure you visit this page on the phone where you want to download it.
-
-The current version is:
-
-<img src="https://build.phonegap.com/apps/3890729/badge/3937019475/version.svg" />
+Then use the buttons at the top of this page.
 
 In the app there is a little info link in the top right cornder.
-You can use this to check the version of the app you currently have installed on your phone.
+You can use this to check the version of the app you currently have installed on your phone,
+in order to make sure you have the most up to date version. The latest versnio of the app is:
+
+<img src="https://build.phonegap.com/apps/3890729/badge/3937019475/version.svg" />
 
 Eventually the app will be in the iOS and Android app stores, like any normal app. However, I'm not at the
 stage yet where the app is smooth enough to be placed there. The way to get there is to have a select few
