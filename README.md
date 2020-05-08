@@ -28,7 +28,7 @@ Then use the buttons at the top of this page.
 
 In the app there is a little info link in the top right cornder.
 You can use this to check the version of the app you currently have installed on your phone,
-in order to make sure you have the most up to date version. The latest versnio of the app is:
+in order to make sure you have the most up to date version. The latest version of the app is:
 
 <img src="https://build.phonegap.com/apps/3890729/badge/3937019475/version.svg" />
 
@@ -36,6 +36,9 @@ Eventually the app will be in the iOS and Android app stores, like any normal ap
 stage yet where the app is smooth enough to be placed there. The way to get there is to have a select few
 people test it first, and this is where you come in. This means that the installation is not as smooth as it
 eventually will be. Please be prepared for a few extra steps!
+
+During the installation you will be asked a few times if you really want to install the app and if you 
+really trust the developer. So, well, only install it if you trust me enough. :)
 
 # Notes for Android users
 
