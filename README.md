@@ -38,9 +38,6 @@ stage yet where the app is smooth enough to be placed there. The way to get ther
 people test it first, and this is where you come in. This means that the installation is not as smooth as it
 eventually will be. Please be prepared for a few extra steps!
 
-During the installation you will be asked a few times if you really want to install the app and if you 
-really trust the developer. So, well, only install it if you trust me enough. :)
-
 # Notes for Android users
 
 For Android users, you need to first enable installation of apps from unknown sources. Please see 
@@ -48,6 +45,9 @@ For Android users, you need to first enable installation of apps from unknown so
 to do this. The app then comes as an .apk file, and upon downloading it you should be prompted to install it.
 For more information on .apk files in general, please see
 [this link](https://www.androidpit.com/android-for-beginners-what-is-an-apk-file).
+
+During the installation you will be asked a few times if you really want to install the app and if you 
+really trust the developer. So, well, only install it if you trust me enough. :)
 
 # Notes for iOS users
 
