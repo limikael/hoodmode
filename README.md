@@ -5,12 +5,13 @@
 
 Hello!
 
-Thanks for testing my app!
+I'm really excited to have you as a part of the testing team for my app!
 
-It is a tool for musicians to play around with rhythm,
-baselines and chords in a live setting.
-Before you try it, check this video as an introduction.
-It is an introduction both when it comes to what the app is and how it can be used.
+The app is a tool for musicians to play around with rhythm,
+baselines and chords. It can be used to quickly create a backing track to be used in a live setting,
+for a recording or for practice.
+
+Before you try it, check this video as an introduction!
 
 <div>
   <div style="position:relative;padding-top:56.25%;">
