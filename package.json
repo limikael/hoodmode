@@ -15,6 +15,7 @@
   "dependencies": {
     "@babel/polyfill": "^7.8.3",
     "cordova-android": "^8.1.0",
+    "cordova-ios": "^5.1.1",
     "cordova-plugin-statusbar": "^2.4.3",
     "preact": "^10.3.1"
   },
@@ -39,7 +40,8 @@
       "cordova-plugin-statusbar": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "ios"
     ]
   }
 }

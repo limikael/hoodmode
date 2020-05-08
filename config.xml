@@ -1,6 +1,7 @@
 <?xml version='1.0' encoding='utf-8'?>
 <widget id="app.hoodmode.co" version="0.0.5" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
     <name>Hoodmode</name>
+    <icon src="www/icons/hoodmode-icon.png"/>
     <description>
         Hyper casual jam composer.
     </description>
@@ -27,6 +28,26 @@
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
+        <icon src="www/icons/icon-1024.png" width="1024" height="1024"/>
+        <icon src="www/icons/icon-small.png" width="29" height="29"/>
+        <icon src="www/icons/icon-small@2x.png" width="58" height="58"/>
+        <icon src="www/icons/icon-small@3x.png" width="87" height="87"/>
+        <icon src="www/icons/icon-small-40.png" width="40" height="40"/>
+        <icon src="www/icons/icon-small-40@2x.png" width="80" height="80"/>
+        <icon src="www/icons/icon-small-40@3x.png" width="120" height="120"/>
+        <icon src="www/icons/icon-small-50.png" width="50" height="50"/>
+        <icon src="www/icons/icon-small-50@2x.png" width="100" height="100"/>
+        <icon src="www/icons/icon.png" width="57" height="57"/>
+        <icon src="www/icons/icon@2x.png" width="114" height="114"/>
+        <icon src="www/icons/icon-60.png" width="60" height="60"/>
+        <icon src="www/icons/icon-60@2x.png" width="120" height="120"/>
+        <icon src="www/icons/icon-60@3x.png" width="180" height="180"/>
+        <icon src="www/icons/icon-72.png" width="72" height="72"/>
+        <icon src="www/icons/icon-72@2x.png" width="144" height="144"/>
+        <icon src="www/icons/icon-76.png" width="76" height="76"/>
+        <icon src="www/icons/icon-76@2x.png" width="152" height="152"/>
+        <icon src="www/icons/icon-167.png" width="167" height="167"/>
+        <icon src="www/icons/icon-83.5@2x.png" width="167" height="167"/>
     </platform>
 
 	<preference name="StatusBarOverlaysWebView" value="false" />
