@@ -4,7 +4,7 @@
     <description>
         Hyper casual jam composer.
     </description>
-    <icon src="www/img/hoodmode-icon.png" />
+    <icon src="www/img/logo.png" />
     <author email="li.mikael@gmail.com" href="https://github.com/limikael">
         Mikael Lindqvist
     </author>
@@ -24,12 +24,10 @@
 
     <platform name="android">
         <allow-intent href="market:*" />
-        <icon src="www/img/hoodmode-icon.png" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />
-        <icon src="www/img/hoodmode-icon.png" />
     </platform>
 
 	<preference name="StatusBarOverlaysWebView" value="false" />
