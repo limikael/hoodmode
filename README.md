@@ -41,3 +41,13 @@ Since the app is not yet released on the iOS app store, I need to set up my buil
 And here is a video explaining how to do the same:
 
 <https://www.youtube.com/watch?v=MvZGl_NVHVI>
+
+# What's next?
+
+After testing the app, please reach ou to me! I would love to hear about your experience.
+Specifically, I would like to know:
+
+1. What features would be needed for the app to be useful to you?
+2. Was there something that was dificult to understand, so it needs to be explained better before I go live?
+
+Very excited to have you as a part of the testing team!
