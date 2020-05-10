@@ -3,6 +3,11 @@
 
 <img src="https://build.phonegap.com/apps/3890729/badge/3937019475/version.svg" />
 
+> Dude this is fucking great!
+> I made dop ss Grimes music the first try!
+> I made a beat in one minute!!! <br/>
+> *-- Diego Garrido*
+
 Hello!
 
 I'm really excited to have you as a part of the testing team for my app!
