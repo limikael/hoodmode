@@ -8,7 +8,7 @@
 > I made a beat in one minute!!! <br/>
 > *-- Diego Garrido*
 
-Hello!
+Hello!!
 
 I'm really excited to have you as a part of the testing team for my app!
 
