@@ -2,3 +2,6 @@ platforms/**
 plugins/**
 node_modules
 _site/**
+bitrise.yml
+bitrise-local.txt
+www/index.js
