@@ -1,21 +1,29 @@
 platform :ios do
   desc "Build ios"
   lane :ci do
-    update_code_signing_settings(
-      code_sign_identity: "iPhone Developer",
-      path: "platforms/ios/Hoodmode.xcodeproj"
+    #update_code_signing_settings(
+    #  code_sign_identity: "iPhone Developer",
+    #  path: "platforms/ios/Hoodmode.xcodeproj"
+    #)
+    import_certificate(
+      certificate_path: 'cert/ios_development.p12',
+      certificate_password: ENV["CERTIFICATE_PASSWORD"],
+      keychain_name: 'login',
+      keychain_password: ENV["KEYCHAIN_PASSWORD"]
     )
-    match(type: "development")
+    install_provisioning_profile(
+      path: 'cert/Hoodmode_Development_200515.mobileprovision'
+    )
     cordova(
       type: 'development',
       platform: 'ios',
       team_id: 'UAWAHU68LH',
-      provisioning_profile: '3218b579-fbd2-4fb6-95fb-822c8a2aede9'
+      provisioning_profile: '39f3cbb9-a76e-4802-b458-5bbcfbfa8db7'
     )
-    applivery(
-      app_token: ENV['APPLIVERY_TOKEN'],
-      build_path: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH']
-    )
+    #applivery(
+    #  app_token: ENV['APPLIVERY_TOKEN'],
+    #  build_path: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH']
+    #)
   end
 end
 
@@ -26,7 +34,7 @@ platform :android do
       platform: 'android',
       keystore_path: ENV["KEYSTORE_PATH"],
       keystore_alias: 'hoodmode-micke',
-      keystore_password: 'getter'
+      keystore_password: ENV["KEYSTORE_PASSWORD"]
     )
     applivery(
       app_token: ENV["APPLIVERY_TOKEN"],
