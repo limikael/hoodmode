@@ -1,3 +1,24 @@
+platform :ios do
+  desc "Build ios"
+  lane :ci do
+    update_code_signing_settings(
+      code_sign_identity: "iPhone Developer",
+      path: "platforms/ios/Hoodmode.xcodeproj"
+    )
+    match(type: "development")
+    cordova(
+      type: 'development',
+      platform: 'ios',
+      team_id: 'UAWAHU68LH',
+      provisioning_profile: '3218b579-fbd2-4fb6-95fb-822c8a2aede9'
+    )
+    applivery(
+      app_token: ENV['APPLIVERY_TOKEN'],
+      build_path: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH']
+    )
+  end
+end
+
 platform :android do
   desc "Deploy android app on play store"
   lane :ci do
