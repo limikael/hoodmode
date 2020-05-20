@@ -5,12 +5,22 @@
     
     
       
-      <testcase classname="fastlane.lanes" name="0: cordova" time="22.260217809">
+      <testcase classname="fastlane.lanes" name="0: update_code_signing_settings" time="0.111158">
         
       </testcase>
     
       
-      <testcase classname="fastlane.lanes" name="1: applivery" time="19.006887083">
+      <testcase classname="fastlane.lanes" name="1: match" time="8.681613">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="2: cordova" time="32.574274">
+        
+      </testcase>
+    
+      
+      <testcase classname="fastlane.lanes" name="3: applivery" time="20.321167">
         
       </testcase>
     
