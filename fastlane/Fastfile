@@ -1,0 +1,15 @@
+platform :android do
+  desc "Deploy android app on play store"
+  lane :ci do
+    cordova(
+      platform: 'android',
+      keystore_path: ENV["KEYSTORE_PATH"],
+      keystore_alias: 'hoodmode-micke',
+      keystore_password: 'getter'
+    )
+    applivery(
+      app_token: ENV["APPLIVERY_TOKEN"],
+      build_path: 'platforms/android/app/build/outputs/apk/release/app-release.apk'
+    )
+  end
+end
