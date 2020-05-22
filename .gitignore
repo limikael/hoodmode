@@ -5,5 +5,4 @@ _site/**
 bitrise.yml
 bitrise-local.txt
 www/index.js
-cert
 fastlane/report.xml
