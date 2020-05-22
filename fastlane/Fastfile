@@ -26,11 +26,11 @@ platform :android do
       platform: 'android',
       keystore_path: ENV["KEYSTORE_PATH"],
       keystore_alias: 'hoodmode-micke',
-      keystore_password: 'getter'
+      keystore_password: ENV["KEYSTORE_PASSWORD"]
     )
     applivery(
       app_token: ENV["APPLIVERY_TOKEN"],
-      build_path: 'platforms/android/app/build/outputs/apk/release/app-release.apk'
+      build_path: ENV['CORDOVA_ANDROID_RELEASE_BUILD_PATH']
     )
   end
 end
