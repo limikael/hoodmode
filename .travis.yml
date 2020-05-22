@@ -1,4 +1,8 @@
 language: android
+android:
+  components:
+    - build-tools-29.0.3
+    - android-28
 install:
   - npm install
   - bundle install
