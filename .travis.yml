@@ -17,6 +17,7 @@ install:
   - yes | sdkmanager platform-tools "platforms;android-28" "build-tools;29.0.3"
   - yes | sdkmanager --licenses
   - set -o pipefail
+  - sudo npm install -g cordova
 
 script:
   - npm install
