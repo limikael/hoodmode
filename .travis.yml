@@ -4,11 +4,8 @@ android:
   components:
     - build-tools-29.0.3
     - android-28
-addons:
-  apt:
-    packages:
-      - npmjs
 install:
+  - lsb_release -a
   - npm install
   - bundle install
 script:
