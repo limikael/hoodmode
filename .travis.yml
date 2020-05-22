@@ -15,7 +15,7 @@ install:
   - export PATH=$PWD/android/cmdline-tools/tools/bin/:$PATH
   - set +o pipefail
   - yes | sdkmanager platform-tools "platforms;android-28" "build-tools;29.0.3"
-  - yes | android-sdk-linux/tools/bin/sdkmanager --licenses
+  - yes | sdkmanager --licenses
   - set -o pipefail
 
 script:
