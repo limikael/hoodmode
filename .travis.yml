@@ -1,0 +1,6 @@
+language: android
+install:
+  - npm install
+  - bundle install
+script:
+  - fastlane android ci
