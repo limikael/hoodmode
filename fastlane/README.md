@@ -25,9 +25,9 @@ Build ios
 ----
 
 ## Android
-### android ci
+### android master
 ```
-fastlane android ci
+fastlane android master
 ```
 Deploy android app on play store
 
