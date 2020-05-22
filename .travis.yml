@@ -4,16 +4,17 @@ sudo: true
 
 install:
   - sudo apt update
-  - sudo apt install -y curl
+  - sudo apt -q install -y curl
   - curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-  - sudo apt install -y nodejs openjdk-8-jre-headless openjdk-8-jdk wget unzip gradle ruby-full build-essential
+  - sudo apt -q install -y nodejs openjdk-8-jre-headless openjdk-8-jdk wget unzip gradle ruby-full build-essential
   - gem install bundler
   - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
   - mkdir -p android/cmdline-tools
   - unzip -d android/cmdline-tools android-sdk.zip
   - export ANDROID_HOME=$PWD/android
+  - export PATH=$PWD/android/cmdline-tools/tools/bin/:$PATH
   - set +o pipefail
-  - yes | ./android/cmdline-tools/tools/bin/sdkmanager platform-tools "platforms;android-28" "build-tools;29.0.3"
+  - yes | sdkmanager platform-tools "platforms;android-28" "build-tools;29.0.3"
   - yes | android-sdk-linux/tools/bin/sdkmanager --licenses
   - set -o pipefail
 
