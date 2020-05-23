@@ -1,57 +1,61 @@
 import { h, Component } from 'preact';
+import { useContext } from 'preact/compat';
+import AppContext from '../utils/AppContext.js';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
 
 export default class Header extends Component {
 	render() {
+		let ctx=useContext(AppContext);
+
 		let playButtonClass="header-button text-white ";
-		if (this.context.playing)
+		if (ctx.playing)
 			playButtonClass+="active";
 
 		let recordButtonClass="header-button text-white ";
-		if (this.context.recording)
+		if (ctx.recording)
 			recordButtonClass+="active";
 
 		let items=[];
-		if (this.context.isSongOpen()) {
+		if (ctx.isSongOpen()) {
 			items.push(
 				<A class="header-button text-white"
-						onRelease={this.context.goBack}>
+						onRelease={ctx.goBack}>
 					<img src="img/arrow-left.svg"/>
 				</A>
 			);
 
-			if (this.context.currentLayerIndex>=0)
+			if (ctx.currentLayerIndex>=0)
 				items.push(
 					<div class="header-button text-white">
-						<img src={"img/"+this.context.getInstrumentIconByKey(this.context.getCurrentLayer().instrumentKey)}/>
+						<img src={"img/"+ctx.getInstrumentIconByKey(ctx.getCurrentLayer().instrumentKey)}/>
 					</div>
 				);
 
 			items.push(
 				<div class="header-text text-white">
-					{this.context.getCurrentSong().name}
+					{ctx.getCurrentSong().name}
 				</div>
 			);
 
 			items.push(
 				<A class={playButtonClass}
-						onPress={this.context.playClick}>
+						onPress={ctx.playClick}>
 					<img src="img/play-fill.svg"/>
 				</A>
 			);
 
-			if (this.context.currentLayerIndex>=0) 
+			if (ctx.currentLayerIndex>=0) 
 				items.push(
 					<A class={recordButtonClass}
-							onPress={this.context.recordClick}>
+							onPress={ctx.recordClick}>
 						<img src="img/circle-fill.svg"/>
 					</A>
 				);
 
 			items.push(
 				<A class="header-button text-white"
-						onRelease={this.context.toggleSettings}>
+						onRelease={ctx.toggleSettings}>
 					<img src="img/gear-fill.svg"/>
 				</A>
 			);
@@ -63,7 +67,7 @@ export default class Header extends Component {
 
 			items.push(
 				<A class="header-button text-white"
-					onRelease={this.context.showAboutScreen}>
+					onRelease={ctx.showAboutScreen}>
 					<img src="img/info-icon.svg"/>
 				</A>
 			);

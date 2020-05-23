@@ -1,9 +1,13 @@
 import { h, Component } from 'preact';
+import { useContext } from 'preact/compat';
+import AppContext from '../utils/AppContext.js';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
 
 export default class SongSettings {
 	render() {
+		let ctx=useContext(AppContext);
+
 		return (
 			<div class="pane-container">
 				<div class="pane box double bg-dark">
@@ -12,8 +16,8 @@ export default class SongSettings {
 						Song Name<br/>
 						<div class="box border bg-white border-black text-black w-4">
 							<input type="text"
-								value={this.context.getCurrentSong().name}
-								onChange={this.context.setCurrentSongName}/>
+								value={ctx.getCurrentSong().name}
+								onChange={ctx.setCurrentSongName}/>
 						</div>
 					</div>
 
@@ -21,8 +25,8 @@ export default class SongSettings {
 						Tempo<br/>
 						<div class="box border bg-white border-black text-black w-4">
 							<input type="text"
-								value={this.context.getCurrentSong().bpm}
-								onChange={this.context.setCurrentSongBpm}/>
+								value={ctx.getCurrentSong().bpm}
+								onChange={ctx.setCurrentSongBpm}/>
 						</div>
 					</div>
 
@@ -30,27 +34,27 @@ export default class SongSettings {
 						Key<br/>
 						<div class="box border bg-white border-black text-black w-2">
 							<Select class="form-control col-2"
-									options={this.context.getNotesSelectOptions()}
-									selected={this.context.getCurrentSong().musicKey}
-									onChange={this.context.setCurrentSongMusicKey}/>
+									options={ctx.getNotesSelectOptions()}
+									selected={ctx.getCurrentSong().musicKey}
+									onChange={ctx.setCurrentSongMusicKey}/>
 						</div>
 						<div class="box border bg-white border-black text-black w-2">
 							<Select class="form-control col-4"
-									options={this.context.getModalSelectOptions()}
-									selected={this.context.getCurrentSong().minor}
-									onChange={this.context.setCurrentSongMinor}/>
+									options={ctx.getModalSelectOptions()}
+									selected={ctx.getCurrentSong().minor}
+									onChange={ctx.setCurrentSongMinor}/>
 						</div>
 					</div>
 
 					<div class="form-buttons">
 						<A class="bg-warning box text-white w-1"
 								href="#"
-								onRelease={this.context.deleteCurrentSong}>
+								onRelease={ctx.deleteCurrentSong}>
 							<img src="img/trash.svg"/>
 						</A>
 						<A class="bg-primary box text-white"
 								href="#"
-								onRelease={this.context.toggleSettings}>
+								onRelease={ctx.toggleSettings}>
 							Close
 						</A>
 					</div>

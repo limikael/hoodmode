@@ -1,4 +1,6 @@
 import { h, Component } from 'preact';
+import { useContext } from 'preact/compat';
+import AppContext from '../utils/AppContext.js';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import Header from './Header.jsx';
 import Front from './Front.jsx';
@@ -70,56 +72,54 @@ export default class App extends Component {
 		s.setProperty("--paneMarginLeft",((windowWidth-fontSize*contentWidth)/2)+"px");
 	}
 
-	onPlayClick=()=>{
-		console.log("play");
-	}
-
 	componentDidMount() {
 		window.onresize=this.updateSize;
 		setTimeout(this.updateSize,0);
 	}
 
 	render() {
-		if (this.context.error)
-			return (<div>{String(this.context.error)}</div>);
+		let ctx=useContext(AppContext);
 
-		if (this.context.busy)
+		if (ctx.error)
+			return (<div>{String(ctx.error)}</div>);
+
+		if (ctx.busy)
 			return (<div>LOADING...</div>);
 
 		let cls="";
-		if (this.context.recording)
+		if (ctx.recording)
 			cls="recording";
 
-		// <TapHighlight />
+		//<TapHighlight />
 
 		return (
 			<div class={cls}>
 				<Header />
-				{IF(!this.context.isSongOpen(),()=>
+				{IF(!ctx.isSongOpen(),()=>
 					<Front />
 				)}
-				{IF(this.context.isSongOpen(),()=>{
-					if (this.context.settingsVisible) {
-						if (this.context.currentLayerIndex>=0)
+				{IF(ctx.isSongOpen(),()=>{
+					if (ctx.settingsVisible) {
+						if (ctx.currentLayerIndex>=0)
 							return <LayerSettings />;
 
 						else
 							return <SongSettings />;
 					}
 
-					else if (this.context.addLayerVisible)
+					else if (ctx.addLayerVisible)
 						return <AddLayer />;
 
-					else if (this.context.currentLayerIndex>=0)
+					else if (ctx.currentLayerIndex>=0)
 						return <Layer />
 
 					else
 						return <Song />;
 				})}
-				{IF(this.context.aboutScreenVisible,()=>
+				{IF(ctx.aboutScreenVisible,()=>
 					<AboutScreen />
 				)}
-				{IF(this.context.dialogText,()=>
+				{IF(ctx.dialogText,()=>
 					<Dialog />
 				)}
 			</div>

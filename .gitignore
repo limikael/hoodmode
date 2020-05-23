@@ -7,3 +7,4 @@ bitrise-local.txt
 www/index.js
 fastlane/report.xml
 android-sdk.zip
+android-sdk

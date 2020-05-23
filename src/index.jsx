@@ -2,7 +2,7 @@ import "preact/debug";
 
 import { h, render } from 'preact';
 import App from './view/App.jsx';
-import AppContext from './utils/AppContext.js';
+import AppContextProvider from './utils/AppContextProvider.jsx';
 import shortid from 'shortid';
 import AppController from './model/AppController.js';
 import AppHelper from './model/AppHelper.js';
@@ -41,18 +41,18 @@ function onStateChange(state) {
 	window.localStorage.setItem("hoodmode-songs",JSON.stringify(state.songs));
 }
 
-let appContext=(
-	<AppContext
+let appContent=(
+	<AppContextProvider
 			controller={appController}
 			helper={appHelper}
 			initAction="init"
 			onStateChange={onStateChange}>
 		<App/>
-	</AppContext>
+	</AppContextProvider>
 );
 
 function start() {
-	render(appContext, document.body);
+	render(appContent, document.body);
 }
 
 if (window.hasOwnProperty("cordova"))

@@ -1,9 +1,12 @@
 import { h, Component } from 'preact';
+import { useContext } from 'preact/compat';
+import AppContext from '../utils/AppContext.js';
 import A from './A.jsx';
 
 export default class SongLayers extends Component {
 	render() {
-		let song=this.context.getCurrentSong();
+		let ctx=useContext(AppContext);
+		let song=ctx.getCurrentSong();
 
 		return (
 			<div class="pane box border border-dark">
@@ -19,12 +22,12 @@ export default class SongLayers extends Component {
 
 					return (
 						<A class={cls}
-							onRelease={this.context.setLayerIndex.bind(null,index)}>
+							onRelease={ctx.setLayerIndex.bind(null,index)}>
 							<div class="layer-icon">
-								<img src={"img/"+this.context.getInstrumentIconByKey(layer.instrumentKey)}/>
+								<img src={"img/"+ctx.getInstrumentIconByKey(layer.instrumentKey)}/>
 							</div>
 							<A class="layer-icon"
-								onPress={this.context.toggleLayerAudible.bind(null,index)}>
+								onPress={ctx.toggleLayerAudible.bind(null,index)}>
 								<img src={icon}/>
 							</A>
 						</A>
@@ -33,7 +36,7 @@ export default class SongLayers extends Component {
 
 				<A class="box border border-white text-white w-1"
 						href="#"
-						onRelease={this.context.showAddLayer}>
+						onRelease={ctx.showAddLayer}>
 					+
 				</A>
 			</div>

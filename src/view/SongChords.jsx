@@ -1,18 +1,22 @@
 import { h, Component } from 'preact';
+import { useContext } from 'preact/compat';
+import AppContext from '../utils/AppContext.js';
 import SelectChord from './SelectChord.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
 
 export default class SongChords extends Component {
 	renderConductorChords() {
-		return this.context.getChordLabels().map((label, index)=>{
+		let ctx=useContext(AppContext);
+
+		return ctx.getChordLabels().map((label, index)=>{
 			let cls="box w-1 bg-success text-light chord ";
-			if (index==this.context.currentChordIndex)
+			if (index==ctx.currentChordIndex)
 				cls+=" active beat-0 beat-4 beat-8 beat-12";
 
 			return (
 				<A class={cls}
-						onPress={this.context.setCurrentChordIndex.bind(null,index)}>
+						onPress={ctx.setCurrentChordIndex.bind(null,index)}>
 					{label}
 				</A>
 			)
@@ -20,12 +24,14 @@ export default class SongChords extends Component {
 	}
 
 	renderSectionChords() {
-		let a=this.context.getCurrentSectionChordLabels().map((label, index)=>{
+		let ctx=useContext(AppContext);
+
+		let a=ctx.getCurrentSectionChordLabels().map((label, index)=>{
 			let cls="box w-1 bg-success text-light section-chord sequence-"+index;
 
 			return (
 				<A class={cls}
-						onRelease={this.context.showEditSectionChord.bind(null,index)}>
+						onRelease={ctx.showEditSectionChord.bind(null,index)}>
 					{label}
 				</A>
 			);
@@ -33,7 +39,7 @@ export default class SongChords extends Component {
 
 		a.push(
 			<A class="box border border-white text-white w-1"
-					onRelease={this.context.addSectionChord}>
+					onRelease={ctx.addSectionChord}>
 				+
 			</A>
 		);
@@ -42,10 +48,11 @@ export default class SongChords extends Component {
 	}
 
 	render() {
-		let song=this.context.getCurrentSong();
+		let ctx=useContext(AppContext);
+		let song=ctx.getCurrentSong();
 
 		let chordLabels;
-		if (this.context.currentSectionIndex==-1)
+		if (ctx.currentSectionIndex==-1)
 			chordLabels=this.renderConductorChords();
 
 		else
@@ -57,23 +64,23 @@ export default class SongChords extends Component {
 				<div class="pane-header text-secondary bg-dark ">CHORDS</div>
 				<div style={{height: '6em'}}>{chordLabels}</div>
 				<A class={"box w-1 bg-secondary text-white "+
-							((this.context.currentSectionIndex==-1)?"active":"")}
-						onPress={this.context.setCurrentSectionIndex.bind(null,-1)}>
+							((ctx.currentSectionIndex==-1)?"active":"")}
+						onPress={ctx.setCurrentSectionIndex.bind(null,-1)}>
 					<img src="img/conductor.svg"/>
 				</A>
 				{["A","B","C"].map((letter, index)=>{
 					let cls="box w-1 bg-primary text-white ";
-					if (index==this.context.currentSectionIndex)
+					if (index==ctx.currentSectionIndex)
 						cls+="active";
 
 					return (
 						<A class={cls}
-								onPress={this.context.setCurrentSectionIndex.bind(null,index)}>
+								onPress={ctx.setCurrentSectionIndex.bind(null,index)}>
 							{letter}
 						</A>
 					);
 				})}
-				{IF(this.context.editSectionChordVisible>=0,()=>
+				{IF(ctx.editSectionChordVisible>=0,()=>
 					<SelectChord />
 				)}
 			</div>
