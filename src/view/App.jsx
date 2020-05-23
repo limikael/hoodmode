@@ -80,6 +80,9 @@ export default class App extends Component {
 	}
 
 	render() {
+		if (this.context.error)
+			return (<div>{String(this.context.error)}</div>);
+
 		if (this.context.busy)
 			return (<div>LOADING...</div>);
 

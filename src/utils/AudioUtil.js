@@ -15,6 +15,11 @@ export default class AudioUtil {
 					}
 				);
 			};
+
+			request.onerror=(e)=>{
+				reject(e);
+			}
+
 			request.send();
 		})
 	}

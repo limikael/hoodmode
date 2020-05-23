@@ -36,11 +36,18 @@ class AppContext extends Component {
 							busy: true
 						});
 
-					newState.then((state)=>{
-						state.busy=false;
-						this.setState(state);
-						this.notifyStateChange(state);
-					});
+					newState
+						.then((state)=>{
+							state.busy=false;
+							this.setState(state);
+							this.notifyStateChange(state);
+						})
+						.catch((e)=>{
+							let state=this.state;
+							state.error=e;
+							this.setState(state);
+							this.notifyStateChange(state);
+						});
 				}
 
 				else {
