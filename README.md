@@ -78,3 +78,5 @@ Ways to find me:
 
 * Facebook: <https://www.facebook.com/li.mikael>
 * Email: <mailto:li.mikael@gmail.com>
+
+Releasing on alpha...
