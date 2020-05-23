@@ -28,7 +28,7 @@ platform :ios do
 end
 
 platform :android do
-  desc "Deploy android app on play store"
+  desc "Build Android version"
   lane :local do
     cordova(
       platform: 'android',
@@ -48,6 +48,22 @@ platform :android do
     applivery(
       app_token: ENV["APPLIVERY_TOKEN"],
       build_path: ENV['CORDOVA_ANDROID_RELEASE_BUILD_PATH']
+    )
+  end
+
+  lane :alpha do
+    cordova(
+      platform: 'android',
+      keystore_path: 'cert/hoodmode-micke.keystore',
+      keystore_alias: 'hoodmode-micke',
+      keystore_password: ENV["KEYSTORE_PASSWORD"]
+    )
+    upload_to_play_store(
+      package_name: 'app.hoodmode.co',
+      track: 'alpha',
+      apk: ENV['CORDOVA_ANDROID_RELEASE_BUILD_PATH'],
+      json_key: 'cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json',
+      validate_only: true
     )
   end
 end

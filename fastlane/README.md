@@ -35,6 +35,11 @@ Deploy android app on play store
 fastlane android master
 ```
 
+### android alpha
+```
+fastlane android alpha
+```
+
 
 ----
 
