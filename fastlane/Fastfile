@@ -62,8 +62,7 @@ platform :android do
       package_name: 'app.hoodmode.co',
       track: 'alpha',
       apk: ENV['CORDOVA_ANDROID_RELEASE_BUILD_PATH'],
-      json_key: 'cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json',
-      validate_only: true
+      json_key: 'cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json'
     )
   end
 end
