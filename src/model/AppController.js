@@ -55,7 +55,7 @@ export default class AppController {
 		state.instruments.push({
 			"key": "basic-bass",
 			"type": "harmonic",
-			"name": "String Bass",
+			"name": "Bass",
 			"sample": "samples/Yamaha-EX5-Old-Strings-C2-edited.wav",
 			"icon": "bass.svg"
 		});
@@ -72,7 +72,7 @@ export default class AppController {
 		state.instruments.push({
 			"key": "basic-organ",
 			"type": "harmonic",
-			"name": "Korg Organ",
+			"name": "Organ",
 			"sample": "samples/Korg-DW-8000-Organ-C3.wav",
 			"icon": "organ.svg",
 			"defaultVolume": 0.25

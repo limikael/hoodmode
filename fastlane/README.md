@@ -25,11 +25,16 @@ Build ios
 ----
 
 ## Android
+### android local
+```
+fastlane android local
+```
+Deploy android app on play store
 ### android master
 ```
 fastlane android master
 ```
-Deploy android app on play store
+
 
 ----
 
