@@ -49,6 +49,14 @@
         <icon src="www/icons/icon-76@2x.png" width="152" height="152"/>
         <icon src="www/icons/icon-167.png" width="167" height="167"/>
         <icon src="www/icons/icon-83.5@2x.png" width="167" height="167"/>
+
+        <preference name="WKWebViewOnly" value="true" />
+
+        <feature name="CDVWKWebViewEngine">
+            <param name="ios-package" value="CDVWKWebViewEngine" />
+        </feature>
+
+        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
     </platform>
 
 	<preference name="StatusBarOverlaysWebView" value="false" />
