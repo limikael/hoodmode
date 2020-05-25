@@ -4,3 +4,4 @@
 
 gem 'fastlane-plugin-cordova'
 gem 'fastlane-plugin-applivery'
+gem 'fastlane-plugin-altool'

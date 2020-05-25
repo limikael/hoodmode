@@ -6,6 +6,7 @@ bitrise.yml
 bitrise-local.txt
 www/index.js
 fastlane/report.xml
+fastlane/Preview.html
 android-sdk.zip
 android-sdk
 cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json

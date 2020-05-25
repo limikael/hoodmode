@@ -21,6 +21,37 @@ platform :ios do
       build_path: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH']
     )
   end
+
+  lane :alpha do
+    import_certificate(
+      certificate_path: 'cert/ios_distribution.p12',
+      certificate_password: ENV["CERTIFICATE_PASSWORD"],
+      keychain_name: 'build.keychain',
+      keychain_password: 'nosecret'
+    )
+    install_provisioning_profile(
+      path: 'cert/Hoodmode_AppStore_200525.mobileprovision'
+    )
+    cordova(
+      type: 'appstore',
+      platform: 'ios',
+      team_id: 'UAWAHU68LH',
+      provisioning_profile: '0cb6686b-1a84-495f-b783-2f4a6bd11a41'
+    )
+    #altool(
+    #  altool_username: ENV["APPLE_USER"],
+    #  altool_password: ENV["APPLE_PASSWORD"],
+    #  altool_app_type: "ios",
+    #  altool_ipa_path: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH'],
+    #  altool_output_format: "xml"
+    #)
+    upload_to_app_store(
+      username: "li.mikael@gmail.com",
+      ipa: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH'],
+      skip_metadata: true,
+      skip_screenshots: true
+    )
+  end
 end
 
 platform :android do

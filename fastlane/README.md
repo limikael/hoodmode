@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane ios master
 ```
 Build ios
+### ios alpha
+```
+fastlane ios alpha
+```
+
 
 ----
 
