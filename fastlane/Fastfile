@@ -1,29 +1,25 @@
 platform :ios do
   desc "Build ios"
-  lane :ci do
-    #update_code_signing_settings(
-    #  code_sign_identity: "iPhone Developer",
-    #  path: "platforms/ios/Hoodmode.xcodeproj"
-    #)
+  lane :master do
     import_certificate(
-      certificate_path: 'cert/ios_development.p12',
+      certificate_path: 'cert/ios_distribution.p12',
       certificate_password: ENV["CERTIFICATE_PASSWORD"],
       keychain_name: 'login',
       keychain_password: ENV["KEYCHAIN_PASSWORD"]
     )
     install_provisioning_profile(
-      path: 'cert/Hoodmode_Development_200515.mobileprovision'
+      path: 'cert/Hoodmode_AdHoc_200525.mobileprovision'
     )
     cordova(
-      type: 'development',
+      type: 'adhoc',
       platform: 'ios',
       team_id: 'UAWAHU68LH',
-      provisioning_profile: '39f3cbb9-a76e-4802-b458-5bbcfbfa8db7'
+      provisioning_profile: '4412c129-1bf8-4ca1-ab11-759ff00b1700'
     )
-    #applivery(
-    #  app_token: ENV['APPLIVERY_TOKEN'],
-    #  build_path: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH']
-    #)
+    applivery(
+      app_token: ENV['APPLIVERY_TOKEN'],
+      build_path: ENV['CORDOVA_IOS_RELEASE_BUILD_PATH']
+    )
   end
 end
 

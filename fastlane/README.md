@@ -16,9 +16,9 @@ or alternatively using `brew cask install fastlane`
 
 # Available Actions
 ## iOS
-### ios ci
+### ios master
 ```
-fastlane ios ci
+fastlane ios master
 ```
 Build ios
 
@@ -29,7 +29,7 @@ Build ios
 ```
 fastlane android local
 ```
-Deploy android app on play store
+Build Android version
 ### android master
 ```
 fastlane android master
