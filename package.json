@@ -16,9 +16,7 @@
     "@babel/polyfill": "^7.8.3",
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
-    "cordova-labs-local-webserver": "git+https://github.com/apache/cordova-plugins.git#local-webserver",
     "cordova-labs-local-webserver-ka": "^1.0.7",
-    "cordova-labs-wkwebview-engine-localhost": "git+https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-wkwebview-engine": "^1.2.1",
     "preact": "^10.3.1"
