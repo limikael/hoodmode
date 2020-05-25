@@ -8,26 +8,7 @@ env:
     - secure: "Tgoj1l5Jfj6oywZaXwyEfe8vpm2+qNXzqvRcsmRNgmK2i/71tHjQ/YE8BOeMAhCeff27YJYEQQQ96SKlNFToQjOl7cVVmheTCJsg3lYHKJwn1RoVRE2O3TAZ9v+E0iyc/UeU/mUnK3cH16jYzpOvALGGI02gXVc0um1Uu7Qkxr5zBgTYIx9xSvOL4Nw7QtMl727Qm9MUdRXKPI6TYg14Iwpom/+gdAVtfwV91mkaERvpfkDRPixnZ5r7OjNunCTfxZshKpPFPj5AORCh2BUl1dM3zyQevd1SNresTOmwgegr+gFvgx+tE+2FgaV1WPVM7qPrVUSejgzx85exVPMw5NEDyndyV1BXK2kN0dwVuYmG3DiOzvmvuNYzAgaijCJUQCkY7FcRgGb+9DKqVtPhIs8Wed0zBeZrFV6cqsuWAP7zjZ2mn1Q7F9+QJBvqorkXwJZ9zVOfhSRXPrWBwQPHLP2w6lxx+zViHenoeIiIC00el90mMwdTz4duRjczeZgUc0peMNh4TowwM846RjQa2vkRG44v2lGetKPrVGA6QsZHJdTxdmQn/O7epVGtbltxN3/QDz5+f+3Df6z/lbaEWt9twdjGARKbjj4nkDyCUjy+LgxP4cs1vZwILwBpVBlmlEsIpOdhYeMDFlfOpGqGvwLp0WajnvLbRLWCxzTEqr4=" # APPLIVERY_TOKEN
 
 install:
-  - openssl aes-256-cbc -K $encrypted_b5a7c6ebd358_key -iv $encrypted_b5a7c6ebd358_iv -in cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json.enc -out cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json -d
-  - sudo apt update
-  - sudo apt -q install -y curl
-  - curl -sL https://deb.nodesource.com/setup_14.x | sudo -E bash -
-  - sudo apt -q install -y nodejs openjdk-8-jdk wget unzip gradle ruby-full build-essential
-  - gem install bundler
-  - wget --quiet --output-document=android-sdk.zip https://dl.google.com/android/repository/commandlinetools-linux-6200805_latest.zip
-  - mkdir -p android-sdk/cmdline-tools
-  - unzip -d android-sdk/cmdline-tools android-sdk.zip
-  - export ANDROID_HOME=$PWD/android-sdk
-  - export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
-  - export PATH=$PWD/android-sdk/cmdline-tools/tools/bin/:$PATH
-  - export PATH=$JAVA_HOME/bin/:$PATH
-  - set +o pipefail
-  - yes | sdkmanager platform-tools "platforms;android-28" "build-tools;29.0.3"
-  - yes | sdkmanager --licenses
-  - set -o pipefail
-  - sudo npm install -g cordova
+  - ./.travis/install_android.sh
 
 script:
-  - npm install
-  - bundle install
   - bundle exec fastlane android $TRAVIS_BRANCH
