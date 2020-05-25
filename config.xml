@@ -58,8 +58,7 @@
 
         <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
 
-        <plugin name="cordova-plugin-wkwebview-engine-localhost" spec="https://github.com/apache/cordova-plugins.git#wkwebview-engine-localhost" />
-        <content src="http://localhost" />
+        <content src="http://localhost:0" />
     </platform>
 
 	<preference name="StatusBarOverlaysWebView" value="false" />
