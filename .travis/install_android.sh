@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+export TARGET_PLATFORM=android
 openssl aes-256-cbc -K $encrypted_b5a7c6ebd358_key -iv $encrypted_b5a7c6ebd358_iv -in cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json.enc -out cert/api-8205799664942222636-981263-fe8ee5d9f8f0.json -d
 sudo apt update
 sudo apt -q install -y curl

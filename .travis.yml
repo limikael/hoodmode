@@ -1,14 +1,20 @@
+os:
+  - linux
+  - osx
 language: generic
 dist: bionic
 sudo: true
+osx_image: xcode11.4
 
 env:
   global:
     - secure: "gOn9t+uY8WEwsZVrNTBAa6QRxP4e1BGt3GZsKQog+DXY7jNxL5l3sce5QR2kv7/WBVEqmjQnGzwePP0d07iAyQ1ZS+AveC3Lni0E7mZINXo0Er1HmeQz29E6c9d/I97cJZMGd88S+IEQS/Ra/iyw5adeZi3TuNeSYUdeoSsk4n3PE7QnXPsSKq28MCkZLS69XIcI7vYeLeGOENlbmnPptnnnkexCT23Iv0/m1745/0CjlVvnk0S8GQFGrvTXV0oDBN5g2kr9b2IlL+I52RHSzq6t2lemEMO87Ipbg75vwi8hkZ38WTe+/u2dM30CD89P/hsUHIfBfcwy9lDiGIjFWGyOlAeOtdwFk6hcJ5lfxSNJYAK1ccThPQH1XWMRzCLq1wSjxc0YusyWDAockyO70lY78zUU+KCdUQS8HLE/pqRPePGKQKU6p4ku9A3V+ymh2SahwSLY33OVDh5lh5lyg/ENZAFBr8df5ZpjphBgrnToc6IDQpetDi8AJB+8USjxERDZ/5dzqKPMLlUeW4l/7+T5t7kFoJYJLLZefKO2M3J2pDeAC67mUKyzJRj2x+XTHhyV0ebiysbrz8298od8dWo2Dwc2+oT72kD+OcrmxrWvfCcD9dvv9vsDiH5hKTYsa51+PLU70zN+tIgrle1exdqZC0cAFz/0NUe/aVMPtyo=" # KEYSTORE_PASSWOD
+    - secure: "aO1HHklVnLqCc1cnG/0GH4PXjZxu9Le9jVcY/U+bcZam10To+S9goqW5DyiuklE13v46fCKIhZdrin2tn2UGNGrHTGKPUpZRR/ra3CtWJTyWNcPgJ3k3WU+B5TdKRNos9J5TgF17Vtr0ucXxGfSGhUsz/uG7oWBngc98ZFxcCTkijziBL+AvHcGEIIDKJeKyCdTuCYHStEa3PrhkS+Dr+2q1zctZ6Flg6OyK8SZNKdzP0756i+kHQcjgNo2UuXLjw48E63YEbKTWO5y6lboF741SqgazD7rUAnlb9/3S5wrtKsnYKqU8QjCkg6UqrAqM5edfH62smHjd2xrPrkEnM5dTfA8f6zIHbR+Pw+OsNZJ4HGq9wmeMdXLucsFzmnjaDTw7gV/iXOFyj+8WCOu49qHoNZwBYCmnwGHnHdNvwogKlYaupKqhar/jGlHoJFW+Po+WsRLifbZtzn//Ebc1AR0Rwl6GSWHFPCAlQ3g8gKoF/VUrEY18lpC7SD1HczpycnlIBXBKgXhPazLwrDWILXXqOYLcXjVWpwc3cvgX/9WrvEaaULXuZrgliUc+YBdyev0qRXKVdCl0Q6ClFuswZUkmAhKrVCNz1imF4373gyptFjSwrMTdhsC8K1G2FsM0DU1lYSWlGz3j4cYRISYoe2fikhO1qBisIcW6BYLgV5I=" # CERTIFICATE_PASSWORD
     - secure: "Tgoj1l5Jfj6oywZaXwyEfe8vpm2+qNXzqvRcsmRNgmK2i/71tHjQ/YE8BOeMAhCeff27YJYEQQQ96SKlNFToQjOl7cVVmheTCJsg3lYHKJwn1RoVRE2O3TAZ9v+E0iyc/UeU/mUnK3cH16jYzpOvALGGI02gXVc0um1Uu7Qkxr5zBgTYIx9xSvOL4Nw7QtMl727Qm9MUdRXKPI6TYg14Iwpom/+gdAVtfwV91mkaERvpfkDRPixnZ5r7OjNunCTfxZshKpPFPj5AORCh2BUl1dM3zyQevd1SNresTOmwgegr+gFvgx+tE+2FgaV1WPVM7qPrVUSejgzx85exVPMw5NEDyndyV1BXK2kN0dwVuYmG3DiOzvmvuNYzAgaijCJUQCkY7FcRgGb+9DKqVtPhIs8Wed0zBeZrFV6cqsuWAP7zjZ2mn1Q7F9+QJBvqorkXwJZ9zVOfhSRXPrWBwQPHLP2w6lxx+zViHenoeIiIC00el90mMwdTz4duRjczeZgUc0peMNh4TowwM846RjQa2vkRG44v2lGetKPrVGA6QsZHJdTxdmQn/O7epVGtbltxN3/QDz5+f+3Df6z/lbaEWt9twdjGARKbjj4nkDyCUjy+LgxP4cs1vZwILwBpVBlmlEsIpOdhYeMDFlfOpGqGvwLp0WajnvLbRLWCxzTEqr4=" # APPLIVERY_TOKEN
 
 install:
-  - source ./.travis/install_android.sh
+  - if [ "$TRAVIS_OS_NAME" = "linux" ]; then source ./.travis/install_android.sh ; fi
+  - if [ "$TRAVIS_OS_NAME" = "osx" ]; then source ./.travis/install_ios.sh ; fi
 
 script:
-  - bundle exec fastlane android $TRAVIS_BRANCH
+  - bundle exec fastlane $TARGET_PLATFORM $TRAVIS_BRANCH
