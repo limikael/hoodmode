@@ -4,10 +4,17 @@ import ConductorLayer from './ConductorLayer';
 import ConductorInstrument from './ConductorInstrument';
 import MusicUtil from '../utils/MusicUtil';
 import AudioTimer from '../utils/AudioTimer';
-import { AudioContext } from 'standardized-audio-context';
 
 export default class Conductor {
 	constructor() {
+		let AudioContext=window.AudioContext;
+
+		if (!AudioContext)
+			AudioContext=window.webkitAudioContext;
+
+		if (!AudioContext)
+			throw new Error("no web audio!");
+
 		this.audioContext=new AudioContext();
 		this.audioTimer=new AudioTimer(this.audioContext);
 		this.audioTimer.onTick=this.onPlayTick;
