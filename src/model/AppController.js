@@ -111,6 +111,10 @@ export default class AppController {
 		this.conductor.setState(state);
 		await this.conductor.loadInstruments();
 
+		if (navigator.splashscreen) {
+			navigator.splashscreen.hide();
+		}
+
 		return state;
 	};
 

@@ -25,6 +25,10 @@
     <platform name="android">
         <allow-intent href="market:*" />
 		<preference name="android-targetSdkVersion" value="28" />
+        <splash src="www/splash/hoodmode-splash.png" />
+        <preference name="SplashMaintainAspectRatio" value="true" />
+        <preference name="AutoHideSplashScreen" value="false" />
+        <preference name="ShowSplashScreenSpinner" value="false"/>
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
