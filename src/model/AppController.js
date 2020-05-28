@@ -226,6 +226,10 @@ export default class AppController {
 				"Enjoy! Please let me know of any bugs you find!",
 
 			buttons: [{
+					class: "bg-danger",
+					text: "Pro",
+					action: "goPro"
+			},{
 				class: "bg-info",
 				text: "Ok"
 			}]
@@ -328,7 +332,9 @@ export default class AppController {
 	}
 
 	confirmGoPro(state) {
-		if (state.dialog.input=="jamming") {
+		state.premium=state.dialog.input;
+
+		if (state.premium=="jamming") {
 			state.dialog={
 				text:
 					"Pro features unlocked!",
@@ -338,8 +344,6 @@ export default class AppController {
 					text: 'Ok'
 				}]
 			};
-
-			state.premium="jamming";
 		}
 
 		else {
@@ -354,13 +358,11 @@ export default class AppController {
 			};
 		}
 
-		console.log("going pro:"+state.dialog.input);
-
 		return state;
 	}
 
 	setDialogInput(state,value) {
-		state.dialog.input=value;
+		state.dialog.input=String(value).toLowerCase();
 		return state;
 	}
 
