@@ -59,6 +59,5 @@
     <feature name="CDVWKWebViewEngine">
       <param name="ios-package" value="CDVWKWebViewEngine"/>
     </feature>
-    <content src="http://localhost:0"/>
   </platform>
 </widget>
