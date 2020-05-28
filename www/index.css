@@ -289,6 +289,10 @@ body.portrait .pane.double {
     margin-right: 0.5em;
 }
 
+.box.full {
+    width: calc( 100% - 1em );
+}
+
 body.landscape .input-group {
     width: 50%;
     display: inline-block;
@@ -385,15 +389,13 @@ hr.pane-divider.four {
 .dialog {
     margin: auto;
     position: relative;
-    width: 8em;
-    height: 6em;
+    width: 16em;
+    height: 8em;
 }
 
-.about-screen {
-    margin: auto;
-    position: relative;
+body.portrait .dialog {
     width: 8em;
-    height: 8em;
+    height: 16em;
 }
 
 .tap-highlight {

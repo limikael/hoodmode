@@ -116,10 +116,7 @@ export default class App extends Component {
 					else
 						return <Song />;
 				})}
-				{IF(ctx.aboutScreenVisible,()=>
-					<AboutScreen />
-				)}
-				{IF(ctx.dialogText,()=>
+				{IF(ctx.dialog,()=>
 					<Dialog />
 				)}
 			</div>

@@ -108,6 +108,8 @@ export default class AppController {
 		if (!state.songs || !state.songs.length)
 			state.songs=demosongs;
 
+		state.premium=window.localStorage.getItem("hoodmode-premium");
+
 		this.conductor.setState(state);
 		await this.conductor.loadInstruments();
 
@@ -122,7 +124,21 @@ export default class AppController {
 		if (!name || name.toString()=="[object MouseEvent]")
 			name="My New Song";
 
-		if (state.songs.length>=3) {
+		if (state.premium!="jamming" && state.songs.length>=3) {
+			state.dialog={
+				text: 
+					"Go pro and create an unlimited number of songs!",
+
+				buttons: [{
+					class: "bg-danger",
+					text: "Pro",
+					action: "goPro"
+				},{
+					class: "bg-info",
+					text: "Later"
+				}]
+			}
+
 			state.dialogText="Max 3 songs during beta...";
 
 			return state;
@@ -203,7 +219,17 @@ export default class AppController {
 	}
 
 	showAboutScreen(state) {
-		state.aboutScreenVisible=true;
+		state.dialog={
+			text: 
+				"Hoodmode\n\n"+
+				"Version: "+this.helper.getAppVersion()+"\n\n"+
+				"Enjoy! Please let me know of any bugs you find!",
+
+			buttons: [{
+				class: "bg-info",
+				text: "Ok"
+			}]
+		}
 
 		return state;
 	}
@@ -255,6 +281,8 @@ export default class AppController {
 	}
 
 	confirmDeleteCurrentSong(state) {
+		state.dialog=null;
+
 		state.songs.splice(state.currentSongIndex,1);
 		state.currentSongIndex=-1;
 		state.settingsVisible=false;
@@ -264,27 +292,80 @@ export default class AppController {
 	}
 
 	deleteCurrentSong(state) {
-		state.dialogText="Sure you want to delete the song?";
-		state.dialogAction="confirmDeleteCurrentSong";
+		state.dialog={
+			text: "Sure you want to delete the song?",
+
+			buttons: [{
+				class: "bg-info",
+				text: "Cancel"
+			},{
+				class: "bg-warning",
+				text: "Ok",
+				action: "confirmDeleteCurrentSong"
+			}]
+		};
 
 		return state;
 	}
 
-	confirmDialog(state) {
-		if (state.dialogAction)
-			state=this[state.dialogAction](state);
+	goPro(state) {
+		state.dialog={
+			text:
+				"Please enter the password to unlock the pro features!",
 
-		state.dialogText=null;
-		state.dialogAction=null;
-		state.dialogData=null;
+			input: "",
+			buttons: [{
+				class: 'bg-danger',
+				text: 'Pro',
+				action: 'confirmGoPro'
+			},{
+				class: 'bg-info',
+				text: 'Later'
+			}]
+		};
 
+		return state;
+	}
+
+	confirmGoPro(state) {
+		if (state.dialog.input=="jamming") {
+			state.dialog={
+				text:
+					"Pro features unlocked!",
+
+				buttons: [{
+					class: 'bg-info',
+					text: 'Ok'
+				}]
+			};
+
+			state.premium="jamming";
+		}
+
+		else {
+			state.dialog={
+				text:
+					"Sorry that's the wrong password...",
+
+				buttons: [{
+					class: 'bg-info',
+					text: 'Ok'
+				}]
+			};
+		}
+
+		console.log("going pro:"+state.dialog.input);
+
+		return state;
+	}
+
+	setDialogInput(state,value) {
+		state.dialog.input=value;
 		return state;
 	}
 
 	cancelDialog(state) {
-		state.dialogText=null;
-		state.dialogAction=null;
-		state.dialogData=null;
+		state.dialog=null;
 
 		return state;
 	}

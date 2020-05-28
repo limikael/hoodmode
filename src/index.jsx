@@ -39,6 +39,7 @@ conductor.onPlayGridIndexChange=(gridIndex, sequenceIndex)=>{
 function onStateChange(state) {
 	conductor.setState(state);
 	window.localStorage.setItem("hoodmode-songs",JSON.stringify(state.songs));
+	window.localStorage.setItem("hoodmode-premium",state.premium);
 }
 
 let appContent=(
