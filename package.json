@@ -1,7 +1,7 @@
 {
   "name": "app.hoodmode.co",
   "displayName": "Hoodmode",
-  "version": "0.0.21",
+  "version": "0.0.22",
   "description": "Hyper casual jam composer.",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
     "cordova-plugin-splashscreen": "^5.0.3",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-wkwebview-engine": "^1.2.1",
+    "cordova-set-version": "^9.1.6",
     "preact": "^10.3.1"
   },
   "devDependencies": {

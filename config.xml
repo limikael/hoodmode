@@ -1,76 +1,64 @@
-<?xml version='1.0' encoding='utf-8'?>
-<widget id="app.hoodmode.co" version="0.0.21" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
-    <name>Hoodmode</name>
-    <icon src="www/icons/hoodmode-icon.png"/>
-    <description>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<widget id="app.hoodmode.co" version="0.0.22" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+  <name>Hoodmode</name>
+  <icon src="www/icons/hoodmode-icon.png"/>
+  <description>
         Hyper casual jam composer.
     </description>
-    <author email="li.mikael@gmail.com" href="https://github.com/limikael">
+  <author email="li.mikael@gmail.com" href="https://github.com/limikael">
         Mikael Lindqvist
     </author>
-    <content src="index.html" />
-	<plugin name="cordova-plugin-whitelist" spec="1" />
-	<plugin name="cordova-plugin-statusbar" spec="~2.4.3" />
-
-    <access origin="*" />
-    <allow-intent href="http://*/*" />
-    <allow-intent href="https://*/*" />
-    <allow-intent href="tel:*" />
-    <allow-intent href="sms:*" />
-    <allow-intent href="mailto:*" />
-    <allow-intent href="geo:*" />
-
-    <hook type="before_prepare" src="hooks/bundle.sh" />
-
-    <preference name="AutoHideSplashScreen" value="false" />
-    <preference name="ShowSplashScreenSpinner" value="false"/>
-
-    <platform name="android">
-        <allow-intent href="market:*" />
-		<preference name="android-targetSdkVersion" value="28" />
-        <splash src="www/splash/hoodmode-splash.png" />
-        <preference name="SplashMaintainAspectRatio" value="true" />
-    </platform>
-    <platform name="ios">
-        <preference name="deployment-target" value="11.0" />
-
-        <allow-intent href="itms:*" />
-        <allow-intent href="itms-apps:*" />
-
-        <splash src="www/splash/Default@2x~universal~anyany.png" />
-
-        <icon src="www/icons/icon-1024.png" width="1024" height="1024"/>
-        <icon src="www/icons/icon-20@2x.png" width="40" height="40"/>
-        <icon src="www/icons/icon-20@3x.png" width="60" height="60"/>
-        <icon src="www/icons/icon-20.png" width="20" height="20"/>
-        <icon src="www/icons/icon-40@2x.png" width="80" height="80"/>
-        <icon src="www/icons/icon-40.png" width="40" height="40"/>
-        <icon src="www/icons/icon-50@2x.png" width="100" height="100"/>
-        <icon src="www/icons/icon-50.png" width="50" height="50"/>
-        <icon src="www/icons/icon-60@2x.png" width="120" height="120"/>
-        <icon src="www/icons/icon-60@3x.png" width="180" height="180"/>
-        <icon src="www/icons/icon-72@2x.png" width="144" height="144"/>
-        <icon src="www/icons/icon-72.png" width="72" height="72"/>
-        <icon src="www/icons/icon-76@2x.png" width="152" height="152"/>
-        <icon src="www/icons/icon-76.png" width="76" height="76"/>
-        <icon src="www/icons/icon-83.5@2x.png" width="167" height="167"/>
-        <icon src="www/icons/icon-small@2x.png" width="58" height="58"/>
-        <icon src="www/icons/icon-small@3x.png" width="87" height="87"/>
-        <icon src="www/icons/icon-small.png" width="29" height="29"/>
-
-        <preference name="WKWebViewOnly" value="true" />
-
-        <feature name="CDVWKWebViewEngine">
-            <param name="ios-package" value="CDVWKWebViewEngine" />
-        </feature>
-
-        <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine" />
-
-        <content src="http://localhost:0" />
-    </platform>
-
-	<preference name="StatusBarOverlaysWebView" value="false" />
-	<preference name="StatusBarBackgroundColor" value="#000000" />
-    <preference name="webviewbounce" value="false" />
-    <preference name="DisallowOverscroll" value="true" />
+  <content src="index.html"/>
+  <plugin name="cordova-plugin-whitelist" spec="1"/>
+  <plugin name="cordova-plugin-statusbar" spec="~2.4.3"/>
+  <access origin="*"/>
+  <allow-intent href="http://*/*"/>
+  <allow-intent href="https://*/*"/>
+  <allow-intent href="tel:*"/>
+  <allow-intent href="sms:*"/>
+  <allow-intent href="mailto:*"/>
+  <allow-intent href="geo:*"/>
+  <hook type="before_prepare" src="hooks/bundle.sh"/>
+  <preference name="AutoHideSplashScreen" value="false"/>
+  <preference name="ShowSplashScreenSpinner" value="false"/>
+  <preference name="StatusBarOverlaysWebView" value="false"/>
+  <preference name="StatusBarBackgroundColor" value="#000000"/>
+  <preference name="webviewbounce" value="false"/>
+  <preference name="DisallowOverscroll" value="true"/>
+  <platform name="android">
+    <allow-intent href="market:*"/>
+    <preference name="android-targetSdkVersion" value="28"/>
+    <preference name="SplashMaintainAspectRatio" value="true"/>
+    <splash src="www/splash/hoodmode-splash.png"/>
+  </platform>
+  <platform name="ios">
+    <preference name="deployment-target" value="11.0"/>
+    <preference name="WKWebViewOnly" value="true"/>
+    <preference name="CordovaWebViewEngine" value="CDVWKWebViewEngine"/>
+    <allow-intent href="itms:*"/>
+    <allow-intent href="itms-apps:*"/>
+    <splash src="www/splash/Default@2x~universal~anyany.png"/>
+    <icon src="www/icons/icon-1024.png" width="1024" height="1024"/>
+    <icon src="www/icons/icon-20@2x.png" width="40" height="40"/>
+    <icon src="www/icons/icon-20@3x.png" width="60" height="60"/>
+    <icon src="www/icons/icon-20.png" width="20" height="20"/>
+    <icon src="www/icons/icon-40@2x.png" width="80" height="80"/>
+    <icon src="www/icons/icon-40.png" width="40" height="40"/>
+    <icon src="www/icons/icon-50@2x.png" width="100" height="100"/>
+    <icon src="www/icons/icon-50.png" width="50" height="50"/>
+    <icon src="www/icons/icon-60@2x.png" width="120" height="120"/>
+    <icon src="www/icons/icon-60@3x.png" width="180" height="180"/>
+    <icon src="www/icons/icon-72@2x.png" width="144" height="144"/>
+    <icon src="www/icons/icon-72.png" width="72" height="72"/>
+    <icon src="www/icons/icon-76@2x.png" width="152" height="152"/>
+    <icon src="www/icons/icon-76.png" width="76" height="76"/>
+    <icon src="www/icons/icon-83.5@2x.png" width="167" height="167"/>
+    <icon src="www/icons/icon-small@2x.png" width="58" height="58"/>
+    <icon src="www/icons/icon-small@3x.png" width="87" height="87"/>
+    <icon src="www/icons/icon-small.png" width="29" height="29"/>
+    <feature name="CDVWKWebViewEngine">
+      <param name="ios-package" value="CDVWKWebViewEngine"/>
+    </feature>
+    <content src="http://localhost:0"/>
+  </platform>
 </widget>
