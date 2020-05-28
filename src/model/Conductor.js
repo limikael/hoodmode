@@ -191,6 +191,8 @@ export default class Conductor {
 	}
 
 	play=()=>{
+		this.audioContext.resume();
+
 		let song=this.getCurrentSong();
 		this.playBpm=song.bpm;
 
