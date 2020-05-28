@@ -53,6 +53,7 @@ let appContent=(
 );
 
 function start() {
+	window.addEventListener('keyboardWillHide', () => window.scrollTo(0, 0));
 	render(appContent, document.body);
 }
 
