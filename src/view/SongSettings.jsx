@@ -26,7 +26,7 @@ export default class SongSettings {
 						<div class="box border bg-white border-black text-black w-4">
 							<input type="text"
 								value={ctx.getCurrentSong().bpm}
-								onChange={ctx.setCurrentSongBpm}/>
+								onBlur={ctx.setCurrentSongBpm}/>
 						</div>
 					</div>
 

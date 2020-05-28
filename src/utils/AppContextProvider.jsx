@@ -15,13 +15,16 @@ export default class AppContextProvider extends Component {
 
 				for (let i in args) {
 					if (args[i] instanceof Event) {
+
 						if (args[i].type=="mousedown" && args[i].button==2)
 							return;
 
 						args[i].preventDefault();
 						args[i].stopPropagation();
 
-						if (args[i].type=="change") {
+						if (args[i].type=="change" 
+								|| args[i].type=="input"
+								|| args[i].type=="blur") {
 							args[i]=args[i].target.value;
 						}
 					}

@@ -9,7 +9,7 @@ export default class AboutScreen extends Component {
 		let ctx=useContext(AppContext);
 
 		return (
-			<div class="modal-container" onClick={this.context.hideAboutScreen}>
+			<div class="modal-container" onClick={ctx.hideAboutScreen}>
 				<div class="box border border-dark bg-background about-screen">
 					<div class="pane-header text-secondary bg-dark ">ABOUT</div>
 					<b>Hoodmode</b><br/><br/>

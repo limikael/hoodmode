@@ -122,6 +122,12 @@ export default class AppController {
 		if (!name || name.toString()=="[object MouseEvent]")
 			name="My New Song";
 
+		if (state.songs.length>=3) {
+			state.dialogText="Max 3 songs during beta...";
+
+			return state;
+		}
+
 		let index=state.songs.length;
 
 		state.songs.push({
@@ -265,7 +271,8 @@ export default class AppController {
 	}
 
 	confirmDialog(state) {
-		state=this[state.dialogAction](state);
+		if (state.dialogAction)
+			state=this[state.dialogAction](state);
 
 		state.dialogText=null;
 		state.dialogAction=null;
