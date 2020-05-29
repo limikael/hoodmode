@@ -1,6 +1,10 @@
 os:
   - linux
   - osx
+branches:
+  only:
+  - master
+  - alpha
 language: generic
 dist: bionic
 sudo: true
