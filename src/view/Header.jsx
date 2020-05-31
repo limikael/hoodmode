@@ -3,6 +3,8 @@ import { useContext } from 'preact/compat';
 import AppContext from '../utils/AppContext.js';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
+import TactBox from '../utils/TactBox.jsx';
+import TactAlign from '../utils/TactAlign.jsx';
 
 export default class Header extends Component {
 	render() {
@@ -75,9 +77,12 @@ export default class Header extends Component {
 
 
 		return (
-			<div class="header box bg-dark">
-				{items}
-			</div>
+			<TactBox h="4" w="100%" bg="dark" tx="white">
+				Qord
+				<TactAlign h="2" a="e" w="2">
+					<img src="img/drum.svg"/>
+				</TactAlign>
+			</TactBox>
 		);
 	}
 }

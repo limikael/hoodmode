@@ -14,69 +14,10 @@ import TapHighlight from './TapHighlight.jsx';
 import AboutScreen from './AboutScreen.jsx';
 import Dialog from './Dialog.jsx';
 import A from './A.jsx';
+import TactApp from '../utils/TactApp.jsx';
+import TactAlign from '../utils/TactAlign.jsx';
 
 export default class App extends Component {
-	updateSize=()=>{
-		let windowWidth=document.documentElement.clientWidth;
-		let windowHeight=document.documentElement.clientHeight;
-
-		let cs=getComputedStyle(document.documentElement);
-		let paneWidth=parseFloat(cs.getPropertyValue('--paneWidth'));
-		let paneHeight=parseFloat(cs.getPropertyValue('--paneHeight'));
-
-		let contentWidth,contentHeight;
-
-		let el=document.activeElement;
-		let screenKeyboardActive=false;
-		if (el.nodeName=="INPUT" && el.type=="text")
-			screenKeyboardActive=true;
-
-		// Portrait.
-		if (windowHeight>windowWidth) {
-			contentHeight=2*(paneHeight+1)+2;
-			contentWidth=paneWidth+1;
-			document.querySelector("body").classList.add("portrait");
-			document.querySelector("body").classList.remove("landscape");
-
-			if (window.hasOwnProperty("cordova"))
-				StatusBar.show();
-		}
-
-		// Landscape.
-		else {
-			contentHeight=paneHeight+2+1;
-			contentWidth=2*(paneWidth+1);
-			document.querySelector("body").classList.add("landscape");
-			document.querySelector("body").classList.remove("portrait");
-
-			if (window.hasOwnProperty("cordova")) {
-				if (screenKeyboardActive)
-					StatusBar.show();
-
-				else
-					StatusBar.hide();
-			}
-		}
-
-		let fontSize;
-		if (windowWidth/contentWidth<windowHeight/contentHeight)
-			fontSize=windowWidth/contentWidth;
-
-		else
-			fontSize=windowHeight/contentHeight;
-
-		document.querySelector("html").style.fontSize=fontSize+"px";
-
-		let s=document.documentElement.style;
-		s.setProperty("--paneMarginTop",((windowHeight-fontSize*contentHeight)/2)+"px");
-		s.setProperty("--paneMarginLeft",((windowWidth-fontSize*contentWidth)/2)+"px");
-	}
-
-	componentDidMount() {
-		window.onresize=this.updateSize;
-		setTimeout(this.updateSize,0);
-	}
-
 	render() {
 		let ctx=useContext(AppContext);
 
@@ -86,15 +27,8 @@ export default class App extends Component {
 		if (ctx.busy)
 			return (<div>LOADING...</div>);
 
-		let cls="";
-		if (ctx.recording)
-			cls="recording";
-
 		//<TapHighlight />
-
-		return (
-			<div class={cls}>
-				<Header />
+		/*
 				{IF(!ctx.isSongOpen(),()=>
 					<Front />
 				)}
@@ -119,7 +53,19 @@ export default class App extends Component {
 				{IF(ctx.dialog,()=>
 					<Dialog />
 				)}
-			</div>
+		*/
+
+		return (
+			<TactApp
+					portraitWidth="18" portraitHeight="40"
+					landscapeWidth="36" landscapeHeight="22">
+				<Header />
+				<TactAlign top="4" pw="18" ph="36" lw="36" lh="18">
+					{IF(!ctx.isSongOpen(),()=>
+						<Front />
+					)}
+				</TactAlign>
+			</TactApp>
 		);
 	}
 }
