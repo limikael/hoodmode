@@ -6,7 +6,7 @@ import A from './A.jsx';
 export default class Song extends Component {
 	render() {
 		return (
-			<div class="pane-container">
+			<div style={{width: "100%", height: "100%"}}>
 				<SongLayers />
 				<SongChords />
 			</div>

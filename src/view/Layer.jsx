@@ -2,6 +2,8 @@ import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
 import AppContext from '../utils/AppContext.js';
 import A from './A.jsx';
+import Box from '../utils/Box.jsx';
+import RemApp from '../utils/RemApp.jsx';
 
 export default class Layer extends Component {
 	onKeyDown=(e)=>{
@@ -28,17 +30,14 @@ export default class Layer extends Component {
 
 		let instrument=ctx.getCurrentInstrument();
 		let layer=ctx.getCurrentLayer();
-		let buttons=new Array(16).fill(<div class="box w-1"/>);
+		let buttons=new Array(16).fill(<Box width="4rem" height="4rem"/>);
 		let numSounds=ctx.getInstrumentNumSoundsByKey(instrument.key);
 
 		for (let i=0; i<9; i++) {
 			let buttonIndex=8-4*Math.floor(i/3)+i%3;
 			if (i<numSounds) {
-				let buttonClass="box w-1 bg-primary text-white ";
-
-				if (ctx.currentGridIndex>=0 &&
+				let active=(ctx.currentGridIndex>=0 &&
 						layer.seq[ctx.currentGridIndex].sounds.includes(i))
-					buttonClass+="active"
 
 				let buttonIcon;
 				if (instrument.type=="percussive")
@@ -48,29 +47,27 @@ export default class Layer extends Component {
 					buttonIcon="img/hnote-"+(1+2*(i%3))+".svg";
 
 				buttons[buttonIndex]=
-					<A class={buttonClass}
+					<Box width="4rem" height="4rem" active={active} bg="primary"
 							onPress={ctx.soundButtonClick.bind(null,i)}>
-						<img src={buttonIcon}/>
-					</A>
+						<img class="icon" src={buttonIcon}/>
+					</Box>
 			}
 
 			else {
 				buttons[buttonIndex]=
-					<div class="box w-1 bg-primary"/>
+					<Box width="4rem" height="4rem" bg="primary"/>
 			}
 
 		}
 
-		let cls="box w-1 bg-warning text-white ";
-		if (ctx.currentGridIndex>=0 &&
-					layer.seq[ctx.currentGridIndex].stacc)
-			cls+="active";
+		let active=(ctx.currentGridIndex>=0 &&
+				layer.seq[ctx.currentGridIndex].stacc);
 
 		buttons[12]=(
-			<A class={cls}
+			<Box bg="warning" active={active}
 					onPress={ctx.toggleCurrentLayerStacc}>
-				<img src="img/rest.svg"/>
-			</A>
+				<img src="img/rest.svg" class="icon"/>
+			</Box>
 		);
 
 		let currentVel=null;
@@ -81,33 +78,26 @@ export default class Layer extends Component {
 		let sizeClasses=["tiny","small",""];
 		let vels=[0.25,0.50,1];
 		for (let i=0; i<3; i++) {
-			let cls="box w-1 bg-warning text-white "+sizeClasses[i]+" ";
-
-			if (currentVel==vels[i])
-				cls+="active";
+			let active=(currentVel==vels[i])
 
 			buttons[13+i]=(
-				<A class={cls}
-						href="#"
+				<Box width="4rem" height="4rem" bg="warning" active={active}
 						onPress={ctx.setCurrentLayerVel.bind(null,vels[i])}>
-					<img src="img/note.svg"/>
-				</A>
+					<img src="img/note.svg" class={"icon "+sizeClasses[i]}/>
+				</Box>
 			);
 		}
 
 		if (instrument.type=="harmonic") {
 			for (let octave of [0,1,2]) {
-				let cls="box w-1 bg-info text-white ";
-				if (ctx.currentGridIndex>=0 &&
-						ctx.currentLayerHasChordAt(ctx.currentGridIndex,octave))
-					cls+="active";
+				let active=(ctx.currentGridIndex>=0 &&
+						ctx.currentLayerHasChordAt(ctx.currentGridIndex,octave));
 
 				buttons[11-octave*4]=(
-					<A class={cls}
-							href="#"
+					<Box width="4rem" height="4rem" bg="info" active={active}
 							onPress={ctx.chordButtonClick.bind(null,octave)}>
-						<img src="img/hnote-chord.svg"/>
-					</A>
+						<img src="img/hnote-chord.svg" class="icon"/>
+					</Box>
 				);
 			}
 		}
@@ -127,28 +117,29 @@ export default class Layer extends Component {
 		};
 
 		for (let gridIndex=0; gridIndex<16; gridIndex++) {
-			let cls="box w-1 beat-grid beat-"+gridIndex+" ";
+			let cls="beat-grid beat-"+gridIndex+" ";
+			let bg="black";
+			let iconCls="icon";
 
-			if (gridIndex==ctx.currentGridIndex)
-				cls+="bg-light ";
-
-			else
-				cls+="bg-black text-white ";
+			if (gridIndex==ctx.currentGridIndex) {
+				bg="white";
+				iconCls+=" dark";
+			}
 
 			let icon=null;
 			if (layer.seq[gridIndex].stacc)
-				icon=<img src="img/rest.svg"/>;
+				icon=<img class={iconCls} src="img/rest.svg"/>;
 
 			else if (ctx.currentLayerHasSoundAt(gridIndex)) {
-				icon=<img src="img/note.svg"/>;
-				cls+=velCls[layer.seq[gridIndex].vel];
+				iconCls+=" "+velCls[layer.seq[gridIndex].vel];
+				icon=<img class={iconCls} src="img/note.svg"/>;
 			}
 
 			res.push(
-				<A class={cls}
+				<Box bg={bg} width="4rem" height="4rem" class={cls}
 						onPress={ctx.gridIndexClick.bind(null,gridIndex)}>
 					{icon}
-				</A>
+				</Box>
 			);
 		}
 
@@ -157,18 +148,30 @@ export default class Layer extends Component {
 
 	render() {
 		let ctx=useContext(AppContext);
+		let vctx=useContext(RemApp.Context);
 		let layer=ctx.getCurrentLayer();
 
+		let sounds=(
+			<Box width="18rem" height="18rem" border="dark">
+				<div class="pane-header text-secondary bg-dark">SOUNDS</div>
+				{this.renderSoundSymbols()}
+			</Box>
+		);
+
+		let sequence=(
+			<Box width="18rem" height="18rem" bg="dark">
+				<div class="pane-header text-secondary bg-dark">SEQUENCE</div>
+				{this.renderSequence()}
+			</Box>
+		);
+
+		let content=[sounds,sequence];
+		if (vctx.orientation=="portrait")
+			content=[sequence,sounds];
+
 		return (
-			<div class="pane-container rev-portrait">
-				<div class="pane box border border-dark">
-					<div class="pane-header text-secondary bg-dark">SOUNDS</div>
-					{this.renderSoundSymbols()}
-				</div>
-				<div class="pane box bg-dark">
-					<div class="pane-header text-secondary bg-dark">SEQUENCE</div>
-					{this.renderSequence()}
-				</div>
+			<div style={{width: "100%", height: "100%"}}>
+				{content}
 			</div>
 		);
 	}

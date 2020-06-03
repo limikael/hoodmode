@@ -1,89 +1,29 @@
 :root {
-    --paneWidth: 8em;
-    --paneHeight: 8em;
-
-    --colorWhite: #fff;
-    --colorBlack: #000;
-    --colorDark: #073642;
-    --colorLight: #FDF6E3;
-    --colorPrimary: #B58900;
-    --colorSecondary: #839496;
-    --colorSuccess: #2AA198;
-    --colorInfo: #268BD2;
-    --colorDanger: #D33682;
-    --colorWarning: #CB4B16;
-
-    --activebgPrimary: #5b4500;
-    --activebgSecondary: #424a4b;
-    --activebgSuccess: #15514c;
-    --activebgInfo: #134669;
-    --activebgDanger: #6a1b41;
-    --activebgWarning: #66260b;
-    --activebgDark: #052932;
-
-    --backgroundColor: #001020;
-
-    --boxPadding: 0.4rem;
-    --borderWidth: 0.05rem;
-
-    --tapHighlightLeft: 0;
-    --tapHighlightTop: 0;
+    --color-white: #ffffff;
+    --color-black: #000000;
+    --color-dark: #073642;
+    --color-light: #FDF6E3;
+    --color-primary: #B58900;
+    --color-secondary: #839496;
+    --color-success: #2AA198;
+    --color-info: #268BD2;
+    --color-danger: #D33682;
+    --color-warning: #CB4B16;
+    --color-background: #001020;
 }
 
-.bg-white { background-color: var(--colorWhite); }
-.bg-black { background-color: var(--colorBlack); }
-.bg-dark { background-color: var(--colorDark); }
-.bg-light { background-color: var(--colorLight); }
-.bg-primary { background-color: var(--colorPrimary); }
-.bg-secondary { background-color: var(--colorSecondary); }
-.bg-success { background-color: var(--colorSuccess); }
-.bg-danger { background-color: var(--colorDanger); }
-.bg-warning { background-color: var(--colorWarning); }
-.bg-info { background-color: var(--colorInfo); }
-.bg-background { background-color: var(--backgroundColor); }
-
-.text-white { color: var(--colorWhite); }
-.text-black { color: var(--colorBlack); }
-.text-dark { color: var(--colorDark); }
-.text-light { color: var(--colorLight); }
-.text-primary { color: var(--colorPrimary); }
-.text-secondary { color: var(--colorSecondary); }
-.text-success { color: var(--colorSuccess); }
-.text-danger { color: var(--colorDanger); }
-.text-warning { color: var(--colorWarning); }
-.text-info { color: var(--colorInfo); }
-
-.border-white { border-color: var(--colorWhite); }
-.border-black { border-color: var(--colorBlack); }
-.border-dark { border-color: var(--colorDark); }
-.border-light { border-color: var(--colorLight); }
-.border-primary { border-color: var(--colorPrimary); }
-.border-secondary { border-color: var(--colorSecondary); }
-.border-success { border-color: var(--colorSuccess); }
-.border-info { border-color: var(--colorInfo); }
-.border-danger { border-color: var(--colorDanger); }
-.border-warning { border-color: var(--colorWarning); }
-
-.active.bg-primary, .pressed.bg-primary { background-color: var(--activebgPrimary); }
-.active.bg-secondary, .pressed.bg-secondary { background-color: var(--activebgSecondary); }
-.active.bg-success, .pressed.bg-success { background-color: var(--activebgSuccess); }
-.active.bg-info, .pressed.bg-info { background-color: var(--activebgInfo); }
-.active.bg-danger, .pressed.bg-danger { background-color: var(--activebgDanger); }
-.active.bg-warning, .pressed.bg-warning { background-color: var(--activebgWarning); }
-.active.bg-dark, .pressed.bg-dark { background-color: var(--activebgDark); }
-
-.border-white.pressed {
+/*.border-white.pressed {
     border-color: #888;
     color: #888;
 }
 
 .pressed .bg-dark {
     background-color: var(--activebgDark);
-}
+}*/
 
 * {
     line-height: 1em;
-    box-sizing: content-box;
+    box-sizing: border-box;
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
@@ -101,8 +41,67 @@ body {
     margin: 0;
     padding: 0;
     font-family: system-ui, -apple-system, -apple-system-font, 'Segoe UI', 'Roboto', sans-serif;
-    background-color: var(--backgroundColor);
-    color: var(--colorLight);
+    background-color: var(--color-background);
+    color: var(--color-light);
+}
+
+.rem-app {
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.align-outer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    pointer-events: none;
+}
+
+.align-inner {
+    pointer-events: auto;
+    position: relative;
+    display: inline-block;
+    margin: auto;
+}
+
+.rem-box {
+    border-radius: 0.8rem;
+    margin: 0.2rem;
+    padding: 0.8rem;
+    display: inline-block;
+    vertical-align: top;
+    position: relative;
+}
+
+.rem-box.border {
+    border: 0.1rem solid;
+    padding: 0.7rem;
+}
+
+.button-label {
+    font-size: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+.button-label-small {
+    font-weight: bold;
+    margin-top: 0.25rem;
+    font-size: 1.5rem;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    margin: 0;
+    padding: 0;
+    font-size: 2rem;
+    font-weight: normal;
+    vertical-align: top;
 }
 
 a {
@@ -184,13 +183,14 @@ body.landscape .box.w-4 {
 }
 
 .header-text {
-    flex: 1;
-    margin-left: 0.25em;
-    margin-right: 0.25em;
+    display: inline-block;
+    font-size: 2rem;
+    vertical-align: top;
 
     text-overflow: ellipsis;
     white-space: nowrap;
     overflow: hidden;
+    height: 2rem;
 }
 
 .header-button {
@@ -203,6 +203,28 @@ body.landscape .box.w-4 {
     margin-top: calc(var(--boxPadding) * -1);
     padding-top: calc(var(--boxPadding));
     padding-bottom: calc(var(--boxPadding));
+}
+
+img.icon {
+    width: 2rem;
+    height: 2rem;
+    filter: invert(1);
+}
+
+img.icon.dark {
+    filter: none;
+}
+
+img.icon.small {
+    width: 1.33rem;
+    height: 1.33rem;
+    margin: 0.33rem;
+}
+
+img.icon.tiny {
+    width: 0.66rem;
+    height: 0.66rem;
+    margin: 0.66rem;
 }
 
 .header-button img {
@@ -263,14 +285,15 @@ body.portrait .pane.double {
 
 .pane-header {
     position: absolute;
-    top: -0.5em;
+    top: -0.4em;
     left: 0.75em;
-    font-size: 0.5em;
+    font-size: 1em;
     padding-left: 0.25em;
     padding-right: 0.25em;
     font-weight: bold;
     border-radius: 0.5em;
-    background-color: var(--backgroundColor);
+    background-color: var(--color-background);
+    color: #888;
 }
 
 .ui-test {
@@ -331,7 +354,7 @@ body.portrait .input-group {
 }
 
 .beat-grid.current-beat {
-    background: var(--colorWhite);
+    background: var(--color-white) !important;
 }
 
 .recording .beat-grid.current-beat {

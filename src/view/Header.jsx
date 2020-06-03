@@ -3,6 +3,7 @@ import { useContext } from 'preact/compat';
 import AppContext from '../utils/AppContext.js';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
+import Box from '../utils/Box.jsx';
 
 export default class Header extends Component {
 	render() {
@@ -19,17 +20,15 @@ export default class Header extends Component {
 		let items=[];
 		if (ctx.isSongOpen()) {
 			items.push(
-				<A class="header-button text-white"
-						onRelease={ctx.goBack}>
-					<img src="img/arrow-left.svg"/>
+				<A onRelease={ctx.goBack}>
+					<img src="img/arrow-left.svg" class="icon" style={{"margin-right": "0.5rem"}}/>
 				</A>
 			);
 
 			if (ctx.currentLayerIndex>=0)
 				items.push(
-					<div class="header-button text-white">
-						<img src={"img/"+ctx.getInstrumentIconByKey(ctx.getCurrentLayer().instrumentKey)}/>
-					</div>
+					<img src={"img/"+ctx.getInstrumentIconByKey(ctx.getCurrentLayer().instrumentKey)}
+							class="icon" style={{"margin-right": "0.5rem"}}/>
 				);
 
 			items.push(
@@ -44,14 +43,6 @@ export default class Header extends Component {
 					<img src="img/play-fill.svg"/>
 				</A>
 			);
-
-			if (ctx.currentLayerIndex>=0) 
-				items.push(
-					<A class={recordButtonClass}
-							onPress={ctx.recordClick}>
-						<img src="img/circle-fill.svg"/>
-					</A>
-				);
 
 			items.push(
 				<A class="header-button text-white"
@@ -75,9 +66,9 @@ export default class Header extends Component {
 
 
 		return (
-			<div class="header box bg-dark">
+			<Box width="100%" height="4rem" bg="dark">
 				{items}
-			</div>
+			</Box>
 		);
 	}
 }

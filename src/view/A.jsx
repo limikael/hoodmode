@@ -8,7 +8,7 @@ export default class A extends Component {
 		if (window.haveTouchEvent && !(e instanceof TouchEvent))
 			return;
 
-		//e.preventDefault();
+		//e.preventDefault(); // commented out to allow list scroll
 		e.stopPropagation();
 
 		if (this.base.isPressed)
@@ -20,7 +20,7 @@ export default class A extends Component {
 			this.props.onPress();
 
 		if (this.props.onRelease)
-			this.base.className+=" pressed";
+			this.setHighlight(true);
 	}
 
 	onUp=(e)=>{
@@ -41,15 +41,26 @@ export default class A extends Component {
 		this.base.isPressed=false;
 
 		if (this.props.onRelease) {
-			this.base.className=this.base.className.replace(" pressed","");
+			this.setHighlight(false);
 			this.props.onRelease();
 		}
 	}
 
 	onMove=(e)=>{
 		if (this.props.cancelOnMove && this.base.isPressed) {
-			this.base.className=this.base.className.replace(" pressed","");
+			this.setHighlight(false);
 			this.base.isPressed=false;
+		}
+	}
+
+	setHighlight=(v)=>{
+		if (v) {
+			if (this.base.className.indexOf("pressed")<0)
+				this.base.className+=" pressed";
+		}
+
+		else {
+			this.base.className=this.base.className.replace(" pressed","");
 		}
 	}
 
