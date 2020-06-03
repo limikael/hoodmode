@@ -25,9 +25,9 @@ export default class Header extends Component {
 				);
 
 			items.push(
-				<div class="header-text">
+				<h1>
 					{ctx.getCurrentSong().name}
-				</div>
+				</h1>
 			);
 
 			rightItems.push(
@@ -46,7 +46,7 @@ export default class Header extends Component {
 		}
 		else {
 			items.push(
-				<div class="header-text text-white">Hoodmode</div>
+				<h1>Hoodmode</h1>
 			);
 
 			rightItems.push(
