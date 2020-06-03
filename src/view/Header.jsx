@@ -4,6 +4,7 @@ import AppContext from '../utils/AppContext.js';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
 import Box from '../utils/Box.jsx';
+import Align from '../utils/Align.jsx';
 
 export default class Header extends Component {
 	render() {
@@ -66,8 +67,11 @@ export default class Header extends Component {
 
 
 		return (
-			<Box width="100%" height="4rem" bg="dark">
+			<Box width="100%" height="4rem" bg="dark" border="white">
 				{items}
+				<Align left="0.7rem" top="0.7rem" bottom="0.7rem" right="0.7rem" align="e" width="4rem" height="2rem" debug>
+
+				</Align>
 			</Box>
 		);
 	}
