@@ -29,21 +29,53 @@ export default class Align extends Component {
 		innerStyle.width=width;
 		innerStyle.height=height;
 
-		if (this.props.top)
-			outerStyle["top"]=this.props.top;
+		let parentPadding=this.props.parentPadding || "0rem";
+		if (parentPadding=="bg")
+			parentPadding="0.8rem";
 
-		if (this.props.bottom)
-			outerStyle["bottom"]=this.props.bottom;
+		if (parentPadding=="border")
+			parentPadding="0.7rem";
 
-		if (this.props.left)
-			outerStyle["left"]=this.props.left;
+		for (let p of ["top","bottom","left","right"]) {
+			if (this.props[p])
+				outerStyle[p]="calc("+parentPadding+" + "+this.props[p]+")";
 
-		if (this.props.right)
-			outerStyle["right"]=this.props.right;
+			else
+				outerStyle[p]=parentPadding;
+		}
 
 		if (this.props.debug) {
 			outerStyle["background-color"]="rgba(255,0,0,.5)";
 			innerStyle["background-color"]="rgba(255,0,0,.5)";
+		}
+
+		if (this.props.textAlign)
+			innerStyle["text-align"]=this.props.textAlign;
+
+		if (this.props.align) {
+			for (let a of this.props.align) {
+				switch (a) {
+					case "n":
+						innerStyle["margin-top"]="0";
+						innerStyle["margin-bottom"]="auto";
+						break;
+
+					case "s":
+						innerStyle["margin-top"]="auto";
+						innerStyle["margin-bottom"]="0";
+						break;
+
+					case "e":
+						innerStyle["margin-left"]="auto";
+						innerStyle["margin-right"]="0";
+						break;
+
+					case "w":
+						innerStyle["margin-left"]="0";
+						innerStyle["margin-right"]="auto";
+						break;
+				}
+			}
 		}
 
 		return (

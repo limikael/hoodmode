@@ -55,7 +55,6 @@ body {
 .align-inner {
     pointer-events: auto;
     position: relative;
-    display: inline-block;
     margin: auto;
 }
 
@@ -341,7 +340,7 @@ body.portrait .input-group {
 }
 
 .recording .beat-grid.current-beat {
-    background: var(--colorWarning);
+    background: var(--color-warning);
 }
 
 .beat-grid.current-beat img {
@@ -360,7 +359,7 @@ body.portrait .input-group {
 
 .chord.current-beat,
 .section-chord.current-sequence {
-    background-color: var(--colorWarning) !important;
+    background-color: var(--color-warning) !important;
 }
 
 hr.pane-divider {

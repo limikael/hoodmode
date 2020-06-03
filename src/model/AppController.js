@@ -194,7 +194,7 @@ export default class AppController {
 		state.currentLayerIndex=-1;
 		state.currentChordIndex=0;
 		state.currentGridIndex=-1;
-		state.currentSectionIndex=-1;
+		state.currentSectionIndex=0;
 		state.playing=false;
 		state.recording=false;
 
@@ -290,7 +290,7 @@ export default class AppController {
 		state.songs.splice(state.currentSongIndex,1);
 		state.currentSongIndex=-1;
 		state.settingsVisible=false;
-		state.currentSectionIndex=-1;
+		state.currentSectionIndex=0;
 
 		return state;
 	}

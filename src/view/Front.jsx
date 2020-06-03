@@ -12,21 +12,19 @@ export default class Front {
 			<Box width="100%" height="100%" border="dark">
 				{/*<div class="pane-header text-secondary bg-dark">SONGS</div>*/}
 
-				<A class="text-white"
-						onRelease={ctx.addSong}>
-					<div class="box bg-dark w-1">+</div>
-					<div class="box">New Song</div>
-				</A>
+				<Box bg="dark" width="4rem" height="4rem"
+						onRelease={ctx.addSong}
+						class="button-label">
+					+
+				</Box>
+				<Box height="4rem">
+					<div class="button-label-small">New Song</div>
+				</Box>
 				{ctx.songs.map((song,index)=>(
 					<Box width="100%" height="4rem" border="light" bg="secondary"
 							onRelease={ctx.setSongIndex.bind(null,index)}>
 						<h1>{song.name}</h1>
 					</Box>
-					/*<A class="box bg-secondary text-white w-4 border border-light el"
-							onRelease={ctx.setSongIndex.bind(null,index)}
-							cancelOnMove={true}>
-						{song.name}
-					</A>*/
 				))}
 			</Box>
 		);

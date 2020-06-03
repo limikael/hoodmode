@@ -9,16 +9,8 @@ import Align from '../utils/Align.jsx';
 export default class Header extends Component {
 	render() {
 		let ctx=useContext(AppContext);
+		let items=[],rightItems=[];
 
-		let playButtonClass="header-button text-white ";
-		if (ctx.playing)
-			playButtonClass+="active";
-
-		let recordButtonClass="header-button text-white ";
-		if (ctx.recording)
-			recordButtonClass+="active";
-
-		let items=[];
 		if (ctx.isSongOpen()) {
 			items.push(
 				<A onRelease={ctx.goBack}>
@@ -38,17 +30,17 @@ export default class Header extends Component {
 				</div>
 			);
 
-			items.push(
-				<A class={playButtonClass}
-						onPress={ctx.playClick}>
-					<img src="img/play-fill.svg"/>
+			rightItems.push(
+				<A onPress={ctx.playClick}>
+					<img class="icon" src="img/play-fill.svg"
+							style={{"margin-left": "0.5rem"}}/>
 				</A>
 			);
 
-			items.push(
-				<A class="header-button text-white"
-						onRelease={ctx.toggleSettings}>
-					<img src="img/gear-fill.svg"/>
+			rightItems.push(
+				<A onRelease={ctx.toggleSettings}>
+					<img class="icon" src="img/gear-fill.svg"
+							style={{"margin-left": "0.5rem"}}/>
 				</A>
 			);
 		}
@@ -57,20 +49,21 @@ export default class Header extends Component {
 				<div class="header-text text-white">Hoodmode</div>
 			);
 
-			items.push(
-				<A class="header-button text-white"
-					onRelease={ctx.showAboutScreen}>
-					<img src="img/info-icon.svg"/>
+			rightItems.push(
+				<A onRelease={ctx.showAboutScreen}>
+					<img class="icon" src="img/info-icon.svg"/>
 				</A>
 			);
 		}
 
 
 		return (
-			<Box width="100%" height="4rem" bg="dark" border="white">
+			<Box width="100%" height="4rem" bg="dark">
 				{items}
-				<Align left="0.7rem" top="0.7rem" bottom="0.7rem" right="0.7rem" align="e" width="4rem" height="2rem" debug>
-
+				<Align parentPadding="bg" align="e"
+						width="6rem" height="2rem"
+						textAlign="right">
+					{rightItems}
 				</Align>
 			</Box>
 		);

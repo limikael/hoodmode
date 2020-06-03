@@ -11,8 +11,6 @@ export default class SongChords extends Component {
 		let ctx=useContext(AppContext);
 
 		let a=ctx.getCurrentSectionChordLabels().map((label, index)=>{
-			let cls="box w-1 bg-success text-light section-chord sequence-"+index;
-
 			return (
 				<Box width="4rem" height="4rem" bg="success"
 						class={"section-chord sequence-"+index}
@@ -24,8 +22,9 @@ export default class SongChords extends Component {
 
 		a.push(
 			<Box width="4rem" height="4rem" border="white"
-					onRelease={ctx.addSectionChord}>
-				<div class="button-label">+</div>
+					onRelease={ctx.addSectionChord}
+					class="button-label">
+				+
 			</Box>
 		);
 
