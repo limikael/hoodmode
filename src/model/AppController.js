@@ -421,9 +421,11 @@ export default class AppController {
 			seq: seq,
 		};
 
+		let layerIndex=song.layers.length;
 		song.layers.push(layer);
 
 		state.addLayerVisible=false;
+		state.currentLayerIndex=layerIndex;
 
 		return state;
 	}

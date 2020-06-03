@@ -38,7 +38,9 @@ export default class SongChords extends Component {
 
 		return (
 			<Box width="18rem" height="18rem" border="dark">
-				<div class="pane-header text-secondary bg-dark ">CHORDS</div>
+				<div class="pane-header text-secondary bg-dark ">
+					CHORDS - key of {ctx.getChordLabels()[0]}
+				</div>
 				{chordLabels}
 				{IF(ctx.editSectionChordVisible>=0,()=>
 					<SelectChord />
