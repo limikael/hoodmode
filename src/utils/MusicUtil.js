@@ -82,9 +82,9 @@ export default class MusicUtil {
 	}
 
 	static getChordNamesForScale(scale, minor) {
-		let prefixes=["","-","-","","","-","o"];
+		let prefixes=["","m","m","","","m","o"];
 		if (minor)
-			prefixes=["-","o","","-","-","",""];
+			prefixes=["m","o","","m","m","",""];
 
 		let noteNames=MusicUtil.getNotesForScale(scale,minor);
 		let res=[];

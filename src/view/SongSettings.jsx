@@ -3,63 +3,66 @@ import { useContext } from 'preact/compat';
 import AppContext from '../utils/AppContext.js';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
+import Box from '../utils/Box.jsx';
+import Align from '../utils/Align.jsx';
+import RemApp from '../utils/RemApp.jsx';
 
 export default class SongSettings {
 	render() {
 		let ctx=useContext(AppContext);
+		let vctx=useContext(RemApp.Context);
 
 		return (
-			<div class="pane-container">
-				<div class="pane box double bg-dark">
+			<Align modal
+					portraitWidth="18rem" portraitHeight="26rem"
+					landscapeWidth="34rem" landscapeHeight="18rem"
+					onDismiss={ctx.toggleSettings}>
+				<Box bg="dark" width="100%" height="100%">
 					<div class="pane-header bg-dark text-secondary">SONG SETTINGS</div>
-					<div class="input-group">
-						Song Name<br/>
-						<div class="box border bg-white border-black text-black w-4">
+
+					<div style={{width: "16rem", display: "inline-block", "vertical-align": "top"}}>
+						<p class="input-label">Song Name</p>
+						<Box width="100%" bg="light" border="black" height="4rem">
 							<input type="text"
 								value={ctx.getCurrentSong().name}
 								onChange={ctx.setCurrentSongName}/>
-						</div>
-					</div>
+						</Box>
 
-					<div class="input-group">
-						Tempo<br/>
-						<div class="box border bg-white border-black text-black w-4">
+						<p class="input-label">Tempo</p>
+						<Box width="100%" bg="light" border="black" height="4rem">
 							<input type="text"
 								value={ctx.getCurrentSong().bpm}
 								onBlur={ctx.setCurrentSongBpm}/>
-						</div>
+						</Box>
 					</div>
 
-					<div class="input-group">
-						Key<br/>
-						<div class="box border bg-white border-black text-black w-2">
-							<Select class="form-control col-2"
-									options={ctx.getNotesSelectOptions()}
+					<div style={{width: "16rem", display: "inline-block", "vertical-align": "top"}}>
+						<p class="input-label">Key</p>
+						<Box width="50%" bg="light" border="black" height="4rem">
+							<Select	options={ctx.getNotesSelectOptions()}
 									selected={ctx.getCurrentSong().musicKey}
 									onChange={ctx.setCurrentSongMusicKey}/>
-						</div>
-						<div class="box border bg-white border-black text-black w-2">
-							<Select class="form-control col-4"
-									options={ctx.getModalSelectOptions()}
+						</Box>
+						<Box width="50%" bg="light" border="black" height="4rem">
+							<Select	options={ctx.getModalSelectOptions()}
 									selected={ctx.getCurrentSong().minor}
 									onChange={ctx.setCurrentSongMinor}/>
-						</div>
+						</Box>
 					</div>
 
-					<div class="form-buttons">
-						<A class="bg-warning box text-white w-1"
-								href="#"
+					<Align height="4rem" width="100%" align="se" textAlign="right"
+							parentPadding="bg">
+						<Box width="4rem" height="4rem" bg="warning"
 								onRelease={ctx.deleteCurrentSong}>
-							<img src="img/trash.svg"/>
-						</A>
-						<A class="bg-primary box text-white"
-								href="#"
+							<img src="img/trash.svg" class="icon"/>
+						</Box>
+						<Box bg="primary" height="4rem"
 								onRelease={ctx.toggleSettings}>
-							Close
-						</A>
-					</div>
-				</div>
-			</div>
+							<div class="button-label-small">Close</div>
+						</Box>
+					</Align>
+				</Box>
+			</Align>
 		);
 	}
 }

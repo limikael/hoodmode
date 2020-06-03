@@ -130,11 +130,11 @@ export default class AppController {
 					"Go pro and create an unlimited number of songs!",
 
 				buttons: [{
-					class: "bg-danger",
+					bg: "danger",
 					text: "Pro",
 					action: "goPro"
 				},{
-					class: "bg-info",
+					bg: "info",
 					text: "Later"
 				}]
 			}
@@ -226,11 +226,11 @@ export default class AppController {
 				"Enjoy! Please let me know of any bugs you find!",
 
 			buttons: [{
-					class: "bg-danger",
-					text: "Pro",
-					action: "goPro"
+				bg: "danger",
+				text: "Pro",
+				action: "goPro"
 			},{
-				class: "bg-info",
+				bg: "info",
 				text: "Ok"
 			}]
 		}
@@ -300,10 +300,10 @@ export default class AppController {
 			text: "Sure you want to delete the song?",
 
 			buttons: [{
-				class: "bg-info",
+				bg: "info",
 				text: "Cancel"
 			},{
-				class: "bg-warning",
+				bg: "warning",
 				text: "Ok",
 				action: "confirmDeleteCurrentSong"
 			}]
@@ -319,11 +319,11 @@ export default class AppController {
 
 			input: "",
 			buttons: [{
-				class: 'bg-danger',
+				bg: 'danger',
 				text: 'Pro',
 				action: 'confirmGoPro'
 			},{
-				class: 'bg-info',
+				bg: 'info',
 				text: 'Later'
 			}]
 		};
@@ -340,7 +340,7 @@ export default class AppController {
 					"Pro features unlocked!",
 
 				buttons: [{
-					class: 'bg-info',
+					bg: 'info',
 					text: 'Ok'
 				}]
 			};
@@ -352,7 +352,7 @@ export default class AppController {
 					"Sorry that's the wrong password...",
 
 				buttons: [{
-					class: 'bg-info',
+					bg: 'info',
 					text: 'Ok'
 				}]
 			};

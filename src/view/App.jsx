@@ -32,9 +32,6 @@ export default class App extends Component {
 					portraitWidth="18" portraitHeight="40"
 					landscapeWidth="36" landscapeHeight="22">
 				<Header />
-				{IF(ctx.dialog,()=>
-					<Dialog />
-				)}
 
 				<Align top="4rem"
 						portraitWidth="18rem" portraitHeight="36rem"
@@ -61,6 +58,10 @@ export default class App extends Component {
 							return <Song />;
 					})}
 				</Align>
+
+				{IF(ctx.dialog,()=>
+					<Dialog />
+				)}
 			</RemApp>
 		);
 	}

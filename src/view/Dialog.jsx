@@ -3,6 +3,9 @@ import { useContext } from 'preact/compat';
 import AppContext from '../utils/AppContext.js';
 import A from './A.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
+import Box from '../utils/Box.jsx';
+import Align from '../utils/Align.jsx';
+import RemApp from '../utils/RemApp.jsx';
 
 export default class Dialog extends Component {
 	nlToBr(string) {
@@ -19,21 +22,20 @@ export default class Dialog extends Component {
 			modalFunc=null;
 
 		return (
-			<div class="modal-container"
-					onMouseUp={modalFunc} onTouchEnd={modalFunc}>
-				<div class="box border border-dark bg-background dialog">
+			<Align modal onDismiss={modalFunc} width="16rem" height="16rem">
+				<Box bg="background" border="dark" width="100%" height="100%">
 					{this.nlToBr(ctx.dialog.text)}
 
 					{IF(typeof ctx.dialog.input !== "undefined",()=>
-						<div class="box border full border-black bg-white"
-								style={{"margin-top": "0.5em"}}>
+						<Box width="100%" height="4rem" border="black" bg="light">
 							<input type="text"
 								value={ctx.dialog.input}
 								onChange={ctx.setDialogInput}/>
-						</div>
+						</Box>
 					)}
 
-					<div class="form-buttons">
+					<Align height="4rem" width="100%" align="se" textAlign="right"
+							parentPadding="bg">
 						{ctx.dialog.buttons.map((button)=>{
 							let cls="box "+button.class;
 
@@ -42,15 +44,15 @@ export default class Dialog extends Component {
 								f=ctx[button.action];
 
 							return (
-								<A class={cls}
+								<Box bg={button.bg} height="4rem"
 										onRelease={f}>
-									{button.text}
-								</A>
+									<div class="button-label-small">{button.text}</div>
+								</Box>
 							);
 						})}
-					</div>
-				</div>
-			</div>
+					</Align>
+				</Box>
+			</Align>
 		);
 	}
 }

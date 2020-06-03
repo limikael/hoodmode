@@ -19,13 +19,11 @@ export default class SelectChord extends Component {
 				<Box width="100%" height="100%" bg="background" border="dark">
 					<div class="pane-header text-secondary bg-dark ">EDIT CHORD</div>
 					{ctx.getChordLabels().map((label, index)=>{
-						/*let cls="box w-1 bg-success text-light chord ";
-
-						if (index==currentChordIndex)
-							cls+="active";*/
+						let active=(index==currentChordIndex);
 
 						return (
 							<Box width="4rem" height="4rem" bg="success"
+									active={active}
 									onRelease={ctx.editSectionChord.bind(null,index)}>
 								<div class="button-label-small">{label}</div>
 							</Box>
