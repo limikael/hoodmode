@@ -25,7 +25,7 @@ export default class Header extends Component {
 				);
 
 			items.push(
-				<div class="header-text text-white">
+				<div class="header-text">
 					{ctx.getCurrentSong().name}
 				</div>
 			);

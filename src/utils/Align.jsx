@@ -3,6 +3,12 @@ import { useContext } from 'preact/compat';
 import RemApp from './RemApp.jsx';
 
 export default class Align extends Component {
+	onDismiss=(ev)=>{
+		if (ev.target==this.base
+				&& this.props.onDismiss)
+			this.props.onDismiss();
+	}
+
 	render() {
 		let outerStyle={},innerStyle={};
 		let vctx=useContext(RemApp.Context);
@@ -78,8 +84,17 @@ export default class Align extends Component {
 			}
 		}
 
+		let outerProps={};
+		if (this.props.modal) {
+			outerStyle["position"]="fixed";
+			outerStyle["background-color"]="rgba(0,0,0,.75)";
+			outerStyle["pointer-events"]="auto";
+
+			outerProps.onClick=this.onDismiss;
+		}
+
 		return (
-			<div class="align-outer" style={outerStyle}>
+			<div class="align-outer" style={outerStyle} {...outerProps}>
 				<div class="align-inner" style={innerStyle}>
 					{this.props.children}
 				</div>

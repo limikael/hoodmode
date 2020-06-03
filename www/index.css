@@ -92,6 +92,7 @@ h1 {
     font-size: 2rem;
     font-weight: normal;
     vertical-align: top;
+    display: inline-block;
 }
 
 a {
