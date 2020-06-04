@@ -112,30 +112,40 @@ a.a {
 /*
  * Typography.
  */
-.button-label {
+.chord-button-label {
+    width: 4rem;
+    margin-left: -1rem;
+    text-align: center;
+    font-size: 1.2rem;
+    margin-top: 0.4rem;
+    font-weight: bold;
+}
+
+.big-button-label {
     font-size: 2rem;
     width: 100%;
     text-align: center;
 }
 
-.button-label-small {
+.button-label {
     font-weight: bold;
-    margin-top: 0.25rem;
-    font-size: 1.5rem;
+    margin-top: 0.4rem;
+    font-size: 1.2rem;
     width: 100%;
     text-align: center;
 }
 
-h1 {
+.header-label {
     margin: 0;
     padding: 0;
-    font-size: 2rem;
+    margin-top: 0.25rem;
+    font-size: 1.5rem;
     font-weight: normal;
     vertical-align: top;
     display: inline-block;
 }
 
-p.input-label {
+.input-label {
     display: block;
     font-size: 1em;
     margin-top: 0.8em;
@@ -155,6 +165,11 @@ p.input-label {
     border-radius: 0.5em;
     background-color: var(--color-background);
     color: var(--color-secondary);
+}
+
+.dialog-text {
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 
 /**

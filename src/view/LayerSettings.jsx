@@ -23,7 +23,7 @@ export default class LayerSettings {
 					<Box width="100%">
 						<img src={"img/"+instrument.icon} class="icon"
 								style={{"margin-right": "0.5rem"}}/>
-						<h1>{instrument.name}</h1>
+						<div class="header-label">{instrument.name}</div>
 					</Box>
 
 					<p class="input-label">Volume</p>
@@ -41,7 +41,7 @@ export default class LayerSettings {
 						</Box>
 						<Box bg="primary" height="4rem"
 								onRelease={ctx.toggleSettings}>
-							<div class="button-label-small">Close</div>
+							<div class="button-label">Close</div>
 						</Box>
 					</Align>
 				</Box>

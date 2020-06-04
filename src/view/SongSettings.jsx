@@ -58,7 +58,7 @@ export default class SongSettings {
 						</Box>
 						<Box bg="primary" height="4rem"
 								onRelease={ctx.toggleSettings}>
-							<div class="button-label-small">Close</div>
+							<div class="button-label">Close</div>
 						</Box>
 					</Align>
 				</Box>

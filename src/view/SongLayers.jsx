@@ -30,7 +30,7 @@ export default class SongLayers extends Component {
 
 				<Box width="4rem" height="4rem" border="white"
 						onRelease={ctx.showAddLayer}>
-					<div class="button-label">+</div>
+					<div class="big-button-label">+</div>
 				</Box>
 			</Box>
 		);

@@ -26,7 +26,7 @@ export default class AddLayer {
 								onRelease={ctx.addLayer.bind(null,instrument.key)}>
 							<img src={"img/"+instrument.icon} class="icon"
 									style={{"margin-right": "0.5rem"}}/>
-							<h1>{instrument.name}</h1>
+							<div class="header-label">{instrument.name}</div>
 						</Box>
 					))}
 				</Box>

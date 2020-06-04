@@ -39,26 +39,23 @@ export default class App extends Component {
 					{IF(!ctx.isSongOpen(),()=>
 						<Front />
 					)}
-					{IF(ctx.isSongOpen(),()=>{
-						if (ctx.settingsVisible) {
-							if (ctx.currentLayerIndex>=0)
-								return <LayerSettings />;
-
-							else
-								return <SongSettings />;
-						}
-
-						else if (ctx.addLayerVisible)
-							return <AddLayer />;
-
-						else if (ctx.currentLayerIndex>=0)
-							return <Layer />
-
-						else
-							return <Song />;
-					})}
+					{IF(ctx.isSongOpen() && !ctx.isLayerOpen(),()=>[
+						<Song/>,
+						IF(ctx.settingsVisible,()=>
+							<SongSettings />
+						),
+					])}
+					{IF(ctx.isSongOpen() && ctx.isLayerOpen(),()=>[
+						<Layer />,
+						IF(ctx.settingsVisible,()=>
+							<LayerSettings />
+						),
+					])}
 				</Align>
 
+				{IF(ctx.addLayerVisible,()=>
+					<AddLayer />
+				)}
 				{IF(ctx.dialog,()=>
 					<Dialog />
 				)}

@@ -25,7 +25,7 @@ export default class SelectChord extends Component {
 							<Box width="4rem" height="4rem" bg="success"
 									active={active}
 									onRelease={ctx.editSectionChord.bind(null,index)}>
-								<div class="button-label-small">{label}</div>
+								<div class="chord-button-label">{label}</div>
 							</Box>
 						)
 					})}

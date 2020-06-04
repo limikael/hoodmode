@@ -24,15 +24,18 @@ export default class Dialog extends Component {
 		return (
 			<Align modal onDismiss={modalFunc} width="16rem" height="16rem">
 				<Box bg="background" border="dark" width="100%" height="100%">
-					{this.nlToBr(ctx.dialog.text)}
+					<div class="dialog-text">
+						{this.nlToBr(ctx.dialog.text)}
+					</div>
 
-					{IF(typeof ctx.dialog.input !== "undefined",()=>
+					{IF(typeof ctx.dialog.input !== "undefined",()=>[
+						<div style={{height: "1rem"}}/>,
 						<Box width="100%" height="4rem" border="black" bg="light">
 							<input type="text"
 								value={ctx.dialog.input}
 								onChange={ctx.setDialogInput}/>
 						</Box>
-					)}
+					])}
 
 					<Align height="4rem" width="100%" align="se" textAlign="right"
 							parentPadding="bg">
@@ -46,7 +49,7 @@ export default class Dialog extends Component {
 							return (
 								<Box bg={button.bg} height="4rem"
 										onRelease={f}>
-									<div class="button-label-small">{button.text}</div>
+									<div class="button-label">{button.text}</div>
 								</Box>
 							);
 						})}

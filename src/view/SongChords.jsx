@@ -15,7 +15,7 @@ export default class SongChords extends Component {
 				<Box width="4rem" height="4rem" bg="success"
 						class={"section-chord sequence-"+index}
 						onRelease={ctx.showEditSectionChord.bind(null,index)}>
-					<div class="button-label-small">{label}</div>
+					<div class="chord-button-label">{label}</div>
 				</Box>
 			);
 		});
@@ -23,7 +23,7 @@ export default class SongChords extends Component {
 		a.push(
 			<Box width="4rem" height="4rem" border="white"
 					onRelease={ctx.addSectionChord}
-					class="button-label">
+					class="big-button-label">
 				+
 			</Box>
 		);
