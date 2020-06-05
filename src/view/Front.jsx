@@ -28,24 +28,30 @@ export default class Front {
 					<div class="button-label">New Song</div>
 				</Box>
 				<Align parentPadding="border" width="100%" height="100%" top="4rem" scroll>
-					{ctx.songs.map((song,index)=>(
-						<Box width={itemWidth} height="4rem" bg="info"
-								onRelease={ctx.setSongIndex.bind(null,index)}
-								cancelOnMove>
-							<img class="icon" src="img/song.svg"/>
-							<Align left="2.5rem" width="100%" height="2rem"
-									parentPadding="bg">
-								<div class="song-label-line1">
-									{ctx.songs[index].name}
-								</div>
-								<div class="song-label-line2">
-									Key of {ctx.getSongKeyLabelByIndex(index)}
-									&nbsp;-&nbsp;
-									{ctx.songs[index].bpm}bpm
-								</div>
-							</Align>
-						</Box>
-					))}
+					{ctx.songs.map((song,index)=>{
+						let songInfo=
+							"Key of "+ctx.getSongKeyLabelByIndex(index)+
+							" - "+
+							ctx.songs[index].bpm+"bpm";
+
+
+						return (
+							<Box width={itemWidth} height="4rem" bg="info"
+									onRelease={ctx.setSongIndex.bind(null,index)}
+									cancelOnMove>
+								<img class="icon" src="img/song.svg"/>
+								<Align left="2.5rem" width="100%" height="2rem"
+										parentPadding="bg">
+									<div class="song-label-line1">
+										{ctx.songs[index].name}
+									</div>
+									<div class="song-label-line2">
+										{songInfo}
+									</div>
+								</Align>
+							</Box>
+						);
+					})}
 				</Align>
 			</Box>
 		);
