@@ -28,7 +28,7 @@ export default class AppController {
 		state.instruments.push({
 			"key": "basic-drums",
 			"type": "percussive",
-			"name": "Drums with a very long name",
+			"name": "Drums",
 			"labels": [
 				"KICK","KICK","SNARE",
 				"SNARE","HI-HAT","HI-HAT",

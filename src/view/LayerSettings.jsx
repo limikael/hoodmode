@@ -20,10 +20,13 @@ export default class LayerSettings {
 				<Box bg="dark" width="100%" height="100%">
 					<div class="pane-header bg-dark text-secondary">LAYER SETTINGS</div>
 
-					<Box width="100%">
+					<Box height="4rem" width="100%">
 						<img src={"img/"+instrument.icon} class="icon"
 								style={{"margin-right": "0.5rem"}}/>
-						<div class="header-label">{instrument.name}</div>
+						<Align left="2.5rem" width="100%" height="2rem"
+								parentPadding="bg">
+							<div class="header-label">{instrument.name}</div>
+						</Align>
 					</Box>
 
 					<p class="input-label">Volume</p>
