@@ -125,6 +125,16 @@ export default class AppHelper {
 		];
 	}
 
+	currentLayerHasAnySound(state) {
+		let layer=this.getCurrentLayer(state);
+
+		for (let i=0; i<16; i++)
+			if (layer.seq[i].sounds.length>0)
+				return true;
+
+		return false;
+	}
+
 	currentLayerHasSoundAt(state, gridIndex) {
 		let layer=this.getCurrentLayer(state);
 

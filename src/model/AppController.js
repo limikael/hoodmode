@@ -532,6 +532,9 @@ export default class AppController {
 			return this.hideSettings(state);
 
 		else if (state.currentLayerIndex>=0) {
+			if (!this.helper.currentLayerHasAnySound(state))
+				state=this.deleteCurrentLayer(state);
+
 			state.currentLayerIndex=-1;
 			state.currentGridIndex=-1;
 			return state;
