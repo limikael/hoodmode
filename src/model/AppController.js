@@ -22,13 +22,13 @@ export default class AppController {
 			playing: false,
 			recording: false,
 			editSectionChordVisible: -1,
-			aboutScreenVisible: false
+			menuVisible: false,
 		};
 
 		state.instruments.push({
 			"key": "basic-drums",
 			"type": "percussive",
-			"name": "Drums",
+			"name": "Drums with a very long name",
 			"labels": [
 				"KICK","KICK","SNARE",
 				"SNARE","HI-HAT","HI-HAT",
@@ -221,7 +221,7 @@ export default class AppController {
 	showAboutScreen(state) {
 		state.dialog={
 			text: 
-				"Hoodmode\n\n"+
+				"Qord\n\n"+
 				"Version: "+this.helper.getAppVersion()+"\n\n"+
 				"Enjoy! Please let me know of any bugs you find!",
 
@@ -238,8 +238,8 @@ export default class AppController {
 		return state;
 	}
 
-	hideAboutScreen(state) {
-		state.aboutScreenVisible=false;
+	toggleMenu(state) {
+		state.menuVisible=!state.menuVisible;
 
 		return state;
 	}

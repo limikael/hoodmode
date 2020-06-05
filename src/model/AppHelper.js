@@ -144,6 +144,6 @@ export default class AppHelper {
 	}
 
 	isLayerOpen(state) {
-		return (state.currentLayerIndex>=0);
+		return (this.isSongOpen(state) && (state.currentLayerIndex>=0));
 	}
 }

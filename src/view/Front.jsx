@@ -27,10 +27,11 @@ export default class Front {
 				<Box height="4rem">
 					<div class="button-label">New Song</div>
 				</Box>
-				<Align parentPadding="border" width="100%" height="100%" top="4rem">
+				<Align parentPadding="border" width="100%" height="100%" top="4rem" scroll>
 					{ctx.songs.map((song,index)=>(
 						<Box width={itemWidth} height="4rem" border="light" bg="secondary"
-								onRelease={ctx.setSongIndex.bind(null,index)}>
+								onRelease={ctx.setSongIndex.bind(null,index)}
+								cancelOnMove>
 							<div class="header-label">{song.name}</div>
 						</Box>
 					))}

@@ -84,21 +84,39 @@ export default class Align extends Component {
 			}
 		}
 
-		let outerProps={};
-		if (this.props.modal) {
-			outerStyle["position"]="fixed";
-			outerStyle["background-color"]="rgba(0,0,0,.75)";
-			outerStyle["pointer-events"]="auto";
+		if (this.props.scroll)
+			innerStyle["overflow-y"]="scroll";
 
-			outerProps.onClick=this.onDismiss;
-		}
-
-		return (
-			<div class="align-outer" style={outerStyle} {...outerProps}>
+		let content=(
+			<div class="align-outer" style={outerStyle}>
 				<div class="align-inner" style={innerStyle}>
 					{this.props.children}
 				</div>
 			</div>
 		);
+
+		if (this.props.modal) {
+			let alignProps={
+				"class": "",
+				"style": {}
+			};
+
+			alignProps.style.left=0;
+			alignProps.style.top=0;
+			alignProps.style.right=0;
+			alignProps.style.bottom=0;
+			alignProps.style["position"]="fixed";
+			alignProps.style["background-color"]="rgba(0,0,0,.75)";
+			alignProps.style["pointer-events"]="auto";
+			alignProps.onClick=this.onDismiss;
+
+			content=(
+				<div {...alignProps}>
+					{content}
+				</div>
+			);
+		}
+
+		return content;
 	}
 }

@@ -16,6 +16,7 @@ import Dialog from './Dialog.jsx';
 import A from './A.jsx';
 import RemApp from '../utils/RemApp.jsx';
 import Align from '../utils/Align.jsx';
+import Menu from './Menu.jsx';
 
 export default class App extends Component {
 	render() {
@@ -45,7 +46,7 @@ export default class App extends Component {
 							<SongSettings />
 						),
 					])}
-					{IF(ctx.isSongOpen() && ctx.isLayerOpen(),()=>[
+					{IF(ctx.isLayerOpen(),()=>[
 						<Layer />,
 						IF(ctx.settingsVisible,()=>
 							<LayerSettings />
@@ -58,6 +59,9 @@ export default class App extends Component {
 				)}
 				{IF(ctx.dialog,()=>
 					<Dialog />
+				)}
+				{IF(ctx.menuVisible,()=>
+					<Menu/>
 				)}
 			</RemApp>
 		);
