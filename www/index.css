@@ -206,6 +206,31 @@ a.a {
     color: var(--color-light);
 }
 
+.song-label-line1 {
+    position: absolute;
+    top: -0.2rem;
+    left: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-weight: bold;
+    font-size: 1.2rem;
+    height: 1.5rem;
+}
+
+.song-label-line2 {
+    position: absolute;
+    top: 1.3rem;
+    left: 0;
+    width: 100%;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    font-size: 0.8rem;
+    height: 1.5rem;
+}
+
 /**
  * Img.
  */

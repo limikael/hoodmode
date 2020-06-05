@@ -296,8 +296,13 @@ export default class AppController {
 	}
 
 	deleteCurrentSong(state) {
+		let name=this.helper.getCurrentSong(state).name;
+
 		state.dialog={
-			text: "Sure you want to delete the song?",
+			text:
+				"Sure you want to delete the current song\n\n"+
+				"'"+name+"',\n\n"+
+				"It might be a hit one day!?",
 
 			buttons: [{
 				bg: "info",

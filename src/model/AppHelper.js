@@ -1,6 +1,5 @@
 import MusicUtil from '../utils/MusicUtil.js';
 const appPackage=require("../../package.json");
-//const appPackage={version: "abc"};
 
 export default class AppHelper {
 	constructor(conductor) {
@@ -13,6 +12,12 @@ export default class AppHelper {
 
 	getCurrentSong(state) {
 		return state.songs[state.currentSongIndex];
+	}
+
+	getSongKeyLabelByIndex(state, songIndex) {
+		let songData=state.songs[songIndex];
+
+		return songData.musicKey+(songData.minor?"m":"");
 	}
 
 	getCurrentLayer(state) {
