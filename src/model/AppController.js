@@ -691,9 +691,6 @@ export default class AppController {
 
 	addSectionChord(state) {
 		state.addSectionChordVisible=true;
-/*		let song=this.helper.getCurrentSong(state);
-		song.sections[state.currentSectionIndex].push(0);*/
-
 		return state;
 	}
 
