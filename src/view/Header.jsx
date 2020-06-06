@@ -19,11 +19,23 @@ export default class Header extends Component {
 				</A>
 			);
 
-			if (ctx.currentLayerIndex>=0)
+			if (ctx.currentLayerIndex>=0) {
 				leftItems.push(
 					<img src={"img/"+ctx.getInstrumentIconByKey(ctx.getCurrentLayer().instrumentKey)}
 							class="icon" style={{"margin-right": "0.5rem"}}/>
 				);
+
+				let recordClass="";
+				if (ctx.recording)
+					recordClass="active"
+
+				rightItems.push(
+					<A class={recordClass} onPress={ctx.recordClick}>
+						<img class="icon record" src="img/circle-fill.svg"
+							style={{"margin-left": "0.5rem"}}/>
+					</A>
+				);
+			}
 
 			let playClass="";
 			if (ctx.playing)
@@ -55,7 +67,7 @@ export default class Header extends Component {
 					<div class="header-label">{headerLabel}</div>
 				</Align>
 				<Align parentPadding="bg" align="e"
-						width="6rem" height="2rem"
+						width="7.5rem" height="2rem"
 						textAlign="right">
 					{rightItems}
 				</Align>

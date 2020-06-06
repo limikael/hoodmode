@@ -158,8 +158,12 @@ export default class Layer extends Component {
 			</Box>
 		);
 
+		let cls="";
+		if (ctx.recording)
+			cls="recording";
+
 		let sequence=(
-			<Box width="18rem" height="18rem" bg="dark">
+			<Box width="18rem" height="18rem" bg="dark" class={cls}>
 				<div class="pane-header text-secondary bg-dark">SEQUENCE</div>
 				{this.renderSequence()}
 			</Box>

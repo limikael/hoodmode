@@ -244,6 +244,16 @@ img.icon.dark {
     filter: none;
 }
 
+img.icon.record {
+    filter: 
+        invert(33%)
+        sepia(33%)
+        saturate(4083%)
+        hue-rotate(358deg)
+        brightness(88%)
+        contrast(86%);
+}
+
 img.icon.small {
     width: 1.33rem;
     height: 1.33rem;
@@ -259,8 +269,21 @@ img.icon.tiny {
 a.pressed img.icon,
 a.active img.icon {
     filter: invert(1)
-        drop-shadow(0em 0em 0.3em #fff)
-        drop-shadow(0em 0em 0.3em #fff);
+        drop-shadow(0em 0em 0.3rem #fff);
+}
+
+a.pressed img.icon.record,
+a.active img.icon.record {
+    filter: 
+        invert(33%)
+        sepia(33%)
+        saturate(4083%)
+        hue-rotate(358deg)
+        brightness(88%)
+        contrast(86%)
+        drop-shadow(0em 0em 0.25rem #CB4B16)
+        drop-shadow(0em 0em 0.25rem #CB4B16)
+        !important;
 }
 
 /**
@@ -268,6 +291,10 @@ a.active img.icon {
  */
 .beat-grid.current-beat {
     background: var(--color-white) !important;
+}
+
+.recording .beat-grid.current-beat {
+    background: var(--color-warning) !important;
 }
 
 .beat-grid.current-beat img {

@@ -529,6 +529,8 @@ export default class AppController {
 	}
 
 	goBack(state) {
+		state.recording=false;
+
 		if (state.settingsVisible)
 			return this.hideSettings(state);
 
