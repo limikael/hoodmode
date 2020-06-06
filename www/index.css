@@ -269,7 +269,8 @@ img.icon.tiny {
 a.pressed img.icon,
 a.active img.icon {
     filter: invert(1)
-        drop-shadow(0em 0em 0.3rem #fff);
+        drop-shadow(0em 0em 0.5rem #fff)
+        drop-shadow(0em 0em 0.25rem #fff);
 }
 
 a.pressed img.icon.record,
@@ -281,7 +282,7 @@ a.active img.icon.record {
         hue-rotate(358deg)
         brightness(88%)
         contrast(86%)
-        drop-shadow(0em 0em 0.25rem #CB4B16)
+        drop-shadow(0em 0em 0.5rem #CB4B16)
         drop-shadow(0em 0em 0.25rem #CB4B16)
         !important;
 }
