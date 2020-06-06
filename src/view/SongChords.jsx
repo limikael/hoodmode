@@ -42,7 +42,7 @@ export default class SongChords extends Component {
 					CHORDS - key of {ctx.getChordLabels()[0]}
 				</div>
 				{chordLabels}
-				{IF(ctx.editSectionChordVisible>=0,()=>
+				{IF(ctx.addSectionChordVisible || ctx.editSectionChordVisible>=0,()=>
 					<SelectChord />
 				)}
 			</Box>

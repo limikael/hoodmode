@@ -22,6 +22,7 @@ export default class AppController {
 			playing: false,
 			recording: false,
 			editSectionChordVisible: -1,
+			addSectionChordVisible: false,
 			menuVisible: false,
 		};
 
@@ -689,19 +690,21 @@ export default class AppController {
 	}
 
 	addSectionChord(state) {
-		let song=this.helper.getCurrentSong(state);
-		song.sections[state.currentSectionIndex].push(0);
+		state.addSectionChordVisible=true;
+/*		let song=this.helper.getCurrentSong(state);
+		song.sections[state.currentSectionIndex].push(0);*/
 
 		return state;
 	}
 
-	showEditSectionChord(state,index) {
+	showEditSectionChord(state, index) {
 		state.editSectionChordVisible=index;
 		return state;
 	}
 
-	hideEditSectionChord(state,index) {
+	hideEditSectionChord(state) {
 		state.editSectionChordVisible=-1;
+		state.addSectionChordVisible=false;
 		return state;
 	}
 
@@ -710,13 +713,22 @@ export default class AppController {
 		song.sections[state.currentSectionIndex].splice(state.editSectionChordVisible,1);
 
 		state.editSectionChordVisible=-1;
+		state.addSectionChordVisible=false;
+
 		return state;
 	}
 
 	editSectionChord(state, index) {
 		let song=this.helper.getCurrentSong(state);
-		song.sections[state.currentSectionIndex][state.editSectionChordVisible]=index;
+
+		if (state.editSectionChordVisible>=0)
+			song.sections[state.currentSectionIndex][state.editSectionChordVisible]=index;
+
+		else
+			song.sections[state.currentSectionIndex].push(index);
+
 		state.editSectionChordVisible=-1;
+		state.addSectionChordVisible=false;
 		return state;
 	}
 }

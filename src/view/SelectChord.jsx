@@ -13,11 +13,19 @@ export default class SelectChord extends Component {
 		let section=song.sections[ctx.currentSectionIndex];
 		let currentChordIndex=section[ctx.editSectionChordVisible];
 
+		let height="10rem";
+		let label="ADD CHORD";
+
+		if (ctx.editSectionChordVisible>=0) {
+			height="15rem";
+			label="EDIT CHORD";
+		}
+
 		return (
-			<Align width="18rem" height="15rem" modal
+			<Align width="18rem" height={height} modal
 					onDismiss={ctx.hideEditSectionChord}>
 				<Box width="100%" height="100%" bg="background" border="dark">
-					<div class="pane-header text-secondary bg-dark ">EDIT CHORD</div>
+					<div class="pane-header text-secondary bg-dark ">{label}</div>
 					{ctx.getChordLabels().map((label, index)=>{
 						let active=(index==currentChordIndex);
 
@@ -29,7 +37,7 @@ export default class SelectChord extends Component {
 							</Box>
 						)
 					})}
-					{IF(section.length>1,()=>
+					{IF(section.length>1 && ctx.editSectionChordVisible>=0,()=>
 						<Align parentPadding="border" width="100%" height="4rem" align="se"
 								textAlign="right">
 							<Box width="4rem" height="4rem" bg="danger"
