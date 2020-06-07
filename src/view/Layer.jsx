@@ -1,13 +1,13 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import A from './A.jsx';
 import Box from '../utils/Box.jsx';
 import RemApp from '../utils/RemApp.jsx';
 
 export default class Layer extends Component {
 	onKeyDown=(e)=>{
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
 		if (e.target.nodeName=="INPUT")
 			return;
@@ -26,7 +26,7 @@ export default class Layer extends Component {
 	}
 
 	renderSoundSymbols() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
 		let instrument=ctx.getCurrentInstrument();
 		let layer=ctx.getCurrentLayer();
@@ -106,7 +106,7 @@ export default class Layer extends Component {
 	}
 
 	renderSequence() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
 		let layer=ctx.getCurrentLayer();
 		let res=[];
@@ -147,7 +147,7 @@ export default class Layer extends Component {
 	}
 
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 		let vctx=useContext(RemApp.Context);
 		let layer=ctx.getCurrentLayer();
 

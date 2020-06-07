@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
 import Box from '../utils/Box.jsx';
@@ -9,7 +9,7 @@ import RemApp from '../utils/RemApp.jsx';
 
 export default class SongSettings {
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 		let vctx=useContext(RemApp.Context);
 
 		return (

@@ -6,7 +6,8 @@ import MusicUtil from '../utils/MusicUtil';
 import AudioTimer from '../utils/AudioTimer';
 
 export default class Conductor {
-	constructor() {
+	constructor(state) {
+		this.state=state;
 		let AudioContext=window.AudioContext;
 
 		if (!AudioContext)
@@ -27,6 +28,8 @@ export default class Conductor {
 	}
 
 	loadInstruments() {
+		this.updateState();
+
 		let promises=[];
 		for (let instrument of this.instruments.getItems())
 			promises.push(instrument.load());
@@ -223,16 +226,15 @@ export default class Conductor {
 		return this.audioTimer.isRunning();
 	}
 
-	setState=(state)=>{
-		this.state=state;
-		this.instruments.setData(state.instruments);
+	updateState=(state)=>{
+		this.instruments.setData(this.state.instruments);
 
 		if (this.getCurrentSong()) {
 			this.layers.setData(this.getCurrentSong().layers);
-			if (state.playing && !this.isPlaying())
+			if (this.state.playing && !this.isPlaying())
 				this.play();
 
-			else if (!state.playing && this.isPlaying())
+			else if (!this.state.playing && this.isPlaying())
 				this.stop();
 
 			if (this.isPlaying() && this.playBpm!=this.getCurrentSong().bpm) {
@@ -246,7 +248,7 @@ export default class Conductor {
 			this.layers.setData([]);
 		}
 
-		if (state.currentSectionIndex<0) {
+		if (this.state.currentSectionIndex<0) {
 			this.playingSequenceIndex=-1;
 			this.playingSequenceChordIndex=-1
 			let currentChordCents=this.getCurrentChordCents();
@@ -254,8 +256,8 @@ export default class Conductor {
 				note.setChordCents(currentChordCents);
 		}
 
-		else if (state.currentSectionIndex!=this.playingSequenceIndex) {
-			this.playingSequenceIndex=state.currentSectionIndex;
+		else if (this.state.currentSectionIndex!=this.playingSequenceIndex) {
+			this.playingSequenceIndex=this.state.currentSectionIndex;
 			this.playingSequenceChordIndex=-1;
 		}
 	};

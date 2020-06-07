@@ -3,28 +3,25 @@ import "regenerator-runtime/runtime";
 import demosongs from './demosongs';
 
 export default class AppController {
-	constructor(conductor, helper) {
+	constructor(conductor) {
 		this.conductor=conductor;
-		this.helper=helper;
 	}
 
-	initState() {
-		let state={
-			currentSongIndex: -1,
-			currentLayerIndex: -1,
-			currentChordIndex: 0,
-			currentSectionIndex: -1,
-			currentGridIndex: -1,
-			settingsVisible: false,
-			addLayerVisible: false,
-			songs: [],
-			instruments: [],
-			playing: false,
-			recording: false,
-			editSectionChordVisible: -1,
-			addSectionChordVisible: false,
-			menuVisible: false,
-		};
+	initState(state) {
+		state.currentSongIndex=-1;
+		state.currentLayerIndex=-1;
+		state.currentChordIndex=0;
+		state.currentSectionIndex=-1;
+		state.currentGridIndex=-1;
+		state.settingsVisible=false;
+		state.addLayerVisible=false;
+		state.songs=[];
+		state.instruments=[];
+		state.playing=false;
+		state.recording=false;
+		state.editSectionChordVisible=-1;
+		state.addSectionChordVisible=false;
+		state.menuVisible=false;
 
 		state.instruments.push({
 			"key": "basic-drums",
@@ -95,13 +92,12 @@ export default class AppController {
 			"sample": "samples/Yamaha-EX5-MellowStrngs-C4.wav",
 			"icon": "violin.svg",
 			"defaultVolume": 0.25
-		})
-
-		return state;
+		});
 	}
 
-	async init() {
-		let state=this.initState();
+	async init(state) {
+		state.initState();
+
 		let songDataJson=window.localStorage.getItem("hoodmode-songs");
 		if (songDataJson)
 			state.songs=JSON.parse(songDataJson);
@@ -111,14 +107,11 @@ export default class AppController {
 
 		state.premium=window.localStorage.getItem("hoodmode-premium");
 
-		this.conductor.setState(state);
 		await this.conductor.loadInstruments();
 
 		if (navigator.splashscreen) {
 			navigator.splashscreen.hide();
 		}
-
-		return state;
 	};
 
 	addSong(state, name) {
@@ -199,7 +192,7 @@ export default class AppController {
 		state.playing=false;
 		state.recording=false;
 
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong();
 		for (let i=song.sections.length-1; i>=0; i--)
 			if (song.sections[i].length>1)
 				state.currentSectionIndex=i;
@@ -223,7 +216,7 @@ export default class AppController {
 		state.dialog={
 			text: 
 				"Qord\n\n"+
-				"Version: "+this.helper.getAppVersion()+"\n\n"+
+				"Version: "+state.getAppVersion()+"\n\n"+
 				"Enjoy! Please let me know of any bugs you find!",
 
 			buttons: [{
@@ -297,7 +290,7 @@ export default class AppController {
 	}
 
 	deleteCurrentSong(state) {
-		let name=this.helper.getCurrentSong(state).name;
+		let name=state.getCurrentSong().name;
 
 		state.dialog={
 			text:
@@ -367,7 +360,7 @@ export default class AppController {
 		return state;
 	}
 
-	setDialogInput(state,value) {
+	setDialogInput(state, value) {
 		state.dialog.input=String(value).toLowerCase();
 		return state;
 	}
@@ -391,7 +384,7 @@ export default class AppController {
 	}
 
 	addSequenceChord(state) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong();
 
 		song.chordSequence.push({
 			chordIndex: 0,
@@ -405,8 +398,8 @@ export default class AppController {
 		let song=state.songs[state.currentSongIndex];
 
 		let seq=[];
-		let numSounds=this.helper.getInstrumentNumSoundsByKey(state,instrumentKey);
-		let instrument=this.helper.getInstrumentByKey(state,instrumentKey);
+		let numSounds=state.getInstrumentNumSoundsByKey(instrumentKey);
+		let instrument=state.getInstrumentByKey(instrumentKey);
 
 		let volume=1;
 		if (instrument.hasOwnProperty("defaultVolume"))
@@ -437,9 +430,9 @@ export default class AppController {
 	}
 
 	setLayerIndex(state, index) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong(state);
 
-		if (!this.helper.instrumentExists(state,song.layers[index].instrumentKey)) {
+		if (!state.instrumentExists(song.layers[index].instrumentKey)) {
 			state.dialogText="Layer is broken, delete?";
 			state.dialogAction="deleteDialogLayer";
 			state.dialogData=index;
@@ -458,14 +451,14 @@ export default class AppController {
 	}
 
 	toggleLayerAudible(state, layerIndex) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong();
 		song.layers[layerIndex].audible=!song.layers[layerIndex].audible;
 
 		return state;
 	}
 
 	deleteDialogLayer(state) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong(state);
 		song.layers.splice(state.dialogData,1);
 		state.currentLayerIndex=-1;
 		state.currentGridIndex=-1;
@@ -475,7 +468,7 @@ export default class AppController {
 	}
 
 	deleteCurrentLayer(state) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong();
 		song.layers.splice(state.currentLayerIndex,1);
 		state.currentLayerIndex=-1;
 		state.currentGridIndex=-1;
@@ -485,7 +478,7 @@ export default class AppController {
 	}
 
 	setCurrentLayerVolume(state, volume) {
-		let layer=this.helper.getCurrentLayer(state);
+		let layer=state.getCurrentLayer();
 		layer.volume=parseFloat(volume);
 
 		return state;
@@ -515,14 +508,14 @@ export default class AppController {
 	}
 
 	deleteSequenceChord(state, index) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong(state);
 		song.chordSequence.splice(index,1);
 
 		return state;
 	}
 
 	setSequenceChord(state, sequenceIndex, chordIndex) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong(state);
 		song.chordSequence[sequenceIndex].chordIndex=chordIndex;
 
 		return state;
@@ -535,7 +528,7 @@ export default class AppController {
 			return this.hideSettings(state);
 
 		else if (state.currentLayerIndex>=0) {
-			if (!this.helper.currentLayerHasAnySound(state))
+			if (!state.currentLayerHasAnySound(state))
 				state=this.deleteCurrentLayer(state);
 
 			state.currentLayerIndex=-1;
@@ -546,7 +539,7 @@ export default class AppController {
 		else if (state.addLayerVisible)
 			return this.hideAddLayer(state);
 
-		else if (this.helper.isSongOpen(state))
+		else if (state.isSongOpen())
 			return this.closeSong(state)
 
 		return state;
@@ -566,7 +559,7 @@ export default class AppController {
 	}
 
 	toggleCurrentLayerStacc(state) {
-		let layer=this.helper.getCurrentLayer(state);
+		let layer=state.getCurrentLayer(state);
 		let gridIndex=state.currentGridIndex;
 
 		if (state.recording)
@@ -583,7 +576,7 @@ export default class AppController {
 	}
 
 	setCurrentLayerVel(state, vel) {
-		let layer=this.helper.getCurrentLayer(state);
+		let layer=state.getCurrentLayer();
 		let gridIndex=state.currentGridIndex;
 
 		if (state.recording)
@@ -598,7 +591,7 @@ export default class AppController {
 	}
 
 	setGridSound(state, gridIndex, soundIndex, enabled) {
-		let layer=this.helper.getCurrentLayer(state);
+		let layer=state.getCurrentLayer();
 		let currentEnabled=
 			layer.seq[gridIndex].sounds.includes(soundIndex);
 
@@ -639,7 +632,7 @@ export default class AppController {
 			return state;
 		}
 
-		let layer=this.helper.getCurrentLayer(state);
+		let layer=state.getCurrentLayer();
 		let enabled=layer.seq[state.currentGridIndex].sounds.includes(soundIndex);
 		state=this.setCurrentGridSound(state,soundIndex,!enabled);
 
@@ -650,7 +643,7 @@ export default class AppController {
 	}
 
 	chordButtonClick(state, octave) {
-		let instrument=this.helper.getCurrentInstrument(state);
+		let instrument=state.getCurrentInstrument();
 
 		if (state.recording) {
 			this.conductor.playLayerInstrument(octave*3);
@@ -672,8 +665,8 @@ export default class AppController {
 			return state;
 		}
 
-		let layer=this.helper.getCurrentLayer(state);
-		if (this.helper.currentLayerHasChordAt(state,state.currentGridIndex,octave)) {
+		let layer=state.getCurrentLayer();
+		if (state.currentLayerHasChordAt(state.currentGridIndex,octave)) {
 			state=this.setCurrentGridSound(state,octave*3,false);
 			state=this.setCurrentGridSound(state,octave*3+1,false);
 			state=this.setCurrentGridSound(state,octave*3+2,false);
@@ -708,7 +701,7 @@ export default class AppController {
 	}
 
 	removeSectionChord(state) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong();
 		song.sections[state.currentSectionIndex].splice(state.editSectionChordVisible,1);
 
 		state.editSectionChordVisible=-1;
@@ -718,7 +711,7 @@ export default class AppController {
 	}
 
 	editSectionChord(state, index) {
-		let song=this.helper.getCurrentSong(state);
+		let song=state.getCurrentSong();
 
 		if (state.editSectionChordVisible>=0)
 			song.sections[state.currentSectionIndex][state.editSectionChordVisible]=index;

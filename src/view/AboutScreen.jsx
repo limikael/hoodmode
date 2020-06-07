@@ -1,12 +1,12 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import A from './A.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 
 export default class AboutScreen extends Component {
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
 		return (
 			<div class="modal-container" onClick={ctx.hideAboutScreen}>

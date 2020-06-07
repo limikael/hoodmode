@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import A from './A.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import Box from '../utils/Box.jsx';
@@ -15,7 +15,7 @@ export default class Dialog extends Component {
 	}
 
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
 		let modalFunc=ctx.cancelDialog;
 		if (typeof ctx.dialog.input !== "undefined")

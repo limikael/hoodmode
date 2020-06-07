@@ -1,23 +1,24 @@
 import "preact/debug";
-
 import { h, render } from 'preact';
 import App from './view/App.jsx';
-import AppContextProvider from './utils/AppContextProvider.jsx';
+import StateStore from './utils/StateStore.jsx';
 import shortid from 'shortid';
 import AppController from './model/AppController.js';
 import AppHelper from './model/AppHelper.js';
 import Conductor from './model/Conductor.js';
+import StoreManager from './model/StoreManager.js';
 
-let conductor, appHelper, appController;
+let stateStore=new StateStore();
+let conductor=new Conductor(stateStore);
+let storeManager=new StoreManager(stateStore);
+stateStore.addMutators(new AppController(conductor));
+stateStore.addMethods(new AppHelper(conductor));
 
-try {
-	conductor=new Conductor();
-	appHelper=new AppHelper(conductor);
-	appController=new AppController(conductor,appHelper);
-}
-
-catch (e) {
-	alert(e);
+stateStore.onStateChange=()=>{
+	conductor.updateState();
+	storeManager.updateState();
+	window.localStorage.setItem("hoodmode-songs",JSON.stringify(stateStore.songs));
+	window.localStorage.setItem("hoodmode-premium",stateStore.premium);
 }
 
 conductor.onPlayGridIndexChange=(gridIndex, sequenceIndex)=>{
@@ -36,23 +37,15 @@ conductor.onPlayGridIndexChange=(gridIndex, sequenceIndex)=>{
 			el.classList.add('current-sequence');
 }
 
-function onStateChange(state) {
-	conductor.setState(state);
-	window.localStorage.setItem("hoodmode-songs",JSON.stringify(state.songs));
-	window.localStorage.setItem("hoodmode-premium",state.premium);
-}
-
 let appContent=(
-	<AppContextProvider
-			controller={appController}
-			helper={appHelper}
-			initAction="init"
-			onStateChange={onStateChange}>
+	<StateStore.Provider store={stateStore}>
 		<App/>
-	</AppContextProvider>
+	</StateStore.Provider>
 );
 
 function start() {
+	stateStore.init();
+	storeManager.init();
 	window.addEventListener('keyboardWillHide', () => window.scrollTo(0, 0));
 	render(appContent, document.body);
 }

@@ -1,12 +1,12 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import A from './A.jsx';
 import Box from '../utils/Box.jsx';
 
 export default class SongLayers extends Component {
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 		let song=ctx.getCurrentSong();
 
 		return (

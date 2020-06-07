@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import SelectChord from './SelectChord.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
@@ -8,7 +8,7 @@ import Box from '../utils/Box.jsx';
 
 export default class SongChords extends Component {
 	renderSectionChords() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
 		let a=ctx.getCurrentSectionChordLabels().map((label, index)=>{
 			return (
@@ -32,7 +32,7 @@ export default class SongChords extends Component {
 	}
 
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 		let song=ctx.getCurrentSong();
 		let chordLabels=this.renderSectionChords();
 

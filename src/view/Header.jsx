@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import A from './A.jsx';
 import Box from '../utils/Box.jsx';
@@ -8,7 +8,7 @@ import Align from '../utils/Align.jsx';
 
 export default class Header extends Component {
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 		let leftItems=[],rightItems=[];
 		let headerLabel="Qord";
 

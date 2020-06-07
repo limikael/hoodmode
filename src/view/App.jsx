@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import { Select, IF } from '../utils/ReactUtil.jsx';
 import Header from './Header.jsx';
 import Front from './Front.jsx';
@@ -20,12 +20,12 @@ import Menu from './Menu.jsx';
 
 export default class App extends Component {
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
-		if (ctx.error)
-			return (<div>{String(ctx.error)}</div>);
+		if (ctx.__error)
+			return (<div>{String(ctx.__error)}</div>);
 
-		if (ctx.busy)
+		if (ctx.isBusy())
 			return (<div>LOADING...</div>);
 
 		return (

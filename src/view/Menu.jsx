@@ -1,20 +1,20 @@
 import { h, Component } from 'preact';
 import { useContext } from 'preact/compat';
-import AppContext from '../utils/AppContext.js';
+import StateStore from '../utils/StateStore.jsx';
 import Align from '../utils/Align.jsx';
 import Box from '../utils/Box.jsx';
 import A from '../view/A.jsx';
 
 export default class Menu extends Component {
 	onMenuClick=(i)=>{
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 
 		ctx.toggleMenu();
 		this.menuItems[i].func();
 	}
 
 	render() {
-		let ctx=useContext(AppContext);
+		let ctx=useContext(StateStore.Context);
 		this.menuItems=[];
 
 		if (ctx.isLayerOpen()) {
