@@ -103,8 +103,6 @@ export default class AppController {
 	}
 
 	async init(state) {
-		console.log("yoyo... initializing...");
-
 		state.initState();
 
 		let songDataJson=window.localStorage.getItem("hoodmode-songs");
