@@ -7,12 +7,20 @@ import AppController from './model/AppController.js';
 import AppHelper from './model/AppHelper.js';
 import Conductor from './model/Conductor.js';
 import StoreManager from './model/StoreManager.js';
+import MockStoreManager from './model/MockStoreManager.js';
 
 let stateStore=new StateStore();
 let conductor=new Conductor(stateStore);
-let storeManager=new StoreManager(stateStore);
-stateStore.addMutators(new AppController(conductor));
-stateStore.addMethods(new AppHelper(conductor));
+
+let storeManager;
+if (window.hasOwnProperty("cordova"))
+	storeManager=new StoreManager(stateStore);
+
+else
+	storeManager=new MockStoreManager(stateStore);
+
+stateStore.addMutators(new AppController(conductor, storeManager));
+stateStore.addMethods(new AppHelper(conductor, storeManager));
 
 stateStore.onStateChange=()=>{
 	conductor.updateState();
@@ -45,7 +53,6 @@ let appContent=(
 
 function start() {
 	stateStore.init();
-	storeManager.init();
 	window.addEventListener('keyboardWillHide', () => window.scrollTo(0, 0));
 	render(appContent, document.body);
 }

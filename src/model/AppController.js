@@ -3,8 +3,9 @@ import "regenerator-runtime/runtime";
 import demosongs from './demosongs';
 
 export default class AppController {
-	constructor(conductor) {
+	constructor(conductor, storeManager) {
 		this.conductor=conductor;
+		this.storeManager=storeManager;
 	}
 
 	initState(state) {
@@ -22,6 +23,7 @@ export default class AppController {
 		state.editSectionChordVisible=-1;
 		state.addSectionChordVisible=false;
 		state.menuVisible=false;
+		state.premiumState="basic";
 
 		state.instruments.push({
 			"key": "basic-drums",
@@ -93,9 +95,16 @@ export default class AppController {
 			"icon": "violin.svg",
 			"defaultVolume": 0.25
 		});
+
+		state.premiumCodes=[
+			"gwbv","ownh","cuth","qlxv",
+			"dcxs","gzlm","bttm","ihpm"
+		];
 	}
 
 	async init(state) {
+		console.log("yoyo... initializing...");
+
 		state.initState();
 
 		let songDataJson=window.localStorage.getItem("hoodmode-songs");
@@ -105,7 +114,7 @@ export default class AppController {
 		if (!state.songs || !state.songs.length)
 			state.songs=demosongs;
 
-		state.premium=window.localStorage.getItem("hoodmode-premium");
+		this.storeManager.init(state.premiumCodes);
 
 		await this.conductor.loadInstruments();
 
@@ -118,22 +127,22 @@ export default class AppController {
 		if (!name || name.toString()=="[object MouseEvent]")
 			name="My New Song";
 
-		if (state.premium!="jamming" && state.songs.length>=3) {
+		if (state.premiumState!="premium" && state.songs.length>=3) {
 			state.dialog={
-				text: 
-					"Go pro and create an unlimited number of songs!",
+				text:
+					"You have reached the maximum song capacity for the basic version.\n\n"+
+					"Please get the pro version for unlimited capacity!",
 
 				buttons: [{
 					bg: "danger",
 					text: "Pro",
-					action: "goPro"
+					action: "premiumClicked"
 				},{
-					bg: "info",
-					text: "Later"
+					bg: "success",
+					text: "Enter Code",
+					action: "premiumCodeClicked"
 				}]
 			}
-
-			state.dialogText="Max 3 songs during beta...";
 
 			return state;
 		}
@@ -220,10 +229,6 @@ export default class AppController {
 				"Enjoy! Please let me know of any bugs you find!",
 
 			buttons: [{
-				bg: "danger",
-				text: "Pro",
-				action: "goPro"
-			},{
 				bg: "info",
 				text: "Ok"
 			}]
@@ -294,7 +299,7 @@ export default class AppController {
 
 		state.dialog={
 			text:
-				"Sure you want to delete the current song\n\n"+
+				"Sure you want to delete the current song:\n\n"+
 				"'"+name+"',\n\n"+
 				"It might be a hit one day!?",
 
@@ -303,59 +308,10 @@ export default class AppController {
 				text: "Cancel"
 			},{
 				bg: "warning",
-				text: "Ok",
+				text: "Delete",
 				action: "confirmDeleteCurrentSong"
 			}]
 		};
-
-		return state;
-	}
-
-	goPro(state) {
-		state.dialog={
-			text:
-				"Please enter the password to unlock the pro features!",
-
-			input: "",
-			buttons: [{
-				bg: 'danger',
-				text: 'Pro',
-				action: 'confirmGoPro'
-			},{
-				bg: 'info',
-				text: 'Later'
-			}]
-		};
-
-		return state;
-	}
-
-	confirmGoPro(state) {
-		state.premium=state.dialog.input;
-
-		if (state.premium=="jamming") {
-			state.dialog={
-				text:
-					"Pro features unlocked!",
-
-				buttons: [{
-					bg: 'info',
-					text: 'Ok'
-				}]
-			};
-		}
-
-		else {
-			state.dialog={
-				text:
-					"Sorry that's the wrong password...",
-
-				buttons: [{
-					bg: 'info',
-					text: 'Ok'
-				}]
-			};
-		}
 
 		return state;
 	}
@@ -722,5 +678,78 @@ export default class AppController {
 		state.editSectionChordVisible=-1;
 		state.addSectionChordVisible=false;
 		return state;
+	}
+
+	premiumClicked(state) {
+		state.cancelDialog();
+		this.storeManager.buyPremium();
+	}
+
+	premiumCodeClicked(state) {
+		state.dialog={
+			text:
+				"Please enter the your pro code to redeem your pro version offer!",
+
+			input: "",
+			buttons: [{
+				bg: 'danger',
+				text: 'Pro',
+				action: 'premiumCodeEntered'
+			}]
+		};
+
+		return state;
+	}
+
+	premiumCodeEntered(state) {
+		let code=String(state.dialog.input).toLowerCase();
+		state.cancelDialog();
+
+		if (state.premiumCodes.includes(code)) {
+			this.storeManager.buyPremium(code);
+		}
+
+		else {
+			state.dialog={
+				text: "This pro code is not recognized.",
+				buttons: [{
+					bg: "info",
+					text: "Ok"
+				}]
+			}
+		}
+	}
+
+	setPremiumState(state, premiumState) {
+		let oldState=state.premiumState;
+		state.premiumState=premiumState;
+
+		if (oldState=="pending" && premiumState=="premium") {
+			state.alert(
+				"Welcome as a pro user, and thank you very much for your confidence!\n\n"+
+				"If there is anything I can do, please reach out!"
+			);
+		}
+
+		if (oldState=="pending" && premiumState=="basic") {
+			state.alert(
+				"Unfortunately there was a problem while enabling your subscription.\n\n"+
+				"Please try again later!"
+			);
+		}
+	}
+
+	manageSubscriptionsClicked(state) {
+		this.storeManager.manageSubscriptions();
+	}
+
+	alert(state, message) {
+		state.dialog={
+			text: message,
+			buttons: [{
+				bg: "info",
+				text: "Ok"
+			}]
+		}
 	}
 }

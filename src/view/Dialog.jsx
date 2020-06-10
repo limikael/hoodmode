@@ -16,10 +16,7 @@ export default class Dialog extends Component {
 
 	render() {
 		let ctx=useContext(StateStore.Context);
-
 		let modalFunc=ctx.cancelDialog;
-		if (typeof ctx.dialog.input !== "undefined")
-			modalFunc=null;
 
 		return (
 			<Align modal onDismiss={modalFunc} width="16rem" height="16rem">
@@ -37,7 +34,7 @@ export default class Dialog extends Component {
 						</Box>
 					])}
 
-					<Align height="4rem" width="100%" align="se" textAlign="right"
+					<Align height="4rem" width="100%" align="se" textAlign="center"
 							parentPadding="bg">
 						{ctx.dialog.buttons.map((button)=>{
 							let cls="box "+button.class;

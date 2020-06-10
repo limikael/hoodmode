@@ -10,7 +10,9 @@ export default class Menu extends Component {
 		let ctx=useContext(StateStore.Context);
 
 		ctx.toggleMenu();
-		this.menuItems[i].func();
+
+		if (this.menuItems[i].func)
+			this.menuItems[i].func();
 	}
 
 	render() {
@@ -58,10 +60,32 @@ export default class Menu extends Component {
 			func: ctx.showAboutScreen
 		});
 
-		this.menuItems.push({
-			label: "Pro Version",
-			func: ctx.goPro
-		});
+		switch (ctx.premiumState) {
+			case "basic":
+				this.menuItems.push({
+					label: "Get Pro version",
+					func: ctx.premiumClicked
+				});
+
+				this.menuItems.push({
+					label: "Enter Pro code",
+					func: ctx.premiumCodeClicked
+				});
+				break;
+
+			case "pending":
+				this.menuItems.push({
+					label: "Pro pending..."
+				});
+				break;
+
+			case "premium":
+				this.menuItems.push({
+					label: "Manage Subscription",
+					func: ctx.manageSubscriptionsClicked
+				});
+				break;
+		}
 
 		let renderedMenuItems=[];
 		for (let i in this.menuItems) {
