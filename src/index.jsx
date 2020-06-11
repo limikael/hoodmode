@@ -54,6 +54,7 @@ let appContent=(
 function start() {
 	stateStore.init();
 	window.addEventListener('keyboardWillHide', () => window.scrollTo(0, 0));
+	document.addEventListener("backbutton", () => stateStore.goBack(), true);
 	render(appContent, document.body);
 }
 

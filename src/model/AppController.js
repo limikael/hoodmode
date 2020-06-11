@@ -478,8 +478,20 @@ export default class AppController {
 	goBack(state) {
 		state.recording=false;
 
-		if (state.settingsVisible)
+		if (state.menuVisible)
+			state.menuVisible=false;
+
+		else if (state.dialog)
+			state.cancelDialog();
+
+		else if (state.settingsVisible)
 			return this.hideSettings(state);
+
+		else if (state.addSectionChordVisible ||
+				state.editSectionChordVisible>=0) {
+			state.addSectionChordVisible=false;
+			state.editSectionChordVisible=-1;
+		}
 
 		else if (state.currentLayerIndex>=0) {
 			if (!state.currentLayerHasAnySound(state))
@@ -496,7 +508,8 @@ export default class AppController {
 		else if (state.isSongOpen())
 			return this.closeSong(state)
 
-		return state;
+		else
+			navigator.app.exitApp();
 	}
 
 	gridIndexClick(state, newGridIndex) {
