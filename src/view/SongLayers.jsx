@@ -9,6 +9,18 @@ export default class SongLayers extends Component {
 		let ctx=useContext(StateStore.Context);
 		let song=ctx.getCurrentSong();
 
+		let iconLinkStyle={
+			"display": 'inline-block',
+			"position": "absolute",
+			"top": "0",
+			"right": "0",
+			"height": "3.6rem",
+			"width": "3.6rem",
+			"padding-top": "0.8rem",
+			"padding-right": "1.3rem",
+			"text-align": "right"
+		}
+
 		return (
 			<Box width="18rem" height="18rem" border="dark">
 				<div class="pane-header text-secondary">LAYERS</div>
@@ -21,7 +33,8 @@ export default class SongLayers extends Component {
 							<img class="icon"
 									src={"img/"+ctx.getInstrumentIconByKey(layer.instrumentKey)}
 									style={{"margin-left": "0.5rem", "margin-right": "1rem"}}/>
-							<A onPress={ctx.toggleLayerAudible.bind(null,index)}>
+							<A onPress={ctx.toggleLayerAudible.bind(null,index)}
+									style={iconLinkStyle}>
 								<img class="icon" src={icon}/>
 							</A>
 						</Box>

@@ -65,8 +65,13 @@ export default class A extends Component {
 	}
 
 	render() {
+		let cls="a";
+		if (this.props.class)
+			cls+=" "+this.props.class
+
 		return (
-			<a class={"a "+this.props.class}
+			<a class={cls}
+					style={this.props.style}
 					onTouchMove={this.onMove}
 					onTouchStart={this.onDown}
 					onTouchEnd={this.onUp}
