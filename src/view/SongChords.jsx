@@ -20,13 +20,14 @@ export default class SongChords extends Component {
 			);
 		});
 
-		a.push(
-			<Box width="4rem" height="4rem" border="white"
-					onRelease={ctx.addSectionChord}
-					class="big-button-label">
-				+
-			</Box>
-		);
+		if (ctx.getCurrentSectionChordLabels().length<16)
+			a.push(
+				<Box width="4rem" height="4rem" border="white"
+						onRelease={ctx.addSectionChord}
+						class="big-button-label">
+					+
+				</Box>
+			);
 
 		return a;
 	}

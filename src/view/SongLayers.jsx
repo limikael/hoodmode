@@ -3,6 +3,7 @@ import { useContext } from 'preact/compat';
 import StateStore from '../utils/StateStore.jsx';
 import A from './A.jsx';
 import Box from '../utils/Box.jsx';
+import { Select, IF } from '../utils/ReactUtil.jsx';
 
 export default class SongLayers extends Component {
 	render() {
@@ -41,10 +42,12 @@ export default class SongLayers extends Component {
 					);
 				})}
 
-				<Box width="4rem" height="4rem" border="white"
-						onRelease={ctx.showAddLayer}>
-					<div class="big-button-label">+</div>
-				</Box>
+				{IF(song.layers.length<8,()=>
+					<Box width="4rem" height="4rem" border="white"
+							onRelease={ctx.showAddLayer}>
+						<div class="big-button-label">+</div>
+					</Box>
+				)}
 			</Box>
 		);
 	}
