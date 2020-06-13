@@ -1,7 +1,7 @@
 {
   "name": "app.hoodmode.co",
   "displayName": "Hoodmode",
-  "version": "0.0.41",
+  "version": "0.0.42",
   "description": "Hyper casual jam composer.",
   "main": "index.js",
   "scripts": {

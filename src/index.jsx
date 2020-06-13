@@ -59,6 +59,8 @@ function start() {
 		HtmlUtil.setCssVar('--scroll','0');
 	});
 	window.addEventListener('keyboardDidShow', (event) => {
+		HtmlUtil.setCssVar('--scroll','0');
+
 		let el=document.activeElement;
 		if (el) {
 			let windowHeight=document.documentElement.clientHeight;
