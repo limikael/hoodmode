@@ -1,7 +1,7 @@
 {
   "name": "app.hoodmode.co",
   "displayName": "Hoodmode",
-  "version": "0.0.37",
+  "version": "0.0.38",
   "description": "Hyper casual jam composer.",
   "main": "index.js",
   "scripts": {
@@ -18,10 +18,10 @@
     "cordova-ios": "^5.1.1",
     "cordova-plugin-keyboard": "^1.2.0",
     "cordova-plugin-purchase": "^10.2.0",
-    "cordova-plugin-splashscreen": "^5.0.3",
+    "cordova-plugin-splashscreen": "^5.0.4",
     "cordova-plugin-statusbar": "^2.4.3",
     "cordova-plugin-wkwebview-engine": "^1.2.1",
-    "cordova-plugin-wkwebviewxhrfix": "git+https://github.com/TheMattRay/cordova-plugin-wkwebviewxhrfix.git",
+    "cordova-plugin-wkwebviewxhrfix": "^0.1.0",
     "cordova-set-version": "^9.1.6",
     "preact": "^10.3.1"
   },
@@ -53,8 +53,8 @@
       }
     },
     "platforms": [
-      "android",
-      "ios"
+      "ios",
+      "android"
     ]
   }
 }

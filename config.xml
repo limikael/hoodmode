@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="app.hoodmode.co" version="0.0.33" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="app.hoodmode.co" version="0.0.38" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
   <name>Hoodmode</name>
   <icon src="www/icons/hoodmode-icon.png"/>
   <description>
@@ -10,7 +10,6 @@
     </author>
   <content src="index.html"/>
   <plugin name="cordova-plugin-whitelist" spec="1"/>
-  <plugin name="cordova-plugin-statusbar" spec="~2.4.3"/>
   <access origin="*"/>
   <allow-intent href="http://*/*"/>
   <allow-intent href="https://*/*"/>
@@ -18,7 +17,7 @@
   <allow-intent href="sms:*"/>
   <allow-intent href="mailto:*"/>
   <allow-intent href="geo:*"/>
-  <hook type="before_prepare" src="hooks/bundle.sh"/>
+  <hook src="hooks/bundle.sh" type="before_prepare"/>
   <preference name="AutoHideSplashScreen" value="false"/>
   <preference name="ShowSplashScreenSpinner" value="false"/>
   <preference name="StatusBarOverlaysWebView" value="false"/>
@@ -38,32 +37,32 @@
     <allow-intent href="itms:*"/>
     <allow-intent href="itms-apps:*"/>
     <splash src="www/splash/Default@2x~universal~anyany.png"/>
-    <icon src="www/icons/icon-1024.png" width="1024" height="1024"/>
-    <icon src="www/icons/icon-20@2x.png" width="40" height="40"/>
-    <icon src="www/icons/icon-20@3x.png" width="60" height="60"/>
-    <icon src="www/icons/icon-20.png" width="20" height="20"/>
-    <icon src="www/icons/icon-24@2x.png" width="512" height="512"/>
-    <icon src="www/icons/icon-27.5@2x.png" width="512" height="512"/>
-    <icon src="www/icons/icon-29@2x.png" width="58" height="58"/>
-    <icon src="www/icons/icon-29@3x.png" width="87" height="87"/>
-    <icon src="www/icons/icon-29.png" width="29" height="29"/>
-    <icon src="www/icons/icon-40@2x.png" width="80" height="80"/>
-    <icon src="www/icons/icon-40.png" width="40" height="40"/>
-    <icon src="www/icons/icon-44@2x.png" width="512" height="512"/>
-    <icon src="www/icons/icon-50@2x.png" width="100" height="100"/>
-    <icon src="www/icons/icon-50.png" width="50" height="50"/>
-    <icon src="www/icons/icon-60@2x.png" width="120" height="120"/>
-    <icon src="www/icons/icon-60@3x.png" width="180" height="180"/>
-    <icon src="www/icons/icon-72@2x.png" width="144" height="144"/>
-    <icon src="www/icons/icon-72.png" width="72" height="72"/>
-    <icon src="www/icons/icon-76@2x.png" width="152" height="152"/>
-    <icon src="www/icons/icon-76.png" width="76" height="76"/>
-    <icon src="www/icons/icon-83.5@2x.png" width="167" height="167"/>
-    <icon src="www/icons/icon-86@2x.png" width="512" height="512"/>
-    <icon src="www/icons/icon-98@2x.png" width="512" height="512"/>
-    <icon src="www/icons/icon-small@2x.png" width="58" height="58"/>
-    <icon src="www/icons/icon-small@3x.png" width="87" height="87"/>
-    <icon src="www/icons/icon-small.png" width="29" height="29"/>
+    <icon height="1024" src="www/icons/icon-1024.png" width="1024"/>
+    <icon height="40" src="www/icons/icon-20@2x.png" width="40"/>
+    <icon height="60" src="www/icons/icon-20@3x.png" width="60"/>
+    <icon height="20" src="www/icons/icon-20.png" width="20"/>
+    <icon height="512" src="www/icons/icon-24@2x.png" width="512"/>
+    <icon height="512" src="www/icons/icon-27.5@2x.png" width="512"/>
+    <icon height="58" src="www/icons/icon-29@2x.png" width="58"/>
+    <icon height="87" src="www/icons/icon-29@3x.png" width="87"/>
+    <icon height="29" src="www/icons/icon-29.png" width="29"/>
+    <icon height="80" src="www/icons/icon-40@2x.png" width="80"/>
+    <icon height="40" src="www/icons/icon-40.png" width="40"/>
+    <icon height="512" src="www/icons/icon-44@2x.png" width="512"/>
+    <icon height="100" src="www/icons/icon-50@2x.png" width="100"/>
+    <icon height="50" src="www/icons/icon-50.png" width="50"/>
+    <icon height="120" src="www/icons/icon-60@2x.png" width="120"/>
+    <icon height="180" src="www/icons/icon-60@3x.png" width="180"/>
+    <icon height="144" src="www/icons/icon-72@2x.png" width="144"/>
+    <icon height="72" src="www/icons/icon-72.png" width="72"/>
+    <icon height="152" src="www/icons/icon-76@2x.png" width="152"/>
+    <icon height="76" src="www/icons/icon-76.png" width="76"/>
+    <icon height="167" src="www/icons/icon-83.5@2x.png" width="167"/>
+    <icon height="512" src="www/icons/icon-86@2x.png" width="512"/>
+    <icon height="512" src="www/icons/icon-98@2x.png" width="512"/>
+    <icon height="58" src="www/icons/icon-small@2x.png" width="58"/>
+    <icon height="87" src="www/icons/icon-small@3x.png" width="87"/>
+    <icon height="29" src="www/icons/icon-small.png" width="29"/>
     <feature name="CDVWKWebViewEngine">
       <param name="ios-package" value="CDVWKWebViewEngine"/>
     </feature>
