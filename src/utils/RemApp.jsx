@@ -21,12 +21,16 @@ export default class RemApp extends Component {
 			orientation="portrait";
 			contentWidth=this.props.portraitWidth;
 			contentHeight=this.props.portraitHeight;
+			if (window.StatusBar)
+				window.StatusBar.show();
 		}
 
 		else {
 			orientation="landscape";
 			contentWidth=this.props.landscapeWidth;
 			contentHeight=this.props.landscapeHeight;
+			if (window.StatusBar)
+				window.StatusBar.hide();
 		}
 
 		let fontSize;
