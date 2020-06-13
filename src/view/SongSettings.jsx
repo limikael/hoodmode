@@ -12,6 +12,45 @@ export default class SongSettings {
 		let ctx=useContext(StateStore.Context);
 		let vctx=useContext(RemApp.Context);
 
+		let settingsStyle={}
+		if (vctx.orientation=="landscape")
+			settingsStyle={
+				"white-space": "nowrap"
+			};
+
+		let settings=
+			<div style={settingsStyle}>
+				<div style={{width: "16rem", display: "inline-block", "vertical-align": "top"}}>
+					<p class="input-label">Song Name</p>
+					<Box width="100%" bg="light" border="black" height="4rem">
+						<input type="text"
+							value={ctx.getCurrentSong().name}
+							onChange={ctx.setCurrentSongName}/>
+					</Box>
+
+					<p class="input-label">Tempo</p>
+					<Box width="100%" bg="light" border="black" height="4rem">
+						<input type="text"
+							value={ctx.getCurrentSong().bpm}
+							onBlur={ctx.setCurrentSongBpm}/>
+					</Box>
+				</div>
+
+				<div style={{width: "16rem", display: "inline-block", "vertical-align": "top"}}>
+					<p class="input-label">Key</p>
+					<Box width="50%" bg="light" border="black" height="4rem">
+						<Select	options={ctx.getNotesSelectOptions()}
+								selected={ctx.getCurrentSong().musicKey}
+								onChange={ctx.setCurrentSongMusicKey}/>
+					</Box>
+					<Box width="50%" bg="light" border="black" height="4rem">
+						<Select	options={ctx.getModalSelectOptions()}
+								selected={ctx.getCurrentSong().minor}
+								onChange={ctx.setCurrentSongMinor}/>
+					</Box>
+				</div>
+			</div>
+
 		return (
 			<Align modal
 					portraitWidth="18rem" portraitHeight="26rem"
@@ -20,35 +59,7 @@ export default class SongSettings {
 				<Box bg="dark" width="100%" height="100%">
 					<div class="pane-header bg-dark text-secondary">SONG SETTINGS</div>
 
-					<div style={{width: "16rem", display: "inline-block", "vertical-align": "top"}}>
-						<p class="input-label">Song Name</p>
-						<Box width="100%" bg="light" border="black" height="4rem">
-							<input type="text"
-								value={ctx.getCurrentSong().name}
-								onChange={ctx.setCurrentSongName}/>
-						</Box>
-
-						<p class="input-label">Tempo</p>
-						<Box width="100%" bg="light" border="black" height="4rem">
-							<input type="text"
-								value={ctx.getCurrentSong().bpm}
-								onBlur={ctx.setCurrentSongBpm}/>
-						</Box>
-					</div>
-
-					<div style={{width: "16rem", display: "inline-block", "vertical-align": "top"}}>
-						<p class="input-label">Key</p>
-						<Box width="50%" bg="light" border="black" height="4rem">
-							<Select	options={ctx.getNotesSelectOptions()}
-									selected={ctx.getCurrentSong().musicKey}
-									onChange={ctx.setCurrentSongMusicKey}/>
-						</Box>
-						<Box width="50%" bg="light" border="black" height="4rem">
-							<Select	options={ctx.getModalSelectOptions()}
-									selected={ctx.getCurrentSong().minor}
-									onChange={ctx.setCurrentSongMinor}/>
-						</Box>
-					</div>
+					{settings}
 
 					<Align height="4rem" width="100%" align="se" textAlign="right"
 							parentPadding="bg">

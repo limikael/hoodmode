@@ -60,7 +60,7 @@ function start() {
 	});
 	window.addEventListener('keyboardDidShow', (event) => {
 		let el=document.activeElement;
-		if (el && window.cordova.platformId=="android") {
+		if (el) {
 			let windowHeight=document.documentElement.clientHeight;
 			let rect=el.getBoundingClientRect();
 			let mp=rect.top+rect.height/2;
