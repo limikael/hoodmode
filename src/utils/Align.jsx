@@ -102,10 +102,10 @@ export default class Align extends Component {
 			};
 
 			alignProps.style.left=0;
-			alignProps.style.top=0;
 			alignProps.style.right=0;
 			alignProps.style.bottom=0;
-			alignProps.style["position"]="fixed";
+			alignProps.style.top=0;
+			alignProps.style["position"]="absolute";
 			alignProps.style["background-color"]="rgba(0,0,0,.75)";
 			alignProps.style["pointer-events"]="auto";
 			alignProps.onClick=this.onDismiss;

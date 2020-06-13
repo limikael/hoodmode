@@ -8,6 +8,7 @@ import AppHelper from './model/AppHelper.js';
 import Conductor from './model/Conductor.js';
 import StoreManager from './model/StoreManager.js';
 import MockStoreManager from './model/MockStoreManager.js';
+import HtmlUtil from './utils/HtmlUtil.js';
 
 let stateStore=new StateStore();
 let conductor=new Conductor(stateStore);
@@ -53,7 +54,26 @@ let appContent=(
 
 function start() {
 	stateStore.init();
-	window.addEventListener('keyboardWillHide', () => window.scrollTo(0, 0));
+	window.addEventListener('keyboardWillHide', () => {
+		window.scrollTo(0, 0);
+		HtmlUtil.setCssVar('--scroll','0');
+	});
+	window.addEventListener('keyboardDidShow', (event) => {
+		let el=document.activeElement;
+		if (el && window.cordova.platformId=="android") {
+			let windowHeight=document.documentElement.clientHeight;
+			let rect=el.getBoundingClientRect();
+			let mp=rect.top+rect.height/2;
+			let fh=windowHeight-event.keyboardHeight;
+			let scroll=fh/2-mp;
+
+			HtmlUtil.setCssVar('--scroll',Math.round(scroll)+"px");
+		}
+
+		else {
+			HtmlUtil.setCssVar('--scroll','0');
+		}
+	});
 	document.addEventListener("backbutton", () => stateStore.goBack(), true);
 	render(appContent, document.body);
 }

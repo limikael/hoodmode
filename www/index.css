@@ -13,6 +13,8 @@
     --color-danger: #D33682;
     --color-warning: #CB4B16;
     --color-background: #001020;
+
+    --scroll: 0;
 }
 
 /*
@@ -56,7 +58,8 @@ a.a {
 .rem-app {
     width: 100%;
     height: 100%;
-    position: relative;
+    position: absolute;
+    top: var(--scroll);
 }
 
 .align-outer {

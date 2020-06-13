@@ -39,7 +39,9 @@ export default class RemApp extends Component {
 		document.querySelector("html").style.fontSize=fontSize+"px";
 
 		this.setState({
-			orientation: orientation
+			orientation: orientation,
+			windowWidth: windowWidth,
+			windowHeight: windowHeight,
 		});
 	}
 
@@ -53,8 +55,19 @@ export default class RemApp extends Component {
 			orientation: "portrait"
 		};
 
+		let debugStyle={
+			"position": "fixed",
+			"z-index": 1000,
+			"background-color": "#000",
+			"top": 0,
+			"left": 0
+		};
+
 		return (
 			<div class="rem-app">
+				{/*<div style={debugStyle}>
+					{this.state.windowWidth}x{this.state.windowHeight}
+				</div>*/}
 				<RemApp.Context.Provider value={this.state}>
 					{this.props.children}
 				</RemApp.Context.Provider>

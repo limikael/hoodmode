@@ -3,4 +3,8 @@ export default class HtmlUtil {
 		return getComputedStyle(document.documentElement)
 				.getPropertyValue(name);
 	}
+
+	static setCssVar(name, val) {
+		document.documentElement.style.setProperty(name,val);
+	}
 }

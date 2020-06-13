@@ -40,20 +40,21 @@ export default class App extends Component {
 					{IF(!ctx.isSongOpen(),()=>
 						<Front />
 					)}
-					{IF(ctx.isSongOpen() && !ctx.isLayerOpen(),()=>[
-						<Song/>,
-						IF(ctx.settingsVisible,()=>
-							<SongSettings />
-						),
-					])}
-					{IF(ctx.isLayerOpen(),()=>[
-						<Layer />,
-						IF(ctx.settingsVisible,()=>
-							<LayerSettings />
-						),
-					])}
+					{IF(ctx.isSongOpen() && !ctx.isLayerOpen(),()=>
+						<Song/>
+					)}
+					{IF(ctx.isLayerOpen(),()=>
+						<Layer />
+					)}
 				</Align>
 
+				{IF(ctx.settingsVisible,()=>{
+					if (ctx.isLayerOpen())
+						return <LayerSettings />;
+
+					else
+						return <SongSettings />;
+				})}
 				{IF(ctx.addLayerVisible,()=>
 					<AddLayer />
 				)}
@@ -62,6 +63,10 @@ export default class App extends Component {
 				)}
 				{IF(ctx.menuVisible,()=>
 					<Menu/>
+				)}
+				{IF(ctx.addSectionChordVisible ||
+						ctx.editSectionChordVisible>=0,()=>
+					<SelectChord />
 				)}
 			</RemApp>
 		);
