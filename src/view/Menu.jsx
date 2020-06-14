@@ -52,11 +52,11 @@ export default class Menu extends Component {
 		}
 
 		this.menuItems.push({
-			sep: "QORD"
+			sep: "CHORDIC"
 		});
 
 		this.menuItems.push({
-			label: "About Qord",
+			label: "About Chordic",
 			func: ctx.showAboutScreen
 		});
 

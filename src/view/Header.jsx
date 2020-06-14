@@ -10,7 +10,7 @@ export default class Header extends Component {
 	render() {
 		let ctx=useContext(StateStore.Context);
 		let leftItems=[],rightItems=[];
-		let headerLabel="Qord";
+		let headerLabel="Chordic";
 
 		if (ctx.isSongOpen()) {
 			leftItems.push(

@@ -222,7 +222,7 @@ export default class AppController {
 	showAboutScreen(state) {
 		state.dialog={
 			text: 
-				"Qord\n\n"+
+				"Chordic\n\n"+
 				"Version: "+state.getAppVersion()+"\n\n"+
 				"Enjoy! Please let me know of any bugs you find!",
 
