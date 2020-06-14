@@ -117,7 +117,7 @@ export default class AppController {
 		await this.conductor.loadInstruments();
 
 		if (navigator.splashscreen) {
-			navigator.splashscreen.hide();
+			setTimeout(navigator.splashscreen.hide,100);
 		}
 	};
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<widget id="app.hoodmode.co" version="0.0.43" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="app.hoodmode.co" version="0.0.44" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
   <name>Hoodmode</name>
   <icon src="www/icons/hoodmode-icon.png"/>
   <description>
@@ -28,6 +28,7 @@
     <allow-intent href="market:*"/>
     <preference name="android-targetSdkVersion" value="28"/>
     <preference name="SplashMaintainAspectRatio" value="true"/>
+    <preference name="SplashShowOnlyFirstTime" value="false"/>
     <splash src="www/splash/hoodmode-splash.png"/>
     <edit-config file="AndroidManifest.xml" mode="merge" target="/manifest/application/activity[@android:name='MainActivity']">
       <activity android:name="MainActivity" android:windowSoftInputMode="adjustPan"/>
