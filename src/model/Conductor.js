@@ -194,6 +194,9 @@ export default class Conductor {
 	}
 
 	play=()=>{
+		if (window.plugins)
+			window.plugins.insomnia.keepAwake();
+
 		this.audioContext.resume();
 
 		let song=this.getCurrentSong();
@@ -208,6 +211,9 @@ export default class Conductor {
 	}
 
 	stop() {
+		if (window.plugins)
+			window.plugins.insomnia.allowSleepAgain();
+
 		if (this.onPlayGridIndexChange)
 			this.onPlayGridIndexChange(-1,-1);
 
