@@ -5,16 +5,24 @@ export default class StoreManager {
 
 	updateState() {}
 
-	async init(premiumCodes) {
+	init(premiumCodes) {
 		let codes=['qord_premium_test'];
 		for (let premiumCode of premiumCodes)
 			codes.push("premium_"+premiumCode);
 
 //		let products=await window.inAppPurchase.getProducts(codes);
-		let data=await window.inAppPurchase.restorePurchases();
+//		let data=await window.inAppPurchase.restorePurchases();
 
-		if (data.length>0)
-			this.state.setPremiumState("premium");
+/*		if (data.length>0)
+			this.state.setPremiumState("premium");*/
+
+		window.inAppPurchase.restorePurchases()
+			.then((data)=>{
+				alert(JSON.stringify(data));
+			})
+			.catch((e)=>{
+				alert("E: "+String(e));
+			});
 	}
 
 	manageSubscriptions() {
