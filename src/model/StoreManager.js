@@ -10,6 +10,7 @@ export default class StoreManager {
 		for (let premiumCode of premiumCodes)
 			codes.push("premium_"+premiumCode);
 
+		let products=await window.inAppPurchase.getProducts(codes);
 		let data=await window.inAppPurchase.restorePurchases();
 
 		if (data.length>0)
