@@ -112,9 +112,9 @@ export default class AppController {
 		if (!state.songs || !state.songs.length)
 			state.songs=demosongs;
 
-		this.storeManager.init(state.premiumCodes);
-
 		await this.conductor.loadInstruments();
+
+		await this.storeManager.init(state.premiumCodes);
 
 		if (navigator.splashscreen) {
 			setTimeout(navigator.splashscreen.hide,100);
