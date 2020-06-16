@@ -7,18 +7,11 @@ import AppController from './model/AppController.js';
 import AppHelper from './model/AppHelper.js';
 import Conductor from './model/Conductor.js';
 import StoreManager from './model/StoreManager.js';
-import MockStoreManager from './model/MockStoreManager.js';
 import HtmlUtil from './utils/HtmlUtil.js';
 
 let stateStore=new StateStore();
 let conductor=new Conductor(stateStore);
-
-let storeManager;
-if (window.hasOwnProperty("cordova"))
-	storeManager=new StoreManager(stateStore);
-
-else
-	storeManager=new MockStoreManager(stateStore);
+let storeManager=new StoreManager(stateStore);
 
 stateStore.addMutators(new AppController(conductor, storeManager));
 stateStore.addMethods(new AppHelper(conductor, storeManager));
@@ -27,7 +20,6 @@ stateStore.onStateChange=()=>{
 	conductor.updateState();
 	storeManager.updateState();
 	window.localStorage.setItem("hoodmode-songs",JSON.stringify(stateStore.songs));
-	window.localStorage.setItem("hoodmode-premium",stateStore.premium);
 }
 
 conductor.onPlayGridIndexChange=(gridIndex, sequenceIndex)=>{

@@ -113,12 +113,11 @@ export default class AppController {
 			state.songs=demosongs;
 
 		await this.conductor.loadInstruments();
+		this.storeManager.init(state.premiumCodes);
 
 		if (navigator.splashscreen) {
 			setTimeout(navigator.splashscreen.hide,100);
 		}
-
-		this.storeManager.init(state.premiumCodes);
 	};
 
 	addSong(state, name) {

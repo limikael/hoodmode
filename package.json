@@ -1,7 +1,7 @@
 {
   "name": "app.hoodmode.co",
   "displayName": "Chordic",
-  "version": "0.0.54",
+  "version": "0.0.55",
   "description": "Hyper casual jam composer.",
   "main": "index.js",
   "scripts": {
@@ -16,6 +16,7 @@
     "@babel/polyfill": "^7.8.3",
     "cordova-android": "^8.1.0",
     "cordova-ios": "^5.1.1",
+    "cordova-plugin-inappbrowser": "^4.0.0",
     "cordova-plugin-inapppurchase": "^1.2.0",
     "cordova-plugin-insomnia": "^4.3.0",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
@@ -50,7 +51,8 @@
       "cordova-plugin-wkwebviewxhrfix": {},
       "cordova-plugin-ionic-keyboard": {},
       "cordova-plugin-insomnia": {},
-      "cordova-plugin-inapppurchase": {}
+      "cordova-plugin-inapppurchase": {},
+      "cordova-plugin-inappbrowser": {}
     },
     "platforms": [
       "ios",

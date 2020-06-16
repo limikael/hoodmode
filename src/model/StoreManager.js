@@ -1,28 +1,77 @@
+import MockInAppPurchase from '../utils/MockInAppPurchase.js';
+import JsonUtil from '../utils/JsonUtil.js';
+
 export default class StoreManager {
 	constructor(state) {
+		this.storeKey="hoodmode-premium";
+		//this.graceTime=10000; //*60*60*24*7;
+		this.graceTime=1000*60*10;
+
 		this.state=state;
 	}
 
 	updateState() {}
 
 	init(premiumCodes) {
-		let codes=['qord_premium_test'];
+		if (window.hasOwnProperty("cordova"))
+			this.inAppPurchase=window.inAppPurchase;
+
+		else
+			this.inAppPurchase=new MockInAppPurchase();
+
+		this.productIds=['qord_premium_test'];
 		for (let premiumCode of premiumCodes)
-			codes.push("premium_"+premiumCode);
+			this.productIds.push("premium_"+premiumCode);
 
-//		let products=await window.inAppPurchase.getProducts(codes);
-//		let data=await window.inAppPurchase.restorePurchases();
-
-/*		if (data.length>0)
-			this.state.setPremiumState("premium");*/
-
-		window.inAppPurchase.restorePurchases()
+		this.inAppPurchase.restorePurchases()
 			.then((data)=>{
-				alert(JSON.stringify(data));
+				if (data.length)
+					this.savePremium();
 			})
 			.catch((e)=>{
-				alert("E: "+String(e));
 			});
+
+		let jsonData=window.localStorage.getItem(this.storeKey);
+		let data=JsonUtil.safeParse(jsonData);
+
+		/*console.log("now: "+Date.now());
+		console.log("lst: "+data.lastCheck);*/
+
+		if (data && data.lastCheck && data.lastCheck+this.graceTime>Date.now())
+			this.state.setPremiumState("premium");
+	}
+
+	savePremium() {
+		let data={
+			lastCheck: Date.now()
+		};
+
+		window.localStorage.setItem(this.storeKey,JSON.stringify(data));
+		this.state.setPremiumState("premium");
+	}
+
+	async buyPremium(code) {
+		this.state.setPremiumState("pending");
+
+		let productId="qord_premium_test";
+		if (code)
+			productId="premium_"+code;
+
+		try {
+			let data=await this.inAppPurchase.restorePurchases();
+			if (data && data.length) {
+				this.savePremium();
+				return;
+			}
+
+			let products=await this.inAppPurchase.getProducts(this.productIds);
+			await this.inAppPurchase.subscribe(productId);
+			this.savePremium();
+		}
+
+		catch (err) {
+			this.state.setPremiumState("basic");
+		}
 	}
 
 	manageSubscriptions() {
@@ -34,24 +83,12 @@ export default class StoreManager {
 
 			if (window.cordova.platformId=="ios")
 				url="https://apps.apple.com/account/subscriptions";
+
+			window.cordova.InAppBrowser.open(url,"_system");
 		}
 
-		window.open(url,"_system");
-	}
-
-	buyPremium(code) {
-		this.state.setPremiumState("pending");
-
-		let productId="qord_premium_test";
-		if (code)
-			productId="premium_"+code;
-
-		window.inAppPurchase.subscribe(productId)
-			.then((data)=>{
-				this.state.setPremiumState("premium");
-			})
-			.catch((err)=>{
-				this.state.setPremiumState("basic");
-			});
+		else {
+			window.open(url,"_system");
+		}
 	}
 }
