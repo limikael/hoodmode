@@ -4,8 +4,8 @@ import JsonUtil from '../utils/JsonUtil.js';
 export default class StoreManager {
 	constructor(state) {
 		this.storeKey="hoodmode-premium";
-		//this.graceTime=10000; //*60*60*24*7;
-		this.graceTime=1000*60*10;
+		this.graceTime=1000*60*60*24*3;
+		//this.graceTime=1000*60*10;
 
 		this.state=state;
 	}
