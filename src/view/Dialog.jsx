@@ -6,6 +6,7 @@ import { Select, IF } from '../utils/ReactUtil.jsx';
 import Box from '../utils/Box.jsx';
 import Align from '../utils/Align.jsx';
 import RemApp from '../utils/RemApp.jsx';
+import {useSpring, animated} from 'react-spring';
 
 export default class Dialog extends Component {
 	nlToBr(string) {
@@ -17,13 +18,16 @@ export default class Dialog extends Component {
 	render() {
 		let ctx=useContext(StateStore.Context);
 		let modalFunc=ctx.cancelDialog;
+		const props = useSpring({opacity: 1, from: {opacity: 0}});
 
 		return (
 			<Align modal onDismiss={modalFunc} width="16rem" height="16rem">
 				<Box bg="background" border="dark" width="100%" height="100%">
-					<div class="dialog-text">
-						{this.nlToBr(ctx.dialog.text)}
-					</div>
+					<animated.div style={props}>
+						<div class="dialog-text">
+							{this.nlToBr(ctx.dialog.text)}
+						</div>
+					</animated.div>
 
 					{IF(typeof ctx.dialog.input !== "undefined",()=>[
 						<div style={{height: "1rem"}}/>,

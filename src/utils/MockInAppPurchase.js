@@ -1,6 +1,6 @@
 export default class MockInAppPurchase {
 	async restorePurchases() {
-		return ["x"];
+		return [];
 	}
 
 	async getProducts(productIds) {
