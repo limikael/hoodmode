@@ -56,6 +56,11 @@ export default class Menu extends Component {
 		});
 
 		this.menuItems.push({
+			label: "Howto Chordic",
+			func: ctx.showTutorial
+		});
+
+		this.menuItems.push({
 			label: "About Chordic",
 			func: ctx.showAboutScreen
 		});

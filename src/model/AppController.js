@@ -24,6 +24,7 @@ export default class AppController {
 		state.addSectionChordVisible=false;
 		state.menuVisible=false;
 		state.premiumState="basic";
+		state.tutorialVisible=false;
 
 		state.instruments.push({
 			"key": "basic-drums",
@@ -119,6 +120,11 @@ export default class AppController {
 			setTimeout(navigator.splashscreen.hide,100);
 		}
 	};
+
+	showTutorial(state) {
+		console.log("showing...");
+		state.tutorialVisible=true;
+	}
 
 	addSong(state, name) {
 		if (!name || name.toString()=="[object MouseEvent]")

@@ -17,6 +17,7 @@ import A from './A.jsx';
 import RemApp from '../utils/RemApp.jsx';
 import Align from '../utils/Align.jsx';
 import Menu from './Menu.jsx';
+import Tutorial from './Tutorial.jsx';
 
 export default class App extends Component {
 	render() {
@@ -67,6 +68,9 @@ export default class App extends Component {
 				{IF(ctx.addSectionChordVisible ||
 						ctx.editSectionChordVisible>=0,()=>
 					<SelectChord />
+				)}
+				{IF(ctx.tutorialVisible,()=>
+					<Tutorial />
 				)}
 			</RemApp>
 		);
