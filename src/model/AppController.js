@@ -122,8 +122,11 @@ export default class AppController {
 	};
 
 	showTutorial(state) {
-		console.log("showing...");
 		state.tutorialVisible=true;
+	}
+
+	hideTutorial(state) {
+		state.tutorialVisible=false;
 	}
 
 	addSong(state, name) {

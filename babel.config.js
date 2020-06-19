@@ -1,10 +1,18 @@
 module.exports={
-  "only": ["src","node_modules/react-spring","node_modules/react-use-gesture"],
+  "only": [
+    "src",
+    "node_modules/react-spring",
+    "node_modules/react-use-gesture",
+    "node_modules/@react-spring",
+    "node_modules/use-memo-one",
+    "node_modules/react-layout-effect"
+  ],
   "presets": ["@babel/preset-env","preact"],
   "plugins": [
     ["module-resolver", {
       "alias": {
         "react": "preact/compat",
+        "react-dom": "preact/compat"
       }
     }],
 	  ["@babel/plugin-proposal-class-properties"],

@@ -49,6 +49,11 @@ export default class RemApp extends Component {
 		});
 	}
 
+	static pixelsToRem(pixels) {
+		let fontSize=parseFloat(document.querySelector("html").style.fontSize);
+		return (pixels/fontSize);
+	}
+
 	componentDidMount() {
 		window.onresize=this.updateSize;
 		setTimeout(this.updateSize,0);
