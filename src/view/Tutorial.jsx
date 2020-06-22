@@ -8,6 +8,7 @@ import Align from '../utils/Align.jsx';
 import RemApp from '../utils/RemApp.jsx';
 import { useSpring, animated, config } from 'react-spring';
 import { useDrag } from 'react-use-gesture';
+import tutorialcontent from '../model/tutorialcontent';
 
 export default class Tutorial extends Component {
 	constructor() {
@@ -26,13 +27,13 @@ export default class Tutorial extends Component {
 		if (vctx.orientation=="landscape")
 			pageSize=34;
 
-		const [props, set] = useSpring(() => ({ left: 0, config: config.stiff }));
+		const [props, set] = useSpring(() => ({ x: 0, config: config.stiff }));
 		const bind = useDrag((e) => {
 			if (e.down) {
 				let rem=RemApp.pixelsToRem(e.movement[0]);
 				rem-=pageSize*this.state.page;
 
-				set({left: rem+"rem", immediate: true})
+				set({x: rem+"rem", immediate: true})
 			}
 
 			else {
@@ -42,10 +43,10 @@ export default class Tutorial extends Component {
 				if (newPage<0)
 					newPage=0;
 
-				if (newPage>2)
-					newPage=2;
+				if (newPage>=tutorialcontent.length)
+					newPage=tutorialcontent.length-1;
 
-				set({left: (-newPage*pageSize)+"rem"})
+				set({x: (-newPage*pageSize)+"rem"})
 
 				this.setState({
 					page: newPage
@@ -53,7 +54,7 @@ export default class Tutorial extends Component {
 			}
 		});
 
-		set({left: (-this.state.page*pageSize)+"rem"});
+		set({x: (-this.state.page*pageSize)+"rem"});
 
 		let imgStyle={
 			width: "16rem",
@@ -63,18 +64,19 @@ export default class Tutorial extends Component {
 		};
 
 		let content=[];
-		for (let i=0; i<3; i++) {
+		for (let i=0; i<tutorialcontent.length; i++) {
 			if (vctx.orientation=="landscape") {
 				imgStyle.width="12rem";
 				imgStyle.height="9rem";
 				content.push(
 					<div style={{height: "17rem", width: "34rem", display: "inline-block",
-							"position": "relative"}}>
-						<img draggable={false} src="tutorial/add-song.png" style={imgStyle}/>
+							"position": "relative", "vertical-align": "top"}}>
+						<img draggable={false} style={imgStyle}
+								src={tutorialcontent[i].image}/>
 						<div class="dialog-text"
 								style={{"color": "#000", width: "16rem", 'white-space': "normal",
 									"position": "absolute", "left": "16rem", "top": 0}}>
-							After creating a song, we need to add layers to our song.
+							{tutorialcontent[i].text}
 						</div>
 					</div>
 				);
@@ -82,10 +84,12 @@ export default class Tutorial extends Component {
 
 			else {
 				content.push(
-					<div style={{height: "31rem", width: "16rem", display: "inline-block"}}>
-						<img draggable={false} src="tutorial/add-song.png" style={imgStyle}/>
+					<div style={{height: "31rem", width: "16rem", display: "inline-block",
+							"position": "relative", "vertical-align": "top"}}>
+						<img draggable={false} style={imgStyle}
+								src={tutorialcontent[i].image}/>
 						<div class="dialog-text" style={{"color": "#000", width: "16rem", 'white-space': "normal"}}>
-							After creating a song, we need to add layers to our song.
+							{tutorialcontent[i].text}
 						</div>
 					</div>
 				);
@@ -93,7 +97,7 @@ export default class Tutorial extends Component {
 		}
 
 		let dots=[];
-		for (let i=0; i<8; i++) {
+		for (let i=0; i<tutorialcontent.length; i++) {
 			let style={
 				display: "inline-block",
 				width: "0.5rem",
