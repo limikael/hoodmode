@@ -15,6 +15,11 @@ export default class Dialog extends Component {
 		})
 	}
 
+	onLinkClick=(href)=>{
+		window.open(href,"_system");
+		return false;
+	}
+
 	render() {
 		let ctx=useContext(StateStore.Context);
 		let modalFunc=ctx.cancelDialog;
@@ -40,7 +45,11 @@ export default class Dialog extends Component {
 						return [
 							<div style={{height: "1rem"}}/>,
 							ctx.dialog.links.map((link)=>
-								<a href="" class="dialog-link">{link.title}</a>
+								<a href="#"
+										class="dialog-link"
+										onClick={this.onLinkClick.bind(this,link.href)}>
+									{link.title}
+								</a>
 							)
 						]
 					})}

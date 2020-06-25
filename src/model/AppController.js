@@ -234,10 +234,10 @@ export default class AppController {
 
 			links: [{
 				title: "EULA",
-				href: ""
+				href: "https://limikael.github.io/hoodmode/EULA.html"
 			},{
 				title: "Privacy Policy",
-				href: ""
+				href: "https://limikael.github.io/hoodmode/PRIVACY.html"
 			}],
 
 			buttons: [{
