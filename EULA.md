@@ -13,6 +13,7 @@ If you are entering into this EULA agreement on behalf of a company or other leg
 This EULA agreement shall apply only to the Software supplied by Mikael Lindqvist herewith regardless of whether other software is referred to or described herein. The terms also apply to any Mikael Lindqvist updates, supplements, Internet-based services, and support services for the Software, unless other terms accompany those items on delivery. If so, those terms apply. This EULA was created by EULA Template for Chordic.
 
 **License Grant**
+
 Mikael Lindqvist hereby grants you a personal, non-transferable, non-exclusive licence to use the Chordic software on your devices in accordance with the terms of this EULA agreement.
 
 You are permitted to load the Chordic software (for example a PC, laptop, mobile or tablet) under your control. You are responsible for ensuring your device meets the minimum requirements of the Chordic software.
@@ -26,14 +27,17 @@ You are not permitted to:
 * Use the Software for any purpose that Mikael Lindqvist considers is a breach of this EULA agreement
 
 **Intellectual Property and Ownership**
+
 Mikael Lindqvist shall at all times retain ownership of the Software as originally downloaded by you and all subsequent downloads of the Software by you. The Software (and the copyright, and other intellectual property rights of whatever nature in the Software, including any modifications made thereto) are and shall remain the property of Mikael Lindqvist.
 
 Mikael Lindqvist reserves the right to grant licences to use the Software to third parties.
 
 **Termination**
+
 This EULA agreement is effective from the date you first use the Software and shall continue until terminated. You may terminate it at any time upon written notice to Mikael Lindqvist.
 
 It will also terminate immediately if you fail to comply with any term of this EULA agreement. Upon such termination, the licenses granted by this EULA agreement will immediately terminate and you agree to stop all access and use of the Software. The provisions that by their nature continue and survive will survive any termination of this EULA agreement.
 
 **Governing Law**
+
 This EULA agreement, and any dispute arising out of or in connection with this EULA agreement, shall be governed by and construed in accordance with the laws of Sweden.
