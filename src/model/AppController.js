@@ -230,9 +230,15 @@ export default class AppController {
 	showAboutScreen(state) {
 		state.dialog={
 			text: 
-				"Chordic\n\n"+
-				"Version: "+state.getAppVersion()+"\n\n"+
-				"Enjoy! Please let me know of any bugs you find!",
+				"Chordic.\n"+"Version "+state.getAppVersion()+".",
+
+			links: [{
+				title: "EULA",
+				href: ""
+			},{
+				title: "Privacy Policy",
+				href: ""
+			}],
 
 			buttons: [{
 				bg: "info",

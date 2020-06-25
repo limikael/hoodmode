@@ -185,6 +185,15 @@ a.a {
     line-height: 1.5rem;
 }
 
+.dialog-link {
+    font-size: 1.2rem;
+    padding-top: 0.4rem;
+    padding-bottom: 0.4rem;
+    display: block;
+    text-decoration: underline;
+    color: var(--color-white);
+}
+
 .menu-separator {
     width: 100%;
     font-size: 1rem;

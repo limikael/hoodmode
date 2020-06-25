@@ -18,16 +18,14 @@ export default class Dialog extends Component {
 	render() {
 		let ctx=useContext(StateStore.Context);
 		let modalFunc=ctx.cancelDialog;
-		const props = useSpring({opacity: 1, from: {opacity: 0}});
+		//const props = useSpring({opacity: 1, from: {opacity: 0}});
 
 		return (
 			<Align modal onDismiss={modalFunc} width="16rem" height="16rem">
 				<Box bg="background" border="dark" width="100%" height="100%">
-					<animated.div style={props}>
-						<div class="dialog-text">
-							{this.nlToBr(ctx.dialog.text)}
-						</div>
-					</animated.div>
+					<div class="dialog-text">
+						{this.nlToBr(ctx.dialog.text)}
+					</div>
 
 					{IF(typeof ctx.dialog.input !== "undefined",()=>[
 						<div style={{height: "1rem"}}/>,
@@ -37,6 +35,15 @@ export default class Dialog extends Component {
 								onChange={ctx.setDialogInput}/>
 						</Box>
 					])}
+
+					{IF(typeof ctx.dialog.links !== "undefined",()=>{
+						return [
+							<div style={{height: "1rem"}}/>,
+							ctx.dialog.links.map((link)=>
+								<a href="" class="dialog-link">{link.title}</a>
+							)
+						]
+					})}
 
 					<Align height="4rem" width="100%" align="se" textAlign="center"
 							parentPadding="bg">

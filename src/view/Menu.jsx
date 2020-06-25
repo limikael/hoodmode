@@ -60,6 +60,11 @@ export default class Menu extends Component {
 			func: ctx.showTutorial
 		});
 
+		this.menuItems.push({
+			label: "About Chordic",
+			func: ctx.showAboutScreen
+		});
+
 		switch (ctx.premiumState) {
 			case "basic":
 				this.menuItems.push({
