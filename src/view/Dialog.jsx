@@ -32,12 +32,21 @@ export default class Dialog extends Component {
 						<div class="dialog-text">
 							<b>{this.nlToBr(ctx.dialog.title)}</b>
 						</div>,
-						<div style={{height: "1rem"}}/>
+						<div style={{height: "0.5rem"}}/>
 					])}
 
 					<div class="dialog-text">
 						{this.nlToBr(ctx.dialog.text)}
 					</div>
+
+					{IF(typeof ctx.dialog.fine !== "undefined",()=>[
+						<div style={{height: "0.5rem"}}/>,
+						<Box width="100%" height="4rem" border="secondary">
+							<div class="dialog-small-text">
+								{this.nlToBr(ctx.dialog.fine)}
+							</div>
+						</Box>
+					])}
 
 					{IF(typeof ctx.dialog.input !== "undefined",()=>[
 						<div style={{height: "1rem"}}/>,

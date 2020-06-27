@@ -37,7 +37,7 @@ export default class StoreManager {
 			lastCheck: Date.now()
 		};
 
-		//window.localStorage.setItem(this.storeKey,JSON.stringify(data));
+		window.localStorage.setItem(this.storeKey,JSON.stringify(data));
 		this.state.setPremiumState(true);
 	}
 
@@ -48,7 +48,7 @@ export default class StoreManager {
 	}
 
 	async updateProducts() {
-		this.products=await this.inAppPurchase.getProducts();
+		this.products=await this.inAppPurchase.getProducts(this.productIds);
 	}
 
 	getProductById(productId) {
