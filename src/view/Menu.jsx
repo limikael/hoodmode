@@ -65,32 +65,18 @@ export default class Menu extends Component {
 			func: ctx.showAboutScreen
 		});
 
-		switch (ctx.premiumState) {
-			case "basic":
-				this.menuItems.push({
-					label: "Get Pro version",
-					func: ctx.premiumClicked
-				});
 
-				this.menuItems.push({
-					label: "Enter Pro code",
-					func: ctx.premiumCodeClicked
-				});
-				break;
+		if (ctx.premium)
+			this.menuItems.push({
+				label: "Manage Subscription",
+				func: ctx.manageSubscriptionsClicked
+			});
 
-			case "pending":
-				this.menuItems.push({
-					label: "Pro pending..."
-				});
-				break;
-
-			case "premium":
-				this.menuItems.push({
-					label: "Manage Subscription",
-					func: ctx.manageSubscriptionsClicked
-				});
-				break;
-		}
+		else
+			this.menuItems.push({
+				label: "Get Pro version",
+				func: ctx.premiumClicked
+			});
 
 		let renderedMenuItems=[];
 		for (let i in this.menuItems) {

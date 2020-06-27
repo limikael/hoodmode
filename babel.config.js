@@ -5,7 +5,8 @@ module.exports={
     "node_modules/react-use-gesture",
     "node_modules/@react-spring",
     "node_modules/use-memo-one",
-    "node_modules/react-layout-effect"
+    "node_modules/react-layout-effect",
+    "node_modules/react-spinner-material"
   ],
   "presets": ["@babel/preset-env","preact"],
   "plugins": [

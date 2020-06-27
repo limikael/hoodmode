@@ -8,6 +8,7 @@ export default class StoreManager {
 		//this.graceTime=1000*60*10;
 
 		this.state=state;
+		this.products=[];
 	}
 
 	updateState() {}
@@ -38,7 +39,7 @@ export default class StoreManager {
 		console.log("lst: "+data.lastCheck);*/
 
 		if (data && data.lastCheck && data.lastCheck+this.graceTime>Date.now())
-			this.state.setPremiumState("premium");
+			this.state.setPremiumState(true);
 	}
 
 	savePremium() {
@@ -47,31 +48,22 @@ export default class StoreManager {
 		};
 
 		window.localStorage.setItem(this.storeKey,JSON.stringify(data));
-		this.state.setPremiumState("premium");
+		this.state.setPremiumState(true);
 	}
 
-	async buyPremium(code) {
-		this.state.setPremiumState("pending");
-
-		let productId="qord_premium_test";
-		if (code)
-			productId="premium_"+code;
-
-		try {
-			let data=await this.inAppPurchase.restorePurchases();
-			if (data && data.length) {
-				this.savePremium();
-				return;
-			}
-
-			let products=await this.inAppPurchase.getProducts(this.productIds);
-			await this.inAppPurchase.subscribe(productId);
+	async restorePurchases() {
+		let data=await this.inAppPurchase.restorePurchases();
+		if (data && data.length)
 			this.savePremium();
-		}
+	}
 
-		catch (err) {
-			this.state.setPremiumState("basic");
-		}
+	async updateProducts() {
+		this.products=await this.inAppPurchase.getProducts();
+	}
+
+	async buyPremium(productId) {
+		await this.inAppPurchase.subscribe(productId);
+		this.savePremium();
 	}
 
 	manageSubscriptions() {

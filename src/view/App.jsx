@@ -18,6 +18,7 @@ import RemApp from '../utils/RemApp.jsx';
 import Align from '../utils/Align.jsx';
 import Menu from './Menu.jsx';
 import Tutorial from './Tutorial.jsx';
+import Loading from './Loading.jsx';
 
 export default class App extends Component {
 	render() {
@@ -25,9 +26,6 @@ export default class App extends Component {
 
 		if (ctx.__error)
 			return (<div>{String(ctx.__error)}</div>);
-
-		if (ctx.isBusy())
-			return (<div>LOADING...</div>);
 
 		return (
 			<RemApp
@@ -71,6 +69,9 @@ export default class App extends Component {
 				)}
 				{IF(ctx.tutorialVisible,()=>
 					<Tutorial />
+				)}
+				{IF(ctx.isBusy(),()=>
+					<Loading />
 				)}
 			</RemApp>
 		);

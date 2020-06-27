@@ -23,7 +23,7 @@ export default class AppController {
 		state.editSectionChordVisible=-1;
 		state.addSectionChordVisible=false;
 		state.menuVisible=false;
-		state.premiumState="basic";
+		state.premium=false;
 		state.tutorialVisible=false;
 
 		state.instruments.push({
@@ -133,7 +133,7 @@ export default class AppController {
 		if (!name || name.toString()=="[object MouseEvent]")
 			name="My New Song";
 
-		if (state.premiumState!="premium" && state.songs.length>=3) {
+		if (!state.premium && state.songs.length>=3) {
 			state.dialog={
 				text:
 					"You have reached the maximum song capacity for the basic version.\n\n"+
@@ -705,25 +705,33 @@ export default class AppController {
 		return state;
 	}
 
-	premiumClicked(state) {
+	async premiumClicked(state) {
 		state.cancelDialog();
-		this.storeManager.buyPremium();
-	}
 
-	premiumCodeClicked(state) {
-		state.dialog={
-			text:
-				"Please enter the your pro code to redeem your pro version offer!",
+		try {
+			await this.storeManager.restorePurchases();
+			if (state.premium)
+				return;
 
-			input: "",
-			buttons: [{
-				bg: 'danger',
-				text: 'Pro',
-				action: 'premiumCodeEntered'
-			}]
-		};
+			await this.storeManager.updateProducts();
+			state.dialog={
+				text:
+					"product...",
 
-		return state;
+				buttons: [{
+					bg: 'danger',
+					text: 'Pro',
+					action: 'premiumCodeEntered'
+				}]
+			};
+		}
+
+		catch (e) {
+			state.alert(
+				"Unfortunately there was a problem while enabling your subscription.\n\n"+
+				"Please try again later!"
+			);
+		}
 	}
 
 	premiumCodeEntered(state) {
@@ -746,7 +754,8 @@ export default class AppController {
 	}
 
 	setPremiumState(state, premiumState) {
-		let oldState=state.premiumState;
+		state.premium=premiumState;
+		/*let oldState=state.premiumState;
 		state.premiumState=premiumState;
 
 		if (oldState=="pending" && premiumState=="premium") {
@@ -757,11 +766,7 @@ export default class AppController {
 		}
 
 		if (oldState=="pending" && premiumState=="basic") {
-			state.alert(
-				"Unfortunately there was a problem while enabling your subscription.\n\n"+
-				"Please try again later!"
-			);
-		}
+		}*/
 	}
 
 	manageSubscriptionsClicked(state) {
