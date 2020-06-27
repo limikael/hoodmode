@@ -24,20 +24,10 @@ export default class StoreManager {
 		for (let premiumCode of premiumCodes)
 			this.productIds.push("premium_"+premiumCode);
 
-		this.inAppPurchase.restorePurchases()
-			.then((data)=>{
-				if (data.length)
-					this.savePremium();
-			})
-			.catch((e)=>{
-			});
+		this.restorePurchases().then(()=>{}).catch(()=>{});
 
 		let jsonData=window.localStorage.getItem(this.storeKey);
 		let data=JsonUtil.safeParse(jsonData);
-
-		/*console.log("now: "+Date.now());
-		console.log("lst: "+data.lastCheck);*/
-
 		if (data && data.lastCheck && data.lastCheck+this.graceTime>Date.now())
 			this.state.setPremiumState(true);
 	}
@@ -47,7 +37,7 @@ export default class StoreManager {
 			lastCheck: Date.now()
 		};
 
-		window.localStorage.setItem(this.storeKey,JSON.stringify(data));
+		//window.localStorage.setItem(this.storeKey,JSON.stringify(data));
 		this.state.setPremiumState(true);
 	}
 
@@ -59,6 +49,14 @@ export default class StoreManager {
 
 	async updateProducts() {
 		this.products=await this.inAppPurchase.getProducts();
+	}
+
+	getProductById(productId) {
+		for (let product of this.products)
+			if (product.productId==productId)
+				return product;
+
+		return null;
 	}
 
 	async buyPremium(productId) {

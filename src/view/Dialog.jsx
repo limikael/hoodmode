@@ -28,6 +28,13 @@ export default class Dialog extends Component {
 		return (
 			<Align modal onDismiss={modalFunc} width="16rem" height="16rem">
 				<Box bg="background" border="dark" width="100%" height="100%">
+					{IF(typeof ctx.dialog.title !== "undefined",()=>[
+						<div class="dialog-text">
+							<b>{this.nlToBr(ctx.dialog.title)}</b>
+						</div>,
+						<div style={{height: "1rem"}}/>
+					])}
+
 					<div class="dialog-text">
 						{this.nlToBr(ctx.dialog.text)}
 					</div>

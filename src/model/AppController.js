@@ -143,10 +143,6 @@ export default class AppController {
 					bg: "danger",
 					text: "Pro",
 					action: "premiumClicked"
-				},{
-					bg: "success",
-					text: "Enter Code",
-					action: "premiumCodeClicked"
 				}]
 			}
 
@@ -705,6 +701,20 @@ export default class AppController {
 		return state;
 	}
 
+	alert(state, message) {
+		state.dialog={
+			text: message,
+			buttons: [{
+				bg: "info",
+				text: "Ok"
+			}]
+		}
+	}
+
+	setPremiumState(state, premiumState) {
+		state.premium=premiumState;
+	}
+
 	async premiumClicked(state) {
 		state.cancelDialog();
 
@@ -714,19 +724,42 @@ export default class AppController {
 				return;
 
 			await this.storeManager.updateProducts();
+			let product=this.storeManager.getProductById("qord_premium_test");
+
 			state.dialog={
-				text:
-					"product...",
+				title: product.title,
+				text: product.description,
 
 				buttons: [{
 					bg: 'danger',
-					text: 'Pro',
-					action: 'premiumCodeEntered'
+					text: product.price,
+					action: 'buyPremium'
 				}]
 			};
 		}
 
 		catch (e) {
+			console.log(e);
+			state.alert(
+				"Unfortunately there was a problem while enabling your subscription.\n\n"+
+				"Please try again later!"
+			);
+		}
+	}
+
+	async buyPremium(state) {
+		state.cancelDialog();
+
+		try {
+			await this.storeManager.buyPremium();
+			state.alert(
+				"Welcome as a pro user, and thank you very much for your confidence!\n\n"+
+				"If there is anything I can do, please reach out!"
+			);
+		}
+
+		catch (e) {
+			console.log(e);
 			state.alert(
 				"Unfortunately there was a problem while enabling your subscription.\n\n"+
 				"Please try again later!"
@@ -753,33 +786,7 @@ export default class AppController {
 		}
 	}
 
-	setPremiumState(state, premiumState) {
-		state.premium=premiumState;
-		/*let oldState=state.premiumState;
-		state.premiumState=premiumState;
-
-		if (oldState=="pending" && premiumState=="premium") {
-			state.alert(
-				"Welcome as a pro user, and thank you very much for your confidence!\n\n"+
-				"If there is anything I can do, please reach out!"
-			);
-		}
-
-		if (oldState=="pending" && premiumState=="basic") {
-		}*/
-	}
-
 	manageSubscriptionsClicked(state) {
 		this.storeManager.manageSubscriptions();
-	}
-
-	alert(state, message) {
-		state.dialog={
-			text: message,
-			buttons: [{
-				bg: "info",
-				text: "Ok"
-			}]
-		}
 	}
 }
