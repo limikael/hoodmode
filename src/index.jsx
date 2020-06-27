@@ -4,6 +4,7 @@ import App from './view/App.jsx';
 import StateStore from './utils/StateStore.jsx';
 import shortid from 'shortid';
 import AppController from './model/AppController.js';
+import PremiumController from './model/PremiumController.js';
 import AppHelper from './model/AppHelper.js';
 import Conductor from './model/Conductor.js';
 import StoreManager from './model/StoreManager.js';
@@ -14,6 +15,7 @@ let conductor=new Conductor(stateStore);
 let storeManager=new StoreManager(stateStore);
 
 stateStore.addMutators(new AppController(conductor, storeManager));
+stateStore.addMutators(new PremiumController(storeManager));
 stateStore.addMethods(new AppHelper(conductor, storeManager));
 
 stateStore.onStateChange=()=>{
