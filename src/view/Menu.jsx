@@ -74,7 +74,7 @@ export default class Menu extends Component {
 
 		else
 			this.menuItems.push({
-				label: "Get Pro version",
+				label: "Get Pro Version",
 				func: ctx.premiumClicked
 			});
 

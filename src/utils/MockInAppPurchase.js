@@ -11,12 +11,12 @@ export default class MockInAppPurchase {
 		await AsyncUtil.sleep(100);
 		return [{
 			productId: "qord_premium_test",
-			title: "Pro version (Chordic)",
-			description: "Enable pro functions.",
-			price: "24,00 kr"
+			title: "Pro Version (Chordic)",
+			description: "You can create unlimited songs with the pro version!",
+			price: "$1.49"
 		},{
 			productId: "premium_ownh",
-			title: "Pro version (Chordic)",
+			title: "Pro Version (Chordic)",
 			description: "First month free courtesy of Dea Reztika.",
 			price: "24,00 kr"
 		}];
