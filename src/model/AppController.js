@@ -229,7 +229,7 @@ export default class AppController {
 				"Chordic.\n"+"Version "+state.getAppVersion()+".",
 
 			links: [{
-				title: "EULA",
+				title: "EULA & ToS",
 				href: "https://limikael.github.io/hoodmode/EULA.html"
 			},{
 				title: "Privacy Policy",
