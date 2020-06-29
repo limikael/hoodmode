@@ -1,3 +1,5 @@
+# End User License Agreement (EULA)
+
 **End-User License Agreement (EULA) of Chordic**
 
 This End-User License Agreement ("EULA") is a legal agreement between you and Mikael Lindqvist
@@ -41,3 +43,40 @@ It will also terminate immediately if you fail to comply with any term of this E
 **Governing Law**
 
 This EULA agreement, and any dispute arising out of or in connection with this EULA agreement, shall be governed by and construed in accordance with the laws of Sweden.
+
+# Terms of Service (ToS)
+
+1. Terms
+By using the App Chordic, you are agreeing to be bound by these Terms and Conditions of Use and agree that you are responsible for the agreement with any applicable local laws. If you disagree with any of these terms, you are prohibited from using the App. The materials contained in this App are protected by copyright and trade mark law. These Terms of Service has been created with the help of the Terms of Service Generator and the Terms & Conditions Example.
+
+2. Use License
+Permission is granted to install and use Chordic for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+
+* modify or copy the materials;
+* use the materials for any commercial purpose or for any public display;
+* attempt to reverse engineer any software contained on Mikael Lindqvist's Website;
+* remove any copyright or other proprietary notations from the materials; or
+* transferring the materials to another person or "mirror" the materials on any other server.
+
+This will let Mikael Lindqvist to terminate upon violations of any of these restrictions. Upon termination, your viewing right will also be terminated and you should destroy any downloaded materials in your possession whether it is printed or electronic format.
+
+3. Disclaimer
+All the materials is the App are provided "as is". Mikael Lindqvist makes no warranties, may it be expressed or implied, therefore negates all other warranties. Furthermore, Mikael Lindqvist does not make any representations concerning the accuracy or reliability of the use of the materials on its Website or otherwise relating to such materials or any sites linked to this App.
+
+4. Limitations
+Mikael Lindqvist or its suppliers will not be hold accountable for any damages that will arise with the use or inability to use the materials on Mikael Lindqvist’s App, even if Mikael Lindqvist or an authorize representative of this Website has been notified, orally or written, of the possibility of such damage. Some jurisdiction does not allow limitations on implied warranties or limitations of liability for incidental damages, these limitations may not apply to you.
+
+5. Revisions and Errata
+The materials appearing in Mikael Lindqvist’s App may include technical, typographical, or photographic errors. Mikael Lindqvist will not promise that any of the materials in this App are accurate, complete, or current. Mikael Lindqvist may change the materials contained in its App at any time without notice. Mikael Lindqvist does not make any commitment to update the materials.
+
+6. Links
+Mikael Lindqvist has not reviewed all of the sites linked to from within the App and is not responsible for the contents of any such linked site. The presence of any link does not imply endorsement by Mikael Lindqvist of the site. The use of any linked website is at the user’s own risk.
+
+7. Site Terms of Use Modifications
+Mikael Lindqvist may revise these Terms of Use for the App at any time without prior notice. By using this App, you are agreeing to be bound by the current version of these Terms and Conditions of Use.
+
+8. Your Privacy
+Please read our Privacy Policy.
+
+9. Governing Law
+Any claim related to Mikael Lindqvist's App shall be governed by the laws of Sweden without regards to its conflict of law provisions.
