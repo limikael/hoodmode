@@ -495,6 +495,9 @@ export default class AppController {
 		if (state.menuVisible)
 			state.menuVisible=false;
 
+		else if (state.tutorialPage>=0)
+			state.tutorialPage=-1;
+
 		else if (state.dialog)
 			state.cancelDialog();
 
