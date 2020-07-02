@@ -11,11 +11,11 @@ import { useDrag } from 'react-use-gesture';
 import tutorialcontent from '../model/tutorialcontent';
 
 export default class Tutorial extends Component {
-	constructor() {
+	constructor(props) {
 		super();
 
 		this.state={
-			page: 0
+			page: props.startPage
 		};
 	}
 
@@ -27,7 +27,14 @@ export default class Tutorial extends Component {
 		if (vctx.orientation=="landscape")
 			pageSize=34;
 
-		const [props, set] = useSpring(() => ({ x: 0, config: config.stiff }));
+		const [props, set] = useSpring(() => ({ 
+			x: (-this.state.page*pageSize)+"rem",
+			config: config.stiff,
+			from: {
+				x: (-this.state.page*pageSize)+"rem"
+			}
+		}));
+
 		const bind = useDrag((e) => {
 			if (e.down) {
 				let rem=RemApp.pixelsToRem(e.movement[0]);

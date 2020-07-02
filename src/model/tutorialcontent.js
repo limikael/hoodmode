@@ -29,6 +29,6 @@ module.exports=[{
 	text: "We will se that the available chords changes to those in the E major scale. So how does one know which key a particualar song is in? This is a mix of art and science, and there are tutorials online for this. As a general rule, however, the key is often the same as the first chord of the song.",
 	image: "tutorial/edit-chord-e-major.png"
 },{
-	text: "Thanks for using Chordic and happy composing! In the basic version of the app, it is possible to create a maximum of three songs. Please consider getting yourself a premium subscription, and you can create an unlimited number of songs!",
+	text: "Thanks for using Chordic and happy composing! In the basic version of the app, it is possible to create a maximum of three songs. Please consider getting yourself the pro subscription, and you can create an unlimited number of songs!",
 	image: "tutorial/get-pro.png"
 }];

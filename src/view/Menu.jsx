@@ -78,6 +78,11 @@ export default class Menu extends Component {
 				func: ctx.premiumClicked
 			});
 
+		this.menuItems.push({
+			label: "About the Pro Version",
+			func: ctx.showTutorialPage.bind(null,10)
+		});
+
 		let renderedMenuItems=[];
 		for (let i in this.menuItems) {
 			let menuItem=this.menuItems[i];

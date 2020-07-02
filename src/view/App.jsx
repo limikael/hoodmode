@@ -67,8 +67,8 @@ export default class App extends Component {
 						ctx.editSectionChordVisible>=0,()=>
 					<SelectChord />
 				)}
-				{IF(ctx.tutorialVisible,()=>
-					<Tutorial />
+				{IF(ctx.tutorialPage>=0,()=>
+					<Tutorial startPage={ctx.tutorialPage}/>
 				)}
 				{IF(ctx.isBusy(),()=>
 					<Loading />

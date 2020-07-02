@@ -24,7 +24,7 @@ export default class AppController {
 		state.addSectionChordVisible=false;
 		state.menuVisible=false;
 		state.premium=false;
-		state.tutorialVisible=false;
+		state.tutorialPage=-1;
 
 		state.instruments.push({
 			"key": "basic-drums",
@@ -122,11 +122,15 @@ export default class AppController {
 	};
 
 	showTutorial(state) {
-		state.tutorialVisible=true;
+		state.tutorialPage=0;
+	}
+
+	showTutorialPage(state, page) {
+		state.tutorialPage=page;
 	}
 
 	hideTutorial(state) {
-		state.tutorialVisible=false;
+		state.tutorialPage=-1;
 	}
 
 	addSong(state, name) {
