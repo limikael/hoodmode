@@ -31,6 +31,7 @@ export default class App extends Component {
 			<RemApp
 					portraitWidth="18" portraitHeight="40"
 					landscapeWidth="36" landscapeHeight="22">
+				<TapHighlight />
 				<Header />
 
 				<Align top="4rem"

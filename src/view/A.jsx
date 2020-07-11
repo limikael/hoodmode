@@ -8,6 +8,9 @@ export default class A extends Component {
 		if (window.haveTouchEvent && !(e instanceof TouchEvent))
 			return;
 
+		if (e.button==2)
+			return;
+
 		//e.preventDefault(); // commented out to allow list scroll
 		e.stopPropagation();
 
@@ -28,6 +31,9 @@ export default class A extends Component {
 			window.haveTouchEvent=true;
 
 		if (window.haveTouchEvent && !(e instanceof TouchEvent))
+			return;
+
+		if (e.button==2)
 			return;
 
 		if (e.cancelable)

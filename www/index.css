@@ -345,8 +345,8 @@ a.active img.icon.record {
 
 .tap-highlight img {
     position: absolute;
-    width: 2.5em;
-    height: 2.5em;
-    left: calc(var(--tapHighlightLeft) - 1.25em);
-    top: calc(var(--tapHighlightTop) - 1.25em);
+    width: 5em;
+    height: 5em;
+    left: calc(var(--tapHighlightLeft) - 2.5em);
+    top: calc(var(--tapHighlightTop) - 2.5em);
 }
