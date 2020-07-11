@@ -16,7 +16,12 @@ export default class Dialog extends Component {
 	}
 
 	onLinkClick=(href)=>{
-		window.open(href,"_system");
+		if (window.cordova)
+			window.cordova.InAppBrowser.open(href,"_system");
+
+		else
+			window.open(href,"_system");
+
 		return false;
 	}
 
