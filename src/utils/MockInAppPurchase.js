@@ -14,6 +14,7 @@ export default class MockInAppPurchase {
 			title: "Pro Version (Chordic)",
 			description: "You can create unlimited songs with the pro version!",
 			price: "$1.49"
+//			price: "IDR 23,000"
 		},{
 			productId: "premium_ownh",
 			title: "Pro Version (Chordic)",

@@ -32,19 +32,21 @@ export default class AppController {
 		let product=this.storeManager.getProductById("qord_premium_test");
 		state.dialog={
 			title: product.title,
-			text: product.description,
-			fine: "Reccuring subscription, "+product.price+" per month.",
+			text:
+				product.description+"\n\n"+
+				"Reccuring subscription, "+product.price+" per month.",
+
 			productId: "qord_premium_test",
 
 			buttons: [{
 				bg: 'danger',
-				text: 'Buy',
+				text: 'Subscribe',
 				action: 'buyPremium'
-			},{
+			}/*,{
 				bg: 'info',
 				text: "Enter code",
 				action: 'premiumCodeClicked'
-			}]
+			}*/]
 		};
 
 		if (code) {
