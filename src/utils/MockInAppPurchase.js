@@ -2,8 +2,9 @@ import AsyncUtil from '../utils/AsyncUtil.js';
 
 export default class MockInAppPurchase {
 	async restorePurchases() {
-		await AsyncUtil.sleep(100);
+		await AsyncUtil.sleep(1000);
 		//throw new Error("network error");
+		//return ["qord_premium_test"];
 		return [];
 	}
 

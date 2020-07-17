@@ -82,6 +82,31 @@ export default class AppController {
 		return state;
 	}
 
+	async restorePurchasesClicked(state) {
+		try {
+			await this.storeManager.restorePurchases();
+
+			if (state.premium)
+				state.alert(
+					"Welcome as a pro user, and thank you very much for your confidence!\n\n"+
+					"If there is anything I can do, please reach out!"
+				);
+
+			else
+				state.alert(
+					"There are no purchases to restore."
+				);
+		}
+
+		catch (e) {
+			console.log(e);
+			state.alert(
+				"Unfortunately there was a problem while restoring your purchases.\n\n"+
+				"Please try again later!"
+			);
+		}
+	}
+
 	async buyPremium(state) {
 		let productId=state.dialog.productId;
 		state.cancelDialog();

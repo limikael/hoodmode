@@ -66,17 +66,24 @@ export default class Menu extends Component {
 		});
 
 
-		if (ctx.premium)
+		if (ctx.premium) {
 			this.menuItems.push({
 				label: "Manage Subscription",
 				func: ctx.manageSubscriptionsClicked
 			});
+		}
 
-		else
+		else {
 			this.menuItems.push({
 				label: "Get Pro Version",
 				func: ctx.premiumClicked
 			});
+
+			this.menuItems.push({
+				label: "Restore Purchases",
+				func: ctx.restorePurchasesClicked
+			});
+		}
 
 		this.menuItems.push({
 			label: "About the Pro Version",
@@ -106,7 +113,7 @@ export default class Menu extends Component {
 
 		return (
 			<Align modal onDismiss={ctx.toggleMenu} width="16rem" height={menuHeight}
-					align="ne" top="3rem" right="1rem">
+					align="ne" top="2rem" right="1rem">
 				<Box bg="light" border="black" width="100%" height="100%">
 					{renderedMenuItems}
 				</Box>
